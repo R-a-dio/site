@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="shortcut icon" href="favicon.png">
+        <link rel="shortcut icon" href="/favicon.ico">
 
         <title>R/a/dio</title>
 
@@ -44,7 +43,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#/news">News</a></li>
+                        <li><a href="news.html">News</a></li>
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Play Data <b class="caret"></b></a>
@@ -92,7 +91,9 @@
                     <!-- Logo 1 (Icon)
                         ============== -->
                     <div class="col-md-3">
-                        <img src="./assets/logo_image_small.png">
+                        <div class="col-xs-12">
+                            <img src="./assets/logo_image_small.png" class="hidden-xs">
+                        </div>
                     </div>
 
 
@@ -103,14 +104,26 @@
                             <!-- Logo 2 (Branded)
                                 ================= -->
                             <div class="col-md-6">
-                                <img src="./assets/logotitle_2.png" width="100% !important">
+                                <img src="./assets/logotitle_2.png" width="100% !important; margin-bottom: 25px">
+
                             </div>
 
                             <!-- Player Options
                                 ================ -->
                             <div class="col-md-6">
                                 <a class="btn btn-primary btn-block" href="#">Play Stream</a>
-                                <p class="text-center"><a href="#">Other Options</a></p>
+                                <div class="btn-group btn-block" style="width:100%">
+                                    <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
+                                        More Options <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" style="width: 100%">
+                                        <li><a href="#">Direct Stream Link</a></li>
+                                        <li><a href="#">Stream .m3u File</a></li>
+                                        <li><a href="#">Stream .pls File</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Help</a></li>
+                                    </ul>
+                                </div>
                             </div>
 
                         </div><!-- /.row#stream-info -->
@@ -141,12 +154,12 @@
 
                             <div class="col-md-6">
                                 <p class="text-muted text-center">
-                                    Listeners: <span id="listeners">220</span>
+                                    Listeners: <span id="listeners">420</span>
                                 </p>
                             </div>
                             <div class="col-md-6">
                                 <p class="text-muted text-center">
-                                    <span id="progress-current">03:37</span>
+                                    <span id="progress-current">weed</span>
                                     /
                                     <span id="progress-total">05:24</span>
                                 </p>
@@ -172,16 +185,130 @@
 
             </div><!-- /.container.content -->
 
-        </div><!-- /.container.main -->
+        </div><!-- /.container.main.bordered -->
+
+
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="text-center">Last Played</h3>
+                    <ul class="list-group text-center">
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">Queue</h3>
+                    <ul class="list-group text-center">
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
+                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
+                            #comiket - trainroll
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">It's fucking nothing.</h3>
+                        </div>
+                        <div class="panel-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Something about news.</h3>
+                        </div>
+                        <div class="panel-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Something else!</h3>
+                        </div>
+                        <div class="panel-body">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
 
         <style>
+
+            .faves { background: rgb(66, 139, 202); }
+            .faves:hover { background: rgb(40, 94, 142); cursor: pointer; }
+            .plays { background: #f0ad4e; }
+            .plays:hover { background: #d58512; cursor: pointer; }
+
             .main {
                 margin-top: 60px;
+                
+            }
+
+            .bordered {
                 border-radius: 7px;
                 -moz-box-shadow: 0 0 4px 4px #888;
                 -webkit-box-shadow: 0 0 4px 4px#888;
                 box-shadow: 0 0 4px 4px #888;
-                min-height: 600px;
             }
 
             .content {
@@ -191,6 +318,23 @@
             #stream-progress-bar {
                 margin-top: 20px;
             }
+            .footer {
+                border-top: 1px solid #eee;
+                margin-top: 40px;
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+
+            /* Responsive: Portrait tablets and up */
+            @media screen and (min-width: 768px) {
+                /* Remove the padding we set earlier */
+                .masthead,
+                .marketing,
+                .footer {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
         </style>
 
 
@@ -198,7 +342,7 @@
         <!-- Bootstrap core JavaScript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
         <script src="./js/bootstrap.min.js"></script>
     </body>
 </html>

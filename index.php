@@ -1,6 +1,13 @@
 <?php
 
-	require("config/development.php");
+
+	if ($_ENV["RADIO_SERVER_CONFIG"])
+		require("config/" . $_ENV["RADIO_SERVER_CONFIG"] . ".php");
+	else
+		require("config/development.php") or die("config can't be found! (or read)");
+
+
+
 	require("functions/core.php");
 
 	require("functions/news.php");

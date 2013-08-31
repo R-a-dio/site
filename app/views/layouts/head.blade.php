@@ -9,6 +9,7 @@
 		<!-- Bootstrap Core CSS
 			==================== -->
 		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/radio.css" rel="stylesheet">
 
 
 		<!-- IE7-9 are not supported in any way by this site.

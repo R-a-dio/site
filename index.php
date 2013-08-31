@@ -11,9 +11,6 @@
     require("functions/core.php");
 
     require("functions/news.php");
-    require("functions/stats.php");
-    require("functions/graph.php");
-    require("functions/user.php");
     require("functions/routes.php");
 
 
@@ -42,7 +39,7 @@
                 require_once($route);
 
                 if ($route != $home)
-                    require_once("templates/footer.php")
+                    require_once("templates/footer.php");
 
                 require_once("templates/postscript.php");
 

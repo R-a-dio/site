@@ -1,3 +1,6 @@
+@extends('layout.master')
+
+@section('content')
         <!-- Main Container
         ================ -->
         <div class="container main">
@@ -208,3 +211,4 @@
 
             </div><!-- /.row -->
         </div><!-- /.container -->
+@stop

@@ -52,7 +52,7 @@
 		}
 
 		if (!isset($result)) {
-			redirect("404");
+			redirect($routes["@404"] . ".php");
 		} else {
 
 			// TODO

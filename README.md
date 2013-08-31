@@ -29,7 +29,7 @@ tl;dr of these is that they make two very important things (music playing while 
 Alpha + Beta
 ----
 
-The staging area (beta) for changed due for live is at https://r-a-d.io/beta/
+The staging area (beta) for changes due for live is at https://r-a-d.io/beta/
 
 The development area (unstable, will often be a 500 error) is at https://r-a-d.io/dev/
 

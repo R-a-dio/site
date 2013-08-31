@@ -31,7 +31,7 @@ Alpha + Beta
 
 The staging area (beta) for changes due for live is at https://r-a-d.io/beta/
 
-The development area (unstable, will often be a 500 error) is at https://r-a-d.io/dev/
+The development area (unstable, will often be a 500 error) is at https://r-a-d.io/dev/public/
 
 
 Issues

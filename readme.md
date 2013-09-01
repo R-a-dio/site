@@ -2,6 +2,7 @@ R/a/dio - https://r-a-d.io
 ==========================
 
 R/a/dio's site, open-sourced. This is a heavy work in progress.
+[![Build Status](https://travis-ci.org/R-a-dio/radio.site.png?branch=develop)](https://travis-ci.org/R-a-dio/radio.site)
 
 
 Why? I thought you were doing it in python?

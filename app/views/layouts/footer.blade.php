@@ -7,8 +7,5 @@
 					|
 					<a class="text-muted" href="http://osu.ppy.sh">osu!</a>
 				</p>
-				<script src='js/githublive.min.js'></script>
-				<script>var GithubPush = {num_old:5,nodes:['r-a-dio/radio.site']}</script>
-				<div id='commits'></div>
 			</div>
 		</footer>

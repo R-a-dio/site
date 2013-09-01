@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'https://r-a-d.io/dev/',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -112,7 +112,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-
+		'Cartalyst\Sentry\SentryServiceProvider',
 	),
 
 	/*

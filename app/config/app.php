@@ -113,6 +113,8 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		'Cartalyst\Sentry\SentryServiceProvider',
+		'Cartalyst\Api\ApiServiceProvider',
 
 	),
 
@@ -178,6 +180,11 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+		'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+		'API'             => 'Cartalyst\Api\Facades\API',
+		'Input'           => 'Cartalyst\Api\Facades\Input',
+		'Request'         => 'Cartalyst\Api\Facades\Request',
+		'Response'        => 'Cartalyst\Api\Facades\Response',
 
 	),
 

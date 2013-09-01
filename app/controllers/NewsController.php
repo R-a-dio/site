@@ -47,6 +47,8 @@ NEWS;
 			App::abort(404);
 		}
 
+		return $news;
+
 	}
 
 	public function showNews() {

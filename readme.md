@@ -43,6 +43,58 @@ Create an issue here if you experience problems with the site when it has launch
 
 To contact the dev(s), ping Hiroto on IRC (#R/a/dio @ irc.rizon.net) or on Twitter [@hirotothefish](https://twitter.com/hirotothefish)
 
+Installing
+----------
+
+If you want to work on this, you'll need `php5`, a webserver and `php5-mcrypt`.
+
+R/a/dio uses php5-fpm and nginx. Here's one of our `server {}` blocks:
+
+```
+# Beta Server.
+server {
+	listen 5672;
+	root /radio/www/r-a-d.io/beta/public;
+	index index.php index.html;
+
+	error_log /radio/www/logs/r-a-d.io/beta/error.log;
+	access_log /radio/www/logs/r-a-d.io/beta/access.log;
+
+	location / {
+		try_files $uri $uri/ /index.php?$request_uri =404;
+	}
+
+	# php5-fpm fastcgi pass.
+	location ~ \.php$ {
+		fastcgi_split_path_info ^((?U).+\.php)(/?.+)$;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_intercept_errors off;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		include fastcgi_params;
+	}
+
+}
+
+
+```
+
+
+You will also need [Composer](http://getcomposer.org/). Clone the repo, enter the directory, and run:
+
+```php
+    curl -sS https://getcomposer.org/installer | php
+```
+
+This will install a `composer.phar` file to the current directory:
+
+    ./composer.phar install
+
+Note: if you get errors about disabled functions, enable them. For any other errors, make sure the branch you are on passes the travis-ci tests.
+
+
+
+
+
 
 Credits
 -------

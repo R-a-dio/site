@@ -11,7 +11,7 @@ class NewsController extends BaseController {
 		if ( ! $id ) {
 			$results = DB::select('SELECT news.*, users.user FROM `news` LEFT JOIN users ON users.id = news.user_id ORDER BY news.time desc limit 10');
 		} else {
-			$results = DB::select('SELECT news.*, users.user FROM `news` LEFT JOIN users ON users.id = news.user_id where news.id=?', array((int) $id))
+			$results = DB::select('SELECT news.*, users.user FROM `news` LEFT JOIN users ON users.id = news.user_id where news.id=?', array((int) $id));
 		}
 
 

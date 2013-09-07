@@ -51,13 +51,7 @@ NEWS;
 
 	}
 
-	public function showNews() {
-		$news = $this->fetchNews();
-
-		$this->layout->content = View::make('news', array($news));
-	}
-
-	public function showSingleNews($id) {
+	public function showNews($id = FALSE) {
 		$news = $this->fetchNews($id);
 
 		$this->layout->content = View::make('news', array($news))

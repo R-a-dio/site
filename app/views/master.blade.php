@@ -7,7 +7,7 @@
 	<body>
 		@include("layouts.navbar")
 
-		@yield("content", "<div class="container">Some idiot forgot to render a view properly.</div>")
+		@yield("content", '<div class="container">Some idiot forgot to render a view properly.</div>')
 
 		@include("layouts.footer")
 

@@ -14,7 +14,7 @@
                         ============== -->
                     <div class="col-md-3">
                         <div class="col-xs-12">
-                            <img src="./assets/logo_image_small.png" class="hidden-xs">
+                            <img src="{{ $base }}/assets/logo_image_small.png" class="hidden-xs">
                         </div>
                     </div>
 
@@ -26,7 +26,7 @@
                             <!-- Logo 2 (Branded)
                                 ================= -->
                             <div class="col-md-6">
-                                <img src="./assets/logotitle_2.png" width="100% !important; margin-bottom: 25px">
+                                <img src="{{ $base }}/assets/logotitle_2.png" width="100% !important; margin-bottom: 25px">
 
                             </div>
 
@@ -43,7 +43,7 @@
                                         <li><a href="#">Stream .m3u File</a></li>
                                         <li><a href="#">Stream .pls File</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="#">Help</a></li>
+                                        <li><a href="{{ $base }}/help">Help</a></li>
                                     </ul>
                                 </div>
                             </div>

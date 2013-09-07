@@ -20,7 +20,7 @@ class BaseController extends Controller {
 		{
 			// TODO: dynamic source for the themes
 			$this->layout = View::make($this->layout)
-				->with("base", Config::get("app.base", "/"))
+				->with("base", Config::get("app.base", ""))
 				->with("theme", $this->getTheme());
 		}
 	}

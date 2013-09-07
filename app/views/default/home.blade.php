@@ -1,10 +1,7 @@
-@extends('layouts.master')
-
 @section('content')
         <!-- Main Container
         ================ -->
         <div class="container main">
-
 
 
             <!-- Content (Dynamic)

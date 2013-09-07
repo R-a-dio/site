@@ -4,7 +4,7 @@
 		<meta name="author" content="">
 		<link rel="shortcut icon" href="/favicon.ico">
 
-		<title>R/a/dio &middot; {{ $title }}</title>
+		<title>R/a/dio</title>
 
 		<!-- Bootstrap Core CSS
 			==================== -->

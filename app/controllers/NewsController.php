@@ -3,7 +3,7 @@
 class NewsController extends BaseController {
 
 
-	protected $layout = 'layouts.master';
+	protected $layout = 'master';
 
 
 	private function fetchNews($id = FALSE) {
@@ -54,7 +54,7 @@ NEWS;
 	public function showNews($id = FALSE) {
 		$news = $this->fetchNews($id);
 
-		$this->layout->content = View::make('news', array($news))
+		$this->layout->content = View::make('news', array($news));
 	}
 
 }

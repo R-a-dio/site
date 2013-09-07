@@ -8,12 +8,13 @@
 
 		<!-- Bootstrap Core CSS
 			==================== -->
-		{{-- Nobody can remove the bootstrap CSS. --}}
 		<link href="{{ $base }}/css/bootstrap.css" rel="stylesheet">
+		<link href="{{ $base }}/css/fonts.css" rel="stylesheet">
 
-		{{-- Or the base CSS --}}
 		<link href="{{ $base }}/css/base.css" rel="stylesheet">
 
+
+		<!-- DJ Theme -->
 		<link href="{{ $base }}/css/{{ $theme }}.css" rel="stylesheet">
 
 

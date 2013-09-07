@@ -20,7 +20,9 @@ class HomeController extends BaseController {
 
 	public function showHome() {
 		
-		$this->layout->content = View::make($this->getTheme() . ".home");
+		$this->layout->content = View::make($this->getTheme() . ".home")
+			->with("base", Config::get("app.base", ""))
+			->with("theme", $this->getTheme());
 
 	}
 

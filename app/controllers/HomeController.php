@@ -7,17 +7,21 @@ class HomeController extends BaseController {
 	| Default Home Controller
 	|--------------------------------------------------------------------------
 	|
-	| You may wish to use controllers instead of, or in addition to, Closure
-	| based routes. That's great! Here is an example controller method to
-	| get you started. To route to this controller, just add the route:
+	| Default Home Controller.
+	| Passes in default variables since they are otherwise not available
+	| in an @section() block.
 	|
-	|	Route::get('/', 'HomeController@showWelcome');
+	|	Route::get('/', 'HomeController@showHome');
 	|
 	*/
 
 	protected $layout = 'master';
 
-
+	/**
+	 * Show the homepage (and throw in a load of variables)
+	 *
+	 * @return void
+	 */
 	public function showHome() {
 		
 		$this->layout->content = View::make($this->getTheme() . ".home")

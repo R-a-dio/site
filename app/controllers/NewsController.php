@@ -2,9 +2,28 @@
 
 class NewsController extends BaseController {
 
+	/*
+	|--------------------------------------------------------------------------
+	| News Controller
+	|--------------------------------------------------------------------------
+	|
+	| Generates a news block.
+	| Sadly I have to touch HTML in a controller. It's just echoed out.
+	| Models probably wont be added due to the complexity of the database.
+	|
+	|	Route::get('/news(/{id})?', 'NewsController@showNews', $id);
+	|
+	*/
 
 	protected $layout = 'master';
 
+	/**
+	 * Generates the News HTML
+	 *
+	 * @param int id
+	 * 
+	 * @return string news articles
+	 */
 
 	private function fetchNews($id = FALSE) {
 
@@ -51,10 +70,16 @@ NEWS;
 
 	}
 
+	/**
+	 * Setup the layout used by the controller, fetch news.
+	 *
+	 * @return void
+	 */
 	public function showNews($id = FALSE) {
 		$news = $this->fetchNews($id);
 
-		$this->layout->content = View::make('news', array($news));
+		$this->layout->content = View::make('news')
+			->with("news", $news);
 	}
 
 }

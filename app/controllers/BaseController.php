@@ -3,17 +3,22 @@
 class BaseController extends Controller {
 
 	/**
-	 * Setup the layout used by the controller.
+	 * Retrieve the current theme's identifier.
 	 *
-	 * @return void
+	 * @return string
 	 */
-
 	protected function getTheme()
 	{
 		// TODO: check database access, DJ column will have theme
 		return "default";
 	}
 
+	/**
+	 * Setup the layout used by the controller.
+	 * Also adds a few required variables.
+	 *
+	 * @return void
+	 */
 	protected function setupLayout()
 	{
 		if ( ! is_null($this->layout))

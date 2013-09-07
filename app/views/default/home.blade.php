@@ -1,3 +1,5 @@
+@extends('master')
+
 @section('content')
         <!-- Main Container
         ================ -->
@@ -97,7 +99,7 @@
                     <div class="col-md-3">
                         <div class="col-xs-12">
                             <div class="thumbnail">
-                                <img src="./assets/dj_image.png">
+                                <img src="{{ $base }}/assets/dj_image.png">
                                 <h4 class="text-center">Hanyuu-sama</h4>
                             </div>
                         </div>

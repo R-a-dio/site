@@ -9,12 +9,12 @@
 		<!-- Bootstrap Core CSS
 			==================== -->
 		{{-- Nobody can remove the bootstrap CSS. --}}
-		<link href="{{ $base }}css/bootstrap.css" rel="stylesheet">
+		<link href="{{ $base }}/css/bootstrap.css" rel="stylesheet">
 
 		{{-- Or the base CSS --}}
-		<link href="{{ $base }}css/base.css" rel="stylesheet">
+		<link href="{{ $base }}/css/base.css" rel="stylesheet">
 
-		<link href="{{ $base }}css/{{ $theme }}.css" rel="stylesheet">
+		<link href="{{ $base }}/css/{{ $theme }}.css" rel="stylesheet">
 
 
 		<!-- IE7-9 are not supported in any way by this site.

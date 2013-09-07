@@ -30,6 +30,19 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
+	| Application Base
+	|--------------------------------------------------------------------------
+	|
+	| This is the base URI which the webserver will recognize.
+	| It is used within views so that the layout generator can provide
+	| correct URLs to templates when inside a folder (/dev/, /live/, /beta/)
+	|
+	*/
+
+	'base' => '/dev/',
+
+	/*
+	|--------------------------------------------------------------------------
 	| Application Timezone
 	|--------------------------------------------------------------------------
 	|

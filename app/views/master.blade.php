@@ -7,12 +7,12 @@
 	<body>
 		@include("layouts.navbar")
 
-		@yield("content")
+		@yield("content", "<div class="container">Some idiot forgot to render a view properly.</div>")
 
 		@include("layouts.footer")
 
 		@include("layouts.postscript")
 
-		@yield("script")
+		@yield("script", "")
 	</body>
 </html>

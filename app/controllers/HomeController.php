@@ -15,10 +15,15 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	protected $layout = 'layouts.master';
+	protected $layout = 'master';
 
 	public function showHome() {
-		$this->layout->content = View::make('home');
+		
+		// primary content.
+		$this->layout->content = View::make($this->theme . "home");
+
+		// optional javascript to place at the end of the body tag
+		$this->layout->script = "";
 	}
 
 }

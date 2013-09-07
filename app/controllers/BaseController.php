@@ -11,7 +11,10 @@ class BaseController extends Controller {
 	{
 		if ( ! is_null($this->layout))
 		{
-			$this->layout = View::make($this->layout);
+			// TODO: dynamic source for the themes
+			$this->layout = View::make($this->layout)
+				->with("base", Config::get("app.base", "/"))
+				->with("theme", $this->theme));
 		}
 	}
 

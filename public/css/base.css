@@ -17,12 +17,3 @@
     padding-top: 40px;
     padding-bottom: 40px;
 }
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    /* Remove the padding we set earlier */
-    .footer {
-        padding-left: 0;
-        padding-right: 0;
-    }
-}

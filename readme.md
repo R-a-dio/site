@@ -61,7 +61,7 @@ server {
 	access_log /radio/www/logs/r-a-d.io/beta/access.log;
 
 	location / {
-		try_files $uri $uri/ /index.php?$request_uri =404;
+		try_files $uri $uri/ /index.php?$uri =404;
 	}
 
 	# php5-fpm fastcgi pass.

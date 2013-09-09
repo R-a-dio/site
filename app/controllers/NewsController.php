@@ -77,7 +77,7 @@ NEWS;
 	public function showNews($id = FALSE) {
 		$news = $this->fetchNews($id);
 
-		$this->layout->content = View::make('news')
+		$this->layout->content = View::make($this->getTheme() . '.news')
 			->with("news", $news);
 	}
 

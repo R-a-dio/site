@@ -46,14 +46,14 @@ class NewsController extends BaseController {
 					<div class="panel-heading">
 					  <h4 class="panel-title">
 						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-news-{$result["id"]}>
-						  {$result["title"]}
+						  {$result["header"]}
 						</a>
 					  </h4>
 					</div>
 					<div id="collapse-news-{$result["id"]} class="panel-collapse collapse">
 						<div class="panel-body">
 							<span class="date">{$result["time"]}</span>
-							{$result["body"]}
+							{$result["newstext"]}
 						</div>
 					</div>
 				</div>

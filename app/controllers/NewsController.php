@@ -28,9 +28,9 @@ class NewsController extends BaseController {
 	private function fetchNews($id = FALSE) {
 
 		if ( ! $id ) {
-			$results = DB::select('SELECT news.*, users.user FROM `news` LEFT JOIN users ON users.id = news.user_id ORDER BY news.time desc limit 10');
+			$results = DB::select('SELECT * FROM `news` ORDER BY news.time desc limit 10');
 		} else {
-			$results = DB::select('SELECT news.*, users.user FROM `news` LEFT JOIN users ON users.id = news.user_id where news.id=?', array((int) $id));
+			$results = DB::select('SELECT * FROM `news` where news.id=?', [(int) $id]);
 		}
 
 
@@ -53,7 +53,6 @@ class NewsController extends BaseController {
 					<div id="collapse-news-{$result["id"]} class="panel-collapse collapse">
 						<div class="panel-body">
 							<span class="date">{$result["time"]}</span>
-							<span class="user">{$result["user"]}</span>
 							{$result["body"]}
 						</div>
 					</div>

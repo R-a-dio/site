@@ -36,10 +36,16 @@ class NewsController extends BaseController {
 
 
 		$news = "";
+		$in = " in";
+		$count = 0;
 
 		foreach ($results as $result) {
 
 			// TODO: commenting
+			if ($count == 1)
+				$in = "";
+
+			$count++;
 
 			$news .= <<<NEWS
 				<div class="panel panel-default">
@@ -50,7 +56,7 @@ class NewsController extends BaseController {
 						</a>
 					  </h4>
 					</div>
-					<div id="collapse-news-{$result["id"]}" class="panel-collapse collapse">
+					<div id="collapse-news-{$result["id"]}" class="panel-collapse collapse{$in}">
 						<div class="panel-body">
 							<span class="date">{$result["time"]}</span>
 							{$result["newstext"]}

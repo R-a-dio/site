@@ -42,4 +42,20 @@ class AdminController extends BaseController {
 	public function getDevFunctions() {}
 
 
+
+	/**
+	 * DELETE functions
+	 * I am well aware that these dont properly adhere to REST.
+	 * TODO (Maybe): fix that.
+	 */ 
+
+	// DELETE /admin/users?id={id}?
+	public function deleteUsers() {}
+
+	// DELETE /admin/pending?id={id}
+	public function deletePending() {}
+
+	// DELETE /admin/bans?id={id}
+	public function deleteBans() {}
+
 }

@@ -23,11 +23,24 @@ class PlayerController extends BaseController {
 	 * @return array
 	 */
 	protected function getQueueArray($limit = 5) {
-		return DB::table('curqueue')
+		return DB::table('queue')
+			->select(
+				'meta',
+				'time',
+				'type'
+			)
+			->orderBy('time', 'asc')
 			->take($limit)
 			->get();	
 	}
 
+
+	/**
+	 * Grabs the last $limit songs played
+	 *
+	 * @param int $limit
+	 * @return array
+	 */
 	protected function getLastPlayedArray($limit = 5) {
 
 		// this query is utter shit and you should feel bad if you made this.
@@ -36,7 +49,7 @@ class PlayerController extends BaseController {
 				'eplay.dt as lastplayed',
 				'esong.meta as metadata',
 				DB::raw('(select count(*) from efave where eplay.isong = esong.isong) as faves'),
-				DB::raw('(select count(*) from eplay where eplay.isong = esong.id) as plays'),
+				DB::raw('(select count(*) from eplay where eplay.isong = esong.id) as plays')
 			)
 			->join('esong', 'eplay.isong', "=", 'esong.id')
 			->orderBy('eplay.dt', 'desc')

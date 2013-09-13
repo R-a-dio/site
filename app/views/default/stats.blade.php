@@ -23,7 +23,8 @@
         var data = new google.visualization.DataTable();
         data.addColumn('datetime', 'Time');
         data.addColumn('number', 'Listeners');
-        data.addColumn({type: 'string', role: 'tooltip'});
+        data.addColumn({type: 'string', role: 'tooltip', p: { 'html' : true}});
+        data.addColumn({type: 'boolean', role: 'scope'});
         
         graph = {{ $json }};
 

@@ -49,7 +49,7 @@ class StatsController extends BaseController {
 			$stat[1] = (int) $stat[1];
 			$stat[3] = ($stat[2] == "Hanyuu-sama") ? FALSE : TRUE;
 
-			$stat[2] = "<div style=\"width: 120px;\"><p><b>DJ:</b> {$stat[2]}</p><p><b>Listeners:</b> {$stat[1]}</p></div>";
+			$stat[2] = "<div style=\"width: 120px; padding: 6px;\"><p><b>DJ:</b> {$stat[2]}</p><p><b>Listeners:</b> {$stat[1]}</p></div>";
 		}
 
 

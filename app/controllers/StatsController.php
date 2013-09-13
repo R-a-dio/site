@@ -47,7 +47,7 @@ class StatsController extends BaseController {
 		foreach ($stats as &$stat) {
 			$stat[0] = DateTime::createFromFormat('Y-m-d H:i:s', $stat[0])->format('Y,m,d,H,i,s');
 			$stat[1] = (int) $stat[1];
-			$stat[3] = ($stat[2] == "Hanyuu-sama") ? TRUE : FALSE;
+			$stat[3] = ($stat[2] == "Hanyuu-sama") ? FALSE : TRUE;
 
 			$stat[2] = "<div style=\"width: 120px;\"><p><b>DJ:</b> {$stat[2]}</p><p><b>Listeners:</b> {$stat[1]}</p></div>";
 		}

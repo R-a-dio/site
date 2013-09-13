@@ -21,10 +21,17 @@
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Time');
+        data.addColumn('datetime', 'Time');
         data.addColumn('number', 'Listeners');
         data.addColumn({type: 'string', role: 'tooltip'});
-        data.addRows({{ $json }});
+        
+        graph = {{ $json }};
+
+        for(var i = 0; i < graph.length; i++) {
+        	var d = graph[i][0].split(',');
+        	graph[i][0] = new Date(d[0], d[1], d[2], d[3], d[4], d[5]);
+        	data.addRow(graph[i]);
+        }
 
         // Set chart options
         var options = {'title':'R/a/dio Listeners (hover for DJ)',

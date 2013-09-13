@@ -30,17 +30,26 @@ class StatsController extends BaseController {
 	private function getGraphs($interval = 288) {
 		// we need a plain array here
 		DB::setFetchMode(PDO::FETCH_NUM);
+
 		$stats = DB::table('listenlog')
 			->select(
-				DB::raw('UNIX_TIMESTAMP(listenlog.time)'),
-				'listenlog.listeners',
-				'djs.djname',
-				'djs.djimage'
+				'listenlog.time',
+				DB::raw('CAST(listenlog.listeners AS SIGNED)'),
+				'djs.djname'
 			)
 			->join('djs', 'listenlog.dj', '=', 'djs.id')
 			->orderBy('listenlog.id', 'desc')
 			->take($interval)
 			->get();
+
+		// post-processing is mandatory because mysql is fucking stupid for JS
+
+		foreach ($stats as &$stat) {
+			$stat[0] = DateTime::createFromFormat('Y-m-d H:i:s', $stat[0])->format('Y,m,d,H,i,s');
+			$stat[1] = (int) $stat[1];
+		}
+
+
 		// return fetch mode to normal
 		DB::setFetchMode(Config::get('database.fetch', PDO::FETCH_ASSOC));
 		return $stats;

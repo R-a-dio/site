@@ -44,6 +44,8 @@ START;
 		foreach($curqueue as $queue) {
 
 			$queue["meta"] = htmlspecialchars($queue["meta"]);
+			$diff = Helper::humanTimeDiff($queue["time"]);
+
 
 			if ($queue["type"] == 1)
 				$queue["meta"] = "<b>" . $queue["meta"] . "</b>";
@@ -52,9 +54,9 @@ START;
                     <li class="list-group-item">
                     	<div class="container">
 	                        <div class="col-md-3">
-	                        	{$queue["time"]}
+	                        	{$diff} ago
 	                        </div>
-	                        <div class="col-md-6">
+	                        <div class="col-md-6" style="line-height: 1; height: 30px;">
 	                        	{$queue["meta"]}
 	                        </div>
 	                        <div class="col-md-3">

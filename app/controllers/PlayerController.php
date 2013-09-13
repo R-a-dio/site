@@ -26,7 +26,7 @@ class PlayerController extends BaseController {
 		return DB::table('queue')
 			->select(
 				'meta',
-				'time',
+				DB::raw('UNIX_TIMESTAMP(time) as time'),
 				'type'
 			)
 			->orderBy('time', 'asc')

@@ -36,7 +36,8 @@
 
         // Set chart options
         var options = {'title':'R/a/dio Listeners (hover for DJ)',
-                       'tooltip' : { isHtml: true }
+                       'tooltip' : { isHtml: true },
+                       'legend': { position: 'none' }
                    };
 
         // Instantiate and draw our chart, passing in some options.

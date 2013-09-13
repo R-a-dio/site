@@ -18,3 +18,5 @@ Route::get('/news/{id}', 'NewsController@showSingleNews')
 	->where('id', '[0-9]+');
 
 Route::get('/stats', 'StatsController@showGraphs');
+Route::get('/stats.json', 'StatsController@getGraphsAjax');
+

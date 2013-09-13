@@ -8,6 +8,3 @@
 
         <!-- History.js -->
         <script src="{{ $base }}/js/jquery.history.js"></script>
-
-        <!-- Ajaxify -->
-        <script src="{{ $base }}/js/ajaxify.js"></script>

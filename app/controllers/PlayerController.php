@@ -46,13 +46,11 @@ class PlayerController extends BaseController {
 		// this query is utter shit and you should feel bad if you made this.
 		return DB::table('eplay')
 			->select(
-				'eplay.dt as lastplayed',
-				'esong.meta as metadata',
-				DB::raw('(select count(*) from efave where eplay.isong = esong.isong) as faves'),
-				DB::raw('(select count(*) from eplay where eplay.isong = esong.id) as plays')
+				DB::raw('unix_timestamp(eplay.dt) as time'),
+				'esong.meta'
 			)
-			->join('esong', 'eplay.isong', "=", 'esong.id')
-			->orderBy('eplay.dt', 'desc')
+			->join('esong', 'esong.id', "=", 'eplay.isong')
+			->orderBy('eplay.id', 'desc')
 			->take($limit)
 			->get();
 	}

@@ -18,7 +18,7 @@
 				======== -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="{{ $base }}">Home</a></li>
+						<li class="active"><a href="{{ $base }}/">Home</a></li>
 						<li><a href="{{ $base }}/news">News</a></li>
 
 						<li class="dropdown">

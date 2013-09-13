@@ -58,4 +58,7 @@ class AdminController extends BaseController {
 	// DELETE /admin/bans?id={id}
 	public function deleteBans() {}
 
+	// DELETE /admin/news?id={id}
+	public function deleteNews() {}
+
 }

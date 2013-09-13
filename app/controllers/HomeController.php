@@ -54,7 +54,7 @@ START;
                     <li class="list-group-item">
                     	<div class="container">
 	                        <div class="col-md-3">
-	                        	{$diff} ago
+	                        	in {$diff}
 	                        </div>
 	                        <div class="col-md-6" style="line-height: 1; height: 30px;">
 	                        	{$queue["meta"]}

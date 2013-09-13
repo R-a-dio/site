@@ -28,10 +28,12 @@ class StatsController extends BaseController {
 	 * @return array
 	 */
 	private function getGraphs($interval = 288) {
+		// we need a plain array here
+		DB::setFetchMode(PDO::FETCH_NUM);
 		$stats = DB::table('listenlog')
 			->select(
+				DB::raw('UNIX_TIMESTAMP(listenlog.time)'),
 				'listenlog.listeners',
-				'listenlog.time',
 				'djs.djname',
 				'djs.djimage'
 			)
@@ -39,8 +41,10 @@ class StatsController extends BaseController {
 			->orderBy('listenlog.id', 'desc')
 			->take($interval)
 			->get();
-
+		// return fetch mode to normal
+		DB::setFetchMode(Config::get('database.fetch', PDO::FETCH_ASSOC));
 		return $stats;
+
 	}
 
 	/**
@@ -79,7 +83,10 @@ class StatsController extends BaseController {
 	 * @return void
 	 */
 	public function showGraphs() {
-		return Response::json($this->getGraphs());
+		$json = json_encode($this->getGraphs());
+
+		$this->layout->content = View::make($this->getTheme() . '.stats')
+			->with("json", $json);
 	}
 
 	/**

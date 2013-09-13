@@ -16,3 +16,5 @@ Route::get('/', 'HomeController@showHome');
 Route::get('/news', 'NewsController@showNews');
 Route::get('/news/{id}', 'NewsController@showSingleNews')
 	->where('id', '[0-9]+');
+
+Route::get('/stats', 'StatsController@showGraphs');

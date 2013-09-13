@@ -22,11 +22,25 @@ class StatsController extends BaseController {
 
 	/**
 	 * Fetches arrays for use in the Google Graph JS API
+	 * Interval is default 288 rows - 24 hours (5min increments)
 	 *
+	 * @param int $interval
 	 * @return array
 	 */
-	private function getGraphs() {
+	private function getGraphs($interval = 288) {
+		$stats = DB::table('listenlog')
+			->select(
+				'listenlog.listeners',
+				'listenlog.time',
+				'djs.djname',
+				'djs.djimage'
+			)
+			->join('djs', 'listenlog.dj', '=', 'djs.id')
+			->orderBy('listenlog.id', 'desc')
+			->take($interval)
+			->get();
 
+		return $stats;
 	}
 
 	/**
@@ -65,7 +79,7 @@ class StatsController extends BaseController {
 	 * @return void
 	 */
 	public function showGraphs() {
-
+		return Response::json($this->getGraphs());
 	}
 
 	/**

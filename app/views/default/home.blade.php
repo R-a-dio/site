@@ -119,35 +119,14 @@
                 <div class="col-md-6">
                     <h3 class="text-center">Last Played</h3>
                     <ul class="list-group text-center">
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
+                        {{ $lp }}
                     </ul>
                 </div>
                 <div class="col-md-6">
-                    {{ $queue }}
+                    <h3 class="text-center">Queue</h3>
+                    <ul class="list-group text-center">
+                        {{ $queue }}
+                    </ul>
                 </div>
 
                 <div class="col-md-4">

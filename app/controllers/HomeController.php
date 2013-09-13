@@ -35,11 +35,7 @@ class HomeController extends PlayerController {
 				["timestr" => "", "track" => ""],
 			];
 
-		$html = <<<START
-		<h3 class="text-center">Queue</h3>
-            <ul class="list-group text-center">
-
-START;
+		$html = "";
 
 		foreach($curqueue as $queue) {
 
@@ -53,15 +49,11 @@ START;
 			$html .= <<<QUEUE
                     <li class="list-group-item">
                     	<div class="container">
-	                        <div class="col-md-3">
+	                        <div class="col-md-4">
 	                        	in {$diff}
 	                        </div>
-	                        <div class="col-md-6" style="line-height: 1; height: 30px;">
+	                        <div class="col-md-8" style="line-height: 1; height: 30px;">
 	                        	{$queue["meta"]}
-	                        </div>
-	                        <div class="col-md-3">
-								<span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            	<span class="badge plays" data-toggle="tooltip" title="plays">99</span>
 	                        </div>
                         </div>
                     </li>
@@ -69,12 +61,32 @@ START;
 QUEUE;
 		}
 
-		$html .= "</ul>";
-
 		return $html;
 	}
 
+	private function makeLastPlayed() {
+		$last_played = $this->getLastPlayedArray();
 
+		$html = "";
+
+		foreach ($last_played as $lp) {
+			$diff = Helper::humanTimeDiff($lp["time"]);
+			$html .= <<<LP
+					<li class="list-group-item">
+                    	<div class="container">
+	                        <div class="col-md-4">
+	                        	{$diff} ago
+	                        </div>
+	                        <div class="col-md-8" style="line-height: 1; height: 30px;">
+	                        	{$lp["meta"]}
+	                        </div>
+                        </div>
+                    </li>
+LP;
+		}
+
+		return $html;
+	}
 
 
 	/**
@@ -87,7 +99,8 @@ QUEUE;
 		$this->layout->content = View::make($this->getTheme() . ".home")
 			->with("base", Config::get("app.base", ""))
 			->with("theme", $this->getTheme())
-			->with("queue", $this->makeQueue());
+			->with("queue", $this->makeQueue())
+			->with("lp", $this->makeLastPlayed());
 
 	}
 

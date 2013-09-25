@@ -108,7 +108,9 @@ Occasional theme-hacker and freedom-hater is [@9001](https://github.com/9001) (a
 ## Laravel PHP Framework
 
 [![Latest Stable Version](https://poser.pugx.org/laravel/framework/version.png)](https://packagist.org/packages/laravel/framework) [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.png)](https://packagist.org/packages/laravel/framework) [![Build Status](https://travis-ci.org/laravel/framework.png)](https://travis-ci.org/laravel/framework)
-
-### License
-
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+
+## License
+
+R/a/dio is licensed under the [MIT License](http://opensource.org/licenses/MIT).
+

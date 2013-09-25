@@ -34,7 +34,7 @@ class StatsController extends BaseController {
 		$stats = DB::table('listenlog')
 			->select(
 				'listenlog.time',
-				DB::raw('CAST(listenlog.listeners AS SIGNED)'),
+				'listenlog.listeners',
 				'djs.djname'
 			)
 			->join('djs', 'listenlog.dj', '=', 'djs.id')

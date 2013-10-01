@@ -33,7 +33,7 @@
 						<li><a href="{{ $base }}/admin/djs">DJs</a><li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Hiroto <span class="badges">42</span></a></li>
+						<li><a href="#">Hiroto <span class="badge">42</span></a></li>
 						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Profile <b class="caret"></b></a>
 						<ul class="dropdown-menu">

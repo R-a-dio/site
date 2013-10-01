@@ -2882,7 +2882,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   float: left;
   padding: 14px 15px;
   font-size: 20px;
-  line-height: 22px;
+  line-height: 23px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -2924,7 +2924,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
-  line-height: 22px;
+  line-height: 23px;
 }
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {

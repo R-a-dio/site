@@ -1,17 +1,17 @@
 <!doctype html>
 <html>
 	<head>
-		@include("layouts.head")
+		@include("admin.head")
 	</head>
 
 	<body>
-		@include("layouts.navbar")
+		@include("admin.navbar")
 
 		@yield("content", '<div class="container main">Some idiot forgot to render a view properly.</div>')
 
-		@include("layouts.footer")
+		@include("admin.footer")
 
-		@include("layouts.postscript")
+		@include("admin.postscript")
 
 		@yield("script", "")
 	</body>

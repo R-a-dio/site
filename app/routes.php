@@ -20,5 +20,7 @@ Route::get('/news/{id}', 'News@showSingleNews')
 Route::get('/stats', 'Stats@showGraphs');
 Route::get('/stats.json', 'Stats@getGraphsAjax');
 
+Route::controller('/admin', 'Admin');
+
 
 

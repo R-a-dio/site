@@ -17,3 +17,13 @@
     padding-top: 40px;
     padding-bottom: 40px;
 }
+
+.errors {
+	background: #AD0000;
+	color: #fff;
+}
+
+.pending {
+	background: #463265;
+	color: #fff;
+}

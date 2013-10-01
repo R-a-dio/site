@@ -34,14 +34,16 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hiroto <span class="badge">42</span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hiroto <span class="badge">42</span> <span class="badge errors">15</span> <span class="badge pending">150</span></a>
 						<ul class="dropdown-menu">
+							<li class="dropdown-header">Notifications</li>
 							<li><a href="{{ $base }}/admin/notifications">Site's broken again</a></li>
 							<li><a href="{{ $base }}/admin/notifications">Someone called Yuru Yuri bad again</a></li>
-							<li><a href="{{ $base }}/admin/pending">150 Pending Songs</a></li>
-							<li><a href="{{ $base }}/admin/errors">15 New Errors</a></li>
 							<li><a href="{{ $base }}/admin/users">2 New Users Registered</a></li>
-							<li><a href="{{ $base }}/admin/notifications">37 More...</a></li>
+							<li class="divider"></li>
+							<li><a href="{{ $base }}/admin/errors"><span class="badge errors">15</span> New Errors</a></li>
+							<li><a href="{{ $base }}/admin/pending"><span class="badge pending">150</span> Pending Songs</a></li>
+							<li><a href="{{ $base }}/admin/notifications"><span class="badge">37</span> More...</a></li>
 						</ul>
 						</li>
 						<li class="dropdown">

@@ -21,7 +21,7 @@ class AdminController extends BaseController {
 	public function __construct() {
 		
 		// Auth, naturally.
-		$this->beforeFilter('auth');
+		//$this->beforeFilter('auth');
 
 		// ALL POST/PUT/DELETE REQUIRE CSRF TOKENS.
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);

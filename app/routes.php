@@ -11,12 +11,14 @@
 |
 */
 
-Route::get('/', 'HomeController@showHome');
+Route::get('/', 'Home@showHome');
 
-Route::get('/news', 'NewsController@showNews');
-Route::get('/news/{id}', 'NewsController@showSingleNews')
+Route::get('/news', 'News@showNews');
+Route::get('/news/{id}', 'News@showSingleNews')
 	->where('id', '[0-9]+');
 
-Route::get('/stats', 'StatsController@showGraphs');
-Route::get('/stats.json', 'StatsController@getGraphsAjax');
+Route::get('/stats', 'Stats@showGraphs');
+Route::get('/stats.json', 'Stats@getGraphsAjax');
+
+
 

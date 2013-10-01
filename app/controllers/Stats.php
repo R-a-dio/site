@@ -1,6 +1,6 @@
 <?php
 
-class StatsController extends BaseController {
+class Stats extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php
 
-class SubmitController extends BaseController {
+class Submit extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php
 
-class HomeController extends PlayerController {
+class Home extends Player {
 
 	/*
 	|--------------------------------------------------------------------------

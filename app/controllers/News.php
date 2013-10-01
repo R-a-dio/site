@@ -1,6 +1,6 @@
 <?php
 
-class NewsController extends BaseController {
+class News extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------

@@ -27,8 +27,14 @@ class Admin extends BaseController {
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 
 	}
+	protected $layout = "admin";
 
-	public function getIndex() {}
+	public function getIndex() {
+		$this->layout->content = View::make('admin.dashboard')
+			->with("base", Config::get("app.base", ""));
+			//->with("user", $this->user);
+	}
+
 	public function getUsers() {}
 	public function getLogin() {}
 	public function getLogout() {}

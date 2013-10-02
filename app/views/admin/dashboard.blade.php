@@ -23,7 +23,7 @@
 		<div class="col-md-8">
 			<div class="panel-group" id="accordion">
 
-				<div class="panel panel-default">
+				<div class="panel panel-info">
 					<div class="panel-heading">
 					  <h4 class="panel-title">
 						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-news-116">
@@ -43,11 +43,57 @@
 					<div class="panel-heading">
 					  <h4 class="panel-title">
 						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-news-115">
-						  Another one.
+						  Peon News.
 						</a>
 					  </h4>
 					</div>
 					<div id="collapse-news-115" class="panel-collapse collapse">
+						<div class="panel-body">
+							<span class="date">2013-04-08 01:44:05</span>
+							<p>Now you listen here, shrimpy, this is the news.</p>
+						</div>
+					</div>	
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					  <h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-news-114">
+						  Peon News.
+						</a>
+					  </h4>
+					</div>
+					<div id="collapse-news-114" class="panel-collapse collapse">
+						<div class="panel-body">
+							<span class="date">2013-04-08 01:44:05</span>
+							<p>Now you listen here, shrimpy, this is the news.</p>
+						</div>
+					</div>	
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+					  <h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-news-113">
+						  Peon News.
+						</a>
+					  </h4>
+					</div>
+					<div id="collapse-news-113" class="panel-collapse collapse">
+						<div class="panel-body">
+							<span class="date">2013-04-08 01:44:05</span>
+							<p>Now you listen here, shrimpy, this is the news.</p>
+						</div>
+					</div>	
+				</div>
+
+				<div class="panel panel-info">
+					<div class="panel-heading">
+					  <h4 class="panel-title">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-news-112">
+						  Overlord News
+						</a>
+					  </h4>
+					</div>
+					<div id="collapse-news-112" class="panel-collapse collapse">
 						<div class="panel-body">
 							<span class="date">2013-04-08 01:44:05</span>
 							<p>Now you listen here, shrimpy, this is the news.</p>

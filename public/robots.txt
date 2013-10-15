@@ -1,2 +1,24 @@
 User-agent: *
-Disallow: 
+Disallow: /x_admin/
+Disallow: /res/music/
+Disallow: /res/music/tagged/
+Disallow: /api/
+Disallow: /api.php?
+Disallow: /song/
+Disallow: /piwik/
+Disallow: /dev/
+Disallow: /beta/
+Disallow: /stream
+Disallow: /main
+Allow: /
+
+# Bad Yahoo.
+User-agent: Slurp
+Disallow: /
+
+User-agent: Yahoo Pipes 1.0
+Disallow: /
+
+# Malicious spider that still obeys this... (chinese)
+User-agent: Baiduspider
+Disallow: /

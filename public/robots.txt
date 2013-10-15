@@ -19,6 +19,6 @@ Disallow: /
 User-agent: Yahoo Pipes 1.0
 Disallow: /
 
-# Malicious spider that still obeys this... (chinese)
+# AGGRESSIVE AS FUCK GO AWAY ALREADY
 User-agent: Baiduspider
 Disallow: /

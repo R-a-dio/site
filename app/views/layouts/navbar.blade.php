@@ -11,14 +11,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="{{ $base }}"><img src="{{ $base }}/assets/logotitle_2.png" height="22"></a>
+					<a class="navbar-brand active" href="{{ $base }}"><img src="{{ $base }}/assets/logotitle_2.png" height="22"></a>
 				</div>
 
 				<!-- Navbar Itself
 				======== -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="{{ $base }}/">Home</a></li>
 						<li><a href="{{ $base }}/news">News</a></li>
 
 						<li class="dropdown">
@@ -39,7 +38,8 @@
 							</ul>
 						</li>
 
-						<li><a href="{{ $base }}/submit">Submit Songs</a></li>
+						<li><a href="{{ $base }}/submit">Submit</a></li>
+						<li><a href="{{ $base }}/irc">IRC</a></li>
 					</ul>
 					<form class="navbar-form navbar-right">
 						<div class="form-group">

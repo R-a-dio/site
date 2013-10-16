@@ -173,12 +173,12 @@
 
 @section('script')
     <script>
-
+    $(function() {
         function createStream() {
             console.log('creating new element');
 
             // the only way to flush the audio buffer is to re-create the element.
-            $('<audio id="stream" src="https://r-a-d.io/main">Get a better bloody browser.</audio>').appendTo('#stream-container');
+            $('<audio id="stream" src="https://r-a-d.io/main.mp3" preload="auto" autoplay>Get a better bloody browser.</audio>').appendTo('#stream-container');
 
             // event handler for audio loading
             $('#stream').on('loadeddata', function() {
@@ -191,11 +191,9 @@
                 console.log(event);
             });
 
-            // play the stream we created
-            document.getElementById('stream').play();
-
             // Show the volume slider
             $('#stream-volume').show();
+
         }
 
         function stopStream() {
@@ -213,6 +211,8 @@
 
         function playStream() {
             createStream();
+            // force a load 
+            
             $('#stream-container').attr('data-var', 'playing');
         }
 
@@ -235,5 +235,6 @@
                 stopStream();
             }
         });
+    });
     </script>
 @stop

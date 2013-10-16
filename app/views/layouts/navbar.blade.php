@@ -48,6 +48,10 @@
 						<button type="submit" class="btn btn-success">Request</button>
 					</form>
 				</div><!--/.nav-collapse -->
+				<span style="display: none" id="stream-container" data-var="stopped">
 
+				</span>
 			</div>
+
+			
 		</div>

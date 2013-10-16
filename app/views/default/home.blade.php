@@ -35,13 +35,20 @@
                             <!-- Player Options
                                 ================ -->
                             <div class="col-md-6">
-                                <a class="btn btn-primary btn-block" href="#">Play Stream</a>
+                                <a class="btn btn-primary btn-block" href="#" id="stream-player">Play Stream</a>
                                 <div class="btn-group btn-block" style="width:100%">
                                     <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
                                         More Options <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" style="width: 100%">
-                                        <li><a href="#">Direct Stream Link</a></li>
+                                        <li id="stream-volume"> 
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                                    <span class="sr-only">60% Complete</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li><a href="https://r-a-d.io/R-a-dio">Direct Stream Link</a></li>
                                         <li><a href="#">Stream .m3u File</a></li>
                                         <li><a href="#">Stream .pls File</a></li>
                                         <li class="divider"></li>
@@ -162,4 +169,71 @@
 
             </div><!-- /.row -->
         </div><!-- /.container -->
+@stop
+
+@section('script')
+    <script>
+
+        function createStream() {
+            console.log('creating new element');
+
+            // the only way to flush the audio buffer is to re-create the element.
+            $('<audio id="stream" src="https://r-a-d.io/main">Get a better bloody browser.</audio>').appendTo('#stream-container');
+
+            // event handler for audio loading
+            $('#stream').on('loadeddata', function() {
+                console.log('loadeddata fired');
+                $('#stream-player').html('Stop Stream');
+            });
+
+            // error logging
+            $('#stream').on('error', function(event) {
+                console.log(event);
+            });
+
+            // play the stream we created
+            document.getElementById('stream').play();
+
+            // Show the volume slider
+            $('#stream-volume').show();
+        }
+
+        function stopStream() {
+            // initially pause the element to stop audio
+            document.getElementById('stream').pause();
+            
+            // Hide the volume slider now that we're done with it.
+            $('#stream-volume').hide();
+
+            // destroy the element, removing it from the DOM
+            $('#stream').remove();
+            $('#stream-container').attr('data-var', 'stopped');
+      
+        }
+
+        function playStream() {
+            createStream();
+            $('#stream-container').attr('data-var', 'playing');
+        }
+
+        $('#stream-player').click(function(event) {
+
+            // prevent url changing to /#
+            event.preventDefault();
+
+            // grab state for below
+            var state = $('#stream-container').attr('data-var');
+
+            if (state == "stopped") {
+                console.log('playing stream');
+                $(this).html('<div class="progress progress-striped active" style="width: 80%; margin-left: auto; margin-right: auto; margin-bottom: 0;"><div class="progress-bar progress-bar-info" role="progressbar" style="width: 100%"></div></div>');
+                playStream();
+            }
+            if (state == "playing") {
+                console.log('stopping stream');
+                $(this).html('Play Stream');
+                stopStream();
+            }
+        });
+    </script>
 @stop

@@ -1,3 +1,7 @@
 # Contribution Guidelines
 
-Please submit all issues and pull requests to the [laravel/framework](http://github.com/laravel/framework) repository!
+Bug reports go into issues. Be as detailed as possible.
+
+Discussion should ideally be first on IRC (#r/a/dio@irc.rizon.net) and then in a github issue if the discussion has any merit.
+
+Pull request to your heart's content if you fancy doing something that's lacking.

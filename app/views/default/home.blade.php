@@ -1,10 +1,9 @@
-@extends('layouts.master')
+@extends('master')
 
 @section('content')
         <!-- Main Container
         ================ -->
         <div class="container main">
-
 
 
             <!-- Content (Dynamic)
@@ -17,7 +16,7 @@
                         ============== -->
                     <div class="col-md-3">
                         <div class="col-xs-12">
-                            <img src="./assets/logo_image_small.png" class="hidden-xs">
+                            <img src="{{ $base }}/assets/logo_image_small.png" class="hidden-xs">
                         </div>
                     </div>
 
@@ -29,24 +28,31 @@
                             <!-- Logo 2 (Branded)
                                 ================= -->
                             <div class="col-md-6">
-                                <img src="./assets/logotitle_2.png" width="100% !important; margin-bottom: 25px">
+                                <img src="{{ $base }}/assets/logotitle_2.png" width="100% !important; margin-bottom: 25px">
 
                             </div>
 
                             <!-- Player Options
                                 ================ -->
                             <div class="col-md-6">
-                                <a class="btn btn-primary btn-block" href="#">Play Stream</a>
+                                <a class="btn btn-primary btn-block" href="#" id="stream-player">Play Stream</a>
                                 <div class="btn-group btn-block" style="width:100%">
                                     <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
                                         More Options <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" style="width: 100%">
-                                        <li><a href="#">Direct Stream Link</a></li>
+                                        <li id="stream-volume"> 
+                                            <div class="progress">
+                                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                                    <span class="sr-only">60% Complete</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li><a href="https://r-a-d.io/R-a-dio">Direct Stream Link</a></li>
                                         <li><a href="#">Stream .m3u File</a></li>
                                         <li><a href="#">Stream .pls File</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="#">Help</a></li>
+                                        <li><a href="{{ $base }}/help">Help</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -100,7 +106,7 @@
                     <div class="col-md-3">
                         <div class="col-xs-12">
                             <div class="thumbnail">
-                                <img src="./assets/dj_image.png">
+                                <img src="{{ $base }}/assets/dj_image.png">
                                 <h4 class="text-center">Hanyuu-sama</h4>
                             </div>
                         </div>
@@ -120,61 +126,13 @@
                 <div class="col-md-6">
                     <h3 class="text-center">Last Played</h3>
                     <ul class="list-group text-center">
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
+                        {{ $lp }}
                     </ul>
                 </div>
                 <div class="col-md-6">
                     <h3 class="text-center">Queue</h3>
                     <ul class="list-group text-center">
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
-                        <li class="list-group-item">
-                            <span class="badge faves" data-toggle="tooltip" title="faves">20</span>
-                            <span class="badge plays" data-toggle="tooltip" title="plays">99</span>
-                            #comiket - trainroll
-                        </li>
+                        {{ $queue }}
                     </ul>
                 </div>
 
@@ -211,4 +169,71 @@
 
             </div><!-- /.row -->
         </div><!-- /.container -->
+@stop
+
+@section('script')
+    <script>
+
+        function createStream() {
+            console.log('creating new element');
+
+            // the only way to flush the audio buffer is to re-create the element.
+            $('<audio id="stream" src="https://r-a-d.io/main">Get a better bloody browser.</audio>').appendTo('#stream-container');
+
+            // event handler for audio loading
+            $('#stream').on('loadeddata', function() {
+                console.log('loadeddata fired');
+                $('#stream-player').html('Stop Stream');
+            });
+
+            // error logging
+            $('#stream').on('error', function(event) {
+                console.log(event);
+            });
+
+            // play the stream we created
+            document.getElementById('stream').play();
+
+            // Show the volume slider
+            $('#stream-volume').show();
+        }
+
+        function stopStream() {
+            // initially pause the element to stop audio
+            document.getElementById('stream').pause();
+            
+            // Hide the volume slider now that we're done with it.
+            $('#stream-volume').hide();
+
+            // destroy the element, removing it from the DOM
+            $('#stream').remove();
+            $('#stream-container').attr('data-var', 'stopped');
+      
+        }
+
+        function playStream() {
+            createStream();
+            $('#stream-container').attr('data-var', 'playing');
+        }
+
+        $('#stream-player').click(function(event) {
+
+            // prevent url changing to /#
+            event.preventDefault();
+
+            // grab state for below
+            var state = $('#stream-container').attr('data-var');
+
+            if (state == "stopped") {
+                console.log('playing stream');
+                $(this).html('<div class="progress progress-striped active" style="width: 80%; margin-left: auto; margin-right: auto; margin-bottom: 0;"><div class="progress-bar progress-bar-info" role="progressbar" style="width: 100%"></div></div>');
+                playStream();
+            }
+            if (state == "playing") {
+                console.log('stopping stream');
+                $(this).html('Play Stream');
+                stopStream();
+            }
+        });
+    </script>
 @stop

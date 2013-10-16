@@ -1,0 +1,29 @@
+/* base CSS. This should be overridden, never removed */
+.main {
+    margin-top: 60px;
+    
+}
+
+.content {
+    margin-top: 30px;
+}
+
+#stream-progress-bar {
+    margin-top: 20px;
+}
+.footer {
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.errors {
+	background: #AD0000;
+	color: #fff;
+}
+
+.pending {
+	background: #463265;
+	color: #fff;
+}

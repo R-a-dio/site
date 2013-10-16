@@ -11,8 +11,20 @@
 |
 */
 
-Route::get('/', 'HomeController@showHome');
+# Index.
+Route::get('/', 'Home@showHome');
 
-Route::get('/news', 'NewsController@showNews');
-Route::get('/news/{id}', 'NewsController@showSingleNews')
+# News - aggregate + single
+Route::get('/news', 'News@showNews');
+Route::get('/news/{id}', 'News@showSingleNews')
 	->where('id', '[0-9]+');
+
+# Stats
+Route::get('/stats', 'Stats@showGraphs');
+Route::get('/stats.json', 'Stats@getGraphsAjax');
+
+# IRC
+Route::get('/irc', 'IRC@show');
+
+# Admin controller; adds extra auth + security
+Route::controller('/admin', 'Admin');

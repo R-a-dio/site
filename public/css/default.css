@@ -1,0 +1,12 @@
+/* default theme */
+.faves { background: rgb(66, 139, 202); }
+.faves:hover { background: rgb(40, 94, 142); cursor: pointer; }
+.plays { background: #f0ad4e; }
+.plays:hover { background: #d58512; cursor: pointer; }
+
+.bordered {
+    border-radius: 7px;
+    -moz-box-shadow: 0 0 4px 4px #888;
+    -webkit-box-shadow: 0 0 4px 4px#888;
+    box-shadow: 0 0 4px 4px #888;
+}

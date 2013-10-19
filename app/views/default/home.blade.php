@@ -178,7 +178,7 @@
             console.log('creating new element');
 
             // the only way to flush the audio buffer is to re-create the element.
-            $('<audio id="stream" src="https://r-a-d.io/main.mp3" preload="auto" autoplay>Get a better bloody browser.</audio>').appendTo('#stream-container');
+            $('<audio id="stream" src="https://r-a-d.io/main" preload="auto">Get a better bloody browser.</audio>').appendTo('#stream-container');
 
             // event handler for audio loading
             $('#stream').on('loadeddata', function() {
@@ -186,9 +186,18 @@
                 $('#stream-player').html('Stop Stream');
             });
 
+            $('#stream').on('canplay', function() {
+                console.log('attempting to play the stream...');
+                document.getElementById('stream').play();
+            });
+
             // error logging
             $('#stream').on('error', function(event) {
                 console.log(event);
+            });
+
+            $('#stream').on('waiting', function(event) {
+                console.log('waiting... ' + event);
             });
 
             // Show the volume slider
@@ -199,6 +208,8 @@
         function stopStream() {
             // initially pause the element to stop audio
             document.getElementById('stream').pause();
+            document.getElementById('stream').currentTime = 0;
+            document.getElementById('stream').load();
             
             // Hide the volume slider now that we're done with it.
             $('#stream-volume').hide();

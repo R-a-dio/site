@@ -2,6 +2,16 @@
 
 class BaseController extends Controller {
 
+	public function __construct() {
+		
+		// Auth, naturally.
+		//$this->beforeFilter('auth');
+
+		// ALL POST/PUT/DELETE REQUIRE CSRF TOKENS.
+		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
+
+	}
+
 	/**
 	 * Retrieve the current theme's identifier.
 	 *

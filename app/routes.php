@@ -10,25 +10,25 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
+$base = Config::get("app.base", "");
 # Index.
-Route::get('/', 'Home@showHome');
+Route::get($base . '/', 'Home@showHome');
 
 # News - aggregate + single
-Route::get('/news', 'News@showNews');
-Route::get('/news/{id}', 'News@showSingleNews')
+Route::get($base . '/news', 'News@showNews');
+Route::get($base . '/news/{id}', 'News@showSingleNews')
 	->where('id', '[0-9]+');
 
 # Stats
-Route::get('/stats', 'Stats@showGraphs');
-Route::get('/stats.json', 'Stats@getGraphsAjax');
+Route::get($base . '/stats', 'Stats@showGraphs');
+Route::get($base . '/stats.json', 'Stats@getGraphsAjax');
 
 # IRC
-Route::get('/irc', 'IRC@show');
+Route::get($base . '/irc', 'IRC@show');
 
 # Search
-Route::any('/search/{search?}', 'Search@showResults');
+Route::any($base . '/search/{search?}', 'Search@showResults');
 
 
 # Admin controller; adds extra auth + security
-Route::controller('/admin', 'Admin');
+Route::controller($base . '/admin', 'Admin');

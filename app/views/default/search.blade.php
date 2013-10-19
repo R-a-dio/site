@@ -25,9 +25,6 @@
 
 	<!-- Search Results -->
 	<div class="container">
-		<pre>
-{{ var_dump($search) }}
-		</pre>
 
 		@foreach ($search as $result)
 

@@ -26,5 +26,9 @@ Route::get('/stats.json', 'Stats@getGraphsAjax');
 # IRC
 Route::get('/irc', 'IRC@show');
 
+# Search
+Route::any('/search/{search?}', 'Search@showResults');
+
+
 # Admin controller; adds extra auth + security
 Route::controller('/admin', 'Admin');

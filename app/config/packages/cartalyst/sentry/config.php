@@ -70,7 +70,7 @@ return array(
 		|
 		*/
 
-		'key' => 'cartalyst_sentry',
+		'key' => 'radio_sentry',
 
  	),
 
@@ -133,7 +133,7 @@ return array(
 		|
 		*/
 
-		'login_attribute' => 'email',
+		'login_attribute' => 'username',
 
 	),
 

@@ -41,12 +41,10 @@
 						<li><a href="{{ $base }}/submit">Submit</a></li>
 						<li><a href="{{ $base }}/irc">IRC</a></li>
 					</ul>
-					<form class="navbar-form navbar-right">
-						<div class="form-group">
-							<input type="text" placeholder="Search" class="form-control">
-						</div>
-						<button type="submit" class="btn btn-success">Request</button>
-					</form>
+					<div class="navbar-form navbar-right">
+						<a class="btn btn-info" href="{{ $base }}/login">Log In</a>
+						<a class="btn btn-success" href="{{ $base }}/search">Request</a>
+					</div>
 				</div><!--/.nav-collapse -->
 				<span style="display: none" id="stream-container" data-var="stopped">
 

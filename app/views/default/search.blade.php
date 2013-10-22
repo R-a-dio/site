@@ -7,7 +7,7 @@
 			<h1 class="text-center text-info"> Search for a song. </h1>
 			{{ Form::open(['url' => $base . "/search" ]) }}
 			<div class="input-group">
-				<input type="text" class="form-control" placeholder="Search" name="q" id="search" value="{{ Input::get("q", "") }}">
+				<input type="text" class="form-control" placeholder="Search" name="q" id="search" value="{{{ Input::get("q", "") }}}">
 				<div class="input-group-btn">
 					<button class="btn btn-info" type="submit">
 						Search

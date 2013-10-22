@@ -55,3 +55,26 @@
 .cooldown {
     opacity: 0.7;
 }
+
+
+.btn-google {
+    background: url('../assets/google_base.png');
+    width: 160px;
+    height: 54px;
+}
+.btn-google:hover,
+.btn-google:focus {
+    background: url('../assets/google_hover.png');
+}
+.btn-google:active {
+    background: url('../assets/google_press.png');
+}
+
+
+
+
+
+
+
+
+

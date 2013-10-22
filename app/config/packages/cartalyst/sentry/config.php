@@ -133,7 +133,7 @@ return array(
 		|
 		*/
 
-		'login_attribute' => 'username',
+		'login_attribute' => 'email',
 
 	),
 

@@ -18,6 +18,8 @@
 				======== -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
+						<li id="nav-control"><a href="#" ><i class="icon-play"></i></a></li>
+
 						<li><a href="{{ $base }}/news">News</a></li>
 
 						<li class="dropdown">
@@ -41,10 +43,12 @@
 						<li><a href="{{ $base }}/submit">Submit</a></li>
 						<li><a href="{{ $base }}/irc">IRC</a></li>
 					</ul>
-					<div class="navbar-form navbar-right">
-						<a class="btn btn-info" href="{{ $base }}/login">Log In</a>
-						<a class="btn btn-success" href="{{ $base }}/search">Request</a>
-					</div>
+					<form class="navbar-form navbar-right" action="{{ $base }}/search" method="post" enctype="utf-8">
+						<div class="form-group">
+							<input type="text" name="q" placeholder="Search" class="form-control" role="search">
+						</div>
+						<button type="submit" class="btn btn-success">Request</button>
+					</form>
 				</div><!--/.nav-collapse -->
 				<span style="display: none" id="stream-container" data-var="stopped">
 

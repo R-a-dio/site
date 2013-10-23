@@ -18,7 +18,7 @@
 				======== -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li id="nav-control"><a href="#" ><i class="icon-play"></i></a></li>
+						<li id="nav-control" class="hidden-xs"><a href="#" ><i class="icon-play"></i></a></li>
 
 						<li><a href="{{ $base }}/news">News</a></li>
 
@@ -47,7 +47,6 @@
 						<div class="form-group">
 							<input type="text" name="q" placeholder="Search" class="form-control" role="search">
 						</div>
-						<button type="submit" class="btn btn-success">Request</button>
 					</form>
 				</div><!--/.nav-collapse -->
 				<span style="display: none" id="stream-container" data-var="stopped">

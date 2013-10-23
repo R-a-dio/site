@@ -28,7 +28,7 @@
                             <!-- Logo 2 (Branded)
                                 ================= -->
                             <div class="col-md-6">
-                                <img src="{{ $base }}/assets/logotitle_2.png" width="100% !important; margin-bottom: 25px">
+                                <img src="{{ $base }}/assets/logotitle_2.png" width="100% !important; margin-bottom: 25px" class="hidden-xs">
 
                             </div>
 
@@ -106,7 +106,7 @@
                     <div class="col-md-3">
                         <div class="col-xs-12">
                             <div class="thumbnail">
-                                <img src="{{ $base }}/assets/dj_image.png">
+                                <img src="{{ $base }}/assets/dj_image.png" class="hidden-xs">
                                 <h4 class="text-center">Hanyuu-sama</h4>
                             </div>
                         </div>

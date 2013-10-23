@@ -43,11 +43,11 @@
 						<li><a href="{{ $base }}/submit">Submit</a></li>
 						<li><a href="{{ $base }}/irc">IRC</a></li>
 					</ul>
-					<form class="navbar-form navbar-right" action="{{ $base }}/search" method="post" enctype="utf-8">
+					{{ Form::open(['url' => $base . "/search", "class" => "navbar-form navbar-right" ]) }}
 						<div class="form-group">
 							<input type="text" name="q" placeholder="Search" class="form-control" role="search">
 						</div>
-					</form>
+					{{ Form::close() }}
 				</div><!--/.nav-collapse -->
 				<span style="display: none" id="stream-container" data-var="stopped">
 

@@ -5,3 +5,4 @@ composer.lock
 .DS_Store
 /app/config/database.php
 /app/config/app.php
+.vagrant

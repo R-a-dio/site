@@ -31,9 +31,9 @@ tl;dr of these is that they make two very important things (music playing while 
 Alpha + Beta
 ----
 
-The staging area (beta) for changes due for live is at https://r-a-d.io/beta/
+The staging area (beta) for changes due for live is at https://r-a-d.io/dev/
 
-The development area (unstable, will often be a 500 error) is at https://r-a-d.io/dev/public/
+The development area (unstable, will often be a 500 error) is at http://radio.hiroto.eu/
 
 
 Issues
@@ -46,54 +46,13 @@ To contact the dev(s), ping Hiroto on IRC (#R/a/dio @ irc.rizon.net) or on Twitt
 Installing
 ----------
 
-If you want to work on this, you'll need `php5`, a webserver and `php5-mcrypt`.
+1. Install [Vagrant][vagrant] and [VirtualBox][vbox]
+2. clone this repository
+3. `vagrant up` inside the repository
+4. `vagrant ssh` into the VM
+5. `cd /vagrant` and `bash install.sh`
 
-R/a/dio uses php5-fpm and nginx. Here's one of our `server {}` blocks:
-
-```
-# Beta Server.
-server {
-	listen 5672;
-	root /radio/www/r-a-d.io/beta/public;
-	index index.php index.html;
-
-	error_log /radio/www/logs/r-a-d.io/beta/error.log;
-	access_log /radio/www/logs/r-a-d.io/beta/access.log;
-
-	location / {
-		try_files $uri $uri/ /index.php?$uri =404;
-	}
-
-	# php5-fpm fastcgi pass.
-	location ~ \.php$ {
-		fastcgi_split_path_info ^((?U).+\.php)(/?.+)$;
-		fastcgi_pass unix:/var/run/php5-fpm.sock;
-		fastcgi_intercept_errors off;
-		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-		include fastcgi_params;
-	}
-
-}
-
-
-```
-
-
-You will also need [Composer](http://getcomposer.org/). Clone the repo, enter the directory, and run:
-
-```php
-    curl -sS https://getcomposer.org/installer | php
-```
-
-This will install a `composer.phar` file to the current directory:
-
-    ./composer.phar install
-
-Note: if you get errors about disabled functions, enable them. For any other errors, make sure the branch you are on passes the travis-ci tests.
-
-
-
-
+R/a/dio is now running at http://localhost:8080
 
 
 Credits
@@ -104,7 +63,6 @@ The original creators of the r/a/dio site are [@Bevinsky](https://github.com/Bev
 Occasional theme-hacker and freedom-hater is [@9001](https://github.com/9001) (aka Tripflag, ed)
 
 
-
 ## Laravel PHP Framework
 
 [![Latest Stable Version](https://poser.pugx.org/laravel/framework/version.png)](https://packagist.org/packages/laravel/framework) [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.png)](https://packagist.org/packages/laravel/framework) [![Build Status](https://travis-ci.org/laravel/framework.png)](https://travis-ci.org/laravel/framework)
@@ -113,4 +71,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## License
 
 R/a/dio is licensed under the [MIT License](http://opensource.org/licenses/MIT).
+
+
+
+[vagrant]: https://www.vagrantup.com
+[vbox]: https://virtualbox.org
 

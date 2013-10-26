@@ -1,6 +1,7 @@
 @extends('master')
 
 @section('content')
+
         <!-- Main Container
         ================ -->
         <div class="container main">
@@ -35,7 +36,7 @@
                             <!-- Player Options
                                 ================ -->
                             <div class="col-md-6">
-                                <a class="btn btn-primary btn-block" href="#" id="stream-player">Play Stream</a>
+                                <a class="btn btn-primary btn-block" href="#" id="stream-player" data-loading-text="Loading...">Play Stream</a>
                                 <div class="btn-group btn-block" style="width:100%">
                                     <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
                                         More Options <span class="caret"></span>

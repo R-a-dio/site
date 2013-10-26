@@ -18,7 +18,12 @@
 				======== -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li id="nav-control" class="hidden-xs"><a href="#" ><i class="icon-play"></i></a></li>
+						<audio id="stream" preload="none" src="https://r-a-d.io/main" style="width: 0; height: 0;"></audio>
+						<li><a href="#" id="play"><i class="icon-play"></i></a></li>
+						<li id="loading"></li>
+						<li>
+							<canvas id="fft" style="width: 70px; height: 39px padding-top: 6px; padding-bottom: 6px;"></canvas>
+						</li>
 
 						<li><a href="{{ $base }}/news">News</a></li>
 
@@ -49,9 +54,6 @@
 						</div>
 					{{ Form::close() }}
 				</div><!--/.nav-collapse -->
-				<span style="display: none" id="stream-container" data-var="stopped">
-
-				</span>
 			</div>
 
 			

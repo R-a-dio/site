@@ -1,4 +1,9 @@
 /* base CSS. This should be overridden, never removed */
+
+body {
+    background: #000000;
+}
+
 .main {
     margin-top: 60px;
     
@@ -74,6 +79,22 @@ li#nav-control > div > div.popover-content {
     padding: 0 !important;
 }
 
+#canvas > canvas {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#canvas {
+    position: absolute;
+    top: 51px;
+    padding: 0;
+    margin: 0;
+    z-index: -9999;
+    height: 100%;
+    width: 100%;
+}
 
 
 

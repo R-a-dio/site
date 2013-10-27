@@ -20,7 +20,6 @@
 					<ul class="nav navbar-nav">
 						<audio id="stream" preload="none" src="https://r-a-d.io/main" style="width: 0; height: 0;"></audio>
 						<li><a href="#" id="play"><i class="icon-play"></i></a></li>
-						<li id="loading"></li>
 						<li>
 							<canvas id="fft"></canvas>
 						</li>

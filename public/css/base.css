@@ -96,6 +96,12 @@ li#nav-control > div > div.popover-content {
     width: 100%;
 }
 
+#fft {
+    height: 150px;
+    position: relative;
+    margin-top: -110px;
+    width: 60px;
+}
 
 
 

@@ -2,8 +2,8 @@
 
   var
     AUDIO_FILE        = 'https://r-a-d.io/main',
-    PARTICLE_COUNT    = 1000,
-    MAX_PARTICLE_SIZE = 10,
+    PARTICLE_COUNT    = 150,
+    MAX_PARTICLE_SIZE = 13,
     MIN_PARTICLE_SIZE = 1,
     GROWTH_RATE       = 5,
     DECAY_RATE        = 0.5,

@@ -8,7 +8,7 @@
 
 		<!-- Bootstrap Core CSS
 			==================== -->
-		<link href="{{ $base }}/css/bootstrap.min.css" rel="stylesheet">
+		<link href="{{ $base }}/css/bootstrap.css" rel="stylesheet">
 
 		<!-- Source Sans Pro -->
 		<link href="{{ $base }}/css/fonts.css" rel="stylesheet">

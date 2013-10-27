@@ -1,6 +1,6 @@
 		<!-- Navbar
 		======== -->
-		<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar navbar-inverse">
 			<div class="container">
 
 				<!-- Collapse Icon
@@ -22,7 +22,7 @@
 						<li><a href="#" id="play"><i class="icon-play"></i></a></li>
 						<li id="loading"></li>
 						<li>
-							<canvas id="fft" style="width: 70px; height: 39px padding-top: 6px; padding-bottom: 6px;"></canvas>
+							<canvas id="fft"></canvas>
 						</li>
 
 						<li><a href="{{ $base }}/news">News</a></li>

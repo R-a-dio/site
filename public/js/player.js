@@ -2,14 +2,14 @@
 
   var
     AUDIO_FILE        = 'https://r-a-d.io/main',
-    PARTICLE_COUNT    = 150,
-    MAX_PARTICLE_SIZE = 13,
+    PARTICLE_COUNT    = 250,
+    MAX_PARTICLE_SIZE = 8,
     MIN_PARTICLE_SIZE = 1,
-    GROWTH_RATE       = 5,
-    DECAY_RATE        = 0.5,
+    GROWTH_RATE       = 8,
+    DECAY_RATE        = 2,
 
-    BEAM_RATE         = 0.5,
-    BEAM_COUNT        = 20,
+    BEAM_RATE         = 0.8,
+    BEAM_COUNT        = 60,
 
     GROWTH_VECTOR = new THREE.Vector3( GROWTH_RATE, GROWTH_RATE, GROWTH_RATE ),
     DECAY_VECTOR  = new THREE.Vector3( DECAY_RATE, DECAY_RATE, DECAY_RATE ),
@@ -38,13 +38,13 @@
           particles[ i ].scale.addSelf( GROWTH_VECTOR );
         }
       }
-      if ( !beamGroup.children[ 0 ].visible ) {
-        for ( i = BEAM_COUNT; i--; ) {
-          beamGroup.children[ i ].visible = true;
-        }
-      }
+      // ~~(Math.random() * 255) == Math.floor(Math.random() * 255)
+      document.getElementsByTagName("body")[0].style["background-color"] = "rgba(" + ~~(Math.random() * 255) +
+       "," + ~~(Math.random() * 255) + "," + ~~(Math.random() * 255) + ", 0.3)";
     },
-    offKick: decay
+    offKick: decay,
+    threshold: 0.1,
+    frequency: [0, 5]
   });
 
   dancer.onceAt( 0, function () {
@@ -55,7 +55,7 @@
     beamGroup.rotation.x += BEAM_RATE;
     beamGroup.rotation.y += BEAM_RATE;
   }).onceAt( 50, function () {
-    changeParticleMat( 'white' );
+    changeParticleMat( 'blue' );
   }).onceAt( 66.5, function () {
     changeParticleMat( 'pink' );
   }).onceAt( 75, function () {
@@ -134,7 +134,7 @@
     return new THREE.ParticleBasicMaterial({
       blending: THREE.AdditiveBlending,
       size: MIN_PARTICLE_SIZE,
-      map: THREE.ImageUtils.loadTexture('../assets/particles/particle_' + sprite + '.png'),
+      map: THREE.ImageUtils.loadTexture('/assets/particles/particle_' + sprite + '.png'),
       vertexColor: 0xFFFFFF
     });
   }
@@ -142,24 +142,19 @@
   function loaded () {
     var
       loading = document.getElementById( 'loading' ),
-      anchor  = document.createElement('A'),
-      supported = Dancer.isSupported(),
-      p;
-
-    anchor.appendChild( document.createTextNode( supported ? 'Rave Modo' : 'N/A' ) );
-    anchor.setAttribute( 'href', '#' );
-    loading.innerHTML = '';
-    loading.appendChild( anchor );
+      supported = Dancer.isSupported();
 
     if ( !supported ) {
-      p = document.createElement('P');
-      p.appendChild( document.createTextNode( 'Your browser does not currently support either Web Audio API or Audio Data API. The audio may play, but the visualizers will not move to the music; check out the latest Chrome or Firefox browsers!' ) );
-      loading.appendChild( p );
+      $(loading).text("UNSUPPORTED BROWSER")
+    } else {
+      $(loading).text("RAVE MODO ACTIVATE");
     }
 
-    anchor.addEventListener( 'click', function () {
+    
+
+    $(loading).click(function(event) {
       dancer.play();
-    }, false );
+    })
 
   }
 
@@ -167,5 +162,8 @@
 
   // For debugging
   window.dancer = dancer;
+  window.newParticleMat = newParticleMat;
+  window.changeParticleMat = changeParticleMat;
+  window.kick = kick;
 
 })();

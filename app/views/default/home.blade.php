@@ -11,7 +11,7 @@
             =================== -->
             <div class="container content">
 
-                <div class="row" id="player">
+                <div class="row">
 
                     <!-- Logo 1 (Icon)
                         ============== -->
@@ -56,6 +56,7 @@
                                         <li><a href="{{ $base }}/help">Help</a></li>
                                     </ul>
                                 </div>
+                                <button class="btn btn-info btn-block" id="loading">DEBUG: Audio Not Loaded</button>
                             </div>
 
                         </div><!-- /.row#stream-info -->

@@ -31,22 +31,6 @@
     renderer.setSize( window.innerWidth, window.innerHeight );
     container.appendChild( renderer.domElement );
 
-    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-    document.addEventListener( 'touchstart', onDocumentTouch, false );
-    document.addEventListener( 'touchmove', onDocumentTouch, false );
-  }
-
-  function onDocumentMouseMove( event ) {
-    mouseX = event.clientX - windowHalfX;
-    mouseY = event.clientY - windowHalfY;
-  }
-
-  function onDocumentTouch( event ) {
-    if ( event.touches.length == 1 ) {
-      event.preventDefault();
-      mouseX = event.touches[ 0 ].pageX - windowHalfX;
-      mouseY = event.touches[ 0 ].pageY - windowHalfY;
-    }
   }
 
   function animate() {

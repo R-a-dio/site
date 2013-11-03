@@ -50,6 +50,27 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 
 App::error(function(Exception $exception, $code)
 {
+	$sentry = Config::get("app.sentry", false);
+
+	if ($sentry) {
+		// grab monolog to add a handler to it
+		$monolog = Log::getMonolog();
+
+		// Create a sentry/raven client
+		$client = new Raven_Client($sentry);
+
+		// handler time
+		$handler = new Monolog\Handler\RavenHandler($client,
+			Monolog\Logger::ERROR);
+
+		// cleanup on formatting
+		//$handler->setFormatter(new Monolog\Formatter\LineFormatter("%message% %context% %extra%\n"));
+
+		// add sentry to monolog
+		$monolog->pushHandler($handler);
+	}
+
+	// display the error with whatever error handler is installed (whoops)
 	Log::error($exception);
 });
 

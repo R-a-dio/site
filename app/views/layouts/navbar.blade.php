@@ -11,7 +11,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand active" href="{{ $base }}"><img src="{{ $base }}/assets/logotitle_2.png" height="22"></a>
+					<a class="navbar-brand active" href="{{ $base }}/"><img src="{{ $base }}/assets/logotitle_2.png" height="22"></a>
 				</div>
 
 				<!-- Navbar Itself
@@ -53,6 +53,7 @@
 						</div>
 					{{ Form::close() }}
 				</div><!--/.nav-collapse -->
+				<audio src="https://r-a-d.io/main" preload="metadata" id="player"></audio>
 			</div>
 
 			

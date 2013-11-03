@@ -1,14 +1,5 @@
 /* base CSS. This should be overridden, never removed */
 
-.main {
-    margin-top: 60px;
-    
-}
-
-.content {
-    margin-top: 30px;
-}
-
 #stream-progress-bar {
     margin-top: 20px;
 }
@@ -97,6 +88,22 @@ li#nav-control > div > div.popover-content {
     position: relative;
     margin-top: -110px;
     width: 60px;
+}
+
+#visualisation > div {
+    width: 2.5%;
+    background-color: rgb(195, 63, 40);
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+}
+
+#visualisation {
+    height: 245px;
+    position: relative;
+    margin: 10px;
+    margin-bottom: -245px;
+    -webkit-box-reflect: below 3px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255,255,255,0.2)));
 }
 
 

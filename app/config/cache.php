@@ -4,7 +4,8 @@ return array(
 
 	'times' => [
 		'search' => 3,
-		'api' => '1'
+		'api' => 1,
+		'themes', 180
 	],
 
 	/*

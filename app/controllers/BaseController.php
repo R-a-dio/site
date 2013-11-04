@@ -19,6 +19,26 @@ class BaseController extends Controller {
 	 */
 	protected function getTheme()
 	{
+		if (Input::cookie("radio.theme", false)) {
+			if (Cache::section("themes")
+				->get(Input::cookie("radio.theme"))) {
+				return Cache::section("themes")
+					->get(Input::cookie("radio.theme"));
+			} else {
+				$theme = DB::table("themes")
+				->where("id", Input::cookie("radio.theme"))
+				->get();
+
+				if ($theme) {
+					Cache::section("themes")->put(
+						Input::cookie("radio.theme"),
+						$theme["name"],
+						Config::get("cache.times.themes", 180)
+					);
+					return $theme["name"];
+				} 
+			}
+		}
 		// TODO: check database access, DJ column will have theme
 		return "default";
 	}

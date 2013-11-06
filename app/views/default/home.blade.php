@@ -17,7 +17,7 @@
                         ============== -->
                     <div class="col-md-3">
                         <div class="col-xs-12">
-                            <img src="{{ $base }}/assets/logo_image_small.png" class="hidden-xs">
+                            <img src="{{ $base }}/assets/logo_image_small.png" class="hidden-xs" alt="R/a/dio">
                         </div>
                     </div>
 
@@ -29,27 +29,27 @@
                             <!-- Logo 2 (Branded)
                                 ================= -->
                             <div class="col-md-6">
-                                <img src="{{ $base }}/assets/logotitle_2.png" width="100% !important; margin-bottom: 25px" class="hidden-xs">
+                                <img src="{{ $base }}/assets/logotitle_2.png" width="100% !important; margin-bottom: 25px" class="hidden-xs" alt="R/a/dio">
 
                             </div>
 
                             <!-- Player Options
                                 ================ -->
                             <div class="col-md-6">
-                                <a class="btn btn-primary btn-block" href="#" id="stream-player" data-loading-text="Loading...">Play Stream</a>
+                                <a class="btn btn-primary btn-block" href="#" id="stream-player" data-loading-text="{{{ trans("stream.play") }}}">Play Stream</a>
                                 <div class="btn-group btn-block" style="width:100%">
                                     <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
-                                        More Options <span class="caret"></span>
+                                        {{{ trans("stream.options") }}} <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" style="width: 100%">
                                         <li id="stream-volume"> 
                                             <input type="range">
                                         </li>
-                                        <li><a href="https://r-a-d.io/R-a-dio">Direct Stream Link</a></li>
-                                        <li><a href="#">Stream .m3u File</a></li>
-                                        <li><a href="#">Stream .pls File</a></li>
+                                        <li><a href="https://r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
+                                        <li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>
+                                        <li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="{{ $base }}/help">Help</a></li>
+                                        <li><a href="{{ $base }}/help">{{{ trans("stream.links.help") }}}</a></li>
                                     </ul>
                                 </div>
                                 <button class="btn btn-info btn-block" id="loading">DEBUG: Audio Not Loaded</button>
@@ -83,7 +83,7 @@
 
                             <div class="col-md-6">
                                 <p class="text-muted text-center">
-                                    Listeners: <span id="listeners">420</span>
+                                    {{{ trans("stream.listeners") }}}: <span id="listeners">420</span>
                                 </p>
                             </div>
                             <div class="col-md-6">
@@ -122,13 +122,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <h3 class="text-center">Last Played</h3>
+                    <h3 class="text-center">{{ trans("stream.lp") }}</h3>
                     <ul class="list-group text-center">
                         {{ $lp }}
                     </ul>
                 </div>
                 <div class="col-md-6">
-                    <h3 class="text-center">Queue</h3>
+                    <h3 class="text-center">{{ trans("stream.queue") }}</h3>
                     <ul class="list-group text-center">
                         {{ $queue }}
                     </ul>

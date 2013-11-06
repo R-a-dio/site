@@ -18,38 +18,31 @@
 				======== -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<audio id="stream" preload="none" src="https://r-a-d.io/main" style="width: 0; height: 0;"></audio>
-						<li><a href="#" id="play"><i class="icon-play"></i></a></li>
-						<li>
-							<canvas id="fft"></canvas>
-						</li>
-
-						<li><a href="{{ $base }}/news">News</a></li>
+						<li><a href="{{ $base }}/news">{{{ trans("navbar.news") }}}</a></li>
 
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Play Data <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{{ trans("navbar.data") }}} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="{{ $base }}/last-played">Last Played</a></li>
-								<li><a href="{{ $base }}/queue">Queue</a></li>
-								<li><a href="{{ $base }}/faves">Favourites</a></li>
+								<li><a href="{{ $base }}/last-played">{{{ trans("navbar.lp") }}}</a></li>
+								<li><a href="{{ $base }}/queue">{{{ trans("navbar.queue") }}}</a></li>
+								<li><a href="{{ $base }}/faves">{{{ trans("navbar.faves") }}}</a></li>
 							</ul>
 						</li>
 
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Stats <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{{ trans("navbar.stats") }}} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="{{ $base }}/stats/graphs">Graphs &amp; Metrics</a></li>
-								<li><a href="{{ $base }}/stats/djs">Staff</a></li>
-								<li><a href="{{ $base }}/stats/faves">Favourites</a></li>
+								<li><a href="{{ $base }}/stats">{{{ trans("navbar.graphs") }}}</a></li>
+								<li><a href="{{ $base }}/staff">{{{ trans("navbar.staff") }}}</a></li>
 							</ul>
 						</li>
 
-						<li><a href="{{ $base }}/submit">Submit</a></li>
-						<li><a href="{{ $base }}/irc">IRC</a></li>
+						<li><a href="{{ $base }}/submit">{{{ trans("navbar.submit") }}}</a></li>
+						<li><a href="{{ $base }}/irc">{{{ trans("navbar.irc") }}}</a></li>
 					</ul>
 					{{ Form::open(['url' => $base . "/search", "class" => "navbar-form navbar-right" ]) }}
 						<div class="form-group">
-							<input type="text" name="q" placeholder="Search" class="form-control" role="search">
+							<input type="text" name="q" placeholder="{{{ trans("search.placeholder") }}}" class="form-control" role="search">
 						</div>
 					{{ Form::close() }}
 				</div><!--/.nav-collapse -->

@@ -11,5 +11,7 @@ return [
 	"submit" => "Submit",
 	"irc" => "IRC",
 	"search" => "Search",
-	"request" => "Request"
+	"request" => "Request",
+	"graphs" => "Graphs & Metrics",
+	"staff" => "Staff"
 ];

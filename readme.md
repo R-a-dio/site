@@ -70,7 +70,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## License
 
-R/a/dio is licensed under the [MIT License](http://opensource.org/licenses/MIT).
+R/a/dio is licensed under the [MIT License](http://opensource.org/licenses/MIT). Optionally you can use the [BSD 2-Clause License](http://opensource.org/licenses/BSD-2-Clause)
 
 
 

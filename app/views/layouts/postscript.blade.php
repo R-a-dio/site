@@ -5,6 +5,6 @@
         <script src="{{ $base }}/js/bootstrap.min.js"></script>
         <!-- jQuery ScrollTo Plugin -->
         <script src="{{ $base }}/js/jquery.scrollto.js"></script>
-
         <!-- History.js -->
         <script src="{{ $base }}/js/jquery.history.js"></script>
+		<script src="{{ $base }}/js/radio.player.js"></script>

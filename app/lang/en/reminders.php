@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
 	/*
 	|--------------------------------------------------------------------------
@@ -19,4 +19,4 @@ return array(
 
 	"token"    => "This password reset token is invalid.",
 
-);
+];

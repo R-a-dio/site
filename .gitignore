@@ -6,3 +6,5 @@ composer.lock
 /app/config/database.php
 /app/config/app.php
 .vagrant
+*.sublime-workspace
+*.sublime-project

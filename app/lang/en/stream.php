@@ -14,4 +14,5 @@ return [
 	"dj" => "DJ",
 	"listeners" => "Listeners",
 	"lp" => "Last Played",
+	"queue" => "Queue",
 ];

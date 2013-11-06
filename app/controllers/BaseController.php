@@ -7,6 +7,7 @@ class BaseController extends Controller {
 		// Auth, naturally.
 		//$this->beforeFilter('auth');
 
+
 		// ALL POST/PUT/DELETE REQUIRE CSRF TOKENS.
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 
@@ -17,8 +18,7 @@ class BaseController extends Controller {
 	 *
 	 * @return string
 	 */
-	protected function getTheme()
-	{
+	protected function getTheme() {
 		if (Input::cookie("radio.theme", false)) {
 			if (Cache::section("themes")
 				->get(Input::cookie("radio.theme"))) {
@@ -43,6 +43,45 @@ class BaseController extends Controller {
 		return "default";
 	}
 
+	protected function getStrings($path, $locale) {
+		try {
+
+			$json = file_get_contents($path);
+			$json = json_decode($json);
+
+			Cache::section("strings")->put($locale, $json, 30);
+
+			return $json;
+		} catch (Exception $e) {
+			die("Invalid json file: " . $path);
+		}
+	}
+
+	protected function getLocaleStrings() {
+		$locale = Config::get("app.locale", "en");
+		// todo: fetch actual locale
+
+		// No Fun Allowed
+		if (preg_match("/[^a-z]/", $locale))
+			$locale = "en";
+
+		if (Cache::section("strings")->has($locale)) {
+
+			return Cache::section("strings")->get($locale);
+
+		} else {
+			// need to add to the cache instead
+
+			$strings = app_path() . "/views/strings/" . $locale . ".json";
+
+			if (file_exists($strings))
+				return $this->getStrings($strings, $locale);
+			else
+				return $this->getStrings($strings = app_path() . "/views/strings/en.json", "en");
+
+		}
+	}
+
 	/**
 	 * Setup the layout used by the controller.
 	 * Also adds a few required variables.
@@ -56,7 +95,8 @@ class BaseController extends Controller {
 			// TODO: dynamic source for the themes
 			$this->layout = View::make($this->layout)
 				->with("base", Config::get("app.base", ""))
-				->with("theme", $this->getTheme());
+				->with("theme", $this->getTheme())
+				->with("strings", $this->getLocaleStrings());
 		}
 	}
 

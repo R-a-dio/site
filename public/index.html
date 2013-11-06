@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+	<head>
+	</head>
+	<style>
+		body {
+		    background-color: #000000; /*#212426;*/
+		    margin: 0;
+		    padding: 0;
+		    font-family: Arial;
+		}
+		#info {
+		    width: 100%;
+		    position: absolute;
+		    top: 0;
+		    height: 52px;
+		    background-color: #111;
+		    color: #ccc;
+		    font-family: 'League Gothic', arial, sans-serif;
+		}
+		#info h1 {
+		    margin: 0 0 0 20px;
+		    float: left;
+		    font-size: 40px;
+		    color: #ff0077;
+		}
+		#info h2 {
+		    margin: 14px 0 0 5px;
+		    float: left;
+		    font-size: 25px;
+		}
+
+		#info ul {
+		    float:right;
+		    display-icon-type:none;
+		}
+
+		#info li {
+		    display:block;
+		    float:left;
+		    margin-right: 15px;
+		}
+
+		#info li a {
+		    color: #ff0077;
+		    margin-left: 5px;
+		}
+
+		#loading {
+		    font-size: 60px;
+		    color: #fff;
+		    width: 500px;
+		    margin-top: 300px;
+		    position: absolute;
+		    background-color: #111;
+		    padding: 10px;
+		    -webkit-border-radius: 10px;
+		    -moz-border-radius: 10px;
+		    border-radius: 10px;
+		    opacity: 0.9;
+		    border: 1px solid #ccc;
+		    text-align: center;
+		}
+
+		#loading a {
+		    color: #fff;
+		    text-shadow: 0 0 10px #fff;
+		    text-decoration: none;
+		}
+
+		#loading p{
+		    color: #fff;
+		    font-size: 18px;
+		}
+
+		#togglefft {
+		    float: left;
+		    margin: 20px 0 0 10px;
+		    color: #ff0077;
+		}
+
+		#fft { 
+		    display: none;
+		    margin: 2px 0 0 10px;
+		    float: left;    
+		}
+
+		#stats {
+		    margin: 0 0 0 10px;
+		    float: left;
+		}
+
+		#songinfo {
+		    position: absolute;
+		    bottom: 0;
+		    left: 0;
+		    background-color: #111;
+		}
+
+		#songinfo span, #songinfo h3 {
+		    color: #ccc;
+		    font-size: 12px;
+		    margin: 5px 30px 5px 30px;
+		    padding: 0;
+		}
+
+		#songinfo a {
+		    color: #ff0077;
+		}
+
+	</style>
+
+
+	<body>
+
+		<div id="info">
+			<h1>dancer.js</h1>
+			<h2>JavaScript Audio Library</h2>
+			<a id="togglefft" href="#">toggle FFT spectrum</a>
+			<canvas id="fft" height="50" width="256"></canvas>
+			<ul>
+				<li><a href="https://github.com/jsantell/dancer.js" title="dancer.js on github">view API/source</a></li>
+				<li>by <a href="http://jsantell.com" title="Jordan Santell">jordan santell</a></li>
+			</ul>
+		</div>
+		<div id="songinfo">
+			<span>Now playing...</span>
+			<h3><a href="http://zirconstudios.bandcamp.com/album/unearthed" title="Zircon Studios Bandcamp">R/a/dio</a></h3>
+		</div>
+		<div id="loading">Loading . . .</div>
+		<!-- Demo dependencies -->
+		<script>
+			var loading = document.getElementById('loading');
+			loading.style.marginLeft = (( window.outerWidth - 500 ) / 2) + 'px';
+		</script>
+
+
+
+
+
+		<!-- YAY JAVASCRIPT -->
+		<script src="/js/lib/Three.js"></script>
+		<script src="/js/lib/Stats.js"></script>
+		<script src="/js/lib/Detector.js"></script>
+
+		<script src="/js/src/dancer.js"></script>
+		<script src="/js/src/support.js"></script>
+		<script src="/js/src/kick.js"></script>
+		<script src="/js/src/adapterWebkit.js"></script>
+		<script src="/js/src/adapterMoz.js"></script>
+		<script src="/js/src/adapterFlash.js"></script>
+		<script src="/js/lib/fft.js"></script>
+		<script src="/js/lib/flash_detect.js"></script>
+		<script src="/js/plugins/dancer.fft.js"></script>
+
+		<!-- UNTZ UNTZ UNTZ -->
+		<script src="/js/scene.js"></script>
+		<script src="/js/player.js"></script>
+		<script>
+			(function () {
+				var fft = document.getElementById( 'fft' ),
+					toggle = document.getElementById( 'togglefft' );
+				toggle.addEventListener( 'click', function ( e ) {
+					e.preventDefault();
+					fft.style.display = fft.style.display == 'block' ? 'none' : 'block';
+				}, true );
+			})();
+		</script>
+	</body>
+</html>

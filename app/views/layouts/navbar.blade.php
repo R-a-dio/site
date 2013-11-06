@@ -1,6 +1,6 @@
 		<!-- Navbar
 		======== -->
-		<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar navbar-inverse">
 			<div class="container">
 
 				<!-- Collapse Icon
@@ -11,46 +11,42 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand active" href="{{ $base }}"><img src="{{ $base }}/assets/logotitle_2.png" height="22"></a>
+					<a class="navbar-brand active" href="{{ $base }}/"><img src="{{ $base }}/assets/logotitle_2.png" height="22"></a>
 				</div>
 
 				<!-- Navbar Itself
 				======== -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="{{ $base }}/news">News</a></li>
+						<li><a href="{{ $base }}/news">{{{ trans("navbar.news") }}}</a></li>
 
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Play Data <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{{ trans("navbar.data") }}} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="{{ $base }}/last-played">Last Played</a></li>
-								<li><a href="{{ $base }}/queue">Queue</a></li>
-								<li><a href="{{ $base }}/faves">Favourites</a></li>
+								<li><a href="{{ $base }}/last-played">{{{ trans("navbar.lp") }}}</a></li>
+								<li><a href="{{ $base }}/queue">{{{ trans("navbar.queue") }}}</a></li>
+								<li><a href="{{ $base }}/faves">{{{ trans("navbar.faves") }}}</a></li>
 							</ul>
 						</li>
 
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Stats <b class="caret"></b></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{{ trans("navbar.stats") }}} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="{{ $base }}/stats/graphs">Graphs &amp; Metrics</a></li>
-								<li><a href="{{ $base }}/stats/djs">Staff</a></li>
-								<li><a href="{{ $base }}/stats/faves">Favourites</a></li>
+								<li><a href="{{ $base }}/stats">{{{ trans("navbar.graphs") }}}</a></li>
+								<li><a href="{{ $base }}/staff">{{{ trans("navbar.staff") }}}</a></li>
 							</ul>
 						</li>
 
-						<li><a href="{{ $base }}/submit">Submit</a></li>
-						<li><a href="{{ $base }}/irc">IRC</a></li>
+						<li><a href="{{ $base }}/submit">{{{ trans("navbar.submit") }}}</a></li>
+						<li><a href="{{ $base }}/irc">{{{ trans("navbar.irc") }}}</a></li>
 					</ul>
-					<form class="navbar-form navbar-right">
+					{{ Form::open(['url' => $base . "/search", "class" => "navbar-form navbar-right" ]) }}
 						<div class="form-group">
-							<input type="text" placeholder="Search" class="form-control">
+							<input type="text" name="q" placeholder="{{{ trans("search.placeholder") }}}" class="form-control" role="search">
 						</div>
-						<button type="submit" class="btn btn-success">Request</button>
-					</form>
+					{{ Form::close() }}
 				</div><!--/.nav-collapse -->
-				<span style="display: none" id="stream-container" data-var="stopped">
-
-				</span>
+				<audio src="https://r-a-d.io/main" preload="metadata" id="player"></audio>
 			</div>
 
 			

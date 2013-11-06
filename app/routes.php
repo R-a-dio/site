@@ -11,6 +11,9 @@
 |
 */
 
+$_SERVER["HTTP_HOST"] = Config::get('app.host', '');
+$_SERVER["SERVER_NAME"] = Config::get('app.host', '');
+
 # Index.
 Route::get('/', 'Home@showHome');
 
@@ -25,6 +28,13 @@ Route::get('/stats.json', 'Stats@getGraphsAjax');
 
 # IRC
 Route::get('/irc', 'IRC@show');
+
+# Search
+Route::any('/search/{search?}', 'Search@showResults');
+
+Route::any('/login', 'UserAuth@login');
+//Route::any('/logout', 'UserAuth@logout');
+
 
 # Admin controller; adds extra auth + security
 Route::controller('/admin', 'Admin');

@@ -1,0 +1,15 @@
+{
+	"name": "R/a/dio 2.0 Default Theme",
+	"ident": "default",
+	"author": "David Collinson <hiroto@hiroto.eu>",
+	"provides": [
+		"home",
+		"irc",
+		"login",
+		"news",
+		"search",
+		"stats"
+	],
+	"css": "css/default.css",
+	"less": "less/*"
+}

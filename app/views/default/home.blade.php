@@ -36,7 +36,7 @@
                             <!-- Player Options
                                 ================ -->
                             <div class="col-md-6">
-                                <a class="btn btn-primary btn-block" href="#" id="stream-player" data-loading-text="{{{ trans("stream.play") }}}">Play Stream</a>
+                                <a class="btn btn-primary btn-block" href="#" id="stream-player" data-loading-text="{{{ trans("stream.loading") }}}">{{{ trans("stream.play") }}}</a>
                                 <div class="btn-group btn-block" style="width:100%">
                                     <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
                                         {{{ trans("stream.options") }}} <span class="caret"></span>

@@ -57,31 +57,6 @@ class BaseController extends Controller {
 		}
 	}
 
-	protected function getLocaleStrings() {
-		$locale = Config::get("app.locale", "en");
-		// todo: fetch actual locale
-
-		// No Fun Allowed
-		if (preg_match("/[^a-z]/", $locale))
-			$locale = "en";
-
-		if (Cache::section("strings")->has($locale)) {
-
-			return Cache::section("strings")->get($locale);
-
-		} else {
-			// need to add to the cache instead
-
-			$strings = app_path() . "/views/strings/" . $locale . ".json";
-
-			if (file_exists($strings))
-				return $this->getStrings($strings, $locale);
-			else
-				return $this->getStrings($strings = app_path() . "/views/strings/en.json", "en");
-
-		}
-	}
-
 	/**
 	 * Setup the layout used by the controller.
 	 * Also adds a few required variables.
@@ -95,8 +70,7 @@ class BaseController extends Controller {
 			// TODO: dynamic source for the themes
 			$this->layout = View::make($this->layout)
 				->with("base", Config::get("app.base", ""))
-				->with("theme", $this->getTheme())
-				->with("strings", $this->getLocaleStrings());
+				->with("theme", $this->getTheme());
 		}
 	}
 

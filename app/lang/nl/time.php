@@ -2,9 +2,9 @@
 
 return [
 	"minute" => ":t minuut|:t minuten",
-	"hour" => ":t uur|:t uren",
+	"hour" => ":t uur",
 	"day" => ":t dag|:t dagen",
 	"week" => ":t week|:t weken ",
-	"timeago" => ": Geleden",
-	"timeuntil" => "Over :time"
+	"timeago" => ": geleden",
+	"timeuntil" => "over :time"
 ]

@@ -13,10 +13,10 @@ return [
 	|
 	*/
 
-	"password" => "Wachtwoord moet minstens 6 tekens lang zijn en gelijk zijn met de bevestiging.",
+	"password" => "Het wachtwoord moet minstens 6 tekens lang zijn en overeenkomen met het bevestigingsveld.",
 
-	"user"     => "We kunnen geen gebruiker vinden met dit E-mail adres.",
+	"user"     => "We kunnen geen gebruiker vinden met dit e-mailadres.",
 
-	"token"    => "Deze wachtwoord reset code is ongeldig.",
+	"token"    => "Deze resetcode is ongeldig.",
 
 ];

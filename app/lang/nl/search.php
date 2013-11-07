@@ -3,18 +3,18 @@
 return [
 	"title" => "Zoek",
 	"help" => [
-		"main" => "Zoek een nummer.",
-		"options" => "Klik op een nummer voor opties",
+		"main" => "Zoek een lied.",
+		"options" => "Klik op een lied voor opties",
 	],
 	"placeholder" => "Zoek",
 	"button" => "Zoek",
-	"plays" => "Malen afgespeeld",
+	"plays" => "Aantal keren afgespeeld",
 	"faves" => "Favorieten",
 	"request" => "Verzoek",
 	"requestable" => "Verzoekbaar",
 	"popover" => [
-		"header" => "Nummer Opties",
-		"lp" => "Laatst Afgespeeld :timeago",
+		"header" => "Opties",
+		"lp" => "Laatst afgespeeld: :timeago",
 		"login" => ":login om aan favorieten toe te voegen of te downloaden",
 	],
 

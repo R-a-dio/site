@@ -1,18 +1,18 @@
 <?php
 
 return [
-	"play" => "Stream Afspelen",
-	"stop" => "Stream Stoppen",
-	"loading" => "Laden...",
-	"options" => "Meer Opties",
+	"play" => "Speel",
+	"stop" => "Stop",
+	"loading" => "Bezig met laden...",
+	"options" => "Meer opties",
 	"links" => [
-		"direct" => "Direct Stream Link",
-		"m3u" => "Stream .m3u Afspeellijst",
-		"pls" => "Stream .pls Afspeellijst",
+		"direct" => "Directe streamlink",
+		"m3u" => "Als afspeellijst (.m3u)",
+		"pls" => "Als afspeellijst (.pls)",
 		"help" => "Help"
 	],
 	"dj" => "DJ",
 	"listeners" => "Luisteraars",
-	"lp" => "Laatst Afgespeeld",
-	"queue" => "Wachtrij",
+	"lp" => "Net gespeeld",
+	"queue" => "Zometeen",
 ];

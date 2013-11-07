@@ -3,16 +3,15 @@
 return [
 	"home" => "R/a/dio",
 	"news" => "Nieuws",
-	"data" => "Afspeel Data",
-	"lp" => "Recent Afgespeeld",
-	"queue" => "Wachtrij",
+	"data" => "Afspeeldata",
+	"lp" => "Net gespeeld",
+	"queue" => "Zometeen",
 	"faves" => "Favorieten",
 	"stats" => "Statistieken",
-	"submit" => "Voeg Toe",
+	"submit" => "Voeg toe",
 	"irc" => "IRC",
 	"search" => "Zoek",
 	"request" => "Verzoek",
-	"graphs" => "Grafieken",
-	"staff" => "Personeel"
-
+	"graphs" => "Statistieken",
+	"staff" => "Bemanning"
 ];

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 return [
 	"minute" => ":t minute|:t minutes",
@@ -6,5 +6,5 @@ return [
 	"day" => ":t jour|:t jours",
 	"week" => ":t semaine|:t semaines",
 	"timeago" => "il y a :time",
-	"timeuntil" => "jusqu'à :time"
+	"timeuntil" => "dans :time"
 ]

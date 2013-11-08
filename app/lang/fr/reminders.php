@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 return [
 
@@ -13,10 +13,10 @@ return [
 	|
 	*/
 
-	"password" => "Les mots de passes doivent contenir six caractères, et correspondre à la confirmation.",
+	"password" => "Les mots de passe doivent contenir 6 caractères, et correspondre à la confirmation.",
 
-	"user"     => "Aucun utilisateurs avec cet adresse e-mail trouvé.",
+	"user"     => "Aucun utilisateur trouvé avec cette adresse mail.",
 
-	"token"    => "Ce reset code du mot de passe est invalide.",
+	"token"    => "Ce token de réinitialisation du mot de passe est invalide.",
 
 ];

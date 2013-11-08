@@ -1,21 +1,21 @@
-<?php
+﻿<?php
 
 return [
 	"title" => "Recherche",
 	"help" => [
-		"main" => "Rechercher une chanson.",
-		"options" => "Cliquer sur une chanson pour afficher les options",
+		"main" => "Recherchez une chanson.",
+		"options" => "Cliquez sur une chanson pour afficher les options.",
 	],
 	"placeholder" => "Recherche",
-	"button" => "Recherche",
-	"plays" => "Nombre de fois joués",
+	"button" => "Rechercher",
+	"plays" => "Lectures",
 	"faves" => "Favoris",
 	"request" => "Requête",
-	"requestable" => "Requestable",
+	"requestable" => "Requête possible",
 	"popover" => [
 		"header" => "Options de la chanson",
-		"lp" => "Dernière fois joué :timeago",
-		"login" => ":login pour l’ajouter en favoris ou la télécharger",
+		"lp" => "Dernière lecture :timeago",
+		"login" => ":login pour l’ajouter aux favoris ou la télécharger",
 	],
 
 ];

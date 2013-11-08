@@ -1,22 +1,10 @@
 <?php
 
 return [
-	"minute" => [
-		"p" => "minutes",
-		"s" => "minute",
-	],
-	"hour" => [
-		"p" => "hours",
-		"s" => "hour"
-	],
-	"day" => [
-		"p" => "days",
-		"s" => "day"
-	],
-	"week" => [
-		"p" => "weeks",
-		"s" => "week"
-	],
-	"timeago" => ":time :units ago",
-	"timeuntil" => "in :time :units"
+	"minute" => ":t minute|:t minutes",
+	"hour" => ":t hour|:t hours",
+	"day" => ":t day|:t days",
+	"week" => ":t week|:t weeks",
+	"timeago" => ":time ago",
+	"timeuntil" => "in :time"
 ]

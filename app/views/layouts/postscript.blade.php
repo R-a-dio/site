@@ -8,3 +8,4 @@
         <!-- History.js -->
         <script src="{{ $base }}/js/jquery.history.js"></script>
 		<script src="{{ $base }}/js/radio.player.js"></script>
+		<script src="{{ $base }}/js/furigana.js"></script>

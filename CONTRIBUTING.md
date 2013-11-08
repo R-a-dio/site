@@ -23,3 +23,37 @@ Rules for translations:
 5. There must be no executable code in the language files
 
 To see where all of the translations are physically on a page, set `"locale" => "<YOUR_LOCALE_CODE_HERE>"` in `app/config/app.php` before you do any work. This will result in a bunch of strings (e.g. "search.placeholder", "search.button") appearing everywhere. These are the locale placeholders, which you then replace in the relevant files (i.e. `search.placeholder` would be `"placeholder" => "Search"` in `app/lang/en/search.php`).
+
+Contributing languages with kanji/hanzi:
+
+You must include Ruby (also called rubi, ルビ, furigana) by writing it in curly braces directly after a kanji.
+
+e.g. `漫{まん}画{が}`, which will generate the code:
+
+```html
+<ruby>
+  <rb>漫</rb>
+  <rp>(</rp>
+    <rt>まん</rt>
+  <rp>)</rp>
+</ruby>
+<ruby>
+  <rb>画</rb>
+  <rp>(</rp>
+    <rt>が</rt>
+  <rp>)</rp>
+</ruby>
+```
+
+The result is this: <ruby>
+  <rb>漫</rb>
+  <rp>(</rp>
+    <rt>まん</rt>
+  <rp>)</rp>
+</ruby>
+<ruby>
+  <rb>画</rb>
+  <rp>(</rp>
+    <rt>が</rt>
+  <rp>)</rp>
+</ruby>

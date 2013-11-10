@@ -15,7 +15,7 @@ return [
     "popover" => [
         "header" => "Opsi Lagu",
         "lp" => "Terakhir kali dimainkan :timeago",
-        "login" => ":login to fave or download",
+        "login" => ":login untuk memfavoritkan atau mendownload lagu",
     ],
 
 ];

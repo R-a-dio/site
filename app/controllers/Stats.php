@@ -86,9 +86,6 @@ class Stats extends Player {
 
 	}
 
-	
-
-
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -130,4 +127,25 @@ class Stats extends Player {
 		return Response::json($this->getGraphs())
 			->setCallback(Input::get('callback'));
 	}
+
+	/**
+	 * Shows the last songs played.
+	 *
+	 * @return void
+	 */
+	public function showLastPlayed() {
+		$this->layout->content = View::make($this->getTheme() . '.lastplayed')
+			->with("lp", $this->getLastPlayedArray());
+	}
+
+	/**
+	 * Shows the queue.
+	 *
+	 * @return void
+	 */
+	public function showQueue() {
+		$this->layout->content = View::make($this->getTheme() . '.queue')
+			->with("queue", $this->getQueueArray());
+	}
+
 }

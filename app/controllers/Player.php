@@ -22,7 +22,7 @@ abstract class Player extends BaseController {
 		// priority is 30 max
 		if ($priority > 30)
 			$priority = 30;
-		
+
 		// between 0 and 7 return magic
 		if ($priority >= 0 and $priority <= 7)
 			return -11057 * $priority * $priority + 172954 * $priority + 81720;
@@ -69,6 +69,14 @@ abstract class Player extends BaseController {
 			->orderBy('eplay.id', 'desc')
 			->take($limit)
 			->get();
+	}
+
+	protected function getStatus() {
+		return DB::table('streamstatus')->first();
+	}
+
+	protected function getCurrentSong() {
+		return $this->getStatus()["np"];
 	}
 
 }

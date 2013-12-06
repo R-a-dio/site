@@ -1,10 +1,10 @@
 <?php
 
-	class IRC extends BaseController {
+class IRC extends BaseController {
 
-		protected $layout = "master";
+	protected $layout = "master";
 
-		public function show() {
-			$this->layout->content = View::make($this->getTheme() . '.irc');
-		}
+	public function show() {
+		$this->layout->content = View::make($this->getTheme() . '.irc');
 	}
+}

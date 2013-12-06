@@ -15,25 +15,29 @@ $_SERVER["HTTP_HOST"] = Config::get('app.host', '');
 $_SERVER["SERVER_NAME"] = Config::get('app.host', '');
 
 # Index.
-Route::get('/', 'Home@showHome');
+Route::get('/',                 'Home@showHome');
 
 # News - aggregate + single
-Route::get('/news', 'News@showNews');
-Route::get('/news/{id}', 'News@showSingleNews')
-	->where('id', '[0-9]+');
+Route::get('/news',             'News@showNews');
+Route::get('/news/{id}',        'News@showSingleNews')->where('id', '[0-9]+');
 
 # Stats
-Route::get('/stats', 'Stats@showGraphs');
-Route::get('/stats.json', 'Stats@getGraphsAjax');
+Route::get('/stats',            'Stats@showGraphs');
+Route::get('/stats.json',       'Stats@getGraphsAjax');
+Route::get('/last-played',      'Stats@showLastPlayed');
+Route::get('/queue',            'Stats@showQueue');
 
 # IRC
-Route::get('/irc', 'IRC@show');
+Route::get('/irc',              'IRC@show');
 
 # Search
 Route::any('/search/{search?}', 'Search@showResults');
 
-Route::any('/login', 'UserAuth@login');
+Route::any('/login',            'UserAuth@login');
 //Route::any('/logout', 'UserAuth@logout');
+
+
+
 
 
 # Admin controller; adds extra auth + security

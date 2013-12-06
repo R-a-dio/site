@@ -135,7 +135,7 @@ class Stats extends Player {
 	 */
 	public function showLastPlayed() {
 		$this->layout->content = View::make($this->getTheme() . '.lastplayed')
-			->with("lp", $this->getLastPlayedArray());
+			->with("lp", $this->getLastPlayedArray(40));
 	}
 
 	/**
@@ -145,7 +145,7 @@ class Stats extends Player {
 	 */
 	public function showQueue() {
 		$this->layout->content = View::make($this->getTheme() . '.queue')
-			->with("queue", $this->getQueueArray());
+			->with("queue", $this->getQueueArray(0));
 	}
 
 }

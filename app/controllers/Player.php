@@ -1,6 +1,6 @@
 <?php
 
-class Player extends BaseController {
+abstract class Player extends BaseController {
 
 
 	/*

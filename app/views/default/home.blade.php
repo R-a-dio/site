@@ -1,5 +1,3 @@
-@extends('master')
-
 @section('content')
 
         <!-- Main Container

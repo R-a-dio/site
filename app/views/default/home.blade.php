@@ -61,12 +61,8 @@
 
                             <div class="col-xs-12">
                                 <h2 class="text-center" id="current-song">
-                                    <span id="song-artist">
-                                        Tripflag
-                                    </span>
-                                         -
-                                    <span id="song-title">
-                                        OnkelSaft
+                                    <span id="song-metadata">
+                                        {{{ $status["np"] }}}
                                     </span>
                                 </h2>
                             </div>
@@ -81,7 +77,7 @@
 
                             <div class="col-md-6">
                                 <p class="text-muted text-center">
-                                    {{{ trans("stream.listeners") }}}: <span id="listeners">420</span>
+                                    {{{ trans("stream.listeners") }}}: <span id="listeners">{{{ $status["listeners"] }}}</span>
                                 </p>
                             </div>
                             <div class="col-md-6">

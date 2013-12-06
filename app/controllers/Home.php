@@ -100,7 +100,8 @@ LP;
 			->with("base", Config::get("app.base", ""))
 			->with("theme", $this->getTheme())
 			->with("queue", $this->makeQueue())
-			->with("lp", $this->makeLastPlayed());
+			->with("lp", $this->makeLastPlayed())
+			->with("status", $this->getStatus());
 
 	}
 

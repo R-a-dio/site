@@ -30,6 +30,9 @@ Route::get('/queue',            'Stats@showQueue');
 # IRC
 Route::get('/irc',              'IRC@show');
 
+# Staff
+Route::get('/staff',            'Staff@show');
+
 # Search
 Route::any('/search/{search?}', 'Search@showResults');
 

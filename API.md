@@ -22,7 +22,7 @@ When querying the API, you'll get the object you queried for in an object with t
              "cached": false,
              "routes": ["current", "tracks", "metadata", "song", "queue", "last", ...],
          }
-         "main": {
+         "result": {
              ...
          }
     }
@@ -38,8 +38,8 @@ Value types will be indicated using `<name:type>`.
 
 `GET /current` - GETs the current R/a/dio status.
 
-```json
-"main": {
+```
+"result": {
     "dj": { <dj:dj(see GET /djs/<id:int>)> },
     "metadata": <metadata:string>",
     "queue": { <queue:queue(see GET /tracks/queue/5)> },

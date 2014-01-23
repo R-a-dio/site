@@ -5,7 +5,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"raven/raven": "0.7.1",
-		"loic-sharma/profiler": "dev-master"
+		"loic-sharma/profiler": "dev-master",
+		"hiro/laravel-hashing": "dev-radio"
 	},
 	"autoload": {
 		"classmap": [

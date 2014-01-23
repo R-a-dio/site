@@ -31,7 +31,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-$logFile = 'log-'.php_sapi_name().'.txt';
+$logFile = 'laravel.log';
 
 Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 

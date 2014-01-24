@@ -1,7 +1,20 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "r-a-dio/site",
+	"description": "R/a/dio's website.",
+	"keywords": ["music", "anime", "r/a/dio"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "David Collinson",
+			"email": "hiroto@hiroto.eu"
+		}
+	],
+	"repositories": [
+		{
+			"type": "git",
+			"url": "https://github.com/hiro/profiler"
+		}
+	],
 	"require": {
 		"laravel/framework": "4.1.*",
 		"raven/raven": "0.7.1",

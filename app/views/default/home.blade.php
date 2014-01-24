@@ -15,7 +15,7 @@
                         ============== -->
                     <div class="col-md-3">
                         <div class="col-xs-12">
-                            <img src="{{ $base }}/assets/logo_image_small.png" class="hidden-xs" alt="R/a/dio">
+                            <img src="/assets/logo_image_small.png" class="hidden-xs" alt="R/a/dio">
                         </div>
                     </div>
 
@@ -27,7 +27,7 @@
                             <!-- Logo 2 (Branded)
                                 ================= -->
                             <div class="col-md-6">
-                                <img src="{{ $base }}/assets/logotitle_2.png" width="100% !important; margin-bottom: 25px" class="hidden-xs" alt="R/a/dio">
+                                <img src="/assets/logotitle_2.png" width="100% !important; margin-bottom: 25px" class="hidden-xs" alt="R/a/dio">
 
                             </div>
 
@@ -47,7 +47,7 @@
                                         <li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>
                                         <li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>
                                         <li class="divider"></li>
-                                        <li><a href="{{ $base }}/help">{{{ trans("stream.links.help") }}}</a></li>
+                                        <li><a href="/help">{{{ trans("stream.links.help") }}}</a></li>
                                     </ul>
                                 </div>
                                 <button class="btn btn-info btn-block" id="loading">DEBUG: Audio Not Loaded</button>
@@ -69,7 +69,7 @@
 
                             <div class="col-xs-12">
                                 <div class="progress" id="stream-progress-bar">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
                                         <span class="sr-only">60% Complete</span>
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                     <div class="col-md-3">
                         <div class="col-xs-12">
                             <div class="thumbnail">
-                                <img src="{{ $base }}/assets/dj_image.png" class="hidden-xs">
+                                <img src="/assets/dj_image.png" class="hidden-xs">
                                 <h4 class="text-center">Hanyuu-sama</h4>
                             </div>
                         </div>
@@ -118,13 +118,39 @@
                 <div class="col-md-6">
                     <h3 class="text-center">{{ trans("stream.lp") }}</h3>
                     <ul class="list-group text-center">
-                        {{ $lp }}
+                        @foreach ($lastplayed as $lp)
+                            <li class="list-group-item">
+                                <div class="container">
+                                    <div class="col-md-4">
+                                        {{ time_ago($lp["time"]) }}
+                                    </div>
+                                    <div class="col-md-8" style="line-height: 1; height: 30px;">
+                                        {{{ $lp["meta"] }}}
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="col-md-6">
                     <h3 class="text-center">{{ trans("stream.queue") }}</h3>
                     <ul class="list-group text-center">
-                        {{ $queue }}
+                        @foreach ($curqueue as $queue)
+                            <li class="list-group-item">
+                                <div class="container">
+                                    <div class="col-md-4">
+                                        {{ time_ago($queue["time"]) }}
+                                    </div>
+                                    <div class="col-md-8" style="line-height: 1; height: 30px;">
+                                        @if ($queue["type"] == 1 or $queue["type"] == 2)
+                                            <b>{{{ $queue["meta"] }}}</b>
+                                        @else
+                                            {{{ $queue["meta"] }}}
+                                        @endif
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
 
@@ -165,10 +191,10 @@
 
 @section('script')
     <script>
-    $("#stream-player").click(function(event) {
-        event.preventDefault();
+        $("#stream-player").click(function(event) {
+            event.preventDefault();
 
-        $("#player").get()[0].play();
-    })
+            $("#player").get()[0].play();
+        });
     </script>
 @stop

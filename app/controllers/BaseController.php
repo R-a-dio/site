@@ -9,6 +9,14 @@ class BaseController extends Controller {
 
 	}
 
+	protected function getStatus() {
+		return DB::table('streamstatus')->first();
+	}
+
+	protected function getCurrentSong() {
+		return $this->getStatus()["np"];
+	}
+
 	/**
 	 * Retrieve the current theme's identifier.
 	 *
@@ -42,7 +50,11 @@ class BaseController extends Controller {
 		{
 			// TODO: dynamic source for the themes
 			View::share("theme", $this->getTheme());
-			
+			View::share("status", $this->getStatus());
+
+			if (Request::ajax() or Input::get("ajax") == "potato")
+				$this->layout = "ajax";
+
 			$this->layout = View::make($this->layout);
 		}
 	}

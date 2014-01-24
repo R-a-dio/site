@@ -42,7 +42,7 @@ trait Player {
 		return DB::table('queue')
 			->select(
 				'meta',
-				DB::raw('UNIX_TIMESTAMP(time) as time'),
+				DB::raw('unix_timestamp(time) as time'),
 				'type'
 			)
 			->orderBy('time', 'asc')
@@ -60,23 +60,13 @@ trait Player {
 	protected function getLastPlayedArray($limit = 5) {
 
 		// this query is utter shit and you should feel bad if you made this.
-		return DB::table('eplay')
-			->select(
-				DB::raw('unix_timestamp(eplay.dt) as time'),
-				'esong.meta'
-			)
-			->join('esong', 'esong.id', "=", 'eplay.isong')
-			->orderBy('eplay.id', 'desc')
-			->take($limit)
-			->get();
-	}
 
-	protected function getStatus() {
-		return DB::table('streamstatus')->first();
-	}
+		return DB::select(
+			"select unix_timestamp(`eplay`.`dt`) as time, `esong`.`meta` " .
+			"from `eplay` use index (PRIMARY) " .
+			"inner join `esong` on `esong`.`id` = `eplay`.`isong` " .
+			"order by `eplay`.`id` desc limit ?", [$limit]);
 
-	protected function getCurrentSong() {
-		return $this->getStatus()["np"];
 	}
 
 }

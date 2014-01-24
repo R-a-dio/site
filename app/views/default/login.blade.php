@@ -3,26 +3,41 @@
 <div class="container main">
 
 	<div class="container">
-		<div class="col-md-6">
+		<div class="col-md-8 col-md-offset-2">
 			<div class="well">
 				<h2 class="text-center text-success">
-					Log In With
+					Here be dragons
 				</h2>
-				{{ Form::open(['url' => 'login']) }}
+				@if (Session::has("error"))
+					<div class="alert alert-warning alert-dismissable">
+						<button class="close" data-dismiss="alert">&times;</button>
+						{{{ Session::get("error") }}}
+					</div>
+				@endif
+				{{ Form::open(['url' => 'login', 'class' => 'form-horizontal']) }}
 					<div class="form-group">
-						<a href="" class="btn btn-google"></a>
+						<label class="col-md-3 control-label">Username</label>
+						<div class="col-md-9">
+							<input type="text" class="form-control" name="username" placeholder="Username">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-3 control-label">Password</label>
+						<div class="col-md-9">
+							<input type="password" class="form-control" name="password" placeholder="Password">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-9 col-md-offset-3">
+							<button class="btn btn-default">Sign In</button>
+						</div>
 					</div>
 				{{ Form::close() }}
 			</div>
 		</div>
-		<div class="col-md-6">
-			<div class="well">
-				<h2 class="text-center text-warning">
-					Register
-				</h2>
- 
-			</div>
-		</div>
+		
 	</div>
 
 

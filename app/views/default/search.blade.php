@@ -5,15 +5,15 @@
 	<div class="container">
 		<div class="col-md-7 centered">
 			<h1 class="text-center text-info"> {{{ trans("search.help.main") }}} </h1>
-			{{ Form::open(['url' => $base . "/search" ]) }}
-			<div class="input-group">
-				<input type="text" class="form-control" placeholder="{{{ trans("search.placeholder") }}}" name="q" id="search" value="{{{ Input::get("q", "") }}}">
-				<div class="input-group-btn">
-					<button class="btn btn-info" type="submit">
-						{{{ trans("search.button") }}}
-					</button>
+			{{ Form::open(['url' => "/search" ]) }}
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="{{{ trans("search.placeholder") }}}" name="q" id="search" value="{{{ Input::get("q", "") }}}">
+					<div class="input-group-btn">
+						<button class="btn btn-info" type="submit">
+							{{{ trans("search.button") }}}
+						</button>
+					</div>
 				</div>
-			</div>
 			{{ Form::close() }}
 
 		</div>
@@ -48,7 +48,7 @@
 							@if ($result["cooldown"])
 								<span class="text-danger">{{{ trans("search.cooldown") }}}</span>
 							@else
-								<a href="{{ $base }}/request/{{ $result["id"] }}"><span class="text-success">{{{ trans("search.requestable") }}}</span></a>
+								<a href="/request/{{ $result["id"] }}"><span class="text-success">{{{ trans("search.requestable") }}}</span></a>
 							@endif
 						</p>
 					</div>
@@ -76,7 +76,7 @@
 	<script>
 		$('.search-result').popover({
 			title: '{{{ trans("search.plays") }}}',
-			content: '<p class="text-danger"><a href="{{ $base }}/request">{{{ trans("search.request") }}}</a> <span class="text-muted"> | </span>  {{{ trans("search.popover.lp", ["timeago" => "3 days ago"]) }}}</p> <p class="text-danger">{{ trans("search.popover.login", ["login" => "<a href=\"#\">Log In</a>"]) }}</p>',
+			content: '<p class="text-danger"><a href="/request">{{{ trans("search.request") }}}</a> <span class="text-muted"> | </span>  {{{ trans("search.popover.lp", ["timeago" => "3 days ago"]) }}}</p> <p class="text-danger">{{ trans("search.popover.login", ["login" => "<a href=\"#\">Log In</a>"]) }}</p>',
 			placement: 'top',
 			delay: { show: 50, hide: 20 },
 			html: true,

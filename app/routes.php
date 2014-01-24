@@ -14,27 +14,14 @@
 $_SERVER["HTTP_HOST"] = Config::get('app.host', '');
 $_SERVER["SERVER_NAME"] = Config::get('app.host', '');
 
-# Index.
-Route::get('/', 'Home@showHome');
-
-# News - aggregate + single
-Route::get('/news', 'News@showNews');
-Route::get('/news/{id}', 'News@showSingleNews')
-	->where('id', '[0-9]+');
-
-# Stats
-Route::get('/stats', 'Stats@showGraphs');
-Route::get('/stats.json', 'Stats@getGraphsAjax');
-
-# IRC
-Route::get('/irc', 'IRC@show');
-
-# Search
-Route::any('/search/{search?}', 'Search@showResults');
-
-Route::any('/login', 'UserAuth@login');
-//Route::any('/logout', 'UserAuth@logout');
-
+# API controller
+Route::controller("/api", "API");
 
 # Admin controller; adds extra auth + security
 Route::controller('/admin', 'Admin');
+
+# Artisan password reminder controller
+Route::controller('password', 'RemindersController');
+
+# Index.
+Route::controller('/', 'Home');

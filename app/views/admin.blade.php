@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 	<head>
-		@include("admin.head")
+		@include("layout.head")
 	</head>
 
 	<body>
@@ -11,7 +11,7 @@
 
 		@include("admin.footer")
 
-		@include("admin.postscript")
+		@include("layout.postscript")
 
 		@yield("script", "")
 	</body>

@@ -29,6 +29,8 @@ return array(
 	|
 	*/
 
+	'expire_on_close' => false,
+
 	'lifetime' => 10080,
 
 	/*

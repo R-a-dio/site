@@ -2,26 +2,26 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="shortcut icon" href="{{ $base }}/favicon.ico">
+		<link rel="shortcut icon" href="/favicon.ico">
 
 		<title>R/a/dio</title>
 
 		<!-- Bootstrap Core CSS
 			==================== -->
-		<link href="{{ $base }}/css/bootstrap.css" rel="stylesheet">
+		<link rel="stylesheet" href="/css/bootstrap.min.css">
 
 		<!-- Source Sans Pro -->
-		<link href="{{ $base }}/css/fonts.css" rel="stylesheet">
+		<link href="/css/fonts.css" rel="stylesheet">
 
 		<!-- FontAwesome -->
-		<link href="{{ $base }}/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 
 		<!-- Base CSS -->
-		<link href="{{ $base }}/css/base.css" rel="stylesheet">
+		<link href="/css/base.css" rel="stylesheet">
 
 
 		<!-- DJ Theme -->
-		<link href="{{ $base }}/css/{{ $theme }}.css" rel="stylesheet">
+		<link href="/css/{{ $theme }}.css" rel="stylesheet">
 
 
 		<!-- IE7-9 are not supported in any way by this site.

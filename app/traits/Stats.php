@@ -2,6 +2,8 @@
 
 class Stats extends BaseController {
 
+	use Player;
+
 	/*
 	|--------------------------------------------------------------------------
 	| Stats Controller
@@ -27,7 +29,7 @@ class Stats extends BaseController {
 	 * @param int $interval
 	 * @return array
 	 */
-	private function getGraphs($interval = 288) {
+	protected function getGraphs($interval = 288) {
 		// we need a plain array here
 		DB::setFetchMode(PDO::FETCH_NUM);
 
@@ -64,7 +66,7 @@ class Stats extends BaseController {
 	 *
 	 * @return string
 	 */
-	private function getFaveStats() {
+	protected function getFaveStats() {
 
 	}
 
@@ -73,7 +75,7 @@ class Stats extends BaseController {
 	 *
 	 * @return string
 	 */
-	private function getDJStats() {
+	protected function getDJStats() {
 
 	}
 
@@ -82,52 +84,8 @@ class Stats extends BaseController {
 	 *
 	 * @return string
 	 */
-	private function getGraphStats() {
+	protected function getGraphStats() {
 
 	}
 
-	
-
-
-	/**
-	 * Setup the layout used by the controller.
-	 *
-	 * @return void
-	 */
-	public function showGraphs() {
-		$json = json_encode($this->getGraphs());
-
-		$this->layout->content = View::make($this->getTheme() . '.stats')
-			->with("json", $json);
-	}
-
-	/**
-	 * Shows each DJ's stats.
-	 *
-	 * @return void
-	 */
-	public function showDJStats() {
-
-	}
-
-	/**
-	 * Shows Top Favourites.
-	 *
-	 * @return void
-	 */
-	public function showFaveStats() {
-
-	}
-
-	/**
-	 * Returns JSONP when asked by a client.
-	 * Yay for realtime stats updating.
-	 * Inb4 this kills nginx
-	 *
-	 * @return jsonp
-	 */
-	public function getGraphsAjax() {
-		return Response::json($this->getGraphs())
-			->setCallback(Input::get('callback'));
-	}
 }

@@ -1,8 +1,6 @@
 <?php
 
-class Search extends Player {
-
-	protected $layout = "master";
+trait Search {
 
 	protected function getSearchResults($search) {
 		if ($search) {
@@ -37,9 +35,6 @@ class Search extends Player {
 					else
 						$result["cooldown"] = true;
 
-					// lets us ->format() the resulting time
-					$result["lastplayed"] = new DateTime($result["lastplayed"]);
-					$result["lastrequested"] = new DateTime($result["lastrequested"]);
 				}
 				Cache::section('search')->put($search, $results, Config::get('cache.times.search'));
 				return $results;
@@ -48,16 +43,6 @@ class Search extends Player {
 			return [];
 		}
 
-	}
-
-	public function showResults($search = false) {
-
-		if (Input::has('q'))
-			$search = Input::get("q", false);
-
-		$this->layout->content = View::make($this->getTheme() . '.search')
-			->with("search", $this->getSearchResults($search))
-			->with("base", Config::get("app.base", ""));
 	}
 
 }

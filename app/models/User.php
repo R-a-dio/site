@@ -13,11 +13,50 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	protected $table = 'users';
 
 	/**
+	 * Should deleted_at be used
+	 *
+	 * @var bool
+	 */
+	protected $softDeletes = true;
+
+	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password');
+	protected $hidden = array('pass');
+
+	const NONE = 0
+	const PENDING = 1;
+	const DJ = 2;
+	const NEWS = 3;
+	const ADMIN = 4;
+	const DEV = 5;
+
+	public function isDev() {
+		return $this->privilege(static::DEV);
+	}
+
+	public function isAdmin() {
+		return $this->privilege(static::ADMIN);
+	}
+
+	public function canPostNews() {
+		return $this->privilege(static::NEWS);
+	}
+
+	public function isDJ() {
+		return $this->privilege(static::DJ) and $this->djid;
+	}
+
+	public function canDoPending() {
+		return $this->privilege(static::PENDING);
+	}
+
+	protected function privilege($priv) {
+		// check it, etc
+		return $this->privileges >= $priv;
+	}
 
 	/**
 	 * Get the unique identifier for the user.
@@ -36,7 +75,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	public function getAuthPassword()
 	{
-		return $this->password;
+		return $this->pass;
 	}
 
 	/**

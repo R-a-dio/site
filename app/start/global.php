@@ -17,6 +17,7 @@ ClassLoader::addDirectories(array(
 	app_path().'/controllers',
 	app_path().'/models',
 	app_path().'/database/seeds',
+	app_path().'/traits',
 
 ));
 
@@ -31,7 +32,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-$logFile = 'log-'.php_sapi_name().'.txt';
+$logFile = 'laravel.log';
 
 Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 
@@ -89,6 +90,22 @@ App::down(function()
 {
 	return Response::make("Be right back!", 503);
 });
+
+// timeago function for all dates
+function time_ago($date) {
+	$date = is_numeric($date) ? (int) $date : strtotime($date);
+
+	// jquery.timeago.js requires an ISO8601 timestamp in the title
+	$timeago = date(DATE_ISO8601, $date);
+
+	// This part is optional, but why not
+	$time = date(DATE_RFC850, $date);
+
+	// Using the <time> HTML5 element instead of <abbr>
+	return "<time class=\"timeago\" datetime=\"$timeago\">$time</time>";
+}
+
+
 
 /*
 |--------------------------------------------------------------------------

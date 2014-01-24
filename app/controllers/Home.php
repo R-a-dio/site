@@ -1,6 +1,10 @@
 <?php
 
-class Home extends Player {
+class Home extends BaseController {
+
+	use Player;
+	use Search;
+	use News;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -19,89 +23,79 @@ class Home extends Player {
 
 
 	/**
-	 * Builds the homepage queue
-	 *
-	 * @return string
-	 */
-	private function makeQueue() {
-		$curqueue = $this->getQueueArray();
-
-		if (!$curqueue)
-			$curqueue = [
-				["timestr" => "", "track" => ""],
-				["timestr" => "", "track" => ""],
-				["timestr" => "", "track" => ""],
-				["timestr" => "", "track" => ""],
-				["timestr" => "", "track" => ""],
-			];
-
-		$html = "";
-
-		foreach($curqueue as $queue) {
-
-			$queue["meta"] = htmlspecialchars($queue["meta"]);
-			$diff = Helper::humanTimeDiff($queue["time"]);
-
-
-			if ($queue["type"] == 1)
-				$queue["meta"] = "<b>" . $queue["meta"] . "</b>";
-
-			$html .= <<<QUEUE
-                    <li class="list-group-item">
-                    	<div class="container">
-	                        <div class="col-md-4">
-	                        	in {$diff}
-	                        </div>
-	                        <div class="col-md-8" style="line-height: 1; height: 30px;">
-	                        	{$queue["meta"]}
-	                        </div>
-                        </div>
-                    </li>
-
-QUEUE;
-		}
-
-		return $html;
-	}
-
-	private function makeLastPlayed() {
-		$last_played = $this->getLastPlayedArray();
-
-		$html = "";
-
-		foreach ($last_played as $lp) {
-			$diff = Helper::humanTimeDiff($lp["time"]);
-			$html .= <<<LP
-					<li class="list-group-item">
-                    	<div class="container">
-	                        <div class="col-md-4">
-	                        	{$diff} ago
-	                        </div>
-	                        <div class="col-md-8" style="line-height: 1; height: 30px;">
-	                        	{$lp["meta"]}
-	                        </div>
-                        </div>
-                    </li>
-LP;
-		}
-
-		return $html;
-	}
-
-
-	/**
 	 * Show the homepage (and throw in a load of variables)
 	 *
 	 * @return void
 	 */
-	public function showHome() {
+	public function getIndex() {
 		
-		$this->layout->content = View::make($this->getTheme() . ".home")
-			->with("base", Config::get("app.base", ""))
-			->with("theme", $this->getTheme())
-			->with("queue", $this->makeQueue())
-			->with("lp", $this->makeLastPlayed());
+		$this->layout->content = View::make($this->theme("home"))
+			->with("curqueue", $this->getQueueArray())
+			->with("lastplayed", $this->getLastPlayedArray());
 
+	}
+
+	public function getIrc() {
+		$this->layout->content = View::make($this->theme("irc"));
+	}
+
+
+	public function anySearch($search = false) {
+
+		if (Input::has('q'))
+			$search = Input::get("q", false);
+
+		$this->layout->content = View::make($this->theme("search"))
+			->with("search", $this->getSearchResults($search));
+	}
+
+	public function getStaff() {
+		$staff = DB::table("djs")
+			->where("visible", "=", 1)
+			->orderBy("role", "asc")
+			->orderBy("priority", "asc")
+			->get();
+
+		$this->layout->content = View::make($this->theme("staff"))
+			->with("staff", $staff);
+	}
+
+	/**
+	 * Setup the layout used by the controller, fetch news.
+	 *
+	 * @return void
+	 */
+	public function getNews($id = false) {
+		$news = $this->fetchNews($id);
+
+		$this->layout->content = View::make($this->theme("news"))
+			->with("news", $news);
+	}
+
+
+	public function getLogin() {
+		$this->layout->content = View::make($this->theme("login"));
+	}
+
+	public function postLogin() {
+		Auth::attempt(["user" => Input::get("username"), "password" => Input::get("password")], true);
+
+		if (!Auth::check()) {
+			Session::put("error", "Invalid Login");
+			return Redirect::to("/login");
+		}
+
+		return Redirect::to("/");
+	}
+
+	public function anyLogout() {
+		Auth::logout();
+		Redirect::to("/");
+	}
+
+
+	public function missingMethod($parameters = []) {
+		App::abort(404);
 	}
 
 }

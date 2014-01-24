@@ -1,22 +1,6 @@
 <?php
 
-class News extends BaseController {
-
-	/*
-	|--------------------------------------------------------------------------
-	| News Controller
-	|--------------------------------------------------------------------------
-	|
-	| Generates a news block.
-	| Sadly I have to touch HTML in a controller. It's just echoed out.
-	| Models probably wont be added due to the complexity of the database.
-	|
-	|	Route::get('/news(/{id})?', 'NewsController@showNews', $id);
-	|
-	*/
-
-	protected $layout = 'master';
-
+trait News {
 
 	/**
 	 * Formats news articles correctly for full-view
@@ -25,7 +9,7 @@ class News extends BaseController {
 	 * @param boolean $excerpt
 	 * @return string formatted news
 	 */
-	private function formatNews($text, $excerpt = false) {
+	protected function formatNews($text, $excerpt = false) {
 		// newlines to <br>. No damn XHTML allowed.
 		$text  = nl2br($text, false);
 
@@ -46,7 +30,7 @@ class News extends BaseController {
 	 * @param int id
 	 * @return string news articles
 	 */
-	private function fetchNews($id = false) {
+	protected function fetchNews($id = false) {
 
 
 		$results = DB::table('news')->orderBy('time', 'desc');
@@ -97,18 +81,6 @@ NEWS;
 
 		return $news;
 
-	}
-
-	/**
-	 * Setup the layout used by the controller, fetch news.
-	 *
-	 * @return void
-	 */
-	public function showNews($id = FALSE) {
-		$news = $this->fetchNews($id);
-
-		$this->layout->content = View::make($this->getTheme() . '.news')
-			->with("news", $news);
 	}
 
 }

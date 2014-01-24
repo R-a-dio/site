@@ -21,7 +21,7 @@ class Admin extends BaseController {
 	public function __construct() {
 		
 		// Auth, naturally.
-		//$this->beforeFilter('auth');
+		$this->beforeFilter('auth');
 
 		// ALL POST/PUT/DELETE REQUIRE CSRF TOKENS.
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
@@ -30,13 +30,13 @@ class Admin extends BaseController {
 	protected $layout = "admin";
 
 	public function getIndex() {
-		$this->layout->content = View::make('admin.dashboard')
-			->with("base", Config::get("app.base", ""));
-			//->with("user", $this->user);
+		$this->layout->content = View::make('admin.dashboard');
 	}
 
 	public function getUsers() {}
-	public function getLogin() {}
+	public function getLogin() {
+		$this->layout->content = View::make('admin.login');
+	}
 	public function getLogout() {}
 	public function getPending() {}
 	public function getSongs() {}
@@ -44,6 +44,7 @@ class Admin extends BaseController {
 	public function getSettings() {}
 	public function getNews() {}
 	public function getBans() {}
+	
 	// /admin/dev-functions
 	public function getDevFunctions() {}
 

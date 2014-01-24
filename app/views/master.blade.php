@@ -6,9 +6,13 @@
 
 	<body>
 		@include("layouts.navbar")
-
-		@yield("content", '<div class="container main">Some idiot forgot to render a view properly.</div>')
-
+		
+		<div id="radio-container">
+			<section class="radio-content-panel current" data-uri="{{{ Request::path() == "/" ? "/" : "/" . Request::path() }}}">
+				@yield("content", '<div class="container main">Some idiot forgot to render a view properly.</div>')
+			</section>
+		</div>
+		
 		@include("layouts.footer")
 
 		@include("layouts.postscript")

@@ -33,7 +33,7 @@ class CreateTracksTable extends Migration {
 
 			// current (shitty) link between songs and acceptors
 			$table->string("accepter")->default("");
-			$table->string("lasteditor")->default("")
+			$table->string("lasteditor")->default("");
 
 			// ACTUALLY make a fucking link between songs and acceptors
 			$table->integer("acceptor_id")->unsigned()->nullable();

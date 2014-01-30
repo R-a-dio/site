@@ -30,7 +30,7 @@ class CreateSearchlogTable extends Migration {
 				->on("users")
 				// keep user searches
 				->onDelete("no action");
-		})
+		});
 	}
 
 	/**

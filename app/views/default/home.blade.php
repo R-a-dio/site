@@ -34,7 +34,7 @@
                             <!-- Player Options
                                 ================ -->
                             <div class="col-md-6">
-                                <a class="btn btn-primary btn-block" href="#" id="stream-player" data-loading-text="{{{ trans("stream.loading") }}}">{{{ trans("stream.play") }}}</a>
+                                <button class="btn btn-primary btn-block" id="stream-play" data-loading-text="{{{ trans("stream.loading") }}}">{{{ trans("stream.play") }}}</button>
                                 <div class="btn-group btn-block" style="width:100%">
                                     <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
                                         {{{ trans("stream.options") }}} <span class="caret"></span>
@@ -57,21 +57,19 @@
 
                         <!-- Progress Bar
                             ================= -->
-                        <div class="row" id="progress">
+                        <div class="row">
 
                             <div class="col-xs-12">
                                 <h2 class="text-center" id="current-song">
-                                    <span id="song-metadata">
+                                    <span id="np">
                                         {{{ $status["np"] }}}
                                     </span>
                                 </h2>
                             </div>
 
                             <div class="col-xs-12">
-                                <div class="progress" id="stream-progress-bar">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                        <span class="sr-only">60% Complete</span>
-                                    </div>
+                                <div class="progress progress-striped active" id="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width: 100%"></div>
                                 </div>
                             </div>
 
@@ -84,7 +82,7 @@
                                 <p class="text-muted text-center">
                                     <span id="progress-current">weed</span>
                                     /
-                                    <span id="progress-total">05:24</span>
+                                    <span id="progress-length">05:24</span>
                                 </p>
                             </div>
 
@@ -98,8 +96,8 @@
                     <div class="col-md-3">
                         <div class="col-xs-12">
                             <div class="thumbnail">
-                                <img src="/assets/dj_image.png" class="hidden-xs">
-                                <h4 class="text-center">Hanyuu-sama</h4>
+                                <img id="dj-image" src="/assets/dj_image.png" class="hidden-xs">
+                                <h4 class="text-center" id="dj-name">Hanyuu-sama</h4>
                             </div>
                         </div>
                     </div>
@@ -190,11 +188,5 @@
 @stop
 
 @section('script')
-    <script>
-        $("#stream-player").click(function(event) {
-            event.preventDefault();
 
-            $("#player").get()[0].play();
-        });
-    </script>
 @stop

@@ -12,7 +12,7 @@ class API extends Controller {
 
 	/**
 	 * Primary response function. 
-	 * compatible with JSONP, too
+	 * 
 	 * 
 	 *
 	 */
@@ -43,6 +43,7 @@ class API extends Controller {
 
 		$current["dj"] = $dj;
 		unset($current["djid"]);
+		$current["current"] = time();
 
 		// time-sensitive. contains timestamps that are hit hundreds of times per second.
 		Cache::connection()->set(Cache::getPrefix() . $this->id(), serialize($current));

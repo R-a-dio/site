@@ -112,8 +112,13 @@
 			///////////////////////////////////////////////////////////////////////
 
 			window.radio = {
-				counter: 0,
-				sync_seconds: 0
+				counter: 0.0,
+				sync_seconds: 0,
+				update_progress: 0.0,
+				update_progress_inc: 0.0,
+				update_old_progress: 0.0,
+				current_pos: 0,
+				current_len: 0
 			};
 
 			String.prototype.format = function() {
@@ -218,7 +223,6 @@
 
 			function periodic() {
 				radio.counter += 0.5;
-				radio.counter_search += 0.5;
 				radio.current_pos += 0.5;
 				applyProgress();
 				if (radio.counter >= 10.0) {

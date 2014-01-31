@@ -10,6 +10,9 @@
 	<script src="/js/jquery.history.js"></script>
 	<script src="/js/radio.player.js"></script>
 	<script src="/js/furigana.js"></script>
+	<script src="/js/jquery.jplayer.min.js"></script>
+	<script>swfpath = "/js/Jplayer.swf";</script>
+
 	<script>
 		$(function() {
 			$.timeago.settings.allowFuture = true;
@@ -73,6 +76,160 @@
 				}
 
 			});
+
+			var player_source_set = false;
+			$("#stream").jPlayer({
+				ready: function () {
+					$("#stream-play").click(function() {
+						if(player_source_set == false) {
+							$("#stream").jPlayer("setMedia", {'mp3': location.protocol + '//stream.r-a-d.io/main.mp3'});
+							player_source_set = true;
+							$("#stream").jPlayer("play");
+							$("#stream-play").text("{{{ trans("stream.stop") }}}");
+						}
+					});
+				},
+				pause: function() {
+					$("#player").jPlayer("clearMedia");
+					player_source_set = false;
+					$("#stream-play").click(function() {
+						if(player_source_set == false) {
+							$("#stream").jPlayer("setMedia", {'mp3': location.protocol + '//stream.r-a-d.io/main.mp3'});
+							player_source_set = true;
+							$("#stream").jPlayer("play");
+						}
+					});
+				},
+				supplied: "mp3",
+				swfPath: swfpath
+			});
+
+
+
+			///////////////////////////////////////////////////////////////////////
+			// HERE BE DRAGONS
+			// MOVE TO MAIN.JS WHEN DONE
+			///////////////////////////////////////////////////////////////////////
+
+			window.radio = {
+				counter: 0,
+				sync_seconds: 0
+			};
+
+			String.prototype.format = function() {
+				var args = arguments;
+				return this.replace(/{(\d+)}/g, function(match, number) { 
+					return typeof args[number] != 'undefined'
+					? args[number]
+					: match
+					;
+				});
+			};
+
+			function setDjImage(image) {
+				$("#dj-image").attr("src", "//r-a-d.io/res/img/dj/" + image);
+			}
+
+			function setDJ(dj) {
+				$("#dj-name").text(dj.djname);
+				setDjImage(dj.djimage);
+			}
+
+			function nowPlaying(np) {
+				$("#np").text(np);
+			}
+
+			function setListeners(listeners) {
+				$("#listeners").text(listeners);
+			}
+
+			function updatePeriodic() {
+				$.ajax({
+					method: 'get',
+					url: "/api",
+					dataType: 'json',
+					success: function (resp) {
+						nowPlaying(resp.main.np);
+						setListeners(resp.main.listeners);
+						setDJ(resp.main.dj);
+						parseProgress(resp.main.start_time, resp.main.end_time, resp.main.current);
+					}
+				});
+			}
+
+			function parseProgress(start, end, cur) {
+				if (end != 0) {
+					radio.cur_time = Math.round(new Date().getTime() / 1000.0);
+					radio.sync_seconds = radio.cur_time - cur;
+					end += radio.sync_seconds;
+					start += radio.sync_seconds;
+					radio.temp_update_progress = 0;
+					radio.duration = end - start;
+					radio.position = radio.cur_time - start;
+					radio.update_progress = 100 / radio.duration * radio.position;
+					radio.update_progress_inc = 100 / radio.duration * 0.5;
+					radio.current_pos = radio.position;
+					radio.current_len = radio.duration;
+				}
+				else {
+					radio.update_progress = false;
+				}
+			}
+
+
+			function secondsToReadable(seconds) {
+				var hours = Math.floor(seconds / 3600);
+				var mins = Math.floor((seconds % 3600) / 60);
+				var secs = Math.floor((seconds % 3600) % 60);
+				return (
+					hours > 0 ? +
+					(hours < 10 ? '0' : '') +
+					hours + ':' : '') +
+					(mins < 10 ? '0' :'') +
+					mins + ':' +
+					(secs < 10 ? '0' : '') + secs;
+			}
+
+			function applyProgress() {
+				if (radio.update_progress) {
+					if ((radio.update_progress < radio.update_old_progress) || (radio.update_old_progress == false)) {
+						radio.update_progress += radio.update_progress_inc;
+						$("#progress .progress-bar").removeClass("progress-bar-danger");
+						$("#progress .progress-bar").css({width: "{0}%".format(radio.update_progress)});
+					}
+					else {
+						radio.update_progress += radio.update_progress_inc;
+						$("#progress .progress-bar").removeClass("progress-bar-danger");
+						$("#progress .progress-bar").css({width: "{0}%".format(radio.update_progress)});
+					}
+					// Fill the duration counter
+					$("#progress-current").text(secondsToReadable(radio.current_pos));
+					$("#progress-length").text(secondsToReadable(radio.current_len));
+				}
+				else {
+					$("#progress .progress-bar").addClass("progress-bar-danger");
+					$("#progress .progress-bar").css({width: "100%"})
+					// Empty the duration counter
+					$("#progress-current").empty();
+					$("#progress-length").empty();
+				}
+				radio.update_old_progress = radio.update_progress;
+			}
+
+			function periodic() {
+				radio.counter += 0.5;
+				radio.counter_search += 0.5;
+				radio.current_pos += 0.5;
+				applyProgress();
+				if (radio.counter >= 10.0) {
+					updatePeriodic();
+					radio.counter = 0;
+				}
+			}
+
+			updatePeriodic();
+			setInterval(periodic, 500);
+
 
 
 		});

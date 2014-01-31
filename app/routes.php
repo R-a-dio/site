@@ -14,6 +14,9 @@
 $_SERVER["HTTP_HOST"] = Config::get('app.host', '');
 $_SERVER["SERVER_NAME"] = Config::get('app.host', '');
 
+# github hook
+Route::post("/git/pull", "GitController@pull");
+
 # API controller
 Route::controller("/api", "API");
 

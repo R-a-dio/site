@@ -8,7 +8,7 @@ trait Search {
 			$results = DB::table('tracks')
 				->where('usable', '=', 1)
 				->where('need_reupload', '=', 0)
-				->whereRaw('match (artist, track, album, tags) against (?)', [$search])
+				->whereRaw('match (artist, track, album, tags) against (?)', [$request])
 				->select("id", "track", "artist", "album", "tags", "lastplayed", "lastrequested", "requestcount", "priority")
 				->paginate(15);
 

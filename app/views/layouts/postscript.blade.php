@@ -78,6 +78,13 @@
 				$("#stream").jPlayer("volume", Math.pow(($(this).val() / 100), 2.0));
 			});
 
+			$("textarea.comment-input").keyup(function() {
+				var $object = $(this);
+				var id = $object.attr("data-id");
+				var value = $object.val();
+				$("#char-count-" + id).text(500 - value.length);
+			});
+
 		}
 		handlers();
 

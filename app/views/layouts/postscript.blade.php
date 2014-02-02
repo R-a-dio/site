@@ -1,14 +1,13 @@
 <!-- Bootstrap core JavaScript
 	================================================== -->
-<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 <!-- jQuery ScrollTo Plugin -->
 <script src="/js/jquery.scrollto.js"></script>
 <script src="/js/jquery.timeago.js"></script>
 <!-- History.js -->
 <script src="/js/jquery.history.js"></script>
-<script src="/js/radio.player.js"></script>
 <script src="/js/furigana.js"></script>
 <script src="/js/jquery.jplayer.min.js"></script>
 <script>swfpath = "/js/Jplayer.swf";</script>

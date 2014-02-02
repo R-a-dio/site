@@ -10,6 +10,7 @@ return [
 	"button" => "Search",
 	"plays" => "Plays",
 	"faves" => "Faves",
+	"fave" => "Fave",
 	"request" => "Request",
 	"requestable" => "Requestable",
 	"popover" => [
@@ -17,5 +18,7 @@ return [
 		"lp" => "Last Played :timeago",
 		"login" => ":login to fave or download",
 	],
+	"cooldown" => "On Cooldown",
+	"metadata" => "Title - Artist",
 
 ];

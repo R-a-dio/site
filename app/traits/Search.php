@@ -2,45 +2,32 @@
 
 trait Search {
 
-	protected function getSearchResults($search) {
-		if ($search) {
-			if (Cache::section('search')->has($search)) {
+	protected function getSearchResults($request) {
+		if ($request) {
+		
+			$results = DB::table('tracks')
+				->where('usable', '=', 1)
+				->where('need_reupload', '=', 0)
+				->whereRaw('match (artist, track, album, tags) against (?)', [$search])
+				->select("id", "track", "artist", "album", "tags", "lastplayed", "lastrequested", "requestcount", "priority")
+				->paginate(15);
 
-				return Cache::section('search')->get($search);
+			$search = $results->toArray();
 
-			} else {
+			foreach ($search["data"] as &$result) {
 
-				$results = DB::table('tracks')
-					->where('usable', '=', 1)
-					->where('need_reupload', '=', 0)
-					->whereRaw('match (artist, track, album, tags) against (?)', [$search])
-					->select("id", "track", "artist", "album", "tags", "lastplayed", "lastrequested", "requestcount", "priority")
-					->get();
+				$delay = $this->getSongDelay((int) $result["requestcount"]);
 
-				$count = 0;
+				if ((time() - strtotime($result["lastrequested"])) > $delay)
+					$result["cooldown"] = false;
+				else
+					$result["cooldown"] = true;
 
-				foreach ($results as &$result) {
-					
-
-					$result["break"] = $count;
-					if ($count == 2)
-						$count = 0;
-					else
-						$count++;
-
-					$delay = $this->getSongDelay((int) $result["requestcount"]);
-
-					if ((time() - strtotime($result["lastrequested"])) > $delay)
-						$result["cooldown"] = false;
-					else
-						$result["cooldown"] = true;
-
-				}
-				Cache::section('search')->put($search, $results, Config::get('cache.times.search'));
-				return $results;
 			}
+
+			return ["search" => $search, "links" => $results->links()];
 		} else {
-			return [];
+			return ["search" => false, "links" => ""];
 		}
 
 	}

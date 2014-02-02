@@ -20,8 +20,9 @@
 					<ul class="nav navbar-nav">
 						<li><a href="/news" class="ajax-navigation">{{{ trans("navbar.news") }}}</a></li>
 						<li><a href="/irc" class="ajax-navigation">{{{ trans("navbar.irc") }}}</a></li>
+						<li><a href="/search" class="ajax-navigation">{{{ trans("search.title") }}}</a></li>
 					</ul>
-					{{ Form::open(['url' => "/search", "class" => "navbar-form navbar-right" ]) }}
+					{{ Form::open(['url' => "/search", "class" => "ajax-search navbar-form navbar-right" ]) }}
 						<div class="form-group">
 							<input type="text" name="q" placeholder="{{{ trans("search.placeholder") }}}" class="form-control" role="search">
 						</div>

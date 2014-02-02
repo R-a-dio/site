@@ -31,39 +31,33 @@
 
 				<div class="row">
 					<div class="col-md-8">
-						<div class="col-sm-6">
+						<div class="col-sm-6" style="margin-bottom: 10px">
 							<span class="text-danger">{{{ $result["artist"] }}}</span>
 						</div>
-						<div class="col-sm-6">
+						<div class="col-sm-6" style="margin-bottom: 10px">
 							<span class="text-info">{{{ $result["track"] }}}</span>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="col-sm-4">
-							<button class="btn btn-block btn-danger">
+						<div class="col-sm-4" style="margin-bottom: 10px">
+							<button class="btn btn-block btn-danger fave-button">
 								{{{ trans("search.fave") }}} <i class="fa fa-heart"></i>
 							</button>
 						</div>
-						<div class="col-sm-8">
+						<div class="col-sm-8" style="margin-bottom: 10px">
 							@if ($result["cooldown"])
-								<div class="form-group">
-									<button class="btn btn-block btn-danger request-button disabled">
-										{{{ trans("search.cooldown") }}}
-									</button>
-								</div>
-
+								<button class="btn btn-block btn-danger request-button disabled">
+									{{{ trans("search.cooldown") }}}
+								</button>
 							@else
-								<div class="form-group">
-									<button class="btn btn-block btn-success request-button" href="/request/{{ $result["id"] }}">
-										{{{ trans("search.request") }}}
-									</button>
-								</div>
-								
+								<button class="btn btn-block btn-success request-button" href="/request/{{ $result["id"] }}">
+									{{{ trans("search.request") }}}
+								</button>
 							@endif
 						</div>
 					</div>	
 				</div>	
-
+				<hr style="margin-top: 3px; margin-bottom: 8px;">
 			@endforeach
 
 			<div class="text-center">

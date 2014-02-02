@@ -21,6 +21,9 @@
 						<li><a href="/news" class="ajax-navigation">{{{ trans("navbar.news") }}}</a></li>
 						<li><a href="/irc" class="ajax-navigation">{{{ trans("navbar.irc") }}}</a></li>
 						<li><a href="/search" class="ajax-navigation">{{{ trans("search.title") }}}</a></li>
+						@if (Auth::check() and Auth::user()->canDoPending())
+							<li><a href="/admin" target="_blank"><i class="fa fa-star"></i></a></li>
+						@endif
 					</ul>
 					{{ Form::open(['url' => "/search", "class" => "ajax-search navbar-form navbar-right" ]) }}
 						<div class="form-group">

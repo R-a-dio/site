@@ -75,7 +75,7 @@
 			$("#volume").change(function (event) {
 				event.preventDefault();
 
-				$("#stream").jPlayer("volume", $(this).val() / 100);
+				$("#stream").jPlayer("volume", Math.pow(($(this).val() / 100), 2.0));
 			});
 
 		}

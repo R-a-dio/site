@@ -31,7 +31,12 @@
 
 				<div class="row">
 					<div class="col-md-8">
-						<span class="text-danger">{{{ $result["artist"] }}}</span> - <span class="text-info">{{{ $result["track"] }}}</span>
+						<div class="col-sm-6">
+							<span class="text-danger">{{{ $result["artist"] }}}</span>
+						</div>
+						<div class="col-sm-6">
+							<span class="text-info">{{{ $result["track"] }}}</span>
+						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="col-sm-4">
@@ -41,13 +46,19 @@
 						</div>
 						<div class="col-sm-8">
 							@if ($result["cooldown"])
-								<button class="btn btn-block btn-danger request-button disabled">
-									{{{ trans("search.cooldown") }}}
-								</a>
+								<div class="form-group">
+									<button class="btn btn-block btn-danger request-button disabled">
+										{{{ trans("search.cooldown") }}}
+									</button>
+								</div>
+
 							@else
-								<button class="btn btn-block btn-success request-button" href="/request/{{ $result["id"] }}">
-									{{{ trans("search.request") }}}
-								</a>
+								<div class="form-group">
+									<button class="btn btn-block btn-success request-button" href="/request/{{ $result["id"] }}">
+										{{{ trans("search.request") }}}
+									</button>
+								</div>
+								
 							@endif
 						</div>
 					</div>	

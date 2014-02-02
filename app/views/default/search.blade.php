@@ -32,7 +32,7 @@
 						<h4>{{{ trans("search.metadata.artist") }}}</h4>
 					</div>
 					<div class="col-sm-6 text-center" style="margin-bottom: 10px">
-						<h4>{{{ trans("search.metadata.track") }}}</h4>
+						<h4>{{{ trans("search.metadata.title") }}}</h4>
 					</div>
 				</div>
 				<div class="col-md-4">

@@ -51,8 +51,12 @@ class Home extends BaseController {
 		if (Input::has('q'))
 			$search = Input::get("q", false);
 
+		$results = $this->getSearchResults($search);
+
 		$this->layout->content = View::make($this->theme("search"))
-			->with("search", $this->getSearchResults($search));
+			->with("search", $results["search"])
+			->with("links", $results["links"])
+			->with("param", $search);
 	}
 
 	public function getStaff() {

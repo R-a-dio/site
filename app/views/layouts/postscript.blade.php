@@ -42,7 +42,7 @@
 			$("time.timeago").timeago();
 
 			// Ajaxify
-			$('a.ajax-navigation').click(function(event) {
+			$('a.ajax-navigation, ul.pagination>li>a').click(function(event) {
 
 				// Continue as normal for cmd clicks etc
 				if (event.which == 2 || event.metaKey) { return true; }
@@ -54,42 +54,60 @@
 				return false;
 			});
 
-			var player_source_set = false;
-			$("#stream").jPlayer({
-				ready: function () {
-					$("#stream-play").text("{{ trans("stream.play") }}").removeClass("disabled");
-					$("#stream-play").click(function() {
-						if(player_source_set == false) {
-							$("#stream").jPlayer("setMedia", {'mp3': location.protocol + '//stream.r-a-d.io/main.mp3'});
-							player_source_set = true;
-							$("#stream").jPlayer("play");
-							$(this).hide();
-							$("#volume-image").hide();
-							$("#stream-stop").show();
-							$("#volume-control").show();
-						}
-					});
-					$("#stream-stop").click(function() {
-						$("#stream").jPlayer("pause");
-						$(this).hide();
-						$("#stream-play").show();
-					});
-				},
-				pause: function() {
-					$("#stream").jPlayer("clearMedia");
-					player_source_set = false;
-					$("#stream-play").click(function() {
-						if(player_source_set == false) {
-							$("#stream").jPlayer("setMedia", {'mp3': location.protocol + '//stream.r-a-d.io/main.mp3'});
-							player_source_set = true;
-							$("#stream").jPlayer("play");
-						}
-					});
-				},
-				supplied: "mp3",
-				swfPath: swfpath
+			$('form.ajax-search').submit(function(event) {
+
+				// Continue as normal for cmd clicks etc
+				if (event.which == 2 || event.metaKey) { return true; }
+
+				event.preventDefault();
+
+				var arr = $(this).serializeObject();
+				
+				History.pushState(null, $(this).text(), $(this).attr("action") + "/" + arr.q);
+				
+				return false;
 			});
 
+
+			if (History.getState().url.replace(History.getRootUrl(), "/") == "/") {
+				$("#stream").jPlayer({
+					ready: function () {
+						$("#stream-play").text("{{{ trans("stream.play") }}}").removeClass("disabled");
+						$("#stream-play").click(function() {
+							if(window.player_source_set == false) {
+								$("#stream").jPlayer("setMedia", {'mp3': location.protocol + '//stream.r-a-d.io/main.mp3'});
+								window.player_source_set = true;
+								$("#stream").jPlayer("play");
+								$(this).hide();
+								$("#volume-image").hide();
+								$("#stream-stop").show();
+								$("#volume-control").show();
+							}
+						});
+						$("#stream-stop").click(function() {
+							$("#stream").jPlayer("pause");
+							$(this).hide();
+							$("#stream-play").show();
+						});
+					},
+					pause: function() {
+						$("#stream").jPlayer("clearMedia");
+						$("#volume-control").hide();
+						$("#volume-image").show();
+						window.player_source_set = false;
+						$("#stream-play").click(function() {
+							if(window.player_source_set == false) {
+								$("#stream").jPlayer("setMedia", {'mp3': location.protocol + '//stream.r-a-d.io/main.mp3'});
+								window.player_source_set = true;
+								$("#stream").jPlayer("play");
+							}
+						});
+					},
+					supplied: "mp3",
+					swfPath: swfpath
+				});
+			}
+			
 			$("#volume").change(function (event) {
 				$("#stream").jPlayer("volume", Math.pow(($(this).val() / 100), 2.0));
 			});
@@ -116,8 +134,8 @@
 				// we've been to this page before.
 				var $current = $("#radio-container > .current");
 
-				$current.removeClass("current").fadeOut();
-				$next.addClass("current").fadeIn();
+				$current.removeClass("current").hide();
+				$next.addClass("current").show();
 			} else {
 				// we need to fetch it and append it
 
@@ -131,8 +149,8 @@
 
 							var $current = $("#radio-container > .current");
 
-							$current.removeClass("current").fadeOut();
-							$section.appendTo($("#radio-container")).addClass("current").fadeIn();
+							$current.removeClass("current").hide();
+							$section.appendTo($("#radio-container")).addClass("current").show();
 
 							handlers();
 

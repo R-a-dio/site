@@ -29,9 +29,20 @@ class Home extends BaseController {
 	 */
 	public function getIndex() {
 		
+		$news = DB::table("news")
+			->orderBy("id", "desc")
+			->take(3)
+			->get();
+
+		foreach ($news as &$article) {
+			$article["text"] = Markdown::render($article["newstext"]);
+		}
+
+
 		$this->layout->content = View::make($this->theme("home"))
 			->with("curqueue", $this->getQueueArray())
-			->with("lastplayed", $this->getLastPlayedArray());
+			->with("lastplayed", $this->getLastPlayedArray())
+			->with("news", $news);
 
 	}
 

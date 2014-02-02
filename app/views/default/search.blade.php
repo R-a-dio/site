@@ -27,51 +27,33 @@
 		<!-- Search Results -->
 		<div class="container">
 
-			<table class="table table-responsive">
-				
-				<thead>
-					<th colspan="4">{{{ trans("search.metadata") }}}</th>
-					<th>{{{ trans("search.plays") }}}</th>
-					<th>{{{ trans("search.fave") }}}</th>
-					<th>{{{ trans("search.request") }}}</th>
-				</thead>
-				<tbody>
-					@foreach ($search["data"] as $result)
+			@foreach ($search["data"] as $result)
 
-						<tr>
-
+				<div class="row">
+					<div class="col-md-8">
+						<span class="text-danger">{{{ $result["artist"] }}}</span> - <span class="text-info">{{{ $result["track"] }}}</span>
+					</div>
+					<div class="col-md-4">
+						<div class="col-sm-4">
+							<button class="btn btn-block btn-danger">
+								{{{ trans("search.fave") }}} <i class="fa fa-heart"></i>
+							</button>
+						</div>
+						<div class="col-sm-8">
 							@if ($result["cooldown"])
-								<td colspan="4" class="cooldown" data-id="{{ $result["id"] }}">
+								<button class="btn btn-block btn-danger request-button disabled">
+									{{{ trans("search.cooldown") }}}
+								</a>
 							@else
-								<td colspan="4" data-id="{{ $result["id"] }}">
+								<button class="btn btn-block btn-success request-button" href="/request/{{ $result["id"] }}">
+									{{{ trans("search.request") }}}
+								</a>
 							@endif
-								<span class="text-danger">{{{ $result["track"] }}}</span> - <span class="text-info">{{{ $result["artist"] }}}</span>
-							</td>
-							<td>
-								0
-							</td>
-							<td>
-								<button class="btn btn-danger fave-button" data-id="{{ $result["id"] }}">
-									<i class="fa fa-heart"></i>
-								</button>
-							</td>
-							<td>
-								@if ($result["cooldown"])
-									<button class="btn btn-block btn-danger request-button disabled">
-										{{{ trans("search.cooldown") }}}
-									</a>
-								@else
-									<button class="btn btn-block btn-success request-button" href="/request/{{ $result["id"] }}">
-										{{{ trans("search.requestable") }}}
-									</a>
-								@endif
-							</td>
-						</tr>
+						</div>
+					</div>	
+				</div>	
 
-					@endforeach
-				</tbody>
-			
-			</table>
+			@endforeach
 
 			<div class="text-center">
 				{{ $links }}

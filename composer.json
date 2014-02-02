@@ -19,7 +19,8 @@
 		"laravel/framework": "4.1.*",
 		"raven/raven": "0.7.1",
 		"loic-sharma/profiler": "dev-master",
-		"hiro/laravel-hashing": "dev-radio"
+		"hiro/laravel-hashing": "dev-radio",
+		"graham-campbell/markdown": "1.0.*@dev"
 	},
 	"autoload": {
 		"classmap": [

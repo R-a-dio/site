@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0bc9bdeb5491c2ceb52e20ae8f1a72c4",
+    "hash": "ce080077244031723b8d8d595ec7be66",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -136,6 +136,67 @@
                 "zf2"
             ],
             "time": "2013-12-04 14:19:30"
+        },
+        {
+            "name": "graham-campbell/markdown",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GrahamCampbell/Laravel-Markdown.git",
+                "reference": "28a66b86c5948cb27d6c1d73fe778ff0429933c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Markdown/zipball/28a66b86c5948cb27d6c1d73fe778ff0429933c3",
+                "reference": "28a66b86c5948cb27d6c1d73fe778ff0429933c3",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "4.1.*",
+                "nazar-pc/php-markdown-next": "2.0.*",
+                "php": ">=5.4.7",
+                "symfony/config": "2.4.*",
+                "symfony/filesystem": "2.4.*"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "0.2.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "GrahamCampbell\\Markdown": "src/",
+                    "GrahamCampbell\\Tests\\Markdown": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@mineuk.com"
+                }
+            ],
+            "description": "Markdown Is A Simple PHP Markdown Wrapper For Laravel 4.1",
+            "keywords": [
+                "Graham Campbell",
+                "GrahamCampbell",
+                "Laravel Markdown",
+                "Laravel-Markdown",
+                "framework",
+                "laravel",
+                "markdown",
+                "markdown wrapper",
+                "php markdown",
+                "php markdown wrapper"
+            ],
+            "time": "2014-01-31 21:01:14"
         },
         {
             "name": "hiro/laravel-hashing",
@@ -276,12 +337,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "cb243b54de5c195d5425435f5cf454a75b1b8c1a"
+                "reference": "c9eaecb03832603fee8bca3cbae500501e55c9bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/cb243b54de5c195d5425435f5cf454a75b1b8c1a",
-                "reference": "cb243b54de5c195d5425435f5cf454a75b1b8c1a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c9eaecb03832603fee8bca3cbae500501e55c9bd",
+                "reference": "c9eaecb03832603fee8bca3cbae500501e55c9bd",
                 "shasum": ""
             },
             "require": {
@@ -385,7 +446,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-01-30 22:10:43"
+            "time": "2014-01-31 21:38:47"
         },
         {
             "name": "loic-sharma/profiler",
@@ -487,6 +548,68 @@
                 "psr-3"
             ],
             "time": "2014-01-17 14:16:06"
+        },
+        {
+            "name": "nazar-pc/php-markdown-next",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nazar-pc/php-markdown-next.git",
+                "reference": "3337147bae068d074bbe33f5a7b1d9d86987cd47"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nazar-pc/php-markdown-next/zipball/3337147bae068d074bbe33f5a7b1d9d86987cd47",
+                "reference": "3337147bae068d074bbe33f5a7b1d9d86987cd47",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "nazarpc": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Michel Fortin",
+                    "email": "michel.fortin@michelf.ca",
+                    "homepage": "http://michelf.ca/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "John Gruber",
+                    "homepage": "http://daringfireball.net/"
+                },
+                {
+                    "name": "Nazar Mokrynskyi",
+                    "email": "nazar@mokrynskyi.com",
+                    "homepage": "http://cleverstyle.org/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Egil Hansen",
+                    "email": "egil@assimilated.dk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Markdown Next",
+            "homepage": "https://github.com/nazar-pc/php-markdown-next",
+            "keywords": [
+                "markdown"
+            ],
+            "time": "2014-01-29 21:11:16"
         },
         {
             "name": "nesbot/carbon",
@@ -1021,6 +1144,54 @@
             "time": "2014-01-24 14:36:08"
         },
         {
+            "name": "symfony/config",
+            "version": "2.4.x-dev",
+            "target-dir": "Symfony/Component/Config",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Config.git",
+                "reference": "d81bd01eac1514c10dcb3b11eaa9048d6b87dd1f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Config/zipball/d81bd01eac1514c10dcb3b11eaa9048d6b87dd1f",
+                "reference": "d81bd01eac1514c10dcb3b11eaa9048d6b87dd1f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/filesystem": "~2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Config\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Config Component",
+            "homepage": "http://symfony.com",
+            "time": "2014-01-07 13:28:54"
+        },
+        {
             "name": "symfony/console",
             "version": "2.4.x-dev",
             "target-dir": "Symfony/Component/Console",
@@ -1290,17 +1461,17 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "dev-master",
+            "version": "2.4.x-dev",
             "target-dir": "Symfony/Component/Filesystem",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "e81f1b30eb9748c3f8e0de3a92ea210845cff0a9"
+                "reference": "7e65abb06d3b38f4be89266fe3fb4a759544e713"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/e81f1b30eb9748c3f8e0de3a92ea210845cff0a9",
-                "reference": "e81f1b30eb9748c3f8e0de3a92ea210845cff0a9",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/7e65abb06d3b38f4be89266fe3fb4a759544e713",
+                "reference": "7e65abb06d3b38f4be89266fe3fb4a759544e713",
                 "shasum": ""
             },
             "require": {
@@ -1309,7 +1480,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -1333,7 +1504,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "http://symfony.com",
-            "time": "2014-01-07 13:29:57"
+            "time": "2014-01-07 13:28:54"
         },
         {
             "name": "symfony/finder",
@@ -1681,7 +1852,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "loic-sharma/profiler": 20,
-        "hiro/laravel-hashing": 20
+        "hiro/laravel-hashing": 20,
+        "graham-campbell/markdown": 20
     },
     "platform": [
 

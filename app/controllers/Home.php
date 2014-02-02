@@ -66,10 +66,17 @@ class Home extends BaseController {
 	 * @return void
 	 */
 	public function getNews($id = false) {
-		$news = $this->fetchNews($id);
+		$news = DB::table("news");
+
+		if (!$id) {
+			$news = $news->select("header", "id")->get();
+		} else {
+			$news = $news->where("id", "=", $id)->first();
+		}
 
 		$this->layout->content = View::make($this->theme("news"))
-			->with("news", $news);
+			->with("news", $news)
+			->with("id", $id);
 	}
 
 

@@ -57,7 +57,7 @@
 								<div class="panel-body">
 									{{ Form::open() }}
 										<div class="form-group">
-											<textarea name="comment" id="comment-input" rows="4" class="form-control" placeholder="Enter a comment..."></textarea>
+											<textarea data-id="{{{ $news["id"] }}}" name="comment" rows="4" class="comment-input form-control" placeholder="Enter a comment..."></textarea>
 										</div>
 
 										@if (Auth::check())
@@ -65,7 +65,9 @@
 										@else
 											<p class="help-block">There'll be a captcha here eventually.</p>
 										@endif
-
+										<p class="help-block">
+											<span id="char-count-{{{ $news["id"] }}}">500</span> characters remaining.
+										</p>
 										<button type="submit" class="btn btn-primary">Post Comment</button>
 									{{ Form::close() }}
 								</div>

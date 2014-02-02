@@ -26,15 +26,34 @@
 	@if ($search)
 		<!-- Search Results -->
 		<div class="container">
+			<div class="row visible-lg">
+				<div class="col-md-8">
+					<div class="col-sm-6 text-center" style="margin-bottom: 10px">
+						<h4>{{{ trans("search.metadata.artist") }}}</h4>
+					</div>
+					<div class="col-sm-6 text-center" style="margin-bottom: 10px">
+						<h4>{{{ trans("search.metadata.track") }}}</h4>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="col-sm-4 text-center" style="margin-bottom: 10px">
+						<h4>{{{ trans("search.fave") }}}</h4>
+					</div>
+					<div class="col-sm-8 text-center" style="margin-bottom: 10px">
+						<h4>{{{ trans("search.requestable") }}}</h4>
+					</div>
+				</div>
+			</div>
+			<hr style="margin-top: 3px; margin-bottom: 8px;">
 
 			@foreach ($search["data"] as $result)
 
 				<div class="row">
 					<div class="col-md-8">
-						<div class="col-sm-6" style="margin-bottom: 10px">
+						<div class="col-sm-6 text-center" style="margin-bottom: 10px">
 							<span class="text-danger">{{{ $result["artist"] }}}</span>
 						</div>
-						<div class="col-sm-6" style="margin-bottom: 10px">
+						<div class="col-sm-6 text-center" style="margin-bottom: 10px">
 							<span class="text-info">{{{ $result["track"] }}}</span>
 						</div>
 					</div>

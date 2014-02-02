@@ -19,6 +19,9 @@ return [
 		"login" => ":login to fave or download",
 	],
 	"cooldown" => "On Cooldown",
-	"metadata" => "Title - Artist",
+	"metadata" => [
+		"title" => "Title",
+		"artist" => "Artist",
+	],
 
 ];

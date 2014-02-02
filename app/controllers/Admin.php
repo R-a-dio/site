@@ -3,6 +3,8 @@
 class Admin extends BaseController {
 
 	use AdminUser;
+	use AdminNews;
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Admin Controller - Split this up maybe?
@@ -19,6 +21,8 @@ class Admin extends BaseController {
 	|
 	*/
 
+	protected $layout = "admin";
+
 	public function __construct() {
 		
 		// Auth, naturally.
@@ -28,7 +32,6 @@ class Admin extends BaseController {
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
 
 	}
-	protected $layout = "admin";
 
 	public function getIndex() {
 		$news = DB::table("radio_news")
@@ -39,36 +42,23 @@ class Admin extends BaseController {
 		$this->layout->content = View::make('admin.dashboard');
 	}
 
-
-
-
-
-	
-	public function getLogin() {
-		$this->layout->content = View::make('admin.login');
+	public function missingMethod($parameters = []) {
+		App::abort(404);
 	}
-	public function getLogout() {}
-	public function getPending() {}
-	public function getSongs() {}
-	public function getProfile() {}
-	public function getSettings() {}
-	public function getNews() {}
-	public function getBans() {}
-	
-	// /admin/dev-functions
-	public function getDevFunctions() {}
 
-	public function deletePending($id = null) {}
-
-	public function deleteBans($id = null) {}
-
-	public function deleteNews($id = null) {}
-
-
-	
-
-
-
-	// PUT (update)
+	/**
+	 * Setup the layout used by the controller.
+	 * Also adds a few required variables.
+	 *
+	 * @return void
+	 */
+	protected function setupLayout()
+	{
+		if ( ! is_null($this->layout))
+		{
+			View::share("notifications", Notification::fetch(Auth::user()));
+			$this->layout = View::make($this->layout);
+		}
+	}
 
 }

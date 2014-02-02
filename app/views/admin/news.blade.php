@@ -99,7 +99,7 @@
 								</div>
 								<div class="radio">
 									<label>
-										<input type="radio" name="private" value="0">
+										<input type="radio" name="private" value="0" checked>
 										Public
 									</label>
 								</div>

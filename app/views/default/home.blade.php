@@ -34,14 +34,15 @@
                             <!-- Player Options
                                 ================ -->
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block" id="stream-play" data-loading-text="{{{ trans("stream.loading") }}}">{{{ trans("stream.play") }}}</button>
+                                <button class="btn btn-primary btn-block disabled" id="stream-play" data-loading-text="{{{ trans("stream.loading") }}}">{{{ trans("stream.loading") }}}</button>
+                                <button class="btn btn-primary btn-block" id="stream-stop" data-loading-text="{{{ trans("stream.loading") }}}" style="display: none; margin-top: 0;">{{{ trans("stream.stop") }}}</button>
                                 <div class="btn-group btn-block" style="width:100%">
                                     <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
                                         {{{ trans("stream.options") }}} <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" style="width: 100%">
                                         <li id="stream-volume"> 
-                                            <input type="range">
+                                            <input id="volume" type="range" min="0" max="100" step="1" style="width: 100%">
                                         </li>
                                         <li><a href="https://r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
                                         <li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>
@@ -50,7 +51,6 @@
                                         <li><a href="/help">{{{ trans("stream.links.help") }}}</a></li>
                                     </ul>
                                 </div>
-                                <button class="btn btn-info btn-block" id="loading">DEBUG: Audio Not Loaded</button>
                             </div>
 
                         </div><!-- /.row#stream-info -->
@@ -82,7 +82,7 @@
                                 <p class="text-muted text-center">
                                     <span id="progress-current">weed</span>
                                     /
-                                    <span id="progress-length">05:24</span>
+                                    <span id="progress-length">weed</span>
                                 </p>
                             </div>
 

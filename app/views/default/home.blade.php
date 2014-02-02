@@ -42,7 +42,7 @@
                                     </button>
                                     <ul class="dropdown-menu" role="menu" style="width: 100%">
                                         <li id="stream-volume"> 
-                                            <input id="volume" type="range" min="0" max="100" step="1" style="width: 100%">
+                                            <input id="volume" type="range" min="0" max="100" step="1" value="80" style="width: 100%">
                                         </li>
                                         <li><a href="https://r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
                                         <li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>

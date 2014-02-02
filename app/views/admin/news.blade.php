@@ -84,7 +84,7 @@
 					</div>
 					<div id="collapse-new-post" class="panel-collapse collapse">
 						<div class="panel-body">
-							{{ Form::open(["method" => "PUT"]) }}
+							{{ Form::open(["method" => "POST"]) }}
 								<div class="form-group">
 									<label>Title</label>
 									<input type="text" name="title" placeholder="Title" class="form-control">

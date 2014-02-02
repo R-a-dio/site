@@ -31,6 +31,8 @@ class Home extends BaseController {
 		
 		$news = DB::table("radio_news")
 			->orderBy("id", "desc")
+			->whereNull("deleted_at")
+			->where("private", "=", 0)
 			->take(3)
 			->get();
 
@@ -76,7 +78,9 @@ class Home extends BaseController {
 	 * @return void
 	 */
 	public function getNews($id = false) {
-		$news = DB::table("radio_news");
+		$news = DB::table("radio_news")
+			->whereNull("deleted_at")
+			->where("private", "=", 0);
 
 		if (!$id) {
 			$news = $news->get();

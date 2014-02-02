@@ -49,7 +49,7 @@
 						</div>
 						<div class="radio">
 							<label>
-								<input type="radio" name="private" value="0"
+								<input type="radio" name="private" value="1"
 								@if ($news["private"])
 									checked
 								@endif
@@ -105,7 +105,7 @@
 								</div>
 								<div class="radio">
 									<label>
-										<input type="radio" name="private" value="0">
+										<input type="radio" name="private" value="1">
 										Private
 									</label>
 								</div>

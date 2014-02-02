@@ -26,7 +26,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('pass');
 
-	const NONE = 0
+	const NONE = 0;
 	const PENDING = 1;
 	const DJ = 2;
 	const NEWS = 3;

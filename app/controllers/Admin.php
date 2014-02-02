@@ -2,6 +2,7 @@
 
 class Admin extends BaseController {
 
+	use AdminUser;
 	/*
 	|--------------------------------------------------------------------------
 	| Admin Controller - Split this up maybe?
@@ -30,10 +31,19 @@ class Admin extends BaseController {
 	protected $layout = "admin";
 
 	public function getIndex() {
+		$news = DB::table("radio_news")
+			->orderBy("id", "desc")
+			->take(15)
+			->get();
+		View::share("news", $news);
 		$this->layout->content = View::make('admin.dashboard');
 	}
 
-	public function getUsers() {}
+
+
+
+
+	
 	public function getLogin() {
 		$this->layout->content = View::make('admin.login');
 	}
@@ -48,24 +58,17 @@ class Admin extends BaseController {
 	// /admin/dev-functions
 	public function getDevFunctions() {}
 
+	public function deletePending($id = null) {}
+
+	public function deleteBans($id = null) {}
+
+	public function deleteNews($id = null) {}
 
 
-	/**
-	 * DELETE functions
-	 * I am well aware that these dont properly adhere to REST.
-	 * TODO (Maybe): fix that.
-	 */ 
+	
 
-	// DELETE /admin/users?id={id}?
-	public function deleteUsers() {}
 
-	// DELETE /admin/pending?id={id}
-	public function deletePending() {}
 
-	// DELETE /admin/bans?id={id}
-	public function deleteBans() {}
-
-	// DELETE /admin/news?id={id}
-	public function deleteNews() {}
+	// PUT (update)
 
 }

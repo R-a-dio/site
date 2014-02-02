@@ -27,8 +27,11 @@
                             <!-- Logo 2 (Branded)
                                 ================= -->
                             <div class="col-md-6">
-                                <img src="/assets/logotitle_2.png" width="100% !important; margin-bottom: 25px" class="hidden-xs" alt="R/a/dio">
-
+                                <img id="volume-image" src="/assets/logotitle_2.png" alt="R/a/dio" style="width: 100% !important; margin-bottom: 25px">
+                                <button class="btn btn-primary btn-block" style="display: none" id="volume-control">
+                                    <p style="margin: 0 0 14px">Volume Control</p>
+                                    <input id="volume" type="range" min="0" max="100" step="1" value="80">
+                                </button>
                             </div>
 
                             <!-- Player Options
@@ -41,9 +44,6 @@
                                         {{{ trans("stream.options") }}} <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" style="width: 100%">
-                                        <li id="stream-volume"> 
-                                            <input id="volume" type="range" min="0" max="100" step="1" value="80" style="width: 100%">
-                                        </li>
                                         <li><a href="https://r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
                                         <li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>
                                         <li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>

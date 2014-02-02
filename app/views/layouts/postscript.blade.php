@@ -48,7 +48,9 @@
 							player_source_set = true;
 							$("#stream").jPlayer("play");
 							$(this).hide();
+							$("#volume-image").hide();
 							$("#stream-stop").show();
+							$("#volume-control").show();
 						}
 					});
 					$("#stream-stop").click(function() {
@@ -73,8 +75,6 @@
 			});
 
 			$("#volume").change(function (event) {
-				event.preventDefault();
-
 				$("#stream").jPlayer("volume", Math.pow(($(this).val() / 100), 2.0));
 			});
 

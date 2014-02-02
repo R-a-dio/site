@@ -29,15 +29,10 @@ class Home extends BaseController {
 	 */
 	public function getIndex() {
 		
-		$news = DB::table("news")
+		$news = DB::table("radio_news")
 			->orderBy("id", "desc")
 			->take(3)
 			->get();
-
-		foreach ($news as &$article) {
-			$article["text"] = Markdown::render($article["newstext"]);
-		}
-
 
 		$this->layout->content = View::make($this->theme("home"))
 			->with("curqueue", $this->getQueueArray())
@@ -77,10 +72,10 @@ class Home extends BaseController {
 	 * @return void
 	 */
 	public function getNews($id = false) {
-		$news = DB::table("news");
+		$news = DB::table("radio_news");
 
 		if (!$id) {
-			$news = $news->select("header", "id")->get();
+			$news = $news->get();
 		} else {
 			$news = $news->where("id", "=", $id)->first();
 		}

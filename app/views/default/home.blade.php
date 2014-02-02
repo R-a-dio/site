@@ -157,11 +157,11 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <a href="/news/{{ $article["id"] }}" class="ajax-navigation">
-                                    <h3 class="panel-title">{{{ $article["header"] }}}</h3>
+                                    <h3 class="panel-title">{{{ $article["title"] }}} <small></small></h3>
                                 </a>
                             </div>
                             <div class="panel-body">
-                                {{ $article["text"] }}
+                                {{ Markdown::render($article["header"]) }}
                             </div>
                         </div>
                     </div>

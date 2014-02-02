@@ -14,7 +14,7 @@ class Notification extends Eloquent {
 	 *
 	 * @var bool
 	 */
-	protected $softDeletes = true;
+	protected $softDelete = true;
 
 	// allow mass-assignment
 	protected $fillable = ["notification", "privileges"];
@@ -43,6 +43,9 @@ class Notification extends Eloquent {
 		return static::generate($notification, User::DJ);
 	}
 
+	public static function fetch(User $user) {
+		return static::where("privileges", "<", (int) $user->privileges + 1)->orderBy("created_at", "desc")->get();
+	}
 
 	public function toArray() {
 		$array = parent::toArray();

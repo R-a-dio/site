@@ -17,7 +17,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var bool
 	 */
-	protected $softDeletes = true;
+	protected $softDelete = true;
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -25,6 +25,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('pass');
+
+	protected $fillable = ["user", "pass", "privileges", "email"];
 
 	const NONE = 0;
 	const PENDING = 1;

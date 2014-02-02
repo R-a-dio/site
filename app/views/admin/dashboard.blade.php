@@ -3,20 +3,20 @@
 		<div class="col-md-4">
 			<div class="well">
 				<div class="well errors">
-					<h3> Error Messages.</h3>
+					<h3>0 Error Messages.</h3>
 					<p>The last one was <a href="#">x mins ago</a></p>
-					<p class="text-center"><a href="/admin/reset-errors" class="btn btn-info">Reset Error Counter</a></p>
+					<p class="text-center"><a href="/admin/errors" class="btn btn-info">Reset Error Counter</a></p>
 				</div>
 				<div class="well pending">
-					<h3> Pending Songs.</h3>
-					<p>The last accepted song was <a href="#">5 months ago</a></p>
+					<h3>0 Pending Songs.</h3>
+					<p>The last accepted song was <a href="#">x mins ago</a></p>
 					<p class="text-center"><a href="/admin/pending" class="btn btn-danger">Bloody Accept Something</a>
 
 				</div>
 				<div class="well">
-					<h3>42 Notifications</h3>
-					<p>Some serious shit right there. You should probably try viewing these once in a while.</p>
-					<p class="text-center"><a href="#" class="btn btn-success">View Notifications</a></p>
+					<h3>{{{ $notifications->count() }}} Notifications</h3>
+					<p>These are mostly for admins, but occasionally there's a global announce.</p>
+					<p class="text-center"><a href="/admin/notifications" class="btn btn-success">View Notifications</a></p>
 				</div>
 			</div>
 		</div>
@@ -45,8 +45,7 @@
 									@endif
 								</span>
 								{{ Markdown::render($article["text"]) }}
-								<a href="/admin/news/edit/{{{ $article["id"] }}}" class="btn btn-info">Edit</a>
-								<a href="/admin/news/delete/{{{ $article["id"] }}}" class="btn btn-danger">Delete</a>
+								<a href="/admin/news/{{{ $article["id"] }}}" class="btn btn-info">Edit</a>
 							</div>
 						</div>	
 					</div>

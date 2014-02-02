@@ -27,8 +27,8 @@
                             <!-- Logo 2 (Branded)
                                 ================= -->
                             <div class="col-md-6">
-                                <img id="volume-image" src="/assets/logotitle_2.png" alt="R/a/dio" style="width: 100% !important; margin-bottom: 25px">
-                                <button class="btn btn-primary btn-block" style="display: none" id="volume-control">
+                                <img id="volume-image" src="/assets/logotitle_2.png" alt="R/a/dio" style="width: 100% !important; margin-bottom: 15px;">
+                                <button class="btn btn-primary btn-block" style="display: none; margin-bottom: 5px;" id="volume-control">
                                     <p style="margin: 0 0 14px">Volume Control</p>
                                     <input id="volume" type="range" min="0" max="100" step="1" value="80">
                                 </button>
@@ -37,7 +37,7 @@
                             <!-- Player Options
                                 ================ -->
                             <div class="col-md-6">
-                                <button class="btn btn-primary btn-block disabled" id="stream-play" data-loading-text="{{{ trans("stream.loading") }}}">{{{ trans("stream.loading") }}}</button>
+                                <button class="btn btn-primary btn-block disabled" id="stream-play" data-loading-text="{{{ trans("stream.loading") }}}"><i class="fa fa-spinner fa-spin"></i></button>
                                 <button class="btn btn-primary btn-block" id="stream-stop" data-loading-text="{{{ trans("stream.loading") }}}" style="display: none; margin-top: 0;">{{{ trans("stream.stop") }}}</button>
                                 <div class="btn-group btn-block" style="width:100%">
                                     <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">

@@ -18,10 +18,26 @@
 				======== -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="/admin">Home</a></li>
-						<li><a href="/news">News</a></li>
+						<li
+							@if (!Request::segment(2))
+								class="active"
+							@endif
+						><a href="/admin">Home</a></li>
+						<li
+							@if (Request::segment(2) == "news")
+								class="active"
+							@endif
+						>
+							<a href="/admin/news">News</a>
+						</li>
 
-						<li class="dropdown">
+						<li
+							@if (Request::segment(2) == "pending" or Request::segment(2) == "songs")
+								class="dropdown active"
+							@else
+								class="dropdown"
+							@endif
+						>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Songs <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="/admin/pending">Pending</a></li>
@@ -29,29 +45,45 @@
 							</ul>
 						</li>
 
-						<li><a href="/admin/users">Users</a></li>
-						<li><a href="/admin/djs">DJs</a><li>
+						<li
+							@if (Request::segment(2) == "users")
+								class="active"
+							@endif
+						><a href="/admin/users">Users</a></li>
+						<li
+							@if (Request::segment(2) == "djs")
+								class="active"
+							@endif
+						><a href="/admin/djs">DJs</a><li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hiroto <span class="badge">42</span> <span class="badge errors">15</span> <span class="badge pending">150</span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hiroto <span class="badge">{{{ $notifications->count() }}}</span> <span class="badge errors"></span> <span class="badge pending"></span></a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Notifications</li>
-							<li><a href="/admin/notifications">Site's broken again</a></li>
-							<li><a href="/admin/notifications">Someone called Yuru Yuri bad again</a></li>
-							<li><a href="/admin/users">2 New Users Registered</a></li>
+							@foreach ($notifications as $notification)
+								<li><a href="/admin/notifications">
+									{{ $notification["notification"] }}
+								</a></li>
+							@endforeach
 							<li class="divider"></li>
-							<li><a href="/admin/errors"><span class="badge errors">15</span> New Errors</a></li>
-							<li><a href="/admin/pending"><span class="badge pending">150</span> Pending Songs</a></li>
-							<li><a href="/admin/notifications"><span class="badge">37</span> More...</a></li>
+							<li><a href="/admin/errors"><span class="badge errors">0</span> Errors</a></li>
+							<li><a href="/admin/pending"><span class="badge pending">0</span> Pending Songs</a></li>
+							<li><a href="/admin/notifications"><span class="badge">{{ $notifications->count() }}</span> Notifications</a></li>
 						</ul>
 						</li>
-						<li class="dropdown">
+						<li
+							@if (Request::segment(2) == "profile")
+								class="dropdown active"
+							@else
+								class="dropdown"
+							@endif
+						>
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="/admin/edit-profile">Edit</a></li>
-							<li><a href="/admin/dj-profile">DJ Profile</a></li>
-							<li><a href="/admin/change-password">Change Password</a></li>
+							<li><a href="/admin/profile">Edit</a></li>
+							<li><a href="/admin/profile/dj">DJ Profile</a></li>
+							<li><a href="/admin/profile/password">Change Password</a></li>
 							<li><a href="/admin/logout">Log Out</a></li>
 						</ul>
 						</li>

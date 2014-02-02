@@ -20,8 +20,10 @@
 		<link href="/css/base.css" rel="stylesheet">
 
 
-		<!-- DJ Theme -->
-		<link href="/css/{{ $theme }}.css" rel="stylesheet">
+		@if (isset($theme))
+			<!-- DJ Theme -->
+			<link href="/css/{{ $theme }}.css" rel="stylesheet">
+		@endif
 
 
 		<!-- IE7-9 are not supported in any way by this site.

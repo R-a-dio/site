@@ -49,7 +49,7 @@
 								<div class="panel-body">
 									@foreach ($news->comments as $comment)
 											<div class="well well-sm parent" id="comment-{{ $comment->id }}">
-												<p class="text-muted">{{{ $comment->author() }}}</p>
+												<p class="text-muted">{{{ $comment->author() }}} #{{{ $comment->id }}}</p>
 												<p>{{ comment_render($comment->comment) }}</p>
 											</div>
 									@endforeach

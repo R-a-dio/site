@@ -81,10 +81,12 @@
 						>
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="/admin/profile">Edit</a></li>
-							<li><a href="/admin/profile/dj">DJ Profile</a></li>
-							<li><a href="/admin/profile/password">Change Password</a></li>
-							<li><a href="/admin/logout">Log Out</a></li>
+							<li><a href="/admin/profile">Edit Profile</a></li>
+							@if (Auth::user()->isDJ())
+								<li><a href="/admin/profile#dj">DJ Profile</a></li>
+							@endif
+							<li><a href="/admin/profile#password">Change Password</a></li>
+							<li><a href="/logout">Log Out</a></li>
 						</ul>
 						</li>
 					</ul>

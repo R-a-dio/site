@@ -47,7 +47,7 @@ trait AdminNews {
 			
 		}
 
-		return Redirect::to("/admin/news/$id")
+		return Redirect::to("/admin/news")
 			->with("status", $status);
 
 	}

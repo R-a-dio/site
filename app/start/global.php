@@ -43,7 +43,7 @@ function comment_render($comment) {
 	$markdown = Markdown::render($quotes);
 
 	$quotes = preg_replace("/&gt;&gt;(\d+)/", '<a href="#comment-$1">&gt;&gt;$1</a>', $markdown);
-	return preg_replace("/^&gt;(.+)$/m", '<span class="text-success">&gt;$1</span><br>', $quotes);
+	return preg_replace("/^&gt;(.+)$/m", '<span class="text-success">&gt;$1</span>', $quotes);
 }
 
 $logFile = 'laravel.log';

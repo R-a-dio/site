@@ -28,10 +28,10 @@
                                 ================= -->
                             <div class="col-md-6">
                                 <img id="volume-image" src="/assets/logotitle_2.png" alt="R/a/dio" style="width: 100% !important; margin-bottom: 15px;">
-                                <button class="btn btn-primary btn-block" style="display: none; margin-bottom: 5px;" id="volume-control">
-                                    <p style="margin: 0 0 14px">Volume Control</p>
+                                <div class="well well-sm text-center" style="display: none; margin-bottom: 0;" id="volume-control">
+                                    <p style="margin-bottom: 10px;">Volume Control</p>
                                     <input id="volume" type="range" min="0" max="100" step="1" value="80">
-                                </button>
+                                </div>
                             </div>
 
                             <!-- Player Options

@@ -36,6 +36,9 @@ if (Auth::check() and Auth::user()->isDev()) {
 	Config::set("app.debug", true);
 }
 
+function comment_link($comment) {
+	return nl2br(preg_replace("/&gt;&gt;(\d+)/", '<a href="#comment-$1">&gt;&gt;$1</a>', htmlentities($comment)), false);
+}
 
 $logFile = 'laravel.log';
 

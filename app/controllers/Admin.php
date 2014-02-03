@@ -4,7 +4,7 @@ class Admin extends BaseController {
 
 	use AdminUser;
 	use AdminNews;
-	
+
 	/*
 	|--------------------------------------------------------------------------
 	| Admin Controller - Split this up maybe?
@@ -34,12 +34,17 @@ class Admin extends BaseController {
 	}
 
 	public function getIndex() {
-		$news = DB::table("radio_news")
-			->orderBy("id", "desc")
-			->take(15)
-			->get();
+		$news = Post::privatePosts()->paginate(15);
 		View::share("news", $news);
-		$this->layout->content = View::make('admin.dashboard');
+		$this->layout->content = View::make("admin.dashboard");
+	}
+
+	public function getNotifications() {
+		$notifications = Notification::grab(Auth::user())
+			->paginate(40);
+
+		$this->layout->content = View::make("admin.notifications")
+			->with("notifications", $notifications);
 	}
 
 	public function missingMethod($parameters = []) {
@@ -52,10 +57,8 @@ class Admin extends BaseController {
 	 *
 	 * @return void
 	 */
-	protected function setupLayout()
-	{
-		if ( ! is_null($this->layout))
-		{
+	protected function setupLayout() {
+		if ( ! is_null($this->layout)) {
 			View::share("notifications", Notification::fetch(Auth::user()));
 			$this->layout = View::make($this->layout);
 		}

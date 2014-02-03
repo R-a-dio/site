@@ -36,8 +36,14 @@ if (Auth::check() and Auth::user()->isDev()) {
 	Config::set("app.debug", true);
 }
 
-function comment_link($comment) {
-	return nl2br(preg_replace("/&gt;&gt;(\d+)/", '<a href="#comment-$1">&gt;&gt;$1</a>', htmlentities($comment)), false);
+function comment_render($comment) {
+	$links = preg_replace("/>>(\d+)/", '&gt;&gt;$1', $comment);
+	$quotes = preg_replace("/>(.+)/", '&gt;$1', $links);
+
+	$markdown = Markdown::render($quotes);
+
+	$quotes = preg_replace("/&gt;&gt;(\d+)/", '<a href="#comment-$1">&gt;&gt;$1</a>', $markdown);
+	return preg_replace("/^&gt;(.+)$/m", '<span class="text-success">&gt;$1</span><br>', $quotes);
 }
 
 $logFile = 'laravel.log';

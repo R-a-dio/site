@@ -36,3 +36,11 @@
 
 			
 		</div>
+		@if (Session::has("status"))
+			<div class="container">
+				<div class="alert alert-dismissable alert-info">
+					<button class="close" data-dismiss="alert">&times;</button>
+					{{{ Session::get("status") }}}
+				</div>
+			</div>
+		@endif

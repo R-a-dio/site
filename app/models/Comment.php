@@ -4,7 +4,7 @@ class Comment extends Eloquent {
 
 	protected $table = "radio_comments";
 	protected $softDelete = true;
-	protected $fillable = ["user_id", "comment"];
+	protected $fillable = ["user_id", "comment", "ip"];
 
 	public function author() {
 		if ($this->user_id) {

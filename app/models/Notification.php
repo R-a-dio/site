@@ -44,7 +44,11 @@ class Notification extends Eloquent {
 	}
 
 	public static function fetch(User $user) {
-		return static::where("privileges", "<", (int) $user->privileges + 1)->orderBy("created_at", "desc")->get();
+		return static::where("privileges", "<=", $user->privileges)->orderBy("created_at", "desc")->get();
+	}
+
+	public static function grab(User $user) {
+		return static::where("privileges", "<=", $user->privileges)->orderBy("created_at", "desc");
 	}
 
 	public function toArray() {

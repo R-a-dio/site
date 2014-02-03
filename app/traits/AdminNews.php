@@ -6,12 +6,11 @@ trait AdminNews {
 	// =======================
 
 	public function getNews($id = null) {
-		$news = DB::table("radio_news");
 
 		if ($id)
-			$news = $news->where("id", "=", $id)->first();
+			$news = Post::findOrFail($id);
 		else
-			$news = $news->orderBy("id", "desc")->get();
+			$news = Post::privatePosts()->paginate(15);
 
 		$this->layout->content = View::make("admin.news")
 			->with("news", $news)
@@ -28,19 +27,17 @@ trait AdminNews {
 			Session::flash("status", "I can't let you do that.");
 		} else {
 			try {
-				$id = DB::table("radio_news")
-					->insert([
-						"user_id" => Auth::user()->id,
-						"created_at" => DB::raw("CURRENT_TIMESTAMP()"),
-						"title" => $title,
-						"text" => $text,
-						"header" => $header,
-						"private" => $private,
-					]);
+				Post::create([
+					"user_id" => Auth::user()->id,
+					"title" => $title,
+					"text" => $text,
+					"header" => $header,
+					"private" => $private,
+				]);
 				
 
 				$status = "News post added.";
-				Notification::news(Auth::user()->user . " just add news post: [$id](/admin/news/$id)"); 
+				Notification::news(Auth::user()->user . " just add news post"); 
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -62,19 +59,17 @@ trait AdminNews {
 			Session::flash("status", "I can't let you do that.");
 		} else {
 			try {
-				DB::table("radio_news")
-					->where("id", "=", $id)
-					->update([
-						"updated_at" => DB::raw("CURRENT_TIMESTAMP()"),
-						"title" => $title,
-						"text" => $text,
-						"header" => $header,
-						"private" => $private,
-					]);
-				
+				$post = Post::findOrFail($id);
+
+				$post->title = $title;
+				$post->header = $header;
+				$post->text = $text;
+				$post->private = $private;
+
+				$post->save();
 
 				$status = "News post $id updated.";
-				Notification::news(Auth::user()->user . " just updated news post: [$id](/admin/news/$id)"); 
+				Notification::news(Auth::user()->user . " just updated news post: $id"); 
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -89,11 +84,9 @@ trait AdminNews {
 	public function deleteNews($id) {
 		if (Auth::user()->isAdmin()) {
 			try {
-				DB::table("radio_news")
-					->where("id", "=", $id)
-					->update([
-						"deleted_at" => DB::raw("CURRENT_TIMETAMP()"),
-					]);
+				$post = Post::findOrFail($id);
+				$post->delete();
+
 				$status = "Post Deleted.";
 				Notification::news(Auth::user()->user . " just soft-deleted news post $id");
 			} catch (Exception $e) {

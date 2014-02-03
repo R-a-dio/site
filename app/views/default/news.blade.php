@@ -48,9 +48,16 @@
 								</div>
 								<div class="panel-body">
 									@foreach ($news->comments as $comment)
-											<div class="well well-sm parent" id="comment-{{ $comment->id }}">
-												<p class="text-muted">{{{ $comment->author() }}} #{{{ $comment->id }}}</p>
-												<p>{{ comment_render($comment->comment) }}</p>
+											<div class="well well-sm parent" id="{{ $comment->id }}">
+												<p class="text-muted">
+													{{ $comment->author() }} #{{{ $comment->id }}}
+													@if (Auth::check() and Auth::user()->isAdmin())
+														{{ Form::open(["method" => "delete"]) }}
+															<button type="submit" name="comment" class="close" value="{{ $comment->id }}">&times;</button>
+														{{ Form::close() }}
+													@endif
+												</p>
+												{{ Markdown::comment($comment->comment) }}
 											</div>
 									@endforeach
 								</div>

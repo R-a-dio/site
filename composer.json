@@ -13,6 +13,10 @@
 		{
 			"type": "git",
 			"url": "https://github.com/hiro/profiler"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/hiro/php-markdown"
 		}
 	],
 	"require": {
@@ -20,7 +24,8 @@
 		"raven/raven": "0.7.1",
 		"loic-sharma/profiler": "dev-master",
 		"hiro/laravel-hashing": "dev-radio",
-		"graham-campbell/markdown": "1.0.*@dev"
+		"ezyang/htmlpurifier": "4.6.0",
+		"michelf/php-markdown": "dev-lib"
 	},
 	"autoload": {
 		"classmap": [

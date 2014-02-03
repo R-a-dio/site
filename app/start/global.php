@@ -36,16 +36,6 @@ if (Auth::check() and Auth::user()->isDev()) {
 	Config::set("app.debug", true);
 }
 
-function comment_render($comment) {
-	$links = preg_replace("/>>(\d+)/", '&gt;&gt;$1', $comment);
-	$quotes = preg_replace("/>(.+)/", '&gt;$1', $links);
-
-	$markdown = Markdown::render($quotes);
-
-	$quotes = preg_replace("/&gt;&gt;(\d+)/", '<a href="#comment-$1">&gt;&gt;$1</a>', $markdown);
-	return preg_replace("/^&gt;(.+)$/m", '<span class="text-success">&gt;$1</span>', $quotes);
-}
-
 $logFile = 'laravel.log';
 
 Log::useDailyFiles(storage_path().'/logs/'.$logFile);
@@ -133,3 +123,4 @@ function time_ago($date) {
 */
 
 require app_path().'/filters.php';
+require 'radio.php';

@@ -111,6 +111,9 @@ li#nav-control > div > div.popover-content {
     -webkit-box-reflect: below 3px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255,255,255,0.2)));
 }
 
-
+.well img {
+    max-width: 100%;
+    max-height: 300px;
+}
 
 

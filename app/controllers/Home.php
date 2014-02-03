@@ -130,6 +130,46 @@ class Home extends BaseController {
 		
 	}
 
+	/**
+	 * Setup the layout used by the controller, fetch news.
+	 *
+	 * @return void
+	 */
+	public function deleteNews($id) {
+
+		if (!Auth::check() and !Auth::user()->isAdmin())
+			return Redirect::to("/news/$id");
+
+		$post = Post::findOrFail($id);
+		$comment = Input::get("comment");
+
+		if ($comment and is_numeric($comment)) {
+
+			try {
+				$comment = Comment::find($comment);
+
+				$comment->delete();
+
+				$status = "Comment Deleted!";
+				$response = ["status" => $status];
+			} catch (Exception $e) {
+				$response = ["error" => $e->getMessage()];
+				$status = $e->getMessage();
+			}
+			
+
+		}
+
+		if (Request::ajax()) {
+			return Response::json($response);
+		} else {
+			return Redirect::to("/news/$id")
+				->with("status", $status);
+		}
+
+		
+	}
+
 
 	public function getLogin() {
 		$this->layout->content = View::make($this->theme("login"));

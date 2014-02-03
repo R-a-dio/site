@@ -5,10 +5,19 @@ trait AdminUser {
 	// USERS
 	// =======================
 
-	public function getUsers() {
-		$users = User::all();
+	public function getUsers($id = null) {
+
+		if (!Auth::user()->isAdmin()) {
+			return Redirect::to("/admin");
+		}
+		if (!$id)
+			$user = User::all();
+		else
+			$user = User::findOrFail($id);
+
 		$this->layout->content = View::make("admin.users")
-			->with("users", $users);
+			->with("users", $user)
+			->with("id", $id);
 	}
 
 	public function postUsers($id = null) {
@@ -100,4 +109,49 @@ trait AdminUser {
 		return Redirect::to("/admin/users")
 			->with("status", $status);
 	}
+
+	public function getProfile() {
+		$this->layout->content = View::make("admin.profile");
+	}
+
+
+	public function putProfile() {
+		$user = Auth::user();
+		$email = Input::get("email");
+		$password = Input::get("password");
+		$check = Input::get("current");
+		$confirm = Input::get("confirm");
+
+		try {
+			if ($password) {
+				if (Auth::validate(["user" => $user->user, "password" => $check])) {
+					if ($password == $confirm) {
+						$user->password = Hash::make($password);
+					} else {
+						return Redirect::to("/admin/profile")
+							->with("status", "Passwords do not match");
+					}
+					
+				} else {
+					return Redirect::to("/admin/profile")
+						->with("status", "Incorrect password");
+				}
+			}
+
+			if ($email)
+				$user->email = $email;
+
+			$user->save();
+
+			$status = "Profile Updated";
+
+		} catch (Exception $e) {
+			$status = $e->getMessage();
+		}
+
+		return Redirect::to("/admin/profile")
+			->with("status", $status);
+
+	}
+
 }

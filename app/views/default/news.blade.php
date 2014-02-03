@@ -50,7 +50,7 @@
 									@foreach ($news->comments as $comment)
 											<div class="well well-sm parent" id="comment-{{ $comment->id }}">
 												<p class="text-muted">{{{ $comment->author() }}}</p>
-												<p>{{ comment_link($comment->comment) }}</p>
+												<p>{{ comment_render($comment->comment) }}</p>
 											</div>
 									@endforeach
 								</div>

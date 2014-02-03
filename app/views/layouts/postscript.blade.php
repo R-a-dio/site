@@ -20,6 +20,25 @@
 		$.timeago.settings.strings.seconds = "less than a min";
 		$.timeago.settings.strings.suffixFromNow = null;
 		$.timeago.settings.strings.prefixFromNow = "in";
+		
+		function supports_html5_storage() {
+			try {
+				return 'localStorage' in window && window['localStorage'] !== null;
+			} catch (e) {
+				return false;
+			}
+		}
+
+		if (supports_html5_storage()) {
+
+			if (!localStorage["volume"]) {
+				localStorage["volume"] = 80;
+			}
+			$("#volume").val(parseInt(localStorage["volume"]));
+
+		} else {
+			$("#volume").val(80);
+		}
 
 		$.fn.serializeObject = function() {
 			var o = {};
@@ -102,12 +121,16 @@
 							}
 						});
 					},
+					volume: Math.pow(($("#volume").val() / 100), 2.0),
 					supplied: "mp3",
 					swfPath: swfpath
 				});
 			}
 			
 			$("#volume").change(function (event) {
+				if (supports_html5_storage()) {
+					localStorage["volume"] = $(this).val();
+				}
 				$("#stream").jPlayer("volume", Math.pow(($(this).val() / 100), 2.0));
 			});
 

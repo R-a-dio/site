@@ -32,6 +32,11 @@ ClassLoader::addDirectories(array(
 |
 */
 
+if (Auth::check() and Auth::user()->isDev()) {
+	Config::set("app.debug", true);
+}
+
+
 $logFile = 'laravel.log';
 
 Log::useDailyFiles(storage_path().'/logs/'.$logFile);

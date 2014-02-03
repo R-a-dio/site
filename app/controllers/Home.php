@@ -102,7 +102,7 @@ class Home extends BaseController {
 		if (Input::has("comment")) {
 
 			try {
-				$comment = new Comment(["comment" => Input::get("comment")]);
+				$comment = new Comment(["comment" => Input::get("comment"), "ip" => Input::server("REMOTE_ADDR")]);
 
 				if (Auth::check()) {
 					$comment->user_id = Auth::user()->id;

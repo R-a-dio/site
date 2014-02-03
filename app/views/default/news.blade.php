@@ -18,6 +18,10 @@
 								</div>
 							</div>
 						@endforeach
+
+						<div class="text-center">
+							{{ $news->links() }}
+						</div>
 					</div>
 				@else
 					<div class="panel panel-default">
@@ -26,7 +30,7 @@
 								<a class="ajax-navigation" href="/news">
 									{{{ $news["title"] }}}
 								</a>
-								<small class="pull-right">{{ User::find($news["user_id"])->user }}</small>
+								<small class="pull-right">{{ $news->author->user }}</small>
 							</h4>
 						</div>
 						<div class="panel-body">
@@ -43,7 +47,14 @@
 									</h4>
 								</div>
 								<div class="panel-body">
-									There are no comments.
+									@foreach ($news->comments as $comment)
+										<div class="row comments">
+											<div class="well parent">
+												<p class="text-muted">{{{ $comment->author() }}}</p>
+												<p>{{{ $comment->comment }}}</p>
+											</div>
+										</div>
+									@endforeach
 								</div>
 							</div>
 						</div>

@@ -4,7 +4,6 @@ class Home extends BaseController {
 
 	use Player;
 	use Search;
-	use News;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,19 +77,57 @@ class Home extends BaseController {
 	 * @return void
 	 */
 	public function getNews($id = false) {
-		$news = DB::table("radio_news")
-			->whereNull("deleted_at")
-			->where("private", "=", 0);
+		
 
-		if (!$id) {
-			$news = $news->get();
+		if ($id) {
+			$news = Post::findOrFail($id);
 		} else {
-			$news = $news->where("id", "=", $id)->first();
+			$news = Post::publicPosts()->paginate(15);
 		}
 
 		$this->layout->content = View::make($this->theme("news"))
 			->with("news", $news)
 			->with("id", $id);
+	}
+
+	/**
+	 * Setup the layout used by the controller, fetch news.
+	 *
+	 * @return void
+	 */
+	public function postNews($id) {
+
+		$post = Post::findOrFail($id);
+
+		if (Input::has("comment")) {
+
+			try {
+				$comment = new Comment(["comment" => Input::get("comment")]);
+
+				if (Auth::check()) {
+					$comment->user_id = Auth::user()->id;
+				}
+
+				$post->comments()->save($comment);
+
+				$status = "Comment posted!";
+				$response = ["comment" => $comment->toArray(), "status" => $status];
+			} catch (Exception $e) {
+				$response = ["error" => $e->getMessage()];
+				$status = $e->getMessage();
+			}
+			
+
+		}
+
+		if (Request::ajax()) {
+			return Response::json($response);
+		} else {
+			return Redirect::to("/news/$id")
+				->with("status", $status);
+		}
+
+		
 	}
 
 
@@ -106,7 +143,7 @@ class Home extends BaseController {
 			return Redirect::to("/login");
 		}
 
-		return Redirect::to("/");
+		return Redirect::to("/admin");
 	}
 
 	public function anyLogout() {

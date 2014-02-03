@@ -12,7 +12,7 @@
 				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a href="/admin/news/{{{ $news["id"] }}}">
-							{{{ $news["title"] }}} <span class="pull-right text-muted">{{{ User::find($news["user_id"]) ? User::find($news["user_id"])->user : "Unknown" }}}</span>
+							{{{ $news["title"] }}} <span class="pull-right text-muted">{{{ $news->author->user }}}</span>
 						</a>
 					</h4>
 				</div>

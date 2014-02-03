@@ -48,12 +48,10 @@
 								</div>
 								<div class="panel-body">
 									@foreach ($news->comments as $comment)
-										<div class="row comments">
-											<div class="well parent">
+											<div class="well well-sm parent" id="comment-{{ $comment->id }}">
 												<p class="text-muted">{{{ $comment->author() }}}</p>
-												<p>{{{ $comment->comment }}}</p>
+												<p>{{ comment_link($comment->comment) }}</p>
 											</div>
-										</div>
 									@endforeach
 								</div>
 							</div>

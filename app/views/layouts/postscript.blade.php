@@ -247,6 +247,12 @@
 				var queue = q[count];
 				$(this).find(".col-md-4").html(queue.time);
 				$(this).find(".col-md-8").text(queue.meta);
+
+				if (queue.type > 0) {
+					var html = $(this).find(".col-md-8").html();
+					$(this).find(".col-md-8").html("<b>" + html + "</b>");
+				}
+				
 				count++;
 			});
 		}

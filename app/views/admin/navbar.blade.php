@@ -95,6 +95,13 @@
 
 			</div>
 		</div>
+		<noscript>
+			<div class="container">
+				<div class="alert alert-danger">
+					Why in the shit do you have NoScript on. Also everything depends on jQuery.
+				</div>
+			</div>
+		</noscript>
 		<div class="container">
 			@if (Session::has("status"))
 				<div class="alert alert-dismissable alert-info">

@@ -2,6 +2,8 @@
 
 class API extends Controller {
 
+	use Player;
+
 	protected $limit;
 	protected $offset = 0;
 	protected $routes = ["tracks", "djs", "faves"];
@@ -41,9 +43,19 @@ class API extends Controller {
 		$current = DB::table("streamstatus")->first();
 		$dj = DB::table("djs")->where("id", "=", $current["djid"])->first();
 
+		$lastplayed = $this->getLastPlayedArray();
+		foreach ($lastplayed as &$lp)
+			$lp["time"] = time_ago($lp["time"]);
+
+		$queue = $this->getQueueArray();
+		foreach ($queue as &$q)
+			$q["time"] = time_ago($q["time"]);
+
 		$current["dj"] = $dj;
 		unset($current["djid"]);
 		$current["current"] = time();
+		$current["queue"] = $queue;
+		$current["lp"] = $lastplayed;
 
 		// time-sensitive. contains timestamps that are hit hundreds of times per second.
 		Cache::connection()->set(Cache::getPrefix() . $this->id(), serialize($current));

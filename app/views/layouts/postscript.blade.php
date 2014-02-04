@@ -229,6 +229,28 @@
 			$("#listeners").text(listeners);
 		}
 
+		function updateLastPlayed(lp) {
+			var $lp = $("#lastplayed .last-played");
+			var count = 0;
+			$lp.each(function() {
+				var lastplayed = lp[count];
+				$(this).find(".col-md-4").html(lastplayed.time);
+				$(this).find(".col-md-8").text(lastplayed.meta);
+				count++;
+			});
+		}
+
+		function updateQueue(q) {
+			var $q = $("#queue .queue");
+			var count = 0;
+			$q.each(function() {
+				var queue = q[count];
+				$(this).find(".col-md-4").html(queue.time);
+				$(this).find(".col-md-8").text(queue.meta);
+				count++;
+			});
+		}
+
 		function updatePeriodic() {
 			$.ajax({
 				method: 'get',
@@ -238,7 +260,10 @@
 					nowPlaying(resp.main.np);
 					setListeners(resp.main.listeners);
 					setDJ(resp.main.dj);
+					updateLastPlayed(resp.main.lp);
+					updateQueue(resp.main.queue);
 					parseProgress(resp.main.start_time, resp.main.end_time, resp.main.current);
+					$("time.timeago").timeago();
 				}
 			});
 		}

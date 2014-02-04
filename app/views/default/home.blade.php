@@ -115,10 +115,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <h3 class="text-center">{{ trans("stream.lp") }}</h3>
-                    <ul class="list-group text-center">
+                    <ul class="list-group text-center" id="lastplayed">
                         @foreach ($lastplayed as $lp)
                             <li class="list-group-item">
-                                <div class="container">
+                                <div class="container last-played">
                                     <div class="col-md-4">
                                         {{ time_ago($lp["time"]) }}
                                     </div>
@@ -132,10 +132,10 @@
                 </div>
                 <div class="col-md-6">
                     <h3 class="text-center">{{ trans("stream.queue") }}</h3>
-                    <ul class="list-group text-center">
+                    <ul class="list-group text-center" id="queue">
                         @foreach ($curqueue as $queue)
                             <li class="list-group-item">
-                                <div class="container">
+                                <div class="container queue">
                                     <div class="col-md-4">
                                         {{ time_ago($queue["time"]) }}
                                     </div>

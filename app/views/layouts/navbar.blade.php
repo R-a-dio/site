@@ -36,6 +36,13 @@
 
 			
 		</div>
+		<noscript>
+			<div class="container">
+				<div class="alert alert-danger">
+					Enable JavaScript or quite a lot of this site is pretty much unusable. (Note: enable HTML5 Storage)
+				</div>
+			</div>
+		</noscript>
 		@if (Session::has("status"))
 			<div class="container">
 				<div class="alert alert-dismissable alert-info">

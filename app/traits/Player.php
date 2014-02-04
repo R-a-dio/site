@@ -52,6 +52,24 @@ trait Player {
 
 
 	/**
+	 * Retrieve the current queue.
+	 * 
+	 * @param int $limit
+	 *
+	 * @return array
+	 */
+	protected function getQueuePagination() {
+		return DB::table('queue')
+			->select(
+				'meta',
+				DB::raw('unix_timestamp(time) as time'),
+				'type'
+			)
+			->orderBy('time', 'asc');	
+	}
+
+
+	/**
 	 * Grabs the last $limit songs played
 	 *
 	 * @param int $limit
@@ -66,6 +84,25 @@ trait Player {
 			"from `eplay` use index (PRIMARY) " .
 			"inner join `esong` on `esong`.`id` = `eplay`.`isong` " .
 			"order by `eplay`.`id` desc limit ?", [$limit]);
+
+	}
+
+	/**
+	 * Grabs the last $limit songs played
+	 *
+	 * @param int $limit
+	 * @return array
+	 */
+	protected function getLastPlayedPagination() {
+
+		// this is such a hack holy shit
+		return DB::table(DB::raw("`eplay` use index(PRIMARY)"))
+			->select(
+				"esong.meta",
+				DB::raw("unix_timestamp(`eplay`.`dt`) as time")
+			)
+			->join("esong", "esong.id", "=", "eplay.isong")
+			->orderBy("eplay.id", "desc");
 
 	}
 

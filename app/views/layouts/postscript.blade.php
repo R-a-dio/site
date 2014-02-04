@@ -152,6 +152,21 @@
 
 			var $next = $("[data-uri='" + uri + "']");
 
+			// handle li.active
+			var active = uri.split("/")[1];
+
+			$(".navbar .active").removeClass("active");
+			var $active = $(".navbar a[href='/" + active + "']");
+
+			if ($active.hasClass("drop")) {
+				$active = $active.closest("li.dropdown");
+			} else {
+				$active = $active.closest("li");
+			}
+			
+			$active.addClass("active");
+
+
 			if ($next.length) {
 				// we've been to this page before.
 				var $current = $("#radio-container > .current");
@@ -252,7 +267,7 @@
 					var html = $(this).find(".col-md-8").html();
 					$(this).find(".col-md-8").html("<b>" + html + "</b>");
 				}
-				
+
 				count++;
 			});
 		}

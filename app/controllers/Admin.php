@@ -4,6 +4,7 @@ class Admin extends BaseController {
 
 	use AdminUser;
 	use AdminNews;
+	use AdminSongs;
 
 	/*
 	|--------------------------------------------------------------------------

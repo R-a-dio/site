@@ -6,7 +6,9 @@
 	"authors": [
 		{
 			"name": "David Collinson",
-			"email": "hiroto@hiroto.eu"
+			"email": "hiroto@hiroto.eu",
+			"role": "Developer",
+			"homepage": "https://r-a-d.io"
 		}
 	],
 	"repositories": [
@@ -25,7 +27,8 @@
 		"loic-sharma/profiler": "dev-master",
 		"hiro/laravel-hashing": "dev-radio",
 		"ezyang/htmlpurifier": "4.6.0",
-		"michelf/php-markdown": "dev-lib"
+		"michelf/php-markdown": "dev-lib",
+		"phansys/getid3": "2.1.*@dev"
 	},
 	"autoload": {
 		"classmap": [

@@ -59,10 +59,6 @@ $framework = $app['path.base'].'/vendor/laravel/framework/src';
 require $framework.'/Illuminate/Foundation/start.php';
 
 
-require $app['path.base'] . "/app/libraries/Helper.php";
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Return The Application

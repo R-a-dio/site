@@ -58,7 +58,7 @@
 							</ul>
 						</li>
 
-						@if (Auth::user() and Auth::user()->canDoPending())
+						@if (Auth::check() and Auth::user()->canDoPending())
 							<li><a href="/admin"><i class="fa fa-star"></i></a></li>
 						@endif
 					</ul>
@@ -84,7 +84,13 @@
 			<div class="container">
 				<div class="alert alert-dismissable alert-info">
 					<button class="close" data-dismiss="alert">&times;</button>
-					{{{ Session::get("status") }}}
+					@if (is_array(Session::get("status")))
+						@foreach (Session::get("status") as $status)
+							<p>{{{ $status }}}</p>
+						@endforeach
+					@else
+						<p>{{{ Session::get("status") }}}</p>
+					@endif
 				</div>
 			</div>
 		@endif

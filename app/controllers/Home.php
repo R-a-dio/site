@@ -2,30 +2,20 @@
 
 class Home extends BaseController {
 
+	// traits (protected functions)
 	use Player;
 	use Search;
+	use Analysis;
+
+	// layout to use. always master unless AJAX.
+	protected $layout = 'master';
 
 	/*
 	|--------------------------------------------------------------------------
-	| Default Home Controller
+	| Homepage (Index) - GET
 	|--------------------------------------------------------------------------
-	|
-	| Default Home Controller.
-	| Passes in default variables since they are otherwise not available
-	| in an @section() block.
-	|
-	|	Route::get('/', 'HomeController@showHome');
-	|
 	*/
 
-	protected $layout = 'master';
-
-
-	/**
-	 * Show the homepage (and throw in a load of variables)
-	 *
-	 * @return void
-	 */
 	public function getIndex() {
 		
 		$news = DB::table("radio_news")
@@ -42,6 +32,11 @@ class Home extends BaseController {
 
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| Stats (Queue, LP, etc.) - GET
+	|--------------------------------------------------------------------------
+	*/
 	public function getQueue() {
 		$this->layout->content = View::make($this->theme("queue"))
 			->with("queue", $this->getQueuePagination()->paginate(20));
@@ -50,25 +45,6 @@ class Home extends BaseController {
 	public function getLastPlayed() {
 		$this->layout->content = View::make($this->theme("lastplayed"))
 			->with("lastplayed", $this->getLastPlayedPagination()->paginate(20));
-	}
-
-
-	public function getIrc() {
-		$this->layout->content = View::make($this->theme("irc"));
-	}
-
-
-	public function anySearch($search = false) {
-
-		if (Input::has('q'))
-			$search = Input::get("q", false);
-
-		$results = $this->getSearchResults($search);
-
-		$this->layout->content = View::make($this->theme("search"))
-			->with("search", $results["search"])
-			->with("links", $results["links"])
-			->with("param", $search);
 	}
 
 	public function getStaff() {
@@ -82,11 +58,41 @@ class Home extends BaseController {
 			->with("staff", $staff);
 	}
 
-	/**
-	 * Setup the layout used by the controller, fetch news.
-	 *
-	 * @return void
-	 */
+
+	/*
+	|--------------------------------------------------------------------------
+	| IRC - GET
+	|--------------------------------------------------------------------------
+	*/
+	public function getIrc() {
+		$this->layout->content = View::make($this->theme("irc"));
+	}
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| Search Page - GET, POST
+	|--------------------------------------------------------------------------
+	*/
+	public function anySearch($search = false) {
+
+		if (Input::has('q'))
+			$search = Input::get("q", false);
+
+		$results = $this->getSearchResults($search);
+
+		$this->layout->content = View::make($this->theme("search"))
+			->with("search", $results["search"])
+			->with("links", $results["links"])
+			->with("param", $search);
+	}
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| News Page - GET, POST|PUT|DELETE (comments)
+	|--------------------------------------------------------------------------
+	*/
 	public function getNews($id = false) {
 		
 
@@ -101,11 +107,6 @@ class Home extends BaseController {
 			->with("id", $id);
 	}
 
-	/**
-	 * Setup the layout used by the controller, fetch news.
-	 *
-	 * @return void
-	 */
 	public function postNews($id) {
 
 		$post = Post::findOrFail($id);
@@ -182,6 +183,11 @@ class Home extends BaseController {
 	}
 
 
+	/*
+	|--------------------------------------------------------------------------
+	| Login Pages (and logout) - GET, POST
+	|--------------------------------------------------------------------------
+	*/
 	public function getLogin() {
 		$this->layout->content = View::make($this->theme("login"));
 	}
@@ -202,7 +208,29 @@ class Home extends BaseController {
 		Redirect::to("/");
 	}
 
+	/*
+	|--------------------------------------------------------------------------
+	| Submit Song Page - GET, POST
+	|--------------------------------------------------------------------------
+	*/
+	public function getSubmit() {
+		$this->layout->content = View::make($this->theme("submit"));
+	}
 
+	public function postSubmit() {
+		$file = Input::file("song");
+		$result = $this->addPending($file);
+
+		return Redirect::to("/submit")
+			->with("status", $result);
+	}
+
+
+	/*
+	|--------------------------------------------------------------------------
+	| 404 Method
+	|--------------------------------------------------------------------------
+	*/
 	public function missingMethod($parameters = []) {
 		App::abort(404);
 	}

@@ -103,7 +103,7 @@ function time_ago($date) {
 	$timeago = date(DATE_ISO8601, $date);
 
 	// This part is optional, but why not
-	$time = date(DATE_RFC850, $date);
+	$time = date("H:i:s", $date);
 
 	// Using the <time> HTML5 element instead of <abbr>
 	return "<time class=\"timeago\" datetime=\"$timeago\">$time</time>";

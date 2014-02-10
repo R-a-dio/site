@@ -11,3 +11,4 @@ Icon*
 .dropbox
 Thumbs.db
 desktop.ini
+.env.php

@@ -9,8 +9,8 @@
 			
 		</div>
 		
-		<div class="modal fade" id="help">
-			<div class="modal-dialog">
+		<div class="modal bs-modal-lg fade" id="help">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -75,8 +75,8 @@
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
 
-		<div class="modal fade" id="other">
-			<div class="modal-dialog">
+		<div class="modal bs-modal-lg fade" id="other">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -92,7 +92,7 @@
 								<li>Off-vocals</li>
 								<li>Single-instrument tracks (e.g. piano versions)</li>
 								<li>Songs with heavy bass that aren't perfect quality</li>
-								<li>Songs with all-japanese metadata (unless romaji etc. is given)</li>
+								<li>Songs with all-japanese metadata (unless romaji, etc. is given)</li>
 							</ul>
 						</p>
 						<p class="text-danger">You have been warned.</p>

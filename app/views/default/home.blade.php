@@ -145,7 +145,7 @@
 				<h3 class="text-center">{{ trans("stream.lp") }}</h3>
 				<ul class="list-group" id="lastplayed">
 					@foreach ($lastplayed as $lp)
-						<li class="list-group-item last-played" style="height: 45px">
+						<li class="list-group-item last-played" style="height: 55px">
 							<div class="col-md-4 lp-time">
 								{{ time_ago($lp["time"]) }}
 							</div>
@@ -161,9 +161,9 @@
 				<ul class="list-group" id="queue">
 					@foreach ($curqueue as $queue)
 						@if ($queue["type"] > 0)
-							<li class="list-group-item list-group-item-info queue" style="height: 45px">
+							<li class="list-group-item list-group-item-info queue" style="height: 55px">
 						@else
-							<li class="list-group-item queue" style="height: 45px">
+							<li class="list-group-item queue" style="height: 55px">
 						@endif
 							<div class="col-md-8 q-meta" style="line-height: 1">
 								{{{ $queue["meta"] }}}

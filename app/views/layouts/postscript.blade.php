@@ -287,8 +287,8 @@
 			var count = 0;
 			$lp.each(function() {
 				var lastplayed = lp[count];
-				$(this).find(".col-md-4").html(lastplayed.time);
-				$(this).find(".col-md-8").text(lastplayed.meta);
+				$(this).find(".lp-time").html(lastplayed.time);
+				$(this).find(".lp-meta").text(lastplayed.meta);
 				count++;
 			});
 		}
@@ -298,12 +298,11 @@
 			var count = 0;
 			$q.each(function() {
 				var queue = q[count];
-				$(this).find(".col-md-4").html(queue.time);
-				$(this).find(".col-md-8").text(queue.meta);
+				$(this).find(".q-time").html(queue.time);
+				$(this).find(".q-meta").text(queue.meta);
 
 				if (queue.type > 0) {
-					var html = $(this).find(".col-md-8").html();
-					$(this).find(".col-md-8").html("<b>" + html + "</b>");
+					$(this).addClass("list-group-item-info");
 				}
 
 				count++;

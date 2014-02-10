@@ -59,6 +59,7 @@ class Markdown {
 	}
 	
 	public static function quotes($comment) {
+		$comment = preg_replace("/>{2,}/", ">>", $comment);
 		$links = preg_replace("/>>(\d+)/", '&gt;&gt;$1', $comment);
 		return preg_replace("/^>([^>]+)$/m", '&gt;$1', $links);
 	}

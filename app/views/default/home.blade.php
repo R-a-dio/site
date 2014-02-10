@@ -149,6 +149,9 @@
                         </li>
                     @endforeach
                 </ul>
+                <div class="well well-lg" id="dj-mode" style="display: none">
+                    <h1 class="text-center">Queue Unavailable</h1>
+                </div>
             </div>
         </div>
 

@@ -214,7 +214,8 @@
 			update_progress_inc: 0.0,
 			update_old_progress: 0.0,
 			current_pos: 0,
-			current_len: 0
+			current_len: 0,
+			afk: 1
 		};
 
 		String.prototype.format = function() {
@@ -280,6 +281,19 @@
 				success: function (resp) {
 					nowPlaying(resp.main.np);
 					setListeners(resp.main.listeners);
+
+					if (radio.afk != resp.main.isafkstream) {
+						radio.afk = resp.main.isafkstream;
+
+						if (radio.afk) {
+							$("#queue").show();
+							$("#dj-mode").hide();
+						} else {
+							$("#queue").hide();
+							$("#dj-mode").show();
+						}
+					}
+					
 					setDJ(resp.main.dj);
 					updateLastPlayed(resp.main.lp);
 					updateQueue(resp.main.queue);

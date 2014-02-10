@@ -52,6 +52,16 @@
 					</div>
 				</div>
 
+				<div class="form-group" style="display: none" id="daypass">
+					<label class="form-label col-sm-2">Daypass</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="daypass" placeholder="Comment">
+						<p class="help-block">
+							Enter the daypass and you can have unlimited uploads for the day (resets at 00:00UTC)
+						</p>
+					</div>
+				</div>
+
 				<button type="submit" class="btn btn-default ajax-upload col-sm-offset-2">
 					Upload Song
 				</button>

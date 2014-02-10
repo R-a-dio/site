@@ -6,6 +6,15 @@ trait AdminSongs {
 		$pending = DB::table("pending")
 			->orderBy("id", "desc")
 			->get();
+
+		foreach($pending as &$p) {
+			try {
+				$filesize = filesize(Config::get("radio.paths.pending") . "/" . $p["path"]);
+			} catch (Exception $e) {
+				$filesize = "unknown";
+			}
+			$p["filesize"] = $filesize;
+		}
 		$this->layout->content = View::make("admin.pending")
 			->with("pending", $pending);
 	}

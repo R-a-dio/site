@@ -7,8 +7,11 @@
 				<h4 class="text-muted">R/a/dio Presents: Papa John's&trade; guide to not uploading shit!</h4>
 				<p>
 					<strong>Step 1:</strong>
-					{{ Form::open(["url" => "/search", "class" => "ajax-search"]) }}
-						<input type="text" name="q" class="form-control" placeholder="Search first or we're going to teabag you into next week">
+					{{ Form::open(["url" => "/search", "class" => "ajax-search form-inline"]) }}
+						<div class="form-group">
+							<input type="text" name="q" class="form-control" placeholder="Search first bitch">
+						</div>
+						<button type="submit" class="btn btn-info">Search</button>
 					{{ Form::close() }}
 				</p>
 				<p>
@@ -19,7 +22,7 @@
 						<li>No runes (Romaji if needed)</li>
 						<li>Artist and Title minimum</li>
 						<li>Only 2 artists in the artist field maximum even if Japan thinks otherwise.</li>
-						<li>None of that Artist1 (cv. Character1) &amp; Artist2 (cv. Character2) &amp; Artist3 (cv. Character3) shite.</li>
+						<li><strong>None of that Character (cv. Artist) shit or heads will roll.</strong></li>
 					</ul>
 				</p>
 			</div>
@@ -49,7 +52,7 @@
 					</div>
 				</div>
 
-				<button type="submit" class="btn btn-success ajax-upload col-sm-offset-2">
+				<button type="submit" class="btn btn-default ajax-upload col-sm-offset-2">
 					Upload Song
 				</button>
 
@@ -59,16 +62,44 @@
 		<div class="container">
 			<div class="col-md-6">
 				<h2 class="text-success text-center">Accepts</h2>
-				<div class="well">
+				<table class="table table-striped">
+					<thead>
+						<th>Metadata</th>
+					</thead>
+					<tbody>
+						@foreach ($accepts as $accept)
+							@if ($accept["good_upload"])
+								<tr class="success">
+							@else
+								<tr>
+							@endif
+								<td>{{{ $accept["meta"] }}}</td>
+							</tr>
+						@endforeach
+					</tbody>
 					
-				</div>
+				</table>
 			</div>
 			<div class="col-md-6">
 				<h2 class="text-danger text-center">Declines</h2>
-				<div class="well">
+
+				<table class="table table-striped table-hover">
+					<thead>
+						<th>Metadata</th>
+						<th>Reason</th>
+					</thead>
+					<tbody>
+						@foreach ($declines as $decline)
+							<tr>
+								<td>{{{ $decline["meta"] }}}</td>
+								<td>{{{ $decline["reason"] }}}</td>
+							</tr>
+						@endforeach
+					</tbody>
 					
-				</div>
+				</table>
 			</div>
+
 		</div>
 		
 

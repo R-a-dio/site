@@ -219,8 +219,12 @@ class Home extends BaseController {
 
 	public function postSubmit() {
 		$file = Input::file("song");
-		$result = $this->addPending($file);
 
+		if ($file)
+			$result = $this->addPending($file);
+		else
+			$result = "You need to add a file.";
+		
 		return Redirect::to("/submit")
 			->with("status", $result);
 	}

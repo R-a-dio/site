@@ -154,7 +154,7 @@
 
 			var uri = state.url.replace(root, "/");
 
-			var $next = $("[data-uri='" + uri + "']");
+			
 
 			// handle li.active
 			var active = uri.split("/")[1];
@@ -171,12 +171,41 @@
 			$active.addClass("active");
 
 
-			if ($next.length) {
-				// we've been to this page before.
-				var $current = $("#radio-container > .current");
+			if (uri == "/") {
 
-				$current.removeClass("current").hide();
-				$next.addClass("current").show();
+				var $main = $("[data-uri='/']");
+
+				if (!$main.length) {
+					$.ajax({
+						url: "/",
+						type: "GET",
+						dataType: "html",
+						success: function(data) {
+							if (data) {
+								var $section = $(data);
+								var $current = $("#radio-container > .current");
+
+								$current.remove();
+								$section.appendTo($("#radio-container")).addClass("current").show();
+
+								handlers();
+
+							}
+						}
+					});
+				} else {
+					var $current = $("#radio-container > .current");
+
+					if ($current.attr("data-uri") != "/") {
+						// trash it
+						$current.remove();
+						$main.addClass("current").show();
+					} else {
+						$main.show();
+					}
+					
+
+				}
 			} else {
 				// we need to fetch it and append it
 
@@ -189,15 +218,19 @@
 							var $section = $(data);
 
 							var $current = $("#radio-container > .current");
-
-							$current.removeClass("current").hide();
+							if ($current.attr("data-uri") == "/") {
+								$current.removeClass("current").hide();
+							} else {
+								$current.remove();
+							}
+							
 							$section.appendTo($("#radio-container")).addClass("current").show();
 
 							handlers();
 
 						}
 					}
-				})
+				});
 			}
 
 		});

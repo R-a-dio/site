@@ -2,8 +2,8 @@
 
 	<div class="container main">
 		<div class="container">
-			<div class="col-md-12">
-				<h1>Submit</h1>
+			<h1>Submit</h1>
+			<div class="col-md-6">
 				<h4 class="text-muted">R/a/dio Presents: Papa John's&trade; guide to not uploading shit!</h4>
 				<p>
 					<strong>Step 1:</strong>
@@ -26,48 +26,39 @@
 					</ul>
 				</p>
 			</div>
-			<hr>
-		</div>
+			<div class="col-md-6">
+				{{ Form::open(["files" => true, "class" => "form-horizontal"]) }}
 
-		<div class="row">
-			{{ Form::open(["files" => true, "class" => "form-horizontal col-sm-8 col-sm-offset-2"]) }}
-
-				<div class="form-group">
-					<label class="form-label col-sm-2">Song</label>
-					<div class="col-sm-10">
+					<div class="form-group">
 						<input type="file" name="song">
 						<p class="help-block">
 							Upload a song to the R/a/dio database. Try to keep MP3s to around 15MB.
 						</p>
 					</div>
-				</div>
 
-				<div class="form-group">
-					<label class="form-label col-sm-2">Comment</label>
-					<div class="col-sm-10">
+					<div class="form-group">
 						<input type="text" class="form-control" name="comment" placeholder="Comment">
 						<p class="help-block">
 							Add the source, artist and title if tags are missing, etc.
 						</p>
 					</div>
-				</div>
 
-				<div class="form-group" style="display: none" id="daypass">
-					<label class="form-label col-sm-2">Daypass</label>
-					<div class="col-sm-10">
+					<div class="form-group" style="display: none" id="daypass">
 						<input type="text" class="form-control" name="daypass" placeholder="Comment">
 						<p class="help-block">
 							Enter the daypass and you can have unlimited uploads for the day (resets at 00:00UTC)
 						</p>
 					</div>
-				</div>
 
-				<button type="submit" class="btn btn-default ajax-upload col-sm-offset-2">
-					Upload Song
-				</button>
+					<button type="submit" class="btn btn-default ajax-upload">
+						Upload Song
+					</button>
 
-			{{ Form::close() }}
+				{{ Form::close() }}
+			</div>
+			<hr>
 		</div>
+
 		<hr>
 		<div class="container">
 			<div class="col-md-6">

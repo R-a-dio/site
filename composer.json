@@ -23,7 +23,8 @@
 		"hiro/laravel-hashing": "dev-radio",
 		"ezyang/htmlpurifier": "4.6.0",
 		"michelf/php-markdown": "dev-lib",
-		"phansys/getid3": "2.1.*@dev"
+		"phansys/getid3": "2.1.*@dev",
+		"recaptcha/php5": "v1.0.0"
 	},
 	"autoload": {
 		"classmap": [

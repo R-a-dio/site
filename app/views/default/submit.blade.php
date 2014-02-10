@@ -9,7 +9,7 @@
 					<strong>Step 1:</strong>
 					{{ Form::open(["url" => "/search", "class" => "ajax-search form-inline"]) }}
 						<div class="form-group">
-							<input type="text" name="q" class="form-control" placeholder="Search first bitch">
+							<input type="text" name="q" class="form-control" placeholder="Search first">
 						</div>
 						<button type="submit" class="btn btn-info">Search</button>
 					{{ Form::close() }}
@@ -22,7 +22,7 @@
 						<li>No runes (Romaji if needed)</li>
 						<li>Artist and Title minimum</li>
 						<li>Only 2 artists in the artist field maximum even if Japan thinks otherwise.</li>
-						<li><strong>None of that Character (cv. Artist) shit or heads will roll.</strong></li>
+						<li><strong>No "Character (cv. Artist)" stuff in tags whatsoever.</strong></li>
 					</ul>
 				</p>
 			</div>

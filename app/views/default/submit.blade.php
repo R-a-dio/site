@@ -84,8 +84,8 @@
 				<br>
 				@foreach ($declines as $decline)
 					<div class="row">
-						<div class="col-md-8">{{{ $decline["meta"] }}}</div>
-						<div class="col-md-4">{{{ $decline["reason"] }}}</div>
+						<div class="col-md-8" style="overflow-x: hidden">{{{ $decline["meta"] }}}</div>
+						<div class="col-md-4 text-danger">{{{ $decline["reason"] }}}</div>
 					</div>
 					<hr>
 				@endforeach

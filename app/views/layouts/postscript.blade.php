@@ -11,6 +11,7 @@
 <script src="/js/furigana.js"></script>
 <script src="/js/jquery.jplayer.min.js"></script>
 <script>swfpath = "/js/Jplayer.swf";</script>
+<script src="/js/konami.js"></script>
 
 <script>
 	$(function() {
@@ -20,6 +21,9 @@
 		$.timeago.settings.strings.seconds = "less than a min";
 		$.timeago.settings.strings.suffixFromNow = null;
 		$.timeago.settings.strings.prefixFromNow = "in";
+		var konami = new Konami(function() {
+			$("#daypass").show();
+		});
 		
 		function supports_html5_storage() {
 			try {
@@ -215,7 +219,7 @@
 			update_old_progress: 0.0,
 			current_pos: 0,
 			current_len: 0,
-			afk: 1
+			afk: "init"
 		};
 
 		String.prototype.format = function() {

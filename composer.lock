@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "e0679562cf4e806783a95b8830f6ada0",
+    "hash": "08504ab5e5cecd596c6b5906189fcda6",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -321,12 +321,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c4f5e7d5c654a9f8277b1814a7b18a33374eb9e6"
+                "reference": "130e0fff64e08b43e0a8c67106fc96e92fec1534"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c4f5e7d5c654a9f8277b1814a7b18a33374eb9e6",
-                "reference": "c4f5e7d5c654a9f8277b1814a7b18a33374eb9e6",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/130e0fff64e08b43e0a8c67106fc96e92fec1534",
+                "reference": "130e0fff64e08b43e0a8c67106fc96e92fec1534",
                 "shasum": ""
             },
             "require": {
@@ -430,41 +430,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-02-07 15:03:01"
-        },
-        {
-            "name": "loic-sharma/profiler",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hiro/profiler",
-                "reference": "26e8e7fe67108d525194ba571b754d7dad772318"
-            },
-            "require": {
-                "php": ">=5.3.0",
-                "psr/log": "1.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Profiler": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Loic Sharma"
-                }
-            ],
-            "description": "A PHP 5.3 profiler based off of Laravel 3's Anbu.",
-            "keywords": [
-                "anbu",
-                "laravel",
-                "profiler"
-            ],
-            "time": "2014-01-06 17:38:47"
+            "time": "2014-02-10 16:59:17"
         },
         {
             "name": "michelf/php-markdown",
@@ -625,32 +591,32 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "dev-master",
+            "version": "0.9.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "5cab2a78442f4c690866c85017f4e99f732602ce"
+                "reference": "6f36a88993a07d0ccd52d813ceff27de022429c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5cab2a78442f4c690866c85017f4e99f732602ce",
-                "reference": "5cab2a78442f4c690866c85017f4e99f732602ce",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/6f36a88993a07d0ccd52d813ceff27de022429c3",
+                "reference": "6f36a88993a07d0ccd52d813ceff27de022429c3",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "php": ">=5.3"
+                "php": ">=5.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "0.9-dev"
                 }
             },
             "autoload": {
-                "files": [
-                    "lib/bootstrap.php"
-                ]
+                "psr-0": {
+                    "PHPParser": "lib/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -666,7 +632,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2014-02-06 20:39:57"
+            "time": "2014-01-24 19:27:42"
         },
         {
             "name": "patchwork/utf8",
@@ -999,6 +965,52 @@
                 "logging"
             ],
             "time": "2013-09-17 19:35:03"
+        },
+        {
+            "name": "recaptcha/php5",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AlekseyKorzun/reCaptcha-PHP-5.git",
+                "reference": "c6596fab6eee998769298ec337539924d8384f34"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AlekseyKorzun/reCaptcha-PHP-5/zipball/c6596fab6eee998769298ec337539924d8384f34",
+                "reference": "c6596fab6eee998769298ec337539924d8384f34",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Captcha": "Package"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Aleksey Korzun",
+                    "email": "al.ko@webfoundation.net",
+                    "homepage": "http://www.alekseykorzun.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A properly coded PHP 5 reCaptcha class that will allow you to interact with Google'sreCaptcha API.",
+            "homepage": "https://github.com/AlekseyKorzun/reCaptcha-PHP-5",
+            "keywords": [
+                "api",
+                "captcha",
+                "google",
+                "php",
+                "recaptcha"
+            ],
+            "time": "2013-06-17 03:37:20"
         },
         {
             "name": "stack/builder",
@@ -1814,7 +1826,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "loic-sharma/profiler": 20,
         "hiro/laravel-hashing": 20,
         "michelf/php-markdown": 20,
         "phansys/getid3": 20

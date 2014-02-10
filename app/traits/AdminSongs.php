@@ -96,4 +96,24 @@ trait AdminSongs {
 			return Response::redirect("/admin/pending");
 	}
 
+	public function getPendingSong($id) {
+		$pending = DB::table("pending")->where("id", "=", $id)->first();
+
+		if ($pending)
+			return Response::download(Config::get("radio.paths.pending") . "/" . $pending["path"]);
+	}
+
+	public function getSong($id) {
+		$track = DB::table("tracks")->where("id", "=", $id)->first();
+
+		if ($track) {
+			try {
+				return Response::download(Config::get("radio.paths.music") . "/" . $track["path"]);
+			} catch (Exception $e) {
+				return Response::json(["error" => 404]);
+			}
+			
+		}
+	}
+
 }

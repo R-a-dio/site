@@ -214,7 +214,22 @@ class Home extends BaseController {
 	|--------------------------------------------------------------------------
 	*/
 	public function getSubmit() {
-		$this->layout->content = View::make($this->theme("submit"));
+		$accepts = DB::table("postpending")
+			->where("accepted", ">=", 1)
+			->take(20)
+			->orderBy("time", "desc")
+			->get();
+
+		$declines = DB::table("postpending")
+			->where("accepted", "=", 0)
+			->where("reason", "!=", "")
+			->take(20)
+			->orderBy("time", "desc")
+			->get();
+
+		$this->layout->content = View::make($this->theme("submit"))
+			->with("accepts", $accepts)
+			->with("declines", $declines);
 	}
 
 	public function postSubmit() {
@@ -224,7 +239,7 @@ class Home extends BaseController {
 			$result = $this->addPending($file);
 		else
 			$result = "You need to add a file.";
-		
+
 		return Redirect::to("/submit")
 			->with("status", $result);
 	}

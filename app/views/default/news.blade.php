@@ -51,6 +51,7 @@
 											<div class="well well-sm parent" id="{{ $comment->id }}">
 												<p class="text-muted">
 													{{ $comment->author() }} #{{{ $comment->id }}}
+													<span class="pull-right">({{{ date("Y-m-d H:i:s", strtotime($comment->created_at)) . "UTC" }}})</span>
 													@if (Auth::check() and Auth::user()->isAdmin())
 														{{ Form::open(["method" => "delete"]) }}
 															<button type="submit" name="comment" class="close" value="{{ $comment->id }}">&times;</button>

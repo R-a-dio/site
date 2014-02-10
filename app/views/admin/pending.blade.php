@@ -92,7 +92,7 @@
 								<li>Off-vocals</li>
 								<li>Single-instrument tracks (e.g. piano versions)</li>
 								<li>Songs with heavy bass that aren't perfect quality</li>
-								<li>Songs with all-japanese metadata and no romaji/translation.</li>
+								<li>Songs with all-japanese metadata (unless romaji etc. is given)</li>
 							</ul>
 						</p>
 						<p class="text-danger">You have been warned.</p>

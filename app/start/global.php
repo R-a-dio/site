@@ -92,7 +92,25 @@ App::error(function(Exception $exception, $code)
 
 App::down(function()
 {
-	return Response::make("Be right back!", 503);
+
+	View::share("theme", "default");
+	View::share("error", 503);
+	$view = Request::ajax() ? View::make("ajax") : View::make("master");
+	$view->content = View::make("layouts.error");
+
+	return $view;
+});
+
+
+App::missing(function()
+{
+
+	View::share("theme", "default");
+	View::share("error", 404);
+	$view = Request::ajax() ? View::make("ajax") : View::make("master");
+	$view->content = View::make("layouts.error");
+
+	return $view;
 });
 
 // timeago function for all dates

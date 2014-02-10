@@ -92,6 +92,9 @@ App::error(function(Exception $exception, $code)
 
 App::down(function()
 {
+	// bypass maintenance mode for devs who logged in earlier
+	if (Auth::check() and Auth::user()->isDev())
+		return null;
 
 	View::share("theme", "default");
 	View::share("error", 503);

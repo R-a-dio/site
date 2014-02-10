@@ -1,6 +1,6 @@
 		<!-- Navbar
 		======== -->
-		<div class="navbar navbar-default">
+		<div class="navbar navbar-default" style="border-radius: 0px">
 			<div class="container">
 
 				<!-- Collapse Icon

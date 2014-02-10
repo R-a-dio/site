@@ -58,6 +58,14 @@
 							</ul>
 						</li>
 
+						@if (Request::segment(1) == "submit")
+							<li class="active">
+						@else
+							<li>
+						@endif
+							<a href="/submit" class="ajax-navigation">{{{ trans("navbar.submit") }}}</a>
+						</li>
+
 						@if (Auth::check() and Auth::user()->canDoPending())
 							<li><a href="/admin"><i class="fa fa-star"></i></a></li>
 						@endif

@@ -14,17 +14,12 @@
 	"repositories": [
 		{
 			"type": "git",
-			"url": "https://github.com/hiro/profiler"
-		},
-		{
-			"type": "git",
 			"url": "https://github.com/hiro/php-markdown"
 		}
 	],
 	"require": {
 		"laravel/framework": "4.1.*",
 		"raven/raven": "0.7.1",
-		"loic-sharma/profiler": "dev-master",
 		"hiro/laravel-hashing": "dev-radio",
 		"ezyang/htmlpurifier": "4.6.0",
 		"michelf/php-markdown": "dev-lib",

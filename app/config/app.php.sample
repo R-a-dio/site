@@ -118,8 +118,6 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-		'Profiler\ProfilerServiceProvider',
-		'GrahamCampbell\Markdown\MarkdownServiceProvider',
 	),
 
 	/*
@@ -185,8 +183,6 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-		'Profiler'        => 'Profiler\Facades\Profiler',
-		'Markdown'        => 'GrahamCampbell\Markdown\Facades\Markdown',
 
 	),
 

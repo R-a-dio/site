@@ -2,20 +2,20 @@
 
 	<div class="container main">
 		<h1 class="text-center">Queue</h1>
-		@foreach ($queue as $q)
-			<div class="row">
-				<div class="col-sm-4 text-center">
-					{{ time_ago($q["time"]) }}
-				</div>
-				<div class="col-sm-8 text-center">
-					@if ($q["type"] > 0)
-						<b>{{{ $q["meta"] }}}</b>
-					@else
-						{{{ $q["meta"] }}}
-					@endif
-				</div>
-			</div>
-		@endforeach
+
+		<ul class="list-group col-md-8 col-md-offset-2">
+			@foreach ($queue as $q)
+				@if ($q["type"] > 0)
+					<li class="list-group-item list-group-item-success">
+				@else
+					<li class="list-group-item">
+				@endif
+					<span>{{{ date("H:m:i", $q["time"]) }}}</span>
+					<span style="padding-left: 25px">{{{ $q["meta"] }}}</span>
+				</li>
+			@endforeach
+		</ul>
+		
 
 		<div class="text-center">
 			{{ $queue->links() }}

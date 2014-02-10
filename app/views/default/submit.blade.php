@@ -62,42 +62,33 @@
 		<div class="container">
 			<div class="col-md-6">
 				<h2 class="text-success text-center">Accepts</h2>
-				<table class="table table-striped">
-					<thead>
-						<th>Metadata</th>
-					</thead>
-					<tbody>
-						@foreach ($accepts as $accept)
-							@if ($accept["good_upload"])
-								<tr class="success">
+				<br>
+				@foreach ($accepts as $accept)
+					<div class="row">
+						<div class="col-md-12">
+							@if ($accept["accepted"] == 2)
+								<span class="text-success">
+									{{{ $accept["meta"] }}}
+								</span>
 							@else
-								<tr>
+								{{{ $accept["meta"] }}}
 							@endif
-								<td>{{{ $accept["meta"] }}}</td>
-							</tr>
-						@endforeach
-					</tbody>
-					
-				</table>
+							
+						</div>
+					</div>
+					<hr>
+				@endforeach
 			</div>
 			<div class="col-md-6">
 				<h2 class="text-danger text-center">Declines</h2>
-
-				<table class="table table-striped table-hover">
-					<thead>
-						<th>Metadata</th>
-						<th>Reason</th>
-					</thead>
-					<tbody>
-						@foreach ($declines as $decline)
-							<tr>
-								<td>{{{ $decline["meta"] }}}</td>
-								<td>{{{ $decline["reason"] }}}</td>
-							</tr>
-						@endforeach
-					</tbody>
-					
-				</table>
+				<br>
+				@foreach ($declines as $decline)
+					<div class="row">
+						<div class="col-md-8">{{{ $decline["meta"] }}}</div>
+						<div class="col-md-4">{{{ $decline["reason"] }}}</div>
+					</div>
+					<hr>
+				@endforeach
 			</div>
 
 		</div>

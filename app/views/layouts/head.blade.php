@@ -25,7 +25,8 @@
 			<link href="/css/{{ $theme }}.css" rel="stylesheet">
 		@endif
 
+		<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
 
-		<!-- IE7-9 are not supported in any way by this site.
+		<!-- IE7-8 are not supported in any way by this site.
 			They can all die in a fire. (IE10 + 11, however, live)
 			======================================================= -->

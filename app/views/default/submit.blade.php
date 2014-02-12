@@ -27,26 +27,26 @@
 					<div class="form-group">
 						<input type="file" name="song">
 						<p class="help-block">
-							{{{ trans("submit.uploaddesc") }}}
+							{{{ trans("submit.upload.desc") }}}
 						</p>
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" name="comment" placeholder="{{{ trans("submit.comment") }}}">
+						<input type="text" class="form-control" name="comment" placeholder="{{{ trans("submit.comment.label") }}}">
 						<p class="help-block">
-							{{{ trans("submit.commentdesc") }}}
+							{{{ trans("submit.comment.desc") }}}
 						</p>
 					</div>
 
 					<div class="form-group" style="display: none" id="daypass">
-						<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass") }}}">
+						<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
 						<p class="help-block">
-							{{{ trans("submit.daypassdesc") }}}
+							{{{ trans("submit.daypass.desc") }}}
 						</p>
 					</div>
 
 					<button type="submit" class="btn btn-default ajax-upload">
-						{{{ trans("submit.upload") }}}
+						{{{ trans("submit.upload.label") }}}
 					</button>
 
 				{{ Form::close() }}

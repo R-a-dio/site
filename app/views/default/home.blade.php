@@ -108,9 +108,9 @@
 						</div>
 						<div class="col-md-6">
 							<p class="text-muted text-center">
-								<span id="progress-current">weed</span>
+								<span id="progress-current">00:00</span>
 								/
-								<span id="progress-length">weed</span>
+								<span id="progress-length">00:00</span>
 							</p>
 						</div>
 
@@ -124,8 +124,8 @@
 				<div class="col-md-3">
 					<div class="col-xs-12">
 						<div class="thumbnail">
-							<img id="dj-image" src="/assets/dj_image.png" class="hidden-xs">
-							<h4 class="text-center" id="dj-name">Hanyuu-sama</h4>
+							<img id="dj-image" src="//r-a-d.io/res/img/dj/{{{ $status["dj"]["djimage"] }}}" class="hidden-xs">
+							<h4 class="text-center" id="dj-name">{{{ $status["dj"]["djname"] }}}</h4>
 						</div>
 					</div>
 				</div>

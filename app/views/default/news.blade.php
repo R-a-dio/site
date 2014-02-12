@@ -8,11 +8,15 @@
 				@if (!$id)
 					<div class="panel-group">
 						@foreach ($news as $article)
-							<div class="panel panel-default">
+							@if ($article->private)
+								<div class="panel panel-info">
+							@else
+								<div class="panel panel-default">
+							@endif
 								<div class="panel-heading">
 									<h4 class="panel-title">
-										<a class="ajax-navigation" href="/news/{{{ $article["id"] }}}">
-											{{{ $article["title"] }}}
+										<a class="ajax-navigation" href="/news/{{{ $article->id }}}">
+											{{{ $article->title }}} <span class="text-muted pull-right">{{{ $article->author->user }}}</span>
 										</a>
 									</h4>
 								</div>
@@ -24,17 +28,21 @@
 						</div>
 					</div>
 				@else
-					<div class="panel panel-default">
+						@if ($news->private)
+							<div class="panel panel-info">
+						@else
+							<div class="panel panel-default">
+						@endif
 						<div class="panel-heading">
 							<h4 class="panel-title">
 								<a class="ajax-navigation" href="/news">
-									{{{ $news["title"] }}}
+									{{{ $news->title }}}
 								</a>
-								<small class="pull-right">{{ $news->author->user }}</small>
+								<span class="text-muted pull-right">{{ $news->author->user }}</span>
 							</h4>
 						</div>
 						<div class="panel-body">
-							{{ Markdown::render($news["text"]) }}
+							{{ Markdown::render($news->text) }}
 						</div>
 					</div>
 
@@ -47,10 +55,27 @@
 									</h4>
 								</div>
 								<div class="panel-body">
-									@foreach ($news->comments as $comment)
+									@foreach ($comments as $comment)
 											<div class="well well-sm parent" id="{{ $comment->id }}">
 												<p class="text-muted">
-													{{ $comment->author() }} #{{{ $comment->id }}}
+													
+													@if (!$comment->user_id)
+														Anonymous
+													@else
+														@if ($comment->user->isAdmin())
+															<span class="text-danger">
+																{{{ $comment->user->user }}} ## Admin
+															</span>
+														@elseif ($comment->user->canDoPending())
+															<span class="text-info">
+																{{{ $comment->user->user }}} ## Mod
+															</span>
+														@else
+															{{{ $comment->user->user }}}
+														@endif
+													@endif
+
+													#{{{ $comment->id }}}
 													<span class="pull-right">({{{ date("Y-m-d H:i:s", strtotime($comment->created_at)) . "UTC" }}})</span>
 													@if (Auth::check() and Auth::user()->isAdmin())
 														{{ Form::open(["method" => "delete"]) }}

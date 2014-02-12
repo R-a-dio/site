@@ -10,13 +10,4 @@ class Comment extends Eloquent {
 		return $this->belongsTo("User", "user_id", "id");
 	}
 
-	public function author() {
-		if ($this->user_id) {
-			// lolwat
-			return "<span class=\"text-danger\">Anonymous ## Mod <i class=\"fa fa-star\"></i></span>";
-		} else {
-			return "Anonymous";
-		}
-	}
-
 }

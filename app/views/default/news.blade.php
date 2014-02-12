@@ -60,18 +60,16 @@
 												<p class="text-muted">
 													
 													@if (!$comment->user_id)
-														Anonymous
+														Anonymous ({{{ substr(sha1($comment->ip), 0, 4)  }}})
 													@else
 														@if ($comment->user->isAdmin())
 															<span class="text-danger">
 																{{{ $comment->user->user }}} ## Admin
 															</span>
-														@elseif ($comment->user->canDoPending())
+														@else
 															<span class="text-info">
 																{{{ $comment->user->user }}} ## Mod
 															</span>
-														@else
-															{{{ $comment->user->user }}}
 														@endif
 													@endif
 

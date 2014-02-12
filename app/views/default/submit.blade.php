@@ -2,27 +2,22 @@
 
 	<div class="container main">
 		<div class="container">
-			<h1>Submit</h1>
+			<h1>{{{ trans("submit.title") }}}</h1>
 			<div class="col-md-6">
-				<h4 class="text-muted">R/a/dio Presents: Papa John's&trade; guide to not uploading shit!</h4>
 				<p>
-					<strong>Step 1:</strong>
-					{{ Form::open(["url" => "/search", "class" => "ajax-search form-inline"]) }}
-						<div class="form-group">
-							<input type="text" name="q" class="form-control" placeholder="Search first">
-						</div>
-						<button type="submit" class="btn btn-info">Search</button>
-					{{ Form::close() }}
+					<strong>{{{ trans("submit.guidelines.upload.title") }}}</strong>
+					<ul>
+						<li>{{{ trans("submit.guidelines.upload.search") }}}</li>
+						<li>{{{ trans("submit.guidelines.upload.quality") }}}</li>
+						<li>{{{ trans("submit.guidelines.upload.source") }}}</li>
+					</ul>
 				</p>
 				<p>
-					<strong>Step 2:</strong>
-					<br>
-					Learn to tag your damn files properly.
+					<strong>{{{ trans("submit.guidelines.tagging.title") }}}</strong>
 					<ul>
-						<li>No runes (Romaji if needed)</li>
-						<li>Artist and Title minimum</li>
-						<li>Only 2 artists in the artist field maximum even if Japan thinks otherwise.</li>
-						<li><strong>No "Character (cv. Artist)" stuff in tags whatsoever.</strong></li>
+						<li>{{{ trans("submit.guidelines.tagging.required") }}}</li>
+						<li>{{{ trans("submit.guidelines.tagging.runes") }}}</li>
+						<li>{{{ trans("submit.guidelines.tagging.cv") }}}</li>
 					</ul>
 				</p>
 			</div>
@@ -32,26 +27,26 @@
 					<div class="form-group">
 						<input type="file" name="song">
 						<p class="help-block">
-							Upload a song to the R/a/dio database. Try to keep MP3s to around 15MB.
+							{{{ trans("submit.upload.desc") }}}
 						</p>
 					</div>
 
 					<div class="form-group">
-						<input type="text" class="form-control" name="comment" placeholder="Comment">
+						<input type="text" class="form-control" name="comment" placeholder="{{{ trans("submit.comment.label") }}}">
 						<p class="help-block">
-							Add the source, artist and title if tags are missing, etc.
+							{{{ trans("submit.comment.desc") }}}
 						</p>
 					</div>
 
 					<div class="form-group" style="display: none" id="daypass">
-						<input type="text" class="form-control" name="daypass" placeholder="Comment">
+						<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
 						<p class="help-block">
-							Enter the daypass and you can have unlimited uploads for the day (resets at 00:00UTC)
+							{{{ trans("submit.daypass.desc") }}}
 						</p>
 					</div>
 
 					<button type="submit" class="btn btn-default ajax-upload">
-						Upload Song
+						{{{ trans("submit.upload.label") }}}
 					</button>
 
 				{{ Form::close() }}
@@ -62,7 +57,7 @@
 		<hr>
 		<div class="container">
 			<div class="col-md-6">
-				<h2 class="text-success text-center">Accepts</h2>
+				<h2 class="text-success text-center">{{{ trans("submit.accepts") }}}</h2>
 				<br>
 				@foreach ($accepts as $accept)
 					<div class="row">
@@ -81,7 +76,7 @@
 				@endforeach
 			</div>
 			<div class="col-md-6">
-				<h2 class="text-danger text-center">Declines</h2>
+				<h2 class="text-danger text-center">{{{ trans("submit.declines") }}}</h2>
 				<br>
 				@foreach ($declines as $decline)
 					<div class="row">

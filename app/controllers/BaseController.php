@@ -10,7 +10,13 @@ class BaseController extends Controller {
 	}
 
 	protected function getStatus() {
-		return DB::table('streamstatus')->first();
+		$status = DB::table('streamstatus')->first();
+		$status["dj"] = DB::table("djs")
+			->where("id", "=", $status["djid"])
+			->first();
+		unset($status["djid"]);
+
+		return $status;
 	}
 
 	protected function getCurrentSong() {

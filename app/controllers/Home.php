@@ -97,14 +97,26 @@ class Home extends BaseController {
 		
 
 		if ($id) {
-			$news = Post::findOrFail($id);
+			$news = Post::with("author")->findOrFail($id);
+			if ($news["private"] and !Auth::check())
+				App::abort(404);
+
+			$comments = $news->comments->load("user");
 		} else {
-			$news = Post::publicPosts()->paginate(15);
+			$news = Post::with("author");
+
+			if (!Auth::check() or !Auth::user()->canDoPending())
+				$news = $news->where("private", "=", 0);
+
+			$news = $news->orderBy("id", "desc")
+				->paginate(15);
+			$comments = null;
 		}
 
 		$this->layout->content = View::make($this->theme("news"))
 			->with("news", $news)
-			->with("id", $id);
+			->with("id", $id)
+			->with("comments", $comments);
 	}
 
 	public function postNews($id) {

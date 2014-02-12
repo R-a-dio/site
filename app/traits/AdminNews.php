@@ -8,9 +8,10 @@ trait AdminNews {
 	public function getNews($id = null) {
 
 		if ($id)
-			$news = Post::findOrFail($id);
+			$news = Post::findOrFail($id)
+				->load("author");
 		else
-			$news = Post::privatePosts()->paginate(15);
+			$news = Post::with("author")->paginate(15);
 
 		$this->layout->content = View::make("admin.news")
 			->with("news", $news)

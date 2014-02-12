@@ -24,13 +24,4 @@ class Post extends Eloquent {
 
 		return $array;
 	}
-
-	public static function privatePosts() {
-		return static::orderBy("id", "desc");
-	}
-
-	public static function publicPosts() {
-		return static::where("private", "=", 0)
-			->orderBy("id", "desc");
-	}
 }

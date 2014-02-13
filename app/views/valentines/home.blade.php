@@ -1,7 +1,7 @@
 @section('content')
 
-<div class="container hidden-xs hidden-sm" style="height: 200px"></div>
-	<div class="snow" id="Div1"></div> <!-- This is for the snow.js -->
+<div class="container hidden-xs" style="height: 200px"></div>
+<div class="snow" id="Div1"></div> <!-- This is for the snow.js -->
 <img src="/images/valentines/happyvalenshit.png" id="happy">
 
 	<!-- Main Container
@@ -18,7 +18,7 @@
 					============== -->
 				<div class="col-md-3">
 					<div class="col-xs-12">
-						<img src="/images/valentines/heart_logo_small.png" class="hidden-sm" id="logo" alt="R/a/dio">
+						<img src="/images/valentines/heart_logo_small.png" class="hidden-sm hidden-xs" id="logo" alt="R/a/dio">
 					</div>
 				</div>
 
@@ -30,7 +30,7 @@
 						<!-- Logo 2 (Branded)
 							================= -->
 						<div class="col-md-6">
-							<img id="volume-image" src="/assets/logotitle_2.png" alt="R/a/dio" style="width: 100% !important; margin-bottom: 15px;">
+							<img id="volume-image" class="hidden-xs hidden-sm" src="/assets/logotitle_2.png" alt="R/a/dio" style="width: 100% !important; margin-bottom: 15px;">
 							<div class="well well-sm text-center" style="display: none; margin-bottom: 0;" id="volume-control">
 								<p style="margin-bottom: 10px;">Volume Control</p>
 								<input id="volume" type="range" min="0" max="100" step="1" value="80">
@@ -105,12 +105,12 @@
 							</div>
 						</div>
 
-						<div class="col-md-6">
+						<div class="col-xs-6">
 							<p class="text-muted text-center">
 								{{{ trans("stream.listeners") }}}: <span id="listeners">{{{ $status["listeners"] }}}</span>
 							</p>
 						</div>
-						<div class="col-md-6">
+						<div class="col-xs-6">
 							<p class="text-muted text-center">
 								<span id="progress-current">00:00</span>
 								/
@@ -128,7 +128,7 @@
 				<div class="col-md-3">
 					<div class="col-xs-12">
 						<div class="thumbnail">
-							<img id="dj-image" src="//r-a-d.io/res/img/dj/{{{ $status["dj"]["djimage"] }}}" class="hidden-xs">
+							<img id="dj-image" src="//r-a-d.io/res/img/dj/{{{ $status["dj"]["djimage"] }}}" class="hidden-xs hidden-sm">
 							<h4 class="text-center" id="dj-name">{{{ $status["dj"]["djname"] }}}</h4>
 						</div>
 					</div>
@@ -143,65 +143,7 @@
 
 	<br>
 
-<!--<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<h3 class="text-center">{{ trans("stream.lp") }}</h3>
-				<ul class="list-group" id="lastplayed">
-					@foreach ($lastplayed as $lp)
-						<li class="list-group-item last-played" style="height: 55px">
-							<div class="col-md-4 lp-time">
-								{{ time_ago($lp["time"]) }}
-							</div>
-							<div class="col-md-8 lp-meta text-right" style="line-height: 1">
-								{{{ $lp["meta"] }}}
-							</div>
-						</li>
-					@endforeach
-				</ul>
-			</div>
-			<div class="col-md-6">
-				<h3 class="text-center">{{ trans("stream.queue") }}</h3>
-				<ul class="list-group" id="queue">
-					@foreach ($curqueue as $queue)
-						@if ($queue["type"] > 0)
-							<li class="list-group-item list-group-item-info queue" style="height: 55px">
-						@else
-							<li class="list-group-item queue" style="height: 55px">
-						@endif
-							<div class="col-md-8 q-meta" style="line-height: 1">
-								{{{ $queue["meta"] }}}
-							</div>
-							<div class="col-md-4 text-right q-time">
-								{{ time_ago($queue["time"]) }}
-							</div>
-						</li>
-					@endforeach
-				</ul>
-				<div class="well well-lg" id="dj-mode" style="display: none">
-					<h1 class="text-center">Queue Unavailable</h1>
-				</div>
-			</div>
-		</div> -->
 
-<!--	<div class="row">
-			
-			@foreach ($news as $article)
-				<div class="col-md-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<a href="/news/{{ $article["id"] }}" class="ajax-navigation">
-								<h3 class="panel-title">{{{ $article["title"] }}}</h3>
-							</a>
-						</div>
-						<div class="panel-body">
-							{{ Markdown::render($article["header"]) }}
-						</div>
-					</div>
-				</div>
-			@endforeach
-
-		</div> --> <!-- /.row -->
 	</div><!-- /.container -->
 	
 	

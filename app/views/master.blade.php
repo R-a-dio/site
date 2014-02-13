@@ -16,7 +16,9 @@
 		@include("layouts.footer")
 
 		@include("layouts.postscript")
-
+		
+		@include($script)
+		
 		@yield("script", "")
 	</body>
 </html>

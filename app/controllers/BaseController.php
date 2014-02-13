@@ -41,7 +41,20 @@ class BaseController extends Controller {
 	 */
 	protected function theme($page) {
 		// TODO: check database access, DJ column will have theme
-		return $this->getTheme() . "." . $page;
+		$theme = $this->getTheme();
+		$path = app_path() . "/views/$theme/$page.blade.php";
+
+		if (!Cache::has("theme:$path")) {
+
+			Cache::put("theme:$path", file_exists($path), 60);
+
+		}
+
+		if (!Cache::get("theme:$path")) {
+			$theme = "default";
+		}
+		
+		return $theme . "." . $page;
 	}
 
 	/**
@@ -57,6 +70,7 @@ class BaseController extends Controller {
 			// TODO: dynamic source for the themes
 			View::share("theme", $this->getTheme());
 			View::share("status", $this->getStatus());
+			View::share("script", $this->theme("script"));
 
 			if (Request::ajax() or Input::get("ajax") == "potato")
 				$this->layout = "ajax";

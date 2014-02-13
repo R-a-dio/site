@@ -1,5 +1,12 @@
 html, body {
-     background: url("http://images4.alphacoders.com/211/211864.jpg") no-repeat fixed left center / cover  #FFFFFF;
+     background: url("/images/valentines/background.jpg") no-repeat fixed left center / cover  #FFFFFF;
+}
+
+#happy {
+     background: url("/images/valentines/happyvalenshit.jpg");
+     bottom: 0px;
+     position: fixed;
+     right: 0px;
 }
 
 .navbar {
@@ -10,6 +17,10 @@ html, body {
      display: none;
 }
 
+.container.hidden-xs.hidden-sm {
+     background: none repeat scroll 0% 0% transparent;
+}
+
 #Div1 {
      height: 100%;
      left: 0px;
@@ -17,7 +28,7 @@ html, body {
      position: fixed;
      top: 0px;
      width: 100%;
-     z-index: -1;
+     z-index: 0;
 }
 
 #volume-control {
@@ -35,16 +46,6 @@ html, body {
      margin-left: -1.5em;
      padding: 4px;
      transition: all 0.2s ease-in-out 0s;
-}
-
-#radio-container {
-     height: 15em ! important;
-     left: 50%;
-     margin-left: -37.5em ! important;
-     margin-top: -8.5em ! important;
-     position: absolute;
-     top: 50%;
-     width: 75em ! important;
 }
 
 .thumbnail {
@@ -140,13 +141,13 @@ h2, h3 {
 }
 
 .modal-footer {
-     border: none;
+     border: medium none;
 }
 
 .modal-header {
-     border: none;
+     border: medium none;
 }
 
 .close {
-     color: #FFF;
+     color: #FFFFFF;
 }

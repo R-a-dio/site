@@ -1,5 +1,9 @@
 @section('content')
 
+<div class="container hidden-xs hidden-sm" style="height: 200px"></div>
+	<div class="snow" id="Div1"></div> <!-- This is for the snow.js -->
+<img src="/images/valentines/happyvalenshit.png" id="happy">
+
 	<!-- Main Container
 	================ -->
 	<div class="container main">
@@ -200,7 +204,6 @@
 		</div> --> <!-- /.row -->
 	</div><!-- /.container -->
 	
-	<div class="snow" id="Div1"></div> <!-- This is for the snow.js -->
 	
 @stop
 

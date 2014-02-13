@@ -241,6 +241,7 @@
 
 
 					} else {
+						$("#errored").text("An unknown error occurred.");
 						showErrored();
 					}
 

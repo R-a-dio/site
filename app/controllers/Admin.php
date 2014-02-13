@@ -35,7 +35,7 @@ class Admin extends BaseController {
 	}
 
 	public function getIndex() {
-		$news = Post::privatePosts()->paginate(15);
+		$news = Post::with("author")->paginate(15);
 		View::share("news", $news);
 		$this->layout->content = View::make("admin.dashboard");
 	}

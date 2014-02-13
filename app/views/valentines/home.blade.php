@@ -1,6 +1,6 @@
 @section('content')
 
-<div class="container hidden-xs" style="height: 200px"></div>
+<div class="hidden-xs" style="height: 200px"></div>
 <div class="snow" id="Div1"></div> <!-- This is for the snow.js -->
 <img src="/images/valentines/happyvalenshit.png" id="happy">
 

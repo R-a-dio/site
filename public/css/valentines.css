@@ -1,0 +1,152 @@
+html, body {
+     background: url("http://images4.alphacoders.com/211/211864.jpg") no-repeat fixed left center / cover  #FFFFFF;
+}
+
+.navbar {
+     display: none;
+}
+
+.footer {
+     display: none;
+}
+
+#Div1 {
+     height: 100%;
+     left: 0px;
+     overflow: hidden;
+     position: fixed;
+     top: 0px;
+     width: 100%;
+     z-index: -1;
+}
+
+#volume-control {
+     background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%) repeat scroll 0% 0% transparent;
+     border-radius: 0px;
+     border: medium none;
+     color: #FFFFFF;
+     margin-left: -1.5em;
+     transition: all 0.2s ease-in-out 0s;
+}
+
+#logo {
+     background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%) repeat scroll 0% 0% transparent;
+     border-radius: 20px 0px 0px;
+     margin-left: -1.5em;
+     padding: 4px;
+     transition: all 0.2s ease-in-out 0s;
+}
+
+#radio-container {
+     height: 15em ! important;
+     left: 50%;
+     margin-left: -37.5em ! important;
+     margin-top: -8.5em ! important;
+     position: absolute;
+     top: 50%;
+     width: 75em ! important;
+}
+
+.thumbnail {
+     background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%) repeat scroll 0px 0px transparent;
+     border-radius: 0px 20px 0px 0px;
+     border: 0px solid #DDDDDD;
+     color: #FFFFFF;
+}
+
+#volume-image {
+     background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%) repeat scroll 0px 0px transparent;
+     border-radius: 0px;
+     padding: 4px;
+     transition: all 0.2s ease-in-out 0s;
+}
+
+#dj-image {
+     border-radius: 200px;
+     margin-top: 0.5em;
+     width: 10em;
+}
+
+.progress-bar {
+     background-color: rgba(0, 0, 0, 0.05);
+}
+
+.progress {
+     background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary {
+     background-color: rgba(0, 0, 0, 0.25);
+     border-radius: 0px;
+     border: medium none;
+}
+
+.btn-primary:hover {
+     background-color: rgba(0, 0, 0, 0.55);
+}
+
+.btn-default {
+     background-color: rgba(0, 0, 0, 0.25);
+     border-radius: 0px;
+     border: medium none;
+     color: #FFFFFF;
+}
+
+.btn-default:hover {
+     background-color: rgba(0, 0, 0, 0.55);
+     color: #FFFFFF;
+}
+
+.btn-group .dropdown-toggle:active, .btn-group.open .dropdown-toggle {
+     background-color: rgba(0, 0, 0, 0.75);
+     color: #FFFFFF;
+}
+
+.dropdown-menu, .dropdown-menu li a {
+     background-color: rgba(0, 0, 0, 0.75);
+     color: #FFFFFF;
+}
+
+.dropdown-menu li a:hover {
+     background-color: rgba(255, 255, 255, 0.1);
+     color: #FFFFFF;
+     transition: all 0.2s ease-in-out 0s;
+}
+
+.dropdown-menu .divider {
+     background-color: rgba(100, 100, 100, 0.3);
+     height: 2px;
+}
+
+h2, h3 {
+     color: #FFFFFF;
+}
+
+.container {
+     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 25%, rgba(0, 0, 0, 0.4) 75%, rgba(0, 0, 0, 0) 100%) repeat scroll 0px 0px transparent;
+     padding-top: 1em;
+}
+
+.content {
+     background: none repeat scroll 0% 0% rgba(0, 0, 0, 0) ! important;
+}
+
+.modal-content {
+     background-color: #000000;
+     border-radius: 20px;
+     border: 0px solid rgba(0, 0, 0, 0.2);
+     color: #FFFFFF;
+     position: relative;
+}
+
+.modal-footer {
+     border: none;
+}
+
+.modal-header {
+     border: none;
+}
+
+.close {
+     color: #FFF;
+}

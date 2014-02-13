@@ -123,6 +123,35 @@
 
 	</div>
 	<script>
+
+		function showUploading() {
+			$("#uploading").show();
+			$("#uploaded").hide();
+			$("#errored").hide();
+			$("#feedback-success").show();
+			$("#feedback-error").hide();
+			$("#file-input").addClass("has-success").addClass("has-feedback").removeClass("has-error");
+			$("#file-progress-bar").addClass("progress-bar-success").removeClass("progress-bar-danger");
+		}
+
+		function showUploaded() {
+			$("#uploaded").show();
+			$("#uploading").hide();
+			$("#errored").hide();
+			$("#feedback-success").show();
+			$("#feedback-error").hide();
+			$("#file-input").addClass("has-success").addClass("has-feedback").removeClass("has-error");
+			$("#file-progress-bar").addClass("progress-bar-success").removeClass("progress-bar-danger");
+		}
+		function showErrored() {
+			$("#uploading").hide();
+			$("#uploaded").hide();
+			$("#errored").show();
+			$("#feedback-success").hide();
+			$("#feedback-error").show();
+			$("#file-input").addClass("has-error").addClass("has-feedback").removeClass("has-success");
+			$("#file-progress-bar").removeClass("progress-bar-success").addClass("progress-bar-danger");
+		}
 		// delegate event to the click button
 		$("#submit").submit(function (e) {
 			e.preventDefault();
@@ -147,14 +176,12 @@
 			}
 
 			if (error) {
-				$("#file-input").addClass("has-error").addClass("has-feedback").removeClass("has-success");
-				$("#feedback-success").hide();
-				$("#feedback-error").show();
+				showErrored();
 			} else {
-				$("#file-input").addClass("has-success").addClass("has-feedback").removeClass("has-error");
-				$("#feedback-success").show();
-				$("#feedback-error").hide();
+				showUploading();
 			}
+
+			$("#file-progress-bar").css("width", "0%");
 
 
 			
@@ -166,12 +193,11 @@
 				xhr = new XMLHttpRequest();
 
 			if (!$form.find("input[name=song]")[0].files[0]) {
-				$("#file-input").addClass("has-error").addClass("has-feedback");
-				$("#feedback-error").show();
-				$("#feedback-success").hide();
-				return false;
+				showErrored();
+				e.preventDefault();
+				return;
 			} else {
-				$("#file-input").removeClass("has-error").addClass("has-feedback").addClass("has-success");
+				showUploading();
 			}
 
 			if (typeof FormData !== "undefined" && xhr.upload) {
@@ -192,9 +218,7 @@
 						var data = JSON.parse(xhr.responseText);
 
 						if (data.value.error) {
-							$("#errored").show();
-							$("#uploaded").hide();
-							$("#uploading").hide();
+							showErrored();
 
 							if (data.value.error instanceof Array) {
 								var error = data.value.error.join("<br>");
@@ -204,43 +228,20 @@
 								$("#errored").text(error);
 							}
 
-							$("#file-input").removeClass("has-success").addClass("has-error");
-							$("#feedback-success").hide();
-							$("#feedback-error").show();
-
-							$("#file-progress-bar").removeClass("progress-bar-success").addClass("progress-bar-danger");
 						} else if (data.value.success) {
-							$("#uploading").hide();
 							$("#uploaded").text(data.value.success).show();
-							$("#errored").hide();
-							$("#file-progress-bar").removeClass("progress-bar-danger").addClass("progress-bar-success");
-
-							$("#file-input").removeClass("has-error").addClass("has-success");
-							$("#feedback-success").show();
-							$("#feedback-error").hide();
+							showUploaded();
 						} else {
-							$("#errored").text("An unknown error occurred.").show();
-							$("#uploaded").hide();
-							$("#uploading").hide();
-							$("#file-progress-bar").removeClass("progress-bar-success").addClass("progress-bar-danger");
-
-							$("#file-input").removeClass("has-success").addClass("has-error");
-							$("#feedback-success").hide();
-							$("#feedback-error").show();
+							$("#errored").text("An unknown error occurred.");
+							
+							showErrored();
 						}
 
 						
 
 
 					} else {
-						$("#errored").show();
-						$("#uploaded").hide();
-						$("#uploading").hide();
-						$("#file-progress-bar").removeClass("progress-bar-success").addClass("progress-bar-danger");
-
-						$("#file-input").removeClass("has-success").addClass("has-error");
-						$("#feedback-success").hide();
-						$("#feedback-error").show();
+						showErrored();
 					}
 
 					$("#file-progress-bar").css("width", "100%");
@@ -250,9 +251,7 @@
 				xhr.upload.addEventListener("progress", function(progress) {
 					var percent = (progress.loaded / progress.total) * 100;
 					console.log(percent);
-					$("#uploading").show();
-					$("#uploaded").hide();
-					$("#errored").hide();
+					showUploading();
 					$("#file-progress-bar").css("width", percent + "%");
 					$("#file-progress").text(percent.toFixed(0));
 				});

@@ -186,12 +186,12 @@
 				<div class="col-md-4">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<a href="/news/{{ $article["id"] }}" class="ajax-navigation">
-								<h3 class="panel-title">{{{ $article["title"] }}}</h3>
+							<a href="/news/{{ $article->id }}" class="ajax-navigation">
+								<h3 class="panel-title">{{{ $article->title }}} <span class="text-muted pull-right">{{{ $article->author->user }}}</span></h3>
 							</a>
 						</div>
 						<div class="panel-body">
-							{{ Markdown::render($article["header"]) }}
+							{{ Markdown::render($article->header) }}
 						</div>
 					</div>
 				</div>

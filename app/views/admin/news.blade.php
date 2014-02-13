@@ -128,7 +128,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a href="/admin/news/{{{ $article->id }}}">
-								{{{ $article->title }}} # {{ $article->id }} <span class="pull-right text-muted">{{{ $news->author->user }}}</span>
+								{{{ $article->title }}} # {{ $article->id }} <span class="pull-right text-muted">{{{ $article->author->user }}}</span>
 							</a>
 						</h4>
 					</div>

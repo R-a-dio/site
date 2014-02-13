@@ -18,10 +18,9 @@ class Home extends BaseController {
 
 	public function getIndex() {
 		
-		$news = DB::table("radio_news")
-			->orderBy("id", "desc")
-			->whereNull("deleted_at")
+		$news = Post::with("author")
 			->where("private", "=", 0)
+			->orderBy("id", "desc")
 			->take(3)
 			->get();
 
@@ -254,7 +253,7 @@ class Home extends BaseController {
 
 		if (Request::ajax())
 			return Response::json(["value" => $result]);
-		
+
 		return Redirect::to("/submit")
 			->with("status", $result);
 	}

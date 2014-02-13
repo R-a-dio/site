@@ -5,7 +5,7 @@ return [
 		"limit" => 25,
 	],
 	"paths" => [
-		"pending" => "/radio/music/pending",
+		"pending" => "/radio/music/pend",
 		"music" => "/radio/music",
 	],
 	"captcha" => [

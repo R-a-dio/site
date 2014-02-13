@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script>
  // ThreeCanvas.js r46 - http://github.com/mrdoob/three.js
 var THREE=THREE||{};if(!self.Int32Array)self.Int32Array=Array,self.Float32Array=Array;THREE.Color=function(a){a!==void 0&&this.setHex(a);return this};
 THREE.Color.prototype={constructor:THREE.Color,r:1,g:1,b:1,copy:function(a){this.r=a.r;this.g=a.g;this.b=a.b;return this},copyGammaToLinear:function(a){this.r=a.r*a.r;this.g=a.g*a.g;this.b=a.b*a.b;return this},copyLinearToGamma:function(a){this.r=Math.sqrt(a.r);this.g=Math.sqrt(a.g);this.b=Math.sqrt(a.b);return this},setRGB:function(a,b,c){this.r=a;this.g=b;this.b=c;return this},setHSV:function(a,b,c){var d,f,e;if(c===0)this.r=this.g=this.b=0;else switch(d=Math.floor(a*6),f=a*6-d,a=c*(1-b),e=c*(1-
@@ -162,7 +162,7 @@ THREE.RenderableParticle=function(){this.rotation=this.z=this.y=this.x=null;this
 
 </script>
 
-<script type="text/javascript">
+<script>
 // Particle3D class
 
 Particle3D = function (material ) {
@@ -245,7 +245,7 @@ function randomRange(min, max)
 }
 </script>
 
-<script type="text/javascript">
+<script>
 
 
 var d = document.getElementById('AAA');
@@ -376,6 +376,4 @@ function loop() {
 }
 </script>
 
-<script>
-      init('Div1');
-  </script>
+<script>init('Div1');</script>

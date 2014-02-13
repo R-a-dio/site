@@ -105,11 +105,11 @@ trait Analysis {
 		$status = $this->analyze($file);
 
 		if (count($status["error"])) {
-			return $status["error"];
+			return ["error" => $status["error"]];
 		}
 
 		if (!$this->checkUploadTime()) {
-			return "You have to wait longer until you can upload another song!";
+			return ["error" => "You have to wait longer until you can upload another song!"];
 		}
 
 		$new = $status["success"];
@@ -136,7 +136,7 @@ trait Analysis {
 			]);
 
 		// todo: translation strings
-		return "File uploaded successfully";
+		return ["success" => "File uploaded successfully"];
 
 	}
 

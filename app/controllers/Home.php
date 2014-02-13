@@ -252,6 +252,9 @@ class Home extends BaseController {
 		else
 			$result = "You need to add a file.";
 
+		if (Request::ajax())
+			return Response::json(["value" => $result]);
+		
 		return Redirect::to("/submit")
 			->with("status", $result);
 	}

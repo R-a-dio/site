@@ -22,17 +22,33 @@
 				</p>
 			</div>
 			<div class="col-md-6">
-				{{ Form::open(["files" => true, "class" => "form-horizontal"]) }}
+				{{ Form::open(["files" => true, "class" => "form-horizontal", "id" => "submit"]) }}
 
-					<div class="form-group">
-						<input type="file" name="song">
+					<div class="form-group" id="file-input">
+						<input type="file" name="song" id="song">
+						<span class="form-control-feedback">
+							<i class="fa fa-check" id="feedback-success" style="display: none"></i>
+							<i class="fa fa-times" id="feedback-error" style="display: none"></i>
+						</span>
+						
 						<p class="help-block">
 							{{{ trans("submit.upload.desc") }}}
 						</p>
 					</div>
 
+					<div class="form-group" id="upload-progress" style="display: none">
+						<div class="progress progress-striped active">
+							<div id="file-progress-bar" class="progress-bar progress-bar-success"  role="progressbar" style="width: 0%"></div>
+						</div>
+						<p class="help-block" id="uploading">Uploading <span id="filename">file</span>... <span id="file-progress">0</span>%</p>
+						<p class="help-block" id="uploaded" style="display: none">
+							Uploaded <span id="filename">file</span>!
+						</p>
+						<p class="help-block" id="errored" style="display: none">Your Browser does not support HTML5 file uploading.</p>
+					</div>
+
 					<div class="form-group">
-						<input type="text" class="form-control" name="comment" placeholder="{{{ trans("submit.comment.label") }}}">
+						<input type="text" class="form-control" name="comment" id="comment" placeholder="{{{ trans("submit.comment.label") }}}">
 						<p class="help-block">
 							{{{ trans("submit.comment.desc") }}}
 						</p>
@@ -45,7 +61,9 @@
 						</p>
 					</div>
 
-					<button type="submit" class="btn btn-default ajax-upload">
+					
+
+					<button type="submit" id="submit-button" class="btn btn-default ajax-upload">
 						{{{ trans("submit.upload.label") }}}
 					</button>
 
@@ -89,7 +107,166 @@
 
 		</div>
 		
+		<div class="modal fade" id="upload">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="upload-title">Uploading File</h4>
+					</div>
+					<div class="modal-body">
+						
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
 	</div>
+	<script>
+		// delegate event to the click button
+		$("#submit").submit(function (e) {
+			e.preventDefault();
+			$("#submit-button").click();
+		});
 
+		$(':file').change(function(){
+			var file = this.files[0],
+				name = file.name,
+				size = (file.size / 1048576).toFixed(1),
+				type = file.type,
+				error;
+
+			$("#filename").text(name + " (" + size + "MB)");
+
+			if (size > 20.0) {
+				error = true;
+			}
+
+			if (!file) {
+				error = true;
+			}
+
+			if (error) {
+				$("#file-input").addClass("has-error").addClass("has-feedback").removeClass("has-success");
+				$("#feedback-success").hide();
+				$("#feedback-error").show();
+			} else {
+				$("#file-input").addClass("has-success").addClass("has-feedback").removeClass("has-error");
+				$("#feedback-success").show();
+				$("#feedback-error").hide();
+			}
+
+
+			
+		});
+
+		$("#submit-button").click(function (e) {
+
+			var $form = $("#submit"),
+				xhr = new XMLHttpRequest();
+
+			if (!$form.find("input[name=song]")[0].files[0]) {
+				$("#file-input").addClass("has-error").addClass("has-feedback");
+				$("#feedback-error").show();
+				$("#feedback-success").hide();
+				return false;
+			} else {
+				$("#file-input").removeClass("has-error").addClass("has-feedback").addClass("has-success");
+			}
+
+			if (typeof FormData !== "undefined" && xhr.upload) {
+				var $data = new FormData();
+				// form data
+				$data.append("song", $form.find("input[name=song]")[0].files[0]);
+				$data.append("_token", $form.find("input[name=_token]").val());
+				$data.append("daypass", $form.find("input[name=daypass]").val());
+				$data.append("comment", $form.find("input[name=comment]").val());
+
+				xhr.open("POST", "/submit", true);
+				xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+				$("#upload-progress").show();
+				xhr.onload = function (e) {
+					
+					if (xhr.status >= 200 && xhr.status < 400) {
+						console.log(xhr.responseText);
+						var data = JSON.parse(xhr.responseText);
+
+						if (data.value.error) {
+							$("#errored").show();
+							$("#uploaded").hide();
+							$("#uploading").hide();
+
+							if (data.value.error instanceof Array) {
+								var error = data.value.error.join("<br>");
+								$("#errored").html(error);
+							} else {
+								var error = data.value.error;
+								$("#errored").text(error);
+							}
+
+							$("#file-input").removeClass("has-success").addClass("has-error");
+							$("#feedback-success").hide();
+							$("#feedback-error").show();
+
+							$("#file-progress-bar").removeClass("progress-bar-success").addClass("progress-bar-danger");
+						} else if (data.value.success) {
+							$("#uploading").hide();
+							$("#uploaded").text(data.value.success).show();
+							$("#errored").hide();
+							$("#file-progress-bar").removeClass("progress-bar-danger").addClass("progress-bar-success");
+
+							$("#file-input").removeClass("has-error").addClass("has-success");
+							$("#feedback-success").show();
+							$("#feedback-error").hide();
+						} else {
+							$("#errored").text("An unknown error occurred.").show();
+							$("#uploaded").hide();
+							$("#uploading").hide();
+							$("#file-progress-bar").removeClass("progress-bar-success").addClass("progress-bar-danger");
+
+							$("#file-input").removeClass("has-success").addClass("has-error");
+							$("#feedback-success").hide();
+							$("#feedback-error").show();
+						}
+
+						
+
+
+					} else {
+						$("#errored").show();
+						$("#uploaded").hide();
+						$("#uploading").hide();
+						$("#file-progress-bar").removeClass("progress-bar-success").addClass("progress-bar-danger");
+
+						$("#file-input").removeClass("has-success").addClass("has-error");
+						$("#feedback-success").hide();
+						$("#feedback-error").show();
+					}
+
+					$("#file-progress-bar").css("width", "100%");
+					
+				};
+
+				xhr.upload.addEventListener("progress", function(progress) {
+					var percent = (progress.loaded / progress.total) * 100;
+					console.log(percent);
+					$("#uploading").show();
+					$("#uploaded").hide();
+					$("#errored").hide();
+					$("#file-progress-bar").css("width", percent + "%");
+					$("#file-progress").text(percent.toFixed(0));
+				});
+
+				xhr.send($data);
+
+				// prevent submission normally
+				return false;
+			} else {
+				// oops, submit normally
+				return true;
+			}
+
+			
+		});
+	</script>
 @stop

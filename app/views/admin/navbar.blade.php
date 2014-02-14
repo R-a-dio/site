@@ -58,7 +58,7 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hiroto <span class="badge">{{{ $notifications->count() }}}</span> <span class="badge errors"></span> <span class="badge pending"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{{ Auth::user()->user }}} <span class="badge">{{{ $notifications->count() }}}</span> <span class="badge errors"></span> <span class="badge pending"></span></a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Notifications</li>
 							@foreach ($notifications as $notification)

@@ -44,12 +44,14 @@
 								<li><a href="/admin/songs">Current</a></li>
 							</ul>
 						</li>
-
-						<li
-							@if (Request::segment(2) == "users")
-								class="active"
-							@endif
-						><a href="/admin/users">Users</a></li>
+						
+						@if (Auth::user()->isAdmin())
+							<li
+								@if (Request::segment(2) == "users")
+									class="active"
+								@endif
+							><a href="/admin/users">Users</a></li>
+						@endif
 						<li
 							@if (Request::segment(2) == "djs")
 								class="active"
@@ -79,7 +81,7 @@
 								class="dropdown"
 							@endif
 						>
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+						<a href="/admin/profile" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/admin/profile">Edit Profile</a></li>
 							@if (Auth::user()->isDJ())

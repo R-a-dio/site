@@ -47,9 +47,9 @@
 									{{{ trans("stream.options") }}} <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu" style="width: 100%">
-									<li><a href="https://r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
-									<li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>
-									<li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>
+									<li><a href="//stream.r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
+									<li><a href="//backup.r-a-d.io/main.pls">{{{ trans("stream.links.m3u") }}}</a></li>
+									<li><a href="//backup.r-a-d.io/main.pls">{{{ trans("stream.links.pls") }}}</a></li>
 									<li class="divider"></li>
 									<li><a href="#help" data-toggle="modal" data-target="#help">{{{ trans("stream.links.help") }}}</a></li>
 								</ul>

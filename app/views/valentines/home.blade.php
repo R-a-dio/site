@@ -48,8 +48,8 @@
 								</button>
 								<ul class="dropdown-menu" role="menu" style="width: 100%">
 									<li><a href="//stream.r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
-									<li><a href="//backup.r-a-d.io/main.pls">{{{ trans("stream.links.m3u") }}}</a></li>
-									<li><a href="//backup.r-a-d.io/main.pls">{{{ trans("stream.links.pls") }}}</a></li>
+									<li><a href="//backup.r-a-d.io/listen.pls">{{{ trans("stream.links.m3u") }}}</a></li>
+									<li><a href="//backup.r-a-d.io/main.mp3.m3u">{{{ trans("stream.links.pls") }}}</a></li>
 									<li class="divider"></li>
 									<li><a href="#help" data-toggle="modal" data-target="#help">{{{ trans("stream.links.help") }}}</a></li>
 								</ul>
@@ -69,8 +69,8 @@
 										<p>To play the stream in your browser, you can use any of the following links:</p>
 										<ul>
 											<li><a href="//stream.r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
-											<li><a href="//backup.r-a-d.io/main.pls">{{{ trans("stream.links.m3u") }}}</a></li>
-											<li><a href="//backup.r-a-d.io/main.mp3.m3u">{{{ trans("stream.links.pls") }}}</a></li>
+											<li><a href="//backup.r-a-d.io/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
+											<li><a href="//backup.r-a-d.io/listen.pls">{{{ trans("stream.links.pls") }}}</a></li>
 										</ul>
 
 										<h3>Requesting Songs</h3>

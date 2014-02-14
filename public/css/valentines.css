@@ -21,7 +21,7 @@ html, body {
      background: none repeat scroll 0% 0% transparent;
 }
 
-#Div1 {
+#Div1.hidden-xs.hidden-sm {
      height: 100%;
      left: 0px;
      overflow: hidden;

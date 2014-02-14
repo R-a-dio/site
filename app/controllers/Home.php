@@ -16,6 +16,10 @@ class Home extends BaseController {
 	|--------------------------------------------------------------------------
 	*/
 
+	public function getMain() {
+		return Redirect::to("//stream.r-a-d.io/main");
+	}
+
 	public function getIndex() {
 		
 		$news = Post::with("author")

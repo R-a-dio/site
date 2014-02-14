@@ -14,6 +14,24 @@
 $_SERVER["HTTP_HOST"] = Config::get('app.host', '');
 $_SERVER["SERVER_NAME"] = Config::get('app.host', '');
 
+# stream links
+Route::get("/main.mp3", function() {
+	return Redirect::to("//stream.r-a-d.io/main");
+});
+
+Route::get("/stream", function() {
+	return Redirect::to("//stream.r-a-d.io/main");
+});
+
+
+Route::get("/stream.mp3", function() {
+	return Redirect::to("//stream.r-a-d.io/main");
+});
+
+Route::get("/R-a-dio", function() {
+	return Redirect::to("//stream.r-a-d.io/main");
+});
+
 # github hook
 Route::post("/git/pull", "GitController@pull");
 

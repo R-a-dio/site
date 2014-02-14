@@ -68,9 +68,9 @@
 										<p>A volume slider will appear, and the slider will change the volume. This is remembered between page loads.</p>
 										<p>To play the stream in your browser, you can use any of the following links:</p>
 										<ul>
-											<li><a href="https://r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
-											<li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>
-											<li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>
+											<li><a href="//stream.r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
+											<li><a href="//backup.r-a-d.io/main.pls">{{{ trans("stream.links.m3u") }}}</a></li>
+											<li><a href="//backup.r-a-d.io/main.mp3.m3u">{{{ trans("stream.links.pls") }}}</a></li>
 										</ul>
 
 										<h3>Requesting Songs</h3>
@@ -128,7 +128,7 @@
 				<div class="col-md-3">
 					<div class="col-xs-12">
 						<div class="thumbnail">
-							<img id="dj-image" src="//r-a-d.io/res/img/dj/{{{ $status["dj"]["djimage"] }}}" class="hidden-xs hidden-sm">
+							<img id="dj-image" src="//backup.r-a-d.io/res/img/dj/{{{ $status["dj"]["djimage"] }}}" class="hidden-xs hidden-sm">
 							<h4 class="text-center" id="dj-name">{{{ $status["dj"]["djname"] }}}</h4>
 						</div>
 					</div>

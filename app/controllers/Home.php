@@ -263,6 +263,15 @@ class Home extends BaseController {
 	}
 
 
+	public function getComiket() {
+		$this->layout->content = View::make("default.comiket");
+	}
+
+	public function postComiket() {
+		
+	}
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| 404 Method

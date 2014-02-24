@@ -119,14 +119,14 @@ trait AdminUser {
 		$user = Auth::user();
 		$email = Input::get("email");
 		$password = Input::get("password");
-		$check = Input::get("current");
+		$check = Input::get("check");
 		$confirm = Input::get("confirm");
 
 		try {
 			if ($password) {
 				if (Auth::validate(["user" => $user->user, "password" => $check])) {
 					if ($password == $confirm) {
-						$user->password = Hash::make($password);
+						$user->pass = Hash::make($password);
 					} else {
 						return Redirect::to("/admin/profile")
 							->with("status", "Passwords do not match");

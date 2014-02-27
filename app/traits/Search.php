@@ -17,11 +17,12 @@ trait Search {
 			foreach ($search["data"] as &$result) {
 
 				$delay = $this->getSongDelay((int) $result["requestcount"]);
+				$lr = strtotime($result["lastrequested"]);
 
-				if ((time() - strtotime($result["lastrequested"])) > $delay)
+				if (time() - $lr > $delay)
 					$result["cooldown"] = false;
 				else
-					$result["cooldown"] = true;
+					$result["cooldown"] = $lr + $delay;
 
 			}
 

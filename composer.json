@@ -24,7 +24,8 @@
 		"ezyang/htmlpurifier": "4.6.0",
 		"michelf/php-markdown": "dev-lib",
 		"phansys/getid3": "2.1.*@dev",
-		"recaptcha/php5": "v1.0.0"
+		"recaptcha/php5": "v1.0.0",
+		"kriswallsmith/buzz": "v0.10"
 	},
 	"autoload": {
 		"classmap": [

@@ -140,6 +140,34 @@
 				$("#char-count-" + id).text(500 - value.length);
 			});
 
+			$(".request-button").click(function (e) {
+				e.preventDefault();
+				var id = $(this).val(),
+					token = $(this).closest("form").find("input[name='_token']").val();
+				$.ajax({
+					url: "/request/" + id,
+					type: "POST",
+					data: { _token: token },
+					dataType: "json",
+					success: function (data) {
+						var result;
+
+						if (data.error) {
+							result = data.error;
+						} else if (data.success) {
+							result = data.success;
+						} else {
+							console.log(data);
+						}
+
+						$("#requests .modal-body").text(result);
+						$("#requests").modal();
+						
+					}
+				});
+				return false;
+			});
+
 		}
 		handlers();
 

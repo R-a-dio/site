@@ -6,6 +6,7 @@ class Home extends BaseController {
 	use Player;
 	use Search;
 	use Analysis;
+	use Requests;
 
 	// layout to use. always master unless AJAX.
 	protected $layout = 'master';

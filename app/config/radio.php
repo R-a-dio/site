@@ -12,4 +12,9 @@ return [
 		"public" => $_ENV["RECAPTCHA_PUBLIC_KEY"],
 		"private" => $_ENV["RECAPTCHA_PRIVATE_KEY"],
 	],
+	"camo" => [
+		"host" => "https://images.r-a-d.io/",
+		"key" => $_ENV["CAMO_KEY"],
+	],
+	"daypass" => $_ENV["DAYPASS"],
 ];

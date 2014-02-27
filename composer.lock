@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d221426e4b2b45d703859da04e9bde2a",
+    "hash": "bc71dfb94a36ad6e9e421de6b1fefaa5",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -229,6 +229,44 @@
             "time": "2014-01-23 19:50:15"
         },
         {
+            "name": "hiro/laravel-markdown",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hiro/laravel-markdown",
+                "reference": "473db44a1d99199a943088084191161e71600c7b"
+            },
+            "require": {
+                "ezyang/htmlpurifier": "4.6.0",
+                "laravel/framework": "4.*",
+                "michelf/php-markdown": "dev-lib",
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "hiro": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Collinson",
+                    "email": "hiroto@hiroto.eu",
+                    "role": "Developer",
+                    "homepage": "https://r-a-d.io"
+                }
+            ],
+            "description": "A *working* markdown renderer.",
+            "keywords": [
+                "laravel",
+                "markdown"
+            ],
+            "time": "2014-02-27 19:38:33"
+        },
+        {
             "name": "ircmaxell/password-compat",
             "version": "1.0.x-dev",
             "source": {
@@ -369,12 +407,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "7a06e32ba5575b0bf7dae64d77129fdd4dd97607"
+                "reference": "0a2b044f747ff4c69f2794e985253ae7ab49c39d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/7a06e32ba5575b0bf7dae64d77129fdd4dd97607",
-                "reference": "7a06e32ba5575b0bf7dae64d77129fdd4dd97607",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0a2b044f747ff4c69f2794e985253ae7ab49c39d",
+                "reference": "0a2b044f747ff4c69f2794e985253ae7ab49c39d",
                 "shasum": ""
             },
             "require": {
@@ -478,7 +516,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-02-26 22:25:26"
+            "time": "2014-02-27 19:28:28"
         },
         {
             "name": "michelf/php-markdown",
@@ -486,7 +524,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hiro/php-markdown",
-                "reference": "e5568673421321e33140054692f2e17ea236516a"
+                "reference": "d5abda8cc93d7f5affd5720ebdd8ac741d4f8b8a"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -522,7 +560,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2014-02-03 19:17:50"
+            "time": "2014-02-27 18:33:19"
         },
         {
             "name": "monolog/monolog",
@@ -1647,12 +1685,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "1e1a8e4f1040d744086e9bdaa979f015789b4af6"
+                "reference": "dc857d7c75fb90422c51aff51a94f1089b0fbf63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/1e1a8e4f1040d744086e9bdaa979f015789b4af6",
-                "reference": "1e1a8e4f1040d744086e9bdaa979f015789b4af6",
+                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/dc857d7c75fb90422c51aff51a94f1089b0fbf63",
+                "reference": "dc857d7c75fb90422c51aff51a94f1089b0fbf63",
                 "shasum": ""
             },
             "require": {
@@ -1711,7 +1749,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "http://symfony.com",
-            "time": "2014-02-12 21:00:41"
+            "time": "2014-02-24 16:20:54"
         },
         {
             "name": "symfony/process",
@@ -1895,6 +1933,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "hiro/laravel-hashing": 20,
+        "hiro/laravel-markdown": 20,
         "michelf/php-markdown": 20,
         "phansys/getid3": 20
     },

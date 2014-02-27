@@ -13,15 +13,15 @@ trait Requests {
 		if ($song) {
 
 			try {
+				$hmac = hash_hmac(
+					"sha256",
+					Config::get("radio.hanyuu.key", "DEADBEEFCAFE"),
+					Request::server("REMOTE_ADDR")
+				);
 				// todo: move to TLS since hanyuu will be on another server
-				$response = RestClient::post("https://r-a-d.io/request/index.py")
+				$response = RestClient::post(Config::get("radio.hanyuu.host", "https://backup.r-a-d.io/request"))
 					->body("songid=$id")
-					->addHeader("X-Radio-Auth", hash_hmac(
-									"sha256",
-									Config::get("radio.hanyuu.key", "DEADBEEFCAFE"),
-									Request::server("REMOTE_ADDR")
-								)
-						)
+					->addHeader("X-Radio-Auth", $hmac)
 					->addHeader("X-Radio-Client", Request::server("REMOTE_ADDR"))
 					->send();
 
@@ -65,6 +65,10 @@ trait Requests {
 
 			case "Thank you for making your request!":
 				$response = ["success" => trans("search.requests.success")];
+				break;
+
+			case "hmac error":
+				$response = ["error" => trans("search.requests.hmac")];
 				break;
 
 			default:

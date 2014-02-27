@@ -63,7 +63,7 @@
 						<div class="form-group">
 							<label class="control-label col-sm-2 input-sm">Size</label>
 							<div class="col-sm-10">
-								<p class="form-control-static input-sm">{{{ $p["length"] ?: 0 }}}s, {{{ $p["filesize"] }}}MiB</p>
+								<p class="form-control-static input-sm">{{{ $p["length"] ?: 0 }}}s, {{{ $p["filesize"] / 1000 }}}MiB</p>
 							</div>
 						</div>
 						<div class="form-group">

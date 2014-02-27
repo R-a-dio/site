@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "bc71dfb94a36ad6e9e421de6b1fefaa5",
+    "hash": "32410336f30d360d63f25f9bfdd53f3a",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -354,65 +354,17 @@
             "time": "2013-10-09 04:20:00"
         },
         {
-            "name": "kriswallsmith/buzz",
-            "version": "v0.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kriswallsmith/Buzz.git",
-                "reference": "759432d66387e3433d3b06cb6f773b97225b9b17"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/759432d66387e3433d3b06cb6f773b97225b9b17",
-                "reference": "759432d66387e3433d3b06cb6f773b97225b9b17",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "suggest": {
-                "ext-curl": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Buzz": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kris Wallsmith",
-                    "email": "kris.wallsmith@gmail.com",
-                    "homepage": "http://kriswallsmith.net/"
-                }
-            ],
-            "description": "Lightweight HTTP client",
-            "homepage": "https://github.com/kriswallsmith/Buzz",
-            "keywords": [
-                "curl",
-                "http client"
-            ],
-            "time": "2013-05-19 03:41:15"
-        },
-        {
             "name": "laravel/framework",
             "version": "4.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "0a2b044f747ff4c69f2794e985253ae7ab49c39d"
+                "reference": "29decb7a636ebea81e2b31d4a0216436ffb84aa4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/0a2b044f747ff4c69f2794e985253ae7ab49c39d",
-                "reference": "0a2b044f747ff4c69f2794e985253ae7ab49c39d",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/29decb7a636ebea81e2b31d4a0216436ffb84aa4",
+                "reference": "29decb7a636ebea81e2b31d4a0216436ffb84aa4",
                 "shasum": ""
             },
             "require": {
@@ -516,7 +468,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-02-27 19:28:28"
+            "time": "2014-02-27 20:50:47"
         },
         {
             "name": "michelf/php-markdown",
@@ -628,6 +580,56 @@
                 "psr-3"
             ],
             "time": "2014-02-26 12:30:17"
+        },
+        {
+            "name": "nategood/httpful",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nategood/httpful.git",
+                "reference": "a6eb354e669bd5ef81ed912b177e3b910eee4225"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nategood/httpful/zipball/a6eb354e669bd5ef81ed912b177e3b910eee4225",
+                "reference": "a6eb354e669bd5ef81ed912b177e3b910eee4225",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Httpful": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nate Good",
+                    "email": "me@nategood.com",
+                    "homepage": "http://nategood.com"
+                }
+            ],
+            "description": "A Readable, Chainable, REST friendly, PHP HTTP Client",
+            "homepage": "http://github.com/nategood/httpful",
+            "keywords": [
+                "api",
+                "curl",
+                "http",
+                "requests",
+                "rest",
+                "restful"
+            ],
+            "time": "2014-02-15 16:08:41"
         },
         {
             "name": "nesbot/carbon",

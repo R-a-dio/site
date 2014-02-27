@@ -21,6 +21,7 @@ return [
 		"user_cooldown" => "You recently requested a song. You have to wait longer until you can request again.",
 		"song_cooldown" => "That song is still on cooldown, You'll have to wait longer to request it.",
 		"success" => "Song Requested!",
+		"hmac" => "We've disabled requests on our end. Check back later!"
 	],
 	"popover" => [
 		"header" => "Song Options",

@@ -81,7 +81,7 @@
 														{{ Form::close() }}
 													@endif
 												</p>
-												{{ Markdown::comment($comment->comment) }}
+												{{ Markdown::render($comment->comment, true, true) }}
 											</div>
 									@endforeach
 								</div>

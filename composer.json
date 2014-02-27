@@ -15,12 +15,17 @@
 		{
 			"type": "git",
 			"url": "https://github.com/hiro/php-markdown"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/hiro/laravel-markdown"
 		}
 	],
 	"require": {
 		"laravel/framework": "4.1.*",
 		"raven/raven": "0.7.1",
 		"hiro/laravel-hashing": "dev-radio",
+		"hiro/laravel-markdown": "dev-master",
 		"ezyang/htmlpurifier": "4.6.0",
 		"michelf/php-markdown": "dev-lib",
 		"phansys/getid3": "2.1.*@dev",

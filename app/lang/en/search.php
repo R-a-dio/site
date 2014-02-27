@@ -13,6 +13,15 @@ return [
 	"fave" => "Fave",
 	"request" => "Request",
 	"requestable" => "Requestable",
+	"requests" => [
+		"oops" => "Something went wrong on our end, and we've been notified.",
+		"invalid" => "Sorry, you made an invalid request.",
+		"missing" => "That song cannot be found. It may have been deleted.",
+		"no_afk" => "Hanyuu (our AFK Streamer) is not playing right now! Requests are disabled.",
+		"user_cooldown" => "You recently requested a song. You have to wait longer until you can request again.",
+		"song_cooldown" => "That song is still on cooldown, You'll have to wait longer to request it.",
+		"success" => "Song Requested!",
+	],
 	"popover" => [
 		"header" => "Song Options",
 		"lp" => "Last Played :timeago",

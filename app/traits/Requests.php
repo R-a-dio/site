@@ -1,7 +1,6 @@
 <?php
 
-use Buzz\Browser as Buzz;
-use Buzz\Exception\ClientException as ClientException;
+use Httpful\Request as RestClient;
 
 trait Requests {
 
@@ -13,30 +12,25 @@ trait Requests {
 
 		if ($song) {
 
-			$client = new Buzz;
-
 			try {
 				// todo: move to TLS since hanyuu will be on another server
-				$response = $client->post(
-					Config::get("radio.hanyuu.host", "http://localhost:9691"),
-					[
-						"X-Radio-Auth" =>
-							hash_hmac(
-								"sha256",
-								Config::get("radio.hanyuu.key", "DEADBEEFCAFE"),
-								Request::server("REMOTE_ADDR")
-							),
-						"X-Radio-Client" => Request::server("REMOTE_ADDR"),
-					],
-					"songid={$song["id"]}"
-				);
+				$response = RestClient::post("https://r-a-d.io/request/index.py")
+					->body("songid=$id")
+					->addHeader("X-Radio-Auth", hash_hmac(
+									"sha256",
+									Config::get("radio.hanyuu.key", "DEADBEEFCAFE"),
+									Request::server("REMOTE_ADDR")
+								)
+						)
+					->addHeader("X-Radio-Client", Request::server("REMOTE_ADDR"))
+					->send();
 
-				if ($response->isOk())
-					$res = $this->parseResponse($response->getContent());
+				if (!$response->hasErrors())
+					$res = $this->parseResponse($response->body);
 				else
 					$res = ["error" => trans("search.requests.oops")];
-			} catch (ClientException $e) {
-				$res = ["error" => trans("search.requests.oops")];
+			} catch (Exception $e) {
+				$res = ["error" => $e->getMessage()];
 			}
 		} else {
 			$res = ["error" => trans("search.requests.missing")];

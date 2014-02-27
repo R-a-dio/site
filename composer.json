@@ -30,7 +30,7 @@
 		"michelf/php-markdown": "dev-lib",
 		"phansys/getid3": "2.1.*@dev",
 		"recaptcha/php5": "v1.0.0",
-		"kriswallsmith/buzz": "v0.10"
+		"nategood/httpful": "*"
 	},
 	"autoload": {
 		"classmap": [

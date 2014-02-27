@@ -17,4 +17,8 @@ return [
 		"key" => $_ENV["CAMO_KEY"],
 	],
 	"daypass" => $_ENV["DAYPASS"],
+	"hanyuu" => [
+		"host" => $_ENV["HANYUU_HOST"],
+		"key" => $_ENV["HANYUU_HMAC_KEY"],
+	],
 ];

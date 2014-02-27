@@ -133,6 +133,10 @@ trait Analysis {
 				"submitter" => $submitter,
 				"dupe_flag" => $duplicate,
 				"replacement" => 0,
+				"bitrate" => $new["bitrate"],
+				"length" => $new["length"],
+				"format" => $new["format"],
+				"mode" => $new["mode"],
 			]);
 
 		// todo: translation strings

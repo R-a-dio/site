@@ -130,7 +130,7 @@ trait Analysis {
 		if (Auth::check()) {
 			$submitter = Auth::user()->user;
 		} else {
-			$submitter = Input::server("REMOTE_ADDR");
+			$submitter = Request::server("REMOTE_ADDR");
 		}
 
 		DB::table("pending")
@@ -167,16 +167,17 @@ trait Analysis {
 			return true;
 
 		// cloudflare + nginx will work this out and pass it in
-		$ip = Input::server("REMOTE_ADDR");
+		$ip = Request::server("REMOTE_ADDR");
 
 		$result = DB::table("uploadtime")
 			->select("time")
-			->where("ip", "=", $ip);
+			->where("ip", "=", $ip)
+			->first();
 
 		if ($result and strtotime($result["time"]) - time() > $this->delay)
 			return false;
 
-		DB::insert("insert into `uploadtime` (`ip`, `time`) values (?, NOW()) on duplicate key update", [$ip]);
+		//DB::insert("insert into `uploadtime` (`ip`, `time`) values (?, NOW()) on duplicate key update", [$ip]);
 
 		return true;
 
@@ -195,7 +196,7 @@ trait Analysis {
 	protected function duplicate($artist, $title) {
 		$result = DB::table("tracks")
 			->where("artist", "=", $artist)
-			->where("title", "=", $title)
+			->where("track", "=", $title)
 			->first();
 
 		return (bool) $result;

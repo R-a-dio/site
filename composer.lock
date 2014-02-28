@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "32410336f30d360d63f25f9bfdd53f3a",
+    "hash": "c3d3d1e5172847843959a3f514882476",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -355,16 +355,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "4.1.x-dev",
+            "version": "v4.1.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "29decb7a636ebea81e2b31d4a0216436ffb84aa4"
+                "reference": "a18a892c9d768464249baa1d16117fe52e0a7004"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/29decb7a636ebea81e2b31d4a0216436ffb84aa4",
-                "reference": "29decb7a636ebea81e2b31d4a0216436ffb84aa4",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a18a892c9d768464249baa1d16117fe52e0a7004",
+                "reference": "a18a892c9d768464249baa1d16117fe52e0a7004",
                 "shasum": ""
             },
             "require": {
@@ -468,7 +468,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-02-27 20:50:47"
+            "time": "2014-02-20 15:13:32"
         },
         {
             "name": "michelf/php-markdown",
@@ -476,7 +476,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hiro/php-markdown",
-                "reference": "d5abda8cc93d7f5affd5720ebdd8ac741d4f8b8a"
+                "reference": "08fc274a6ecc753e8d63cbf95a6fc2297124e6b9"
             },
             "require": {
                 "php": ">=5.3.0"
@@ -512,7 +512,7 @@
             "keywords": [
                 "markdown"
             ],
-            "time": "2014-02-27 18:33:19"
+            "time": "2014-02-28 05:28:53"
         },
         {
             "name": "monolog/monolog",

@@ -210,7 +210,7 @@ trait Analysis {
 		{
 			$seed = substr(hash("sha256", uniqid()), 0, 15) . ".$format";
 		}
-		while (file_exists($real . $seed) or file_exists($pend . $seed));
+		while (file_exists($real . "/" . $seed) or file_exists($pend . "/" . $seed));
 
 		return $seed;
 	}

@@ -232,7 +232,7 @@
 							$("#uploaded").text(data.value.success).show();
 							showUploaded();
 						} else {
-							$("#errored").text(data);
+							$("#errored").text("An unknown error occurred.");
 							console.log(data);
 							
 							showErrored();
@@ -241,7 +241,7 @@
 
 
 					} else {
-						$("#errored").text(xhr.responseText);
+						$("#errored").text("An unknown error occurred.");
 						showErrored();
 					}
 

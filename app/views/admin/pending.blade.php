@@ -1,30 +1,16 @@
 @section("content")
 
 	<div class="container main">
-
 		<div class="col-md-4">
-			<button class="btn btn-danger" data-toggle="modal" data-target="#help">Pending Songs Help</button>
-			<button class="btn btn-info" data-toggle="modal" data-target="#other">What not to accept</button>
-		</div>
-		
-		<div class="col-md-8 well well-sm">
-			<div class="col-xs-4">
-				<button class="btn btn-info">Play</button>
-				<button class="btn btn-warning">Pause</button>
-				<button class="btn btn-danger">Stop</button>
+			<div class="col-xs-6">
+				<button class="btn btn-danger" data-toggle="modal" data-target="#help">Help</button>
 			</div>
-			<div class="col-xs-8">
-				<div class="progress" style="margin-top: 7px; margin-bottom: 0;">
-					<div class="progress-bar progress-bar-warning" style="width: 60%"></div>
-				</div>
-				<audio id="pending-audio"></audio>
+			<div class="col-xs-6">
+				<button class="btn btn-info" data-toggle="modal" data-target="#other">What not to accept</button>
 			</div>
 		</div>
-		
-
-		<hr>
 	</div>	
-
+	<hr>
 	@foreach ($pending as $p)
 		@if ($p["dupe_flag"])
 			<div class="well" style="background-color: rgba(217, 83, 79, 0.5); padding-bottom: 0">
@@ -35,58 +21,62 @@
 				<div class="container" style="width: 100%">
 					<div class="col-lg-2">
 						<div class="form-group">
-							<label class="control-label col-sm-2 input-sm">Artist</label>
-							<div class="col-sm-10">
+							<label class="control-label col-xs-2 input-sm">Artist</label>
+							<div class="col-xs-10">
 								<input type="text" class="form-control input-sm" value="{{{ $p["artist"] }}}" placeholder="Artist" name="artist">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2 input-sm">Title</label>
-							<div class="col-sm-10">
+							<label class="control-label col-xs-2 input-sm">Title</label>
+							<div class="col-xs-10">
 								<input type="text" class="form-control input-sm" value="{{{ $p["track"] }}}" placeholder="Title" name="title">
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="form-group">
-							<label class="control-label col-sm-2 input-sm">Album</label>
-							<div class="col-sm-10">
+							<label class="control-label col-xs-2 input-sm">Album</label>
+							<div class="col-xs-10">
 								<input type="text" class="form-control input-sm" value="{{{ $p["album"] }}}" placeholder="Album" name="album">
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2 input-sm">Tags</label>
-							<div class="col-sm-10">
+							<label class="control-label col-xs-2 input-sm">Tags</label>
+							<div class="col-xs-10">
 								<input type="text" class="form-control input-sm" placeholder="Tags" name="tags">
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="form-group">
-							<label class="control-label col-sm-5 input-sm">Uploader</label>
-							<div class="col-sm-7">
+							<label class="control-label col-xs-4 input-sm">Uploader</label>
+							<div class="col-xs-8">
 								<p class="form-control-static input-sm">{{{ $p["submitter"] }}}</p>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-5 input-sm">
+							<label class="control-label col-xs-4 input-sm">
 								Bitrate
 							</label>
-							<div class="col-sm-7">
+							<div class="col-xs-8">
 								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">{{{ ceil($p["bitrate"] / 1000) }}}kbps {{{ $p["mode"] ?: "" }}}</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="form-group">
-							<label class="control-label col-sm-4 input-sm">Size</label>
-							<div class="col-sm-8">
-								<p class="form-control-static input-sm">{{{ ceil($p["length"]) ?: 0 }}}s, {{{ number_format($p["filesize"] / 1000000, 2) }}}MiB</p>
+							<label class="control-label col-xs-4 input-sm">Size</label>
+							<div class="col-xs-8">
+								<p class="form-control-static input-sm">
+									<button class="btn btn-xs btn-primary">
+										{{{ ceil($p["length"]) ?: 0 }}}s, {{{ number_format($p["filesize"] / 1000000, 2) }}}MiB
+									</button>
+								</p>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-4 input-sm">Name</label>
-							<div class="col-sm-8">
+							<label class="control-label col-xs-4 input-sm">Name</label>
+							<div class="col-xs-8">
 								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">
 									<a href="/admin/pending-song/{{{ $p["id"] }}}">
 										{{{ strlen($p["origname"]) > 17 ? preg_replace("/(.{1,14})(.*)(\..*)/", "$1..$3", $p["origname"]) : $p["origname"] }}}
@@ -95,22 +85,30 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-2">
 						<div class="form-group">
-							<label class="control-label col-sm-4 input-sm" style="padding-top: 0">
+							<label class="control-label col-xs-4 input-sm">Comment</label>
+							<div class="col-xs-8">
+								<p class="form-control-static input-sm">{{{ $p["comment"] }}}</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-2">
+						<div class="form-group">
+							<label class="control-label col-xs-4 input-sm" style="padding-top: 0">
 								<button type="submit" name="choice" value="accept" class="btn btn-sm btn-success accept-song">Accept</button>
 							</label>
-							<div class="col-sm-8">
+							<div class="col-xs-8">
 								<div class="checkbox">
 									<input type="checkbox" name="good" value="1"> Good Upload?
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-4 input-sm" style="padding-top: 0">
+							<label class="control-label col-xs-4 input-sm" style="padding-top: 0">
 								<button type="submit" name="choice" value="decline" class="btn btn-sm btn-danger decline-song">Decline</button>
 							</label>
-							<div class="col-sm-8">
+							<div class="col-xs-8">
 								<input type="text" class="form-control input-sm" placeholder="Reason for declining">
 							</div>
 						</div>

@@ -5,7 +5,6 @@
 <!-- History.js -->
 <script src="/js/jquery.history.js"></script>
 <script src="/js/jquery.jplayer.min.js"></script>
-<script>window.swfpath = "/js/Jplayer.swf";</script>
 <script src="/js/konami.js"></script>
 
 <script>

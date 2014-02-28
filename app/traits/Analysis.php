@@ -11,11 +11,14 @@ trait Analysis {
 	// max upload size
 	protected $maxSize = 20000000; // 18MiB
 
+	// flac max upload size
+	protected $maxFlacSize = 90000000; // 90 MiB
+
 	// max song length, in seconds
 	protected $length = 480.0; // 8 minutes
 
 	// allowed formats
-	protected $formats = ["mp3"];
+	protected $formats = ["mp3", "flac"];
 
 	// upload delay
 	protected $delay = 7200; // 2 hours
@@ -76,8 +79,11 @@ trait Analysis {
 			if ($length > $this->length)
 				$status["error"][] = "The song is too long (>{$this->length} seconds)";
 
-			if ($size > $this->maxSize)
+			if ($size > $this->maxSize and $format != "flac")
 				$status["error"][] = "Max filesize exceeded (" . $this->maxSize / 1000000 . "MiB)";
+
+			if ($size > $this->maxFlacSize and $format == "flac")
+				$status["error"][] = "Max filesize exceeded (" . $this->maxFlacSize / 1000000 . "MiB)";
 
 			if ($format == "mp3" and $bitrate > 325000)
 				$status["error"][] = "The MP3 file is over 320kbps. MP3 is useless above that.";

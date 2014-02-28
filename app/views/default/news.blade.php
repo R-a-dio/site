@@ -60,7 +60,11 @@
 												<p class="text-muted">
 													
 													@if (!$comment->user_id)
-														Anonymous ({{{ substr(sha1($comment->ip), 0, 4)  }}})
+														Anonymous 
+															({{{ 
+																(Auth::check() and Auth::user()->isAdmin())
+																? $comment->ip : substr(sha1($comment->ip), 0, 4)
+															}}})
 													@else
 														@if ($comment->user->isAdmin())
 															<span class="text-danger">

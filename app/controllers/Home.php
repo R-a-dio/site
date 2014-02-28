@@ -127,27 +127,46 @@ class Home extends BaseController {
 
 		$post = Post::findOrFail($id);
 
-		if (Input::has("comment")) {
+		$check = Comment::withTrashed()
+			->where("ip", "=", Input::server("REMOTE_ADDR"))
+			->orderBy("created_at", "desc")
+			->first();
 
-			try {
-				$comment = new Comment(["comment" => Input::get("comment"), "ip" => Input::server("REMOTE_ADDR")]);
+		if ($check
+			and (
+					(time() - strtotime($check->created_at) < (60 * 20))
+					or
+					($check->deleted_at ? time() - strtotime($check->deleted_at) < (60 * 60 * 6) : false)
+				)
+			and !Auth::check())
+		{
 
-				if (Auth::check()) {
-					$comment->user_id = Auth::user()->id;
+			$status = "Slow the hell down, cowboy.";
+			$response = ["status" => $status];
+
+		} else {
+
+			if (Input::has("comment")) {
+
+				try {
+					$comment = new Comment(["comment" => Input::get("comment"), "ip" => Input::server("REMOTE_ADDR")]);
+
+					if (Auth::check()) {
+						$comment->user_id = Auth::user()->id;
+					}
+
+					$post->comments()->save($comment);
+
+					$status = "Comment posted!";
+					$response = ["comment" => $comment->toArray(), "status" => $status];
+				} catch (Exception $e) {
+					$response = ["error" => $e->getMessage()];
+					$status = $e->getMessage();
 				}
+				
 
-				$post->comments()->save($comment);
-
-				$status = "Comment posted!";
-				$response = ["comment" => $comment->toArray(), "status" => $status];
-			} catch (Exception $e) {
-				$response = ["error" => $e->getMessage()];
-				$status = $e->getMessage();
 			}
-			
-
 		}
-
 		if (Request::ajax()) {
 			return Response::json($response);
 		} else {

@@ -1,9 +1,27 @@
 @section("content")
 
 	<div class="container main">
-		<button class="btn btn-large btn-danger" data-toggle="modal" data-target="#help">Pending Songs Help</button>
-		<button class="btn btn-large btn-info" data-toggle="modal" data-target="#other">What not to accept</button>
+
+		<div class="col-md-4">
+			<button class="btn btn-danger" data-toggle="modal" data-target="#help">Pending Songs Help</button>
+			<button class="btn btn-info" data-toggle="modal" data-target="#other">What not to accept</button>
+		</div>
 		
+		<div class="col-md-8 well well-sm">
+			<div class="col-xs-4">
+				<button class="btn btn-info">Play</button>
+				<button class="btn btn-warning">Pause</button>
+				<button class="btn btn-danger">Stop</button>
+			</div>
+			<div class="col-xs-8">
+				<div class="progress" style="margin-top: 7px; margin-bottom: 0;">
+					<div class="progress-bar progress-bar-warning" style="width: 60%"></div>
+				</div>
+				<audio id="pending-audio"></audio>
+			</div>
+		</div>
+		
+
 		<hr>
 	</div>	
 
@@ -15,7 +33,7 @@
 		@endif
 			{{ Form::open(["url" => "/admin/pending/" . $p["id"], "class" => "form-horizontal"]) }}
 				<div class="container" style="width: 100%">
-					<div class="col-lg-3">
+					<div class="col-lg-2">
 						<div class="form-group">
 							<label class="control-label col-sm-2 input-sm">Artist</label>
 							<div class="col-sm-10">
@@ -29,7 +47,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-lg-2">
 						<div class="form-group">
 							<label class="control-label col-sm-2 input-sm">Album</label>
 							<div class="col-sm-10">
@@ -45,51 +63,54 @@
 					</div>
 					<div class="col-lg-2">
 						<div class="form-group">
-							<label class="control-label col-sm-2 input-sm">Uploader</label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-5 input-sm">Uploader</label>
+							<div class="col-sm-7">
 								<p class="form-control-static input-sm">{{{ $p["submitter"] }}}</p>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2 input-sm">
-								<button class="btn btn-sm btn-info">Play</button>
+							<label class="control-label col-sm-5 input-sm">
+								Bitrate
 							</label>
-							<div class="col-sm-9">
-								<div class="form-control-static"><div class="well well-sm" style="margin-bottom: 0">Seek bar goes here</div></div>
+							<div class="col-sm-7">
+								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">{{{ ceil($p["bitrate"] / 1000) }}}kbps {{{ $p["mode"] ?: "" }}}</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="form-group">
-							<label class="control-label col-sm-2 input-sm">Size</label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-4 input-sm">Size</label>
+							<div class="col-sm-8">
 								<p class="form-control-static input-sm">{{{ ceil($p["length"]) ?: 0 }}}s, {{{ number_format($p["filesize"] / 1000000, 2) }}}MiB</p>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-2 input-sm">Filename</label>
-							<div class="col-sm-10">
-								<p class="form-control-static input-sm">
+							<label class="control-label col-sm-4 input-sm">Name</label>
+							<div class="col-sm-8">
+								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">
 									<a href="/admin/pending-song/{{{ $p["id"] }}}">
-										{{{ $p["origname"] }}}
+										{{{ strlen($p["origname"]) > 17 ? preg_replace("/(.{1,14})(.*)(\..*)/", "$1..$3", $p["origname"]) : $p["origname"] }}}
 									</a>
 								</p>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-2">
-						
+					<div class="col-lg-4">
 						<div class="form-group">
-							<label class="control-label col-sm-3"><button class="btn btn-sm btn-success">Accept</button></label>
-							<div class="col-sm-9">
+							<label class="control-label col-sm-4 input-sm" style="padding-top: 0">
+								<button type="submit" name="choice" value="accept" class="btn btn-sm btn-success accept-song">Accept</button>
+							</label>
+							<div class="col-sm-8">
 								<div class="checkbox">
-									<input type="checkbox"> Good Upload? <button class="btn btn-sm btn-warning">Replace</button>
+									<input type="checkbox" name="good" value="1"> Good Upload?
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-sm-3"><button class="btn btn-sm btn-danger">Decline</button></label>
-							<div class="col-sm-9">
+							<label class="control-label col-sm-4 input-sm" style="padding-top: 0">
+								<button type="submit" name="choice" value="decline" class="btn btn-sm btn-danger decline-song">Decline</button>
+							</label>
+							<div class="col-sm-8">
 								<input type="text" class="form-control input-sm" placeholder="Reason for declining">
 							</div>
 						</div>
@@ -149,7 +170,7 @@
 						If an entry is <span class="text-success">green</span>, when you accept the song it will be replaced.
 					</p>
 					<p>
-						If you want to force-replace a song, click <button class="btn btn-xs btn-warning">Force Replace</button> and then enter the ID of the song that should be replaced.
+						If you want to force-replace a song, click <button class="btn btn-xs btn-warning">Replace</button> and then enter the ID of the song that should be replaced.
 					</p>
 
 					<h3 id="declining">Declining</h3>
@@ -175,7 +196,7 @@
 					<h4 class="modal-title">Shit you shouldn't accept ever.</h4>
 				</div>
 				<div class="modal-body">
-					<p class="text-warning">Your ass will be toast if you accept any of the following:</p>
+					<h2 class="text-warning">Your ass will be toast if you accept any of the following:</h2>
 					<p>
 						<ul>
 							<li>Mashups</li>
@@ -187,7 +208,7 @@
 							<li>Songs with all-japanese metadata (unless romaji, etc. is given)</li>
 						</ul>
 					</p>
-					<p class="text-danger">You have been warned.</p>
+					<h2 class="text-danger">You have been warned.</h2>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

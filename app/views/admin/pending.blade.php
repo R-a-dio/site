@@ -78,7 +78,7 @@
 							<label class="control-label col-xs-4 input-sm">Name</label>
 							<div class="col-xs-8">
 								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">
-									<a href="/admin/pending-song/{{{ $p["id"] }}}">
+									<a href="/admin/pending-song/{{{ $p["id"] }}}" title="{{{ $p["origname"] }}}">
 										{{{ strlen($p["origname"]) > 17 ? preg_replace("/(.{1,14})(.*)(\..*)/", "$1..$3", $p["origname"]) : $p["origname"] }}}
 									</a>
 								</p>

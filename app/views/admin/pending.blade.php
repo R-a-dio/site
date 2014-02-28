@@ -100,7 +100,7 @@
 							</label>
 							<div class="col-xs-8">
 								<div class="checkbox">
-									<input type="checkbox" name="good" value="1"> Good Upload?
+									<input type="checkbox" name="good" value="1"> Good?
 								</div>
 							</div>
 						</div>

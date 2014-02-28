@@ -68,8 +68,8 @@
 							<label class="control-label col-xs-4 input-sm">Size</label>
 							<div class="col-xs-8">
 								<p class="form-control-static input-sm">
-									<button class="btn btn-xs btn-primary" data-url="/admin/pending-song/{{{ $p["id"] }}}" data-format="{{ $p["format"] ?: "mp3" }}">
-										{{{ date("i\ms\s", floor($p["length"]) ?: 0) }}}, {{{ number_format($p["filesize"] / 1000000, 2) }}}MiB
+									<button class="btn btn-xs btn-primary play-button" data-url="/admin/pending-song/{{{ $p["id"] }}}" data-format="{{ $p["format"] ?: "mp3" }}">
+										{{{ date("i\ms\s", floor($p["length"]) ?: 0) }}}, {{{ number_format($p["filesize"] / 1048576, 2) }}}MB
 									</button>
 								</p>
 							</div>

@@ -122,23 +122,28 @@ trait Analysis {
 
 
 		$duplicate = $this->duplicate($new["artist"], $new["title"]);
-		$path = $this->getPath();
+		$path = $this->getPath($new["format"]);
 
 		// move the file into pending
 		$file->move(Config::get("radio.paths.pending"), $path);
 
-		$submitter = Auth::check() ? Auth::user()->user : Input::server("REMOTE_ADDR");
+		if (Auth::check()) {
+			$submitter = Auth::user()->user;
+		} else {
+			$submitter = Input::server("REMOTE_ADDR");
+		}
 
 		DB::table("pending")
 			->insert([
 				"artist" => $new["artist"],
 				"track" => $new["title"],
 				"album" => $new["album"],
+				"path" => $path,
 				"origname" => $file->getClientOriginalName(),
 				"comment" => Input::get("comment"),
 				"submitter" => $submitter,
 				"dupe_flag" => $duplicate,
-				"replacement" => 0,
+				"replacement" => null,
 				"bitrate" => $new["bitrate"],
 				"length" => $new["length"],
 				"format" => $new["format"],
@@ -153,8 +158,9 @@ trait Analysis {
 	protected function checkUploadTime() {
 
 		// logged in users have unlimited uploads.
-		if (Auth::check() and Auth::user()->canDoPending())
-			return true;
+		if (Auth::check())
+			if (Auth::user()->canDoPending())
+				return true;
 
 		// people can be given a "daypass" to upload unlimited songs.
 		if (Input::get("daypass") === $this->daypass())
@@ -189,7 +195,8 @@ trait Analysis {
 	protected function duplicate($artist, $title) {
 		$result = DB::table("tracks")
 			->where("artist", "=", $artist)
-			->where("title", "=", $title);
+			->where("title", "=", $title)
+			->first();
 
 		return (bool) $result;
 	}

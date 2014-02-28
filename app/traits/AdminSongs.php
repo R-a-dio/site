@@ -4,14 +4,14 @@ trait AdminSongs {
 
 	public function getPending() {
 		$pending = DB::table("pending")
-			->orderBy("id", "desc")
+			->orderBy("id", "asc")
 			->get();
 
 		foreach($pending as &$p) {
 			try {
 				$filesize = filesize(Config::get("radio.paths.pending") . "/" . $p["path"]);
 			} catch (Exception $e) {
-				$filesize = "unknown";
+				$filesize = "N/A";
 			}
 			$p["filesize"] = $filesize;
 		}

@@ -249,18 +249,22 @@ class Home extends BaseController {
 	}
 
 	public function postSubmit() {
-		$file = Input::file("song");
+		try {
+			$file = Input::file("song");
 
-		if ($file)
-			$result = $this->addPending($file);
-		else
-			$result = "You need to add a file.";
+			if ($file)
+				$result = $this->addPending($file);
+			else
+				$result = "You need to add a file.";
 
-		if (Request::ajax())
-			return Response::json(["value" => $result]);
+			if (Request::ajax())
+				return Response::json(["value" => $result]);
 
-		return Redirect::to("/submit")
-			->with("status", $result);
+			return Redirect::to("/submit")
+				->with("status", $result);
+		} catch (Exception $e) {
+			return Response::json(["value" => ["error" => $e->getTrace(), "success" => $e->getMessage()]]);
+		}
 	}
 
 

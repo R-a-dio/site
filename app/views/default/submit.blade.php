@@ -232,16 +232,16 @@
 							$("#uploaded").text(data.value.success).show();
 							showUploaded();
 						} else {
-							$("#errored").text("An unknown error occurred.");
+							$("#errored").text(data);
+							console.log(data);
 							
 							showErrored();
 						}
-
 						
 
 
 					} else {
-						$("#errored").text("An unknown error occurred.");
+						$("#errored").text(xhr.responseText);
 						showErrored();
 					}
 
@@ -256,6 +256,10 @@
 					$("#file-progress-bar").css("width", percent + "%");
 					$("#file-progress").text(percent.toFixed(0));
 				});
+
+				xhr.onerror = function (e) {
+					console.log(xhr.responseText);
+				};
 
 				xhr.send($data);
 

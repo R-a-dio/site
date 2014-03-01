@@ -11,7 +11,17 @@
 
 		@include("admin.footer")
 
-		@include("layouts.postscript")
+		<!-- Bootstrap core JavaScript
+			================================================== -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+		<script src="/js/jquery.timeago.js"></script>
+		<!-- History.js -->
+		<script src="/js/jquery.history.js"></script>
+		<script src="/js/jquery.jplayer.min.js"></script>
+		<script src="/js/konami.js"></script>
+		<script src="/js/aurora.js"></script>
+		<script src="/js/flac.js"></script>
+		<script src="/js/mp3.js"></script>
 
 		@yield("script", "")
 	</body>

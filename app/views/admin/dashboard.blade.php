@@ -2,21 +2,23 @@
 	<div class="container main">
 		<div class="col-md-4">
 			<div class="well">
-				<div class="well errors">
-					<h3>0 Error Messages.</h3>
-					<p>The last one was <a href="#">x mins ago</a></p>
-					<p class="text-center"><a href="/admin/errors" class="btn btn-info">Reset Error Counter</a></p>
-				</div>
+				@if (Auth::user()->isDev())
+					<div class="well errors">
+						<h3>{{{ $notifications["errors"] }}} Error Messages.</h3>
+						<p>The last one was <a href="#">x mins ago</a></p>
+						<p class="text-center"><a href="/admin/errors" class="btn btn-info">Reset Error Counter</a></p>
+					</div>
+				@endif
 				<div class="well pending">
-					<h3>0 Pending Songs.</h3>
+					<h3>{{{ $notifications["pending"] }}} Pending Song(s).</h3>
 					<p>The last accepted song was <a href="#">x mins ago</a></p>
-					<p class="text-center"><a href="/admin/pending" class="btn btn-danger">Bloody Accept Something</a>
+					<p class="text-center"><a href="/admin/pending" class="btn btn-danger">View Pending</a>
 
 				</div>
 				<div class="well">
-					<h3>{{{ $notifications->count() }}} Notifications</h3>
+					<h3>{{{ $notifications["events"] }}} Events</h3>
 					<p>These are mostly for admins, but occasionally there's a global announce.</p>
-					<p class="text-center"><a href="/admin/notifications" class="btn btn-success">View Notifications</a></p>
+					<p class="text-center"><a href="/admin/notifications" class="btn btn-success">View Events</a></p>
 				</div>
 			</div>
 		</div>

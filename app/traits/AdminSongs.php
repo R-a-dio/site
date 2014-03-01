@@ -42,6 +42,7 @@ trait AdminSongs {
 						]);
 					unlink(Config::get("radio.paths.pending") . $pending["path"]);
 					$delete = true;
+					Notification::pending("declined $meta", Auth::user());
 					break;
 				case "replace":
 					$replace = Input::get("replace");
@@ -58,7 +59,7 @@ trait AdminSongs {
 						$delete = true;
 						rename(Config::get("radio.paths.pending") . $pending["path"], Config::get("radio.paths.music") . $check["path"]);
 					}
-					
+					Notification::pending("replaced song {$check["id"]}", Auth::user());
 					break;
 				case "accept":
 					$editor = Auth::user()->user;
@@ -85,6 +86,7 @@ trait AdminSongs {
 							]);
 						rename(Config::get("radio.paths.pending") . $pending["path"], Config::get("radio.paths.music") . $pending["path"]);
 					}
+					Notification::pending("accepted $artist - $title", Auth::user());
 					break;
 				default:
 					break;

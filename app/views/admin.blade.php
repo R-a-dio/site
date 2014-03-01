@@ -22,6 +22,7 @@
 		<script src="/js/aurora.js"></script>
 		<script src="/js/flac.js"></script>
 		<script src="/js/mp3.js"></script>
+		<script>$("time.timeago").timeago();</script>
 
 		@yield("script", "")
 	</body>

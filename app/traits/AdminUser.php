@@ -63,13 +63,11 @@ trait AdminUser {
 
 		if (!Auth::user()->isAdmin() or ($privileges >= 5)) {
 			Session::flash("status", "I can't let you do that.");
+			Notification::dev("just tried to update privileges " .
+				"(privileges: $privileges, username: $username, email: $email, on: $id)", Auth::user());
 		} else {
 			try {
-				$user = User::find($id);
-				
-				if ($username != $user->user) {
-					$user->user = $username;
-				}
+				$user = User::findOrFail($id);
 
 				if ($password) {
 					$user->pass = Hash::make($password);
@@ -79,10 +77,10 @@ trait AdminUser {
 					$user->privileges = $privileges;
 				}
 
-				$user->save();
-
 				$status = "User {$user->user} updated.";
-				Notification::admin("updated user {$user->user} ({$user->id})", Auth::user()); 
+				Notification::admin("updated user {$user->user} ({$user->id})", Auth::user());
+
+				$user->save();
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}

@@ -138,4 +138,30 @@ trait AdminSongs {
 		}
 	}
 
+	public function getSongs($search = null) {
+		$search = $search ?: Input::get("q", null);
+
+		if ($search) {
+			$results = DB::table("tracks")
+				->whereRaw("match (track, artist, album, tags) against (? in boolean mode)", [$search])
+				->paginate(25);
+		} else {
+			$results = DB::table("tracks")
+				->orderBy("id", "desc")
+				->paginate(25);
+		}
+		
+
+		$this->layout->content = View::make("admin.database")
+			->with("search", $search)
+			->with("results", $results);
+	}
+
+	public function postSongs($id) {
+		if ($id == "search") {
+			$search = Input::get("q");
+			return Redirect::to("/admin/songs/$search");
+		}
+	}
+
 }

@@ -14,7 +14,7 @@
 						<li class="list-group-item">
 					@endif
 						<p class="text-center">
-							{{ $notification->notification }} {{ time_ago($notification->created_at) }}
+							{{{ $notification->notification }}} {{ time_ago($notification->created_at) }}
 						</p>
 					</li>
 				@endforeach

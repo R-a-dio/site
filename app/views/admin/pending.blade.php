@@ -1,12 +1,87 @@
 @section("content")
 
 	<div class="container main">
-		<div class="col-md-4">
-			<div class="col-xs-6">
-				<button class="btn btn-danger" data-toggle="modal" data-target="#help">Help</button>
+		<div class="col-lg-4">
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3">
+					<button class="btn btn-block btn-danger" data-toggle="modal" data-target="#help">Help</button>
+					<button class="btn btn-block btn-info" data-toggle="modal" data-target="#other">What not to accept</button>
+				</div>
 			</div>
-			<div class="col-xs-6">
-				<button class="btn btn-info" data-toggle="modal" data-target="#other">What not to accept</button>
+		</div>
+		<style>
+			#player-test {
+				margin-top: 25px;
+				margin-left: auto;
+				margin-right: auto;
+				width: 300px;
+				height: 30px;
+				border-radius: 5px;
+				background: rgba(0, 0, 0, 0.7);
+			}
+			.audio-icon {
+				font-size: 22px;
+				color: #fff;
+				padding-top: 5px;
+			}
+			.track-slider {
+				margin-top: 12px;
+				-webkit-appearance: none;
+				background-color: rgba(0, 0, 0, 0.7);
+				height: 7px;
+				border-radius: 4px;
+				outline: none;
+			}
+			.track-slider:focus {
+				outline: none;
+			}
+			.track-slider::-webkit-slider-thumb {
+				-webkit-appearance: none;
+				width: 15px;
+				height: 10px;
+				background-color: #fff;
+				border-radius: 10px;
+				-webkit-border-radius: 10px;
+			}
+			.track-slider::-webkit-slider-track {
+				height: 5px;
+			}
+			#audio-time {
+				color: #fff;
+				padding-top: 5px;
+				padding-left: 0;
+				padding-right: 0;
+			}
+			#np {
+				padding-top: 20px;
+			}
+		</style>
+		<div class="col-lg-8">
+
+			<div class="row">
+				<div id="player-test">
+					<div>
+						<div class="col-xs-1" style="padding-right: 0" id="play-pause">
+							<i class="fa fa-play audio-icon" id="audio-play"></i>
+							<i class="fa fa-pause audio-icon" id="audio-pause" style="display: none"></i>
+						</div>
+						<div class="col-xs-5" id="audio-slider">
+							<input id="audio-progress" type="range" class="track-slider" min="0" max="1000" step="1" value="0">
+						</div>
+						<div class="col-xs-1" id="audio-time">
+							0:00
+						</div>
+						<div class="col-xs-1" style="padding-right: 0">
+							<i class="fa fa-volume-up audio-icon" id="volume-high"></i>
+							<i class="fa fa-volume-down audio-icon" id="volume-low" style="display: none"></i>
+							<i class="fa fa-volume-off audio-icon" id="volume-muted" style="color: rgb(153, 153, 153); display: none"></i>
+						</div>
+						<div class="col-xs-3" style="padding-right: 0">
+							<input type="range" class="track-slider" min="0" max="100" step="1" value="100" id="volume">
+						</div>
+					</div>
+				</div>
+				<p id="np" class="text-center"></p>
 			</div>
 		</div>
 	</div>	
@@ -68,7 +143,7 @@
 							<label class="control-label col-xs-4 input-sm">Size</label>
 							<div class="col-xs-8">
 								<p class="form-control-static input-sm">
-									<button class="btn btn-xs btn-primary play-button" data-url="/admin/pending-song/{{{ $p["id"] }}}" data-format="{{ $p["format"] ?: "mp3" }}">
+									<button type="button" class="btn btn-xs btn-primary play-button" data-url="/admin/pending-song/{{{ $p["id"] }}}" data-format="{{ $p["format"] ?: "mp3" }}">
 										{{{ date("i\ms\s", floor($p["length"]) ?: 0) }}}, {{{ number_format($p["filesize"] / 1048576, 2) }}}MB
 									</button>
 								</p>
@@ -214,31 +289,119 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
+@stop
+
+@section("script")
 
 	<script>
-		$("#volume-pending").val(localStorage["volume"]);
 
-		$("#volume-pending").change(function (event) {
+		$("#volume").val(localStorage["volume"]);
+
+		$("#volume").change(function (event) {
 			localStorage["volume"] = $(this).val();
-			$("#pending-player").jPlayer("volume", Math.pow(($(this).val() / 100), 2.0));
+		});
+		var avplayer, duration;
+
+		$(".play-button").click(function (e) {
+			e.preventDefault();
+
+			if (avplayer)
+				avplayer.stop();
+
+			avplayer = AV.Player.fromURL($(this).attr("data-url"));
+			duration = null;
+
+			avplayer.on("duration", function (event) {
+				duration = event;
+			});
+
+			avplayer.on("progress", function (event) {
+				if (duration) {
+					var raw = event / duration;
+					var parsed = parseInt(raw * 1000);
+					$("#audio-progress").val(parsed);
+
+					var date = new Date(event);
+
+					var mins = date.getUTCMinutes(),
+						secs = date.getUTCSeconds();
+
+					if (secs < 10) {
+						secs = "0" + secs;
+					}
+
+					$("#audio-time").text(mins + ":" + secs);
+				} else {
+					$("#audio-time").text(".:..");
+				}
+			});
+
+			avplayer.on("end", function (event) {
+				avplayer.stop();
+				avplayer = null;
+				duration = null;
+				$("#audio-progress").val(0);
+				$("#audio-time").text("0:00");
+			});
+
+			avplayer.on("metadata", function (metadata) {
+				var artist = metadata.artist,
+					title = metadata.title;
+
+				$("#np").text(artist + " - " + title);
+			});
+
+			$("#audio-play").click(function (e) {
+				e.preventDefault();
+
+				avplayer.pause();
+				$(this).hide();
+				$("#audio-pause").show();
+			});
+
+			$("#audio-pause").click(function (e) {
+				e.preventDefault();
+
+				avplayer.play();
+				$(this).hide();
+				$("#audio-play").show();
+			});
+
+			$("#volume").change(function (e) {
+				var vol = $(this).val();
+
+				// #CopyPastingEverything
+				if (vol >= 70) {
+					$("#volume-high").show();
+					$("#volume-low").hide();
+					$("#volume-muted").hide();
+				} else if (vol < 70 && vol != 0) {
+					$("#volume-high").hide();
+					$("#volume-low").show();
+					$("#volume-muted").hide();
+				}  else {
+					$("#volume-high").hide();
+					$("#volume-low").hide();
+					$("#volume-muted").show();
+				}
+
+				localStorage["av-volume"] = vol;
+
+				avplayer.volume = Math.pow(parseInt(localStorage["av-volume"]) / 10, 2.0);
+			});
+
+			if (localStorage["av-volume"]) {
+				avplayer.volume = Math.pow(parseInt(localStorage["av-volume"]) / 10, 2.0);
+				$("#volume").val(localStorage["av-volume"]);
+			}
+
+
+			avplayer.play();
+
+
 		});
 
-		$("#pending-player").jPlayer({
-			ready: function () {
-				$(".play-button").click(function (e) {
-					e.preventDefault();
-					var url = $(this).attr("data-href");
-					$("#pending-player").jPlayer("clearMedia");
-					$("#pending-player").jPlayer("setMedia", {'mp3': url});
-					$("#pending-player").jPlayer("play");
-				});
-				$("#pause").click(function () {
-					$("#pending-player").jPlayer("pause");
-				});
-			},
-			volume: Math.pow(($("#volume-pending").val() / 100), 2.0),
-			supplied: "mp3",
-			swfPath: swfpath
-		});
+
 	</script>
+
 @stop

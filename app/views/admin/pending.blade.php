@@ -55,6 +55,9 @@
 			#np {
 				padding-top: 20px;
 			}
+			#audio-play, #audio-pause {
+				cursor: pointer;
+			}
 		</style>
 		<div class="col-lg-8">
 

@@ -102,14 +102,25 @@ trait AdminSongs {
 		if (Request::ajax())
 			return Response::json(["status" => !$delete]);
 		else
-			return Response::redirect("/admin/pending");
+			return Redirect::to("/admin/pending");
 	}
 
 	public function getPendingSong($id) {
 		$pending = DB::table("pending")->where("id", "=", $id)->first();
 
-		if ($pending)
-			return Response::download(Config::get("radio.paths.pending") . "/" . $pending["path"]);
+		if ($pending) {
+			try {
+				if ($pending["format"] == "flac") {
+					$head = ["Content-Type" => ["audio/x-flac"]];
+				} else {
+					$head = ["Content-Type" => ["audio/mpeg"]];
+				}
+				return Response::download(Config::get("radio.paths.pending") . "/" . $pending["path"], $pending["path"], $head);
+			} catch (Exception $e) {
+				return Response::json(["error" => $e->getMessage()]);
+			}
+			
+		}
 	}
 
 	public function getSong($id) {

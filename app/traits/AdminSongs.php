@@ -26,11 +26,11 @@ trait AdminSongs {
 
 		$delete = false;
 
-		$action = Input::get("action");
+		$action = Input::get("choice");
 
 		if ($pending) {
 			switch ($action) {
-				case "delete":
+				case "decline":
 					$reason = Input::get("reason", "");
 					$meta = $pending["track"] ?: $pending["origname"];
 					DB::table("postpending")
@@ -42,7 +42,7 @@ trait AdminSongs {
 						]);
 					unlink(Config::get("radio.paths.pending") . $pending["path"]);
 					$delete = true;
-					Notification::pending("declined $meta", Auth::user());
+					Notification::pending("declined $meta ($reason)", Auth::user());
 					break;
 				case "replace":
 					$replace = Input::get("replace");
@@ -68,25 +68,42 @@ trait AdminSongs {
 					$album = Input::get("album", "");
 					$tags = Input::get("tags", "");
 					$hash = sha1(strtolower(trim($artist != "" ? "$artist - $title" : $title)));
+					$good = Input::get("good");
 
 					// title is required.
 					if ($title) {
 						$delete = true;
-						DB::table("tracks")
+
+						try {
+							$track = DB::table("tracks")
+								->insertGetId([
+									"track" => $title,
+									"artist" => $artist,
+									"album" => $album,
+									"tags" => $tags,
+									"path" => $pending["path"],
+									"usable" => 0,
+									"accepter" => $editor,
+									"lasteditor" => $editor,
+									"hash" => $hash,
+								]);
+							} catch (Exception $e) {
+								$delete = false;
+								break;
+							}
+						
+
+						DB::table("postpending")
 							->insert([
-								"track" => $title,
-								"artist" => $artist,
-								"album" => $album,
-								"tags" => $tags,
-								"path" => $pending["path"],
-								"usable" => 0,
-								"accepter" => $editor,
-								"lasteditor" => $editor,
-								"hash" => $hash,
+								"ip" => $pending["submitter"],
+								"accepted" => 1,
+								"meta" => "$artist - $title",
+								"good_upload" => $good ? 1 : 0,
 							]);
-						rename(Config::get("radio.paths.pending") . $pending["path"], Config::get("radio.paths.music") . $pending["path"]);
+						rename(Config::get("radio.paths.pending") . "/" . $pending["path"], Config::get("radio.paths.music") . "/" . $pending["path"]);
+						Notification::pending("accepted $artist - $title ($track)", Auth::user());
 					}
-					Notification::pending("accepted $artist - $title", Auth::user());
+					
 					break;
 				default:
 					break;
@@ -144,6 +161,7 @@ trait AdminSongs {
 		if ($search) {
 			$results = DB::table("tracks")
 				->whereRaw("match (track, artist, album, tags) against (? in boolean mode)", [$search])
+				->orWhere("id", "=", $search)
 				->paginate(25);
 		} else {
 			$results = DB::table("tracks")

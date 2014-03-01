@@ -187,7 +187,7 @@
 								<button type="submit" name="choice" value="decline" class="btn btn-sm btn-danger decline-song">Decline</button>
 							</label>
 							<div class="col-xs-8">
-								<input type="text" class="form-control input-sm" placeholder="Reason for declining">
+								<input type="text" name="reason" class="form-control input-sm" placeholder="Reason for declining">
 							</div>
 						</div>
 					</div>

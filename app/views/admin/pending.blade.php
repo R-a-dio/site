@@ -11,7 +11,7 @@
 		</div>
 		<style>
 			#player-test {
-				margin-top: 25px;
+				margin-top: 3px;
 				margin-left: auto;
 				margin-right: auto;
 				width: 300px;

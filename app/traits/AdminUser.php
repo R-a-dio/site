@@ -43,7 +43,7 @@ trait AdminUser {
 				}
 
 				$status = "User {$user->user} created.";
-				Notification::admin(Auth::user()->user . " just created a user: {$user->user}");
+				Notification::admin("created user {$user->user} ({$user->id})", Auth::user());
 				
 			} else {
 				$status = "Missing username, password or permissions";
@@ -82,7 +82,7 @@ trait AdminUser {
 				$user->save();
 
 				$status = "User {$user->user} updated.";
-				Notification::admin(Auth::user()->user . " just updated a user: {$user->user}"); 
+				Notification::admin("updated user {$user->user} ({$user->id})", Auth::user()); 
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -98,9 +98,10 @@ trait AdminUser {
 		if (Auth::user()->isAdmin()) {
 			try {
 				$user = User::find($id);
+				$username = $user->id;
 				$user->delete();
 				$status = "User Deleted.";
-				Notification::admin(Auth::user()->user . " just soft-deleted user $id");
+				Notification::admin("soft-deleted $username ($id)", Auth::user());
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -144,6 +145,7 @@ trait AdminUser {
 			$user->save();
 
 			$status = "Profile Updated";
+			Notification::dev("updated their profile", $user);
 
 		} catch (Exception $e) {
 			$status = $e->getMessage();

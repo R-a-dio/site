@@ -4,15 +4,21 @@
 		
 		@if ($id)
 
-			@if ($news["private"])
+			@if ($news->private)
 				<div class="panel panel-info">
+			@elseif ($news->deleted_at)
+				<div class="panel panel-danger">
 			@else
 				<div class="panel panel-default">
 			@endif
 				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a href="/admin/news/{{{ $news->id }}}">
-							{{{ $news->title }}} <span class="pull-right text-muted">{{{ $news->author->user }}}</span>
+							{{{ $news->title }}} ({{{ $news->id}}})
+							@if ($news->deleted_at)
+								<i class="fa fa-trash-o"></i>
+							@endif
+							<span class="pull-right text-muted">{{{ $news->author->user }}}</span>
 						</a>
 					</h4>
 				</div>
@@ -143,13 +149,19 @@
 			@foreach ($news as $article)
 				@if ($article->private)
 					<div class="panel panel-info">
+				@elseif ($article->deleted_at)
+					<div class="panel panel-danger">
 				@else
 					<div class="panel panel-default">
 				@endif
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a href="/admin/news/{{{ $article->id }}}">
-								{{{ $article->title }}} # {{ $article->id }} <span class="pull-right text-muted">{{{ $article->author->user }}}</span>
+								{{{ $article->title }}} ({{ $article->id }})
+								@if ($article->deleted_at)
+									<i class="fa fa-trash-o"></i>
+								@endif
+								<span class="pull-right text-muted">{{{ $article->author->user }}}</span>
 							</a>
 						</h4>
 					</div>

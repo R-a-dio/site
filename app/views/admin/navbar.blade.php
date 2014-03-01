@@ -60,19 +60,22 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{{ Auth::user()->user }}} <span class="badge">{{{ $notifications->count() }}}</span> <span class="badge errors"></span> <span class="badge pending"></span></a>
-						<ul class="dropdown-menu">
-							<li class="dropdown-header">Notifications</li>
-							@foreach ($notifications as $notification)
-								<li><a href="/admin/notifications">
-									{{ $notification["notification"] }}
-								</a></li>
-							@endforeach
-							<li class="divider"></li>
-							<li><a href="/admin/errors"><span class="badge errors">0</span> Errors</a></li>
-							<li><a href="/admin/pending"><span class="badge pending">0</span> Pending Songs</a></li>
-							<li><a href="/admin/notifications"><span class="badge">{{ $notifications->count() }}</span> Notifications</a></li>
-						</ul>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								{{{ Auth::user()->user }}}
+								@if (Auth::user()->isDev())
+									<span class="badge errors">{{{ $notifications["errors"] }}}</span>
+								@endif
+								<span class="badge pending">{{{ $notifications["pending"] }}}</span>
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header">Notifications</li>
+								@if (Auth::user()->isDev())
+									<li><a href="/admin/errors"><span class="badge errors">{{{ $notifications["errors"] ?: 0 }}}</span> Errors</a></li>
+								@endif
+								<li><a href="/admin/pending"><span class="badge pending">{{{ $notifications["pending"] }}}</span> Pending Songs</a></li>
+								<li><a href="/admin/notifications"><span class="badge">{{{ $notifications["events"] }}}</span> Events</a></li>
+							</ul>
 						</li>
 						<li
 							@if (Request::segment(2) == "profile")

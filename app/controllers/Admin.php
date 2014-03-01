@@ -42,7 +42,7 @@ class Admin extends BaseController {
 
 	public function getNotifications() {
 		$notifications = Notification::grab(Auth::user())
-			->paginate(40);
+			->paginate(20);
 
 		$this->layout->content = View::make("admin.notifications")
 			->with("notifications", $notifications);
@@ -60,7 +60,15 @@ class Admin extends BaseController {
 	 */
 	protected function setupLayout() {
 		if ( ! is_null($this->layout)) {
-			View::share("notifications", Notification::fetch(Auth::user()));
+			$pending = DB::table("pending")
+				->select(DB::raw("count(*) as count"))
+				->first()["count"];
+			$events = Notification::count(Auth::user());
+			View::share("notifications", [
+				"errors" => "",
+				"pending" => $pending,
+				"events" => $events,
+			]);
 			$this->layout = View::make($this->layout);
 		}
 	}

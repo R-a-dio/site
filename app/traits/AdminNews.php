@@ -20,9 +20,12 @@ trait AdminNews {
 			if (Auth::user()->isDev()) {
 				$news = Post::with("author")
 					->withTrashed()
+					->orderBy("id", "desc")
 					->paginate(15);
 			} else {
-				$news = Post::with("author")->paginate(15);
+				$news = Post::with("author")
+					->orderBy("id", "desc")
+					->paginate(15);
 			}
 			
 		}

@@ -45,7 +45,7 @@
 									
 								</div>
 								<div class="col-xs-2">
-									<button class="btn btn-xs btn-default" style="margin-top: 2px;" id="audio-reset">reset state</button>
+									<button class="btn btn-xs btn-default" style="margin-top: 2px;" id="audio-reset">reset</button>
 								</div>
 							</div>
 						</div>

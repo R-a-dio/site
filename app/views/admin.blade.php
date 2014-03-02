@@ -168,6 +168,7 @@
 				$("#audio-buffer").css("width", "0%");
 				$("#audio-progress").val(0);
 				$("#audio-time").text("0:00");
+				$("#np").empty();
 			}
 
 		</script>

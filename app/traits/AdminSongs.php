@@ -129,12 +129,25 @@ trait AdminSongs {
 
 		if ($pending) {
 			try {
+				
+				$path = Config::get("radio.paths.pending") . "/" . $pending["path"];
+				$file = file_get_contents($path);
+				$size = filesize($path);
+				$response = Response::make($file, 200);
+				
 				if ($pending["format"] == "flac") {
-					$head = ["Content-Type" => ["audio/x-flac"]];
+					$type = "audio/x-flac";
 				} else {
-					$head = ["Content-Type" => ["audio/mpeg"]];
+					$type = "audio/mpeg";
 				}
-				return Response::download(Config::get("radio.paths.pending") . "/" . $pending["path"], $pending["path"], $head);
+
+				$response->header("Cache-Control", "no-cache");
+				$response->header("Content-Description", "File Transfer");
+				$response->header("Content-Type", $type);
+				$response->header("Content-Transfer-Encoding", "binary");
+				$response->header("Content-Length", $size);
+
+				return $response;
 			} catch (Exception $e) {
 				return Response::json(["error" => $e->getMessage()]);
 			}

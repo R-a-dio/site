@@ -1,5 +1,72 @@
 /* base CSS. This should be overridden, never removed */
 
+#player-test {
+    margin-top: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: -4;
+}
+.audio-icon {
+    font-size: 22px;
+    color: #fff;
+    padding-top: 5px;
+}
+.buffer {
+    margin-top: -7px;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    pointer-events: none;
+}
+
+.buffer-bar {
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 7px;
+    border-radius: 4px;
+    pointer-events: none;
+    padding: 0;
+}
+
+.track-slider {
+    margin-top: 12px;
+    -webkit-appearance: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 7px;
+    border-radius: 4px;
+    outline: none;
+    z-index: 9999;
+}
+.track-slider:focus {
+    outline: none; 
+}
+.track-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px; 
+}
+.track-slider::-webkit-slider-track {
+    height: 5px;
+}
+
+#audio-time {
+    color: #fff;
+    padding-top: 5px;
+    padding-left: 0;
+    padding-right: 0;
+}
+#np {
+    padding-top: 20px;
+}
+#audio-play, #audio-pause {
+    cursor: pointer;
+}
 #stream-progress-bar {
     margin-top: 20px;
 }

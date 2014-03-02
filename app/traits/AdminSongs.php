@@ -160,9 +160,26 @@ trait AdminSongs {
 
 		if ($track) {
 			try {
-				return Response::download(Config::get("radio.paths.music") . "/" . $track["path"]);
+				$path = Config::get("radio.paths.music") . "/" . $track["path"];
+				$file = file_get_contents($path);
+				$size = filesize($path);
+				$response = Response::make($file, 200);
+				
+				if (strpos($track["path"], ".flac") !== 0) {
+					$type = "audio/x-flac";
+				} else {
+					$type = "audio/mpeg";
+				}
+
+				$response->header("Cache-Control", "no-cache");
+				$response->header("Content-Description", "File Transfer");
+				$response->header("Content-Type", $type);
+				$response->header("Content-Transfer-Encoding", "binary");
+				$response->header("Content-Length", $size);
+
+				return $response;
 			} catch (Exception $e) {
-				return Response::json(["error" => 404]);
+				return Response::json(["error" => $e->getMessage()]);
 			}
 			
 		}

@@ -9,56 +9,6 @@
 				</div>
 			</div>
 		</div>
-		<style>
-			#player-test {
-				margin-top: 3px;
-				margin-left: auto;
-				margin-right: auto;
-				width: 300px;
-				height: 30px;
-				border-radius: 5px;
-				background: rgba(0, 0, 0, 0.7);
-			}
-			.audio-icon {
-				font-size: 22px;
-				color: #fff;
-				padding-top: 5px;
-			}
-			.track-slider {
-				margin-top: 12px;
-				-webkit-appearance: none;
-				background-color: rgba(0, 0, 0, 0.7);
-				height: 7px;
-				border-radius: 4px;
-				outline: none;
-			}
-			.track-slider:focus {
-				outline: none;
-			}
-			.track-slider::-webkit-slider-thumb {
-				-webkit-appearance: none;
-				width: 15px;
-				height: 10px;
-				background-color: #fff;
-				border-radius: 10px;
-				-webkit-border-radius: 10px;
-			}
-			.track-slider::-webkit-slider-track {
-				height: 5px;
-			}
-			#audio-time {
-				color: #fff;
-				padding-top: 5px;
-				padding-left: 0;
-				padding-right: 0;
-			}
-			#np {
-				padding-top: 20px;
-			}
-			#audio-play, #audio-pause {
-				cursor: pointer;
-			}
-		</style>
 		<div class="col-lg-8">
 
 			<div class="row">
@@ -70,6 +20,9 @@
 						</div>
 						<div class="col-xs-5" id="audio-slider">
 							<input id="audio-progress" type="range" class="track-slider" min="0" max="1000" step="1" value="0">
+							<div class="buffer" style="margin-right: 30px">
+								<div id="audio-buffer" class="buffer-bar" style="width: 0%"></div>
+							</div>
 						</div>
 						<div class="col-xs-1" id="audio-time">
 							0:00
@@ -79,8 +32,15 @@
 							<i class="fa fa-volume-down audio-icon" id="volume-low" style="display: none"></i>
 							<i class="fa fa-volume-off audio-icon" id="volume-muted" style="color: rgb(153, 153, 153); display: none"></i>
 						</div>
-						<div class="col-xs-3" style="padding-right: 0">
-							<input type="range" class="track-slider" min="0" max="100" step="1" value="100" id="volume">
+						<div class="col-xs-2" style="padding-right: 0">
+							<input type="range" class="track-slider" min="0" max="100" step="1" value="80" id="volume">
+							<div class="buffer" style="margin-right: 15px">
+								<div id="audio-bar" class="buffer-bar" style="width: 80%"></div>
+							</div>
+							
+						</div>
+						<div class="col-xs-2">
+							<button class="btn btn-xs btn-default" style="margin-top: 2px;" id="audio-reset">reset state</button>
 						</div>
 					</div>
 				</div>
@@ -156,7 +116,7 @@
 							<label class="control-label col-xs-4 input-sm">Name</label>
 							<div class="col-xs-8">
 								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">
-									<a href="/admin/pending-song/{{{ $p["id"] }}}" title="{{{ $p["origname"] }}}">
+									<a href="/admin/pending-song/{{{ $p["id"] }}}" title="{{{ $p["origname"] }}}" target="_blank">
 										{{{ strlen($p["origname"]) > 17 ? preg_replace("/(.{1,14})(.*)(\..*)/", "$1..$3", $p["origname"]) : $p["origname"] }}}
 									</a>
 								</p>
@@ -292,119 +252,4 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-@stop
-
-@section("script")
-
-	<script>
-
-		$("#volume").val(localStorage["volume"]);
-
-		$("#volume").change(function (event) {
-			localStorage["volume"] = $(this).val();
-		});
-		var avplayer, duration;
-
-		$(".play-button").click(function (e) {
-			e.preventDefault();
-
-			if (avplayer)
-				avplayer.stop();
-
-			avplayer = AV.Player.fromURL($(this).attr("data-url"));
-			duration = null;
-
-			avplayer.on("duration", function (event) {
-				duration = event;
-			});
-
-			avplayer.on("progress", function (event) {
-				if (duration) {
-					var raw = event / duration;
-					var parsed = parseInt(raw * 1000);
-					$("#audio-progress").val(parsed);
-
-					var date = new Date(event);
-
-					var mins = date.getUTCMinutes(),
-						secs = date.getUTCSeconds();
-
-					if (secs < 10) {
-						secs = "0" + secs;
-					}
-
-					$("#audio-time").text(mins + ":" + secs);
-				} else {
-					$("#audio-time").text(".:..");
-				}
-			});
-
-			avplayer.on("end", function (event) {
-				avplayer.stop();
-				avplayer = null;
-				duration = null;
-				$("#audio-progress").val(0);
-				$("#audio-time").text("0:00");
-			});
-
-			avplayer.on("metadata", function (metadata) {
-				var artist = metadata.artist,
-					title = metadata.title;
-
-				$("#np").text(artist + " - " + title);
-			});
-
-			$("#audio-play").click(function (e) {
-				e.preventDefault();
-
-				avplayer.pause();
-				$(this).hide();
-				$("#audio-pause").show();
-			});
-
-			$("#audio-pause").click(function (e) {
-				e.preventDefault();
-
-				avplayer.play();
-				$(this).hide();
-				$("#audio-play").show();
-			});
-
-			$("#volume").change(function (e) {
-				var vol = $(this).val();
-
-				// #CopyPastingEverything
-				if (vol >= 70) {
-					$("#volume-high").show();
-					$("#volume-low").hide();
-					$("#volume-muted").hide();
-				} else if (vol < 70 && vol != 0) {
-					$("#volume-high").hide();
-					$("#volume-low").show();
-					$("#volume-muted").hide();
-				}  else {
-					$("#volume-high").hide();
-					$("#volume-low").hide();
-					$("#volume-muted").show();
-				}
-
-				localStorage["av-volume"] = vol;
-
-				avplayer.volume = Math.pow(parseInt(localStorage["av-volume"]) / 10, 2.0);
-			});
-
-			if (localStorage["av-volume"]) {
-				avplayer.volume = Math.pow(parseInt(localStorage["av-volume"]) / 10, 2.0);
-				$("#volume").val(localStorage["av-volume"]);
-			}
-
-
-			avplayer.play();
-
-
-		});
-
-
-	</script>
-
 @stop

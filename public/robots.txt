@@ -6,10 +6,12 @@ Disallow: /api/
 Disallow: /api.php?
 Disallow: /song/
 Disallow: /piwik/
-Disallow: /dev/
+Disallow: /dev
 Disallow: /beta/
 Disallow: /stream
 Disallow: /main
+Disallow: /admin/
+Disallow: /song/
 Allow: /
 
 # Bad Yahoo.

@@ -147,10 +147,10 @@
 			<hr>
 
 			@foreach ($news as $article)
-				@if ($article->private)
-					<div class="panel panel-info">
-				@elseif ($article->deleted_at)
+				@if ($article->deleted_at)
 					<div class="panel panel-danger">
+				@elseif ($article->private)
+					<div class="panel panel-info">
 				@else
 					<div class="panel panel-default">
 				@endif
@@ -158,11 +158,28 @@
 						<h4 class="panel-title">
 							<a href="/admin/news/{{{ $article->id }}}">
 								{{{ $article->title }}} ({{ $article->id }})
-								@if ($article->deleted_at)
-									<i class="fa fa-trash-o"></i>
-								@endif
-								<span class="pull-right text-muted">{{{ $article->author->user }}}</span>
 							</a>
+							@if ($article->deleted_at)
+								<span class="text-muted">
+									<i class="fa fa-trash-o"></i>  Deleted {{ time_ago($article->deleted_at) }}
+									(<a href="/admin/restore/news/{{{ $article->id }}}">undelete</a>)
+								</span>
+							@else
+								
+								<span class="text-muted">
+									<i class="fa fa-pencil"></i> Posted {{ time_ago($article->created_at) }}
+									<span>
+										@if (Auth::user()->isAdmin())
+											{{ Form::open(["style" => "display: inline", "class" => "form-inline", "method" => "DELETE", "url" => "/admin/news/{$article->id}"]) }}
+												(<button class="btn-link" type="submit">delete</button>)
+											{{ Form::close() }}
+										@endif
+									</span>
+								</span>
+
+							@endif
+
+							<span class="pull-right text-muted">{{{ $article->author->user }}}</span>
 						</h4>
 					</div>
 				</div>

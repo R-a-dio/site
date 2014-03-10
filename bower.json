@@ -1,0 +1,13 @@
+{
+  "name": "r/a/dio",
+  "version": "1.0.0",
+  "dependencies": {
+    "jquery": ">=1.7",
+    "jquery-timeago": "latest",
+    "history.js": "latest",
+    "font-awesome": "latest",
+    "bootstrap": "latest",
+    "jquery.scrollTo": "latest",
+    "typeahead.js": "latest"
+  }
+}

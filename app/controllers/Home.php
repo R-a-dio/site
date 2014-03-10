@@ -262,9 +262,20 @@ class Home extends BaseController {
 			->orderBy("time", "desc")
 			->get();
 
+		$uploadTime = $this->checkUploadTime();
+		$cooldown = time() - $uploadTime < $this->delay;
+
+		if ($cooldown) {
+			$message = trans("api.upload.cooldown", ["time" => time_ago($uploadTime)]);
+		} else {
+			$message = trans("api.upload.no-cooldown");
+		}
+
 		$this->layout->content = View::make($this->theme("submit"))
 			->with("accepts", $accepts)
-			->with("declines", $declines);
+			->with("declines", $declines)
+			->with("message", $message)
+			->with("cooldown", $cooldown);
 	}
 
 	public function postSubmit() {

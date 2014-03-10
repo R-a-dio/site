@@ -32,7 +32,7 @@ trait AdminSongs {
 			switch ($action) {
 				case "decline":
 					$reason = Input::get("reason", "");
-					$meta = $pending["track"] ?: $pending["origname"];
+					$meta = $pending["track"] ? $pending["artist"] . " - " . $pending["track"] : $pending["origname"];
 					DB::table("postpending")
 						->insert([
 							"reason" => $reason,
@@ -40,7 +40,13 @@ trait AdminSongs {
 							"accepted" => 0,
 							"meta" => $meta,
 						]);
-					unlink(Config::get("radio.paths.pending") . $pending["path"]);
+
+					try {
+						unlink(Config::get("radio.paths.pending") . "/" . $pending["path"]);
+					} catch (Exception $e) {
+						return Response::json(["error" => $e->getMessage()]);
+					}
+					
 					$delete = true;
 					Notification::pending("declined $meta ($reason)", Auth::user());
 					break;
@@ -57,7 +63,12 @@ trait AdminSongs {
 								"lasteditor" => Auth::user()->user,
 							]);
 						$delete = true;
-						rename(Config::get("radio.paths.pending") . $pending["path"], Config::get("radio.paths.music") . $check["path"]);
+
+						try {
+							rename(Config::get("radio.paths.pending") . "/" . $pending["path"], Config::get("radio.paths.music") . $check["path"]);
+						} catch (Exception $e) {
+							return Response::json(["error" => $e->getMessage()]);
+						}
 					}
 					Notification::pending("replaced song {$check["id"]}", Auth::user());
 					break;
@@ -146,6 +157,7 @@ trait AdminSongs {
 				$response->header("Content-Type", $type);
 				$response->header("Content-Transfer-Encoding", "binary");
 				$response->header("Content-Length", $size);
+				$response->header("Content-Disposition", "attachment; filename=" . $pending["path"]);
 
 				return $response;
 			} catch (Exception $e) {
@@ -176,6 +188,7 @@ trait AdminSongs {
 				$response->header("Content-Type", $type);
 				$response->header("Content-Transfer-Encoding", "binary");
 				$response->header("Content-Length", $size);
+				$response->header("Content-Disposition", "attachment; filename=" . $track["path"]);
 
 				return $response;
 			} catch (Exception $e) {
@@ -188,16 +201,7 @@ trait AdminSongs {
 	public function getSongs($search = null) {
 		$search = $search ?: Input::get("q", null);
 
-		if ($search) {
-			$results = DB::table("tracks")
-				->whereRaw("match (track, artist, album, tags) against (? in boolean mode)", [$search])
-				->orWhere("id", "=", $search)
-				->paginate(25);
-		} else {
-			$results = DB::table("tracks")
-				->orderBy("id", "desc")
-				->paginate(25);
-		}
+		$results = $this->getSearchResults($search);
 		
 
 		$this->layout->content = View::make("admin.database")

@@ -15,8 +15,8 @@ trait Requests {
 			try {
 				$hmac = hash_hmac(
 					"sha256",
-					Config::get("radio.hanyuu.key", "DEADBEEFCAFE"),
-					Request::server("REMOTE_ADDR")
+					Request::server("REMOTE_ADDR"),
+					Config::get("radio.hanyuu.key", "DEADBEEFCAFE")
 				);
 				// todo: move to TLS since hanyuu will be on another server
 				$response = RestClient::post(Config::get("radio.hanyuu.host", "https://backup.r-a-d.io/request"))

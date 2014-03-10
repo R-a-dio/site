@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader
@@ -23,56 +25,101 @@ ClassLoader::addDirectories(array(
 
 /*
 |--------------------------------------------------------------------------
-| Application Error Logger
+| Sentry Error Handler
 |--------------------------------------------------------------------------
 |
-| Here we will configure the error logger setup for the application which
-| is built on top of the wonderful Monolog library. By default we will
-| build a rotating log file setup which creates a new file each day.
+| Distributed error logging using the $_ENV["SENTRY_KEY"] URL to send
+| events to. Setting app.sentry to false will result in sentry errors
+| being skipped over. This will not log errors to disk.
 |
 */
+function sentry_log($exception, $code = 500) {
+	$sentry = Config::get("app.sentry", false);
+	if ($sentry) {
+		$client = new Raven_Client($sentry, [
+			"tags" => [
+				"http_code" => $code,
+			],
+		]);
 
-$logFile = 'laravel.log';
+		if ($code < 500 and $code >= 400) {
+			$id = $client->getIdent($client->captureMessage($exception));
+		} else {
+			$id = $client->getIdent($client->captureException($exception));
+		}
 
-Log::useDailyFiles(storage_path().'/logs/'.$logFile);
+		return [
+			"error" => $exception->getMessage(),
+			"trace" => $exception->getTraceAsString(),
+			"line" => $exception->getLine(),
+			"file" => $exception->getFile(),
+		];
+	}
+
+	return null;
+}
 
 /*
 |--------------------------------------------------------------------------
-| Application Error Handler
+| R/a/dio Error View
 |--------------------------------------------------------------------------
 |
-| Here you may handle any errors that occur in your application, including
-| logging them or displaying custom views for specific errors. You may
-| even register several error handlers to handle different types of
-| exceptions. If nothing is returned, the default error view is
-| shown, which includes a detailed stack trace during debug.
+| Dumps out a generic localised error page using a code.
 |
 */
+function radio_error($exception, $code = 500) {
+	View::share("theme", "default");
+	View::share("error", $code);
+	View::share("reference", sentry_log($exception, $code));
+	$view = Request::ajax() ? View::make("ajax") : View::make("master");
+	$view->content = View::make("layouts.error");
 
+	return $view;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Primary Error Handlers
+|--------------------------------------------------------------------------
+|
+| This will grab regular and fatal errors and pass them to sentry,
+| showing a 500 error view if app.debug is false.
+|
+*/
 App::error(function(Exception $exception, $code)
 {
-	$sentry = Config::get("app.sentry", false);
+	return radio_error($exception, 500);
+});
 
-	if ($sentry) {
-		// grab monolog to add a handler to it
-		$monolog = Log::getMonolog();
+App::fatal(function($exception)
+{
+	return radio_error($exception, 500);
+});
 
-		// Create a sentry/raven client
-		$client = new Raven_Client($sentry);
+/*
+|--------------------------------------------------------------------------
+| ModelNotFoundException handler
+|--------------------------------------------------------------------------
+| Thrown when a model isn't found. By default this would usually be the
+| output from User::findOrFail() or Set::findOrFail().
+| Logs a 404 and then shows a 404 view.
+|
+*/
+App::error(function(ModelNotFoundException $exception, $code)
+{
+	return radio_error("Model not found at /" . Request::path(), 404);
+});
 
-		// handler time
-		$handler = new Monolog\Handler\RavenHandler($client,
-			Monolog\Logger::ERROR);
-
-		// cleanup on formatting
-		//$handler->setFormatter(new Monolog\Formatter\LineFormatter("%message% %context% %extra%\n"));
-
-		// add sentry to monolog
-		$monolog->pushHandler($handler);
-	}
-
-	// display the error with whatever error handler is installed (whoops)
-	Log::error($exception);
+/*
+|--------------------------------------------------------------------------
+| 404 Logger
+|--------------------------------------------------------------------------
+| Logs 404 errors with the sentry tag "404" and returns a 404 view
+|
+*/
+App::missing(function($exception)
+{
+	return radio_error("404 at /" . Request::path(), 404);
 });
 
 /*
@@ -94,18 +141,6 @@ App::down(function()
 
 	View::share("theme", "default");
 	View::share("error", 503);
-	$view = Request::ajax() ? View::make("ajax") : View::make("master");
-	$view->content = View::make("layouts.error");
-
-	return $view;
-});
-
-
-App::missing(function()
-{
-
-	View::share("theme", "default");
-	View::share("error", 404);
 	$view = Request::ajax() ? View::make("ajax") : View::make("master");
 	$view->content = View::make("layouts.error");
 

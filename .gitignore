@@ -12,3 +12,5 @@ Icon*
 Thumbs.db
 desktop.ini
 .env.php
+.dropbox.attr
+.bower.json

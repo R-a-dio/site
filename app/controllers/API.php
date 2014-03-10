@@ -69,6 +69,20 @@ class API extends Controller {
 		return "api:" . Request::url() . ":offset:" . Input::get("offset", 0) . ":limit:" . Input::get("limit", Config::get("radio.api.limit"));
 	}
 
+	public function getMetadata($meta) {
+		if (preg_match("/\(cv[.:] .+\)/i", $meta)) {
+			$status = "api.metadata.cv";
+		} elseif (preg_match("/\p{Han}/i", $meta)) {
+			$status = "api.metadata.kanji";
+		} elseif (" - " or !$meta) {
+			$status = "api.metadata.missing";
+		} else {
+			$status = "api.metadata.success";
+		}
+
+		return Response::json(["status" => trans($status), "metadata" => $meta]);
+	}
+
 	public function getIndex() {
 	 	$current = Cache::get($this->id(), null) ?: $this->currentModelOutput();
 	  

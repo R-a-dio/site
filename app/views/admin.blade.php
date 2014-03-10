@@ -74,6 +74,19 @@
 					console.log(percent);
 					$("#audio-buffer").css("width", percent + "%");
 
+					if (percent == 100) {
+						$("#audio-progress").change(function (e) {
+							e.preventDefault();
+
+							var percent = $(this).val() / 1000,
+								raw = duration * percent;
+
+							avplayer.seek(parseInt(raw));
+							console.log(raw);
+
+						});
+					}
+
 				});
 
 				$("#audio-play").click(function (e) {
@@ -103,16 +116,6 @@
 					console.log("Debug: document.player");
 				});
 
-				$("#audio-progress").change(function (e) {
-					e.preventDefault();
-
-					var percent = $(this).val() / 1000,
-						raw = duration * percent;
-
-					avplayer.seek(parseInt(raw));
-					console.log(raw);
-
-				});
 				avplayer.volume = Math.pow(parseInt(localStorage["av-volume"]) / 10, 2.0);
 
 				avplayer.play();

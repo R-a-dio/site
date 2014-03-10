@@ -16,7 +16,9 @@ class Home extends BaseController {
 	| Homepage (Index) - GET
 	|--------------------------------------------------------------------------
 	*/
-
+	public function getException() {
+		throw new Exception("test");
+	}
 	public function getMain() {
 		return Redirect::to("//stream.r-a-d.io/main");
 	}

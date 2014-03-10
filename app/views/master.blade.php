@@ -17,7 +17,9 @@
 
 		@include("layouts.postscript")
 		
-		@include($script)
+		@if (isset($script))
+			@include($script)
+		@endif
 		
 		@yield("script", "")
 	</body>

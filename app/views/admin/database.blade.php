@@ -14,6 +14,10 @@
 							</div>
 						</div>
 					{{ Form::close() }}
+					@if (isset($time))
+						<br>
+						<p class="text-center text-info">Search took {{{ $time }}}ms</p>
+					@endif
 				</div>
 				<div class="col-lg-4">
 					<div class="row">
@@ -60,19 +64,19 @@
 
 	@foreach ($results as $result)
 		<div class="well" style="padding-bottom: 0; padding-top: 8px">
-			{{ Form::open(["url" => "/admin/songs/" . $result["id"], "class" => "form-horizontal"]) }}
+			{{ Form::open(["url" => "/admin/songs/" . $result["_id"], "class" => "form-horizontal"]) }}
 				<div class="container" style="width: 100%; padding: 0">
 					<div class="col-lg-3">
 						<div class="form-group">
 							<label class="control-label col-xs-3 input-sm">Artist</label>
 							<div class="col-xs-9">
-								<input type="text" class="form-control input-sm" value="{{{ $result["artist"] }}}" placeholder="Artist" name="artist">
+								<input type="text" class="form-control input-sm" value="{{{ $result["_source"]["artist"] }}}" placeholder="Artist" name="artist">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-3 input-sm">Title</label>
 							<div class="col-xs-9">
-								<input type="text" class="form-control input-sm" value="{{{ $result["track"] }}}" placeholder="Title" name="title">
+								<input type="text" class="form-control input-sm" value="{{{ $result["_source"]["title"] }}}" placeholder="Title" name="title">
 							</div>
 						</div>
 					</div>
@@ -80,13 +84,13 @@
 						<div class="form-group">
 							<label class="control-label col-xs-3 input-sm">Album</label>
 							<div class="col-xs-9">
-								<input type="text" class="form-control input-sm" value="{{{ $result["album"] }}}" placeholder="Album" name="album">
+								<input type="text" class="form-control input-sm" value="{{{ $result["_source"]["album"] }}}" placeholder="Album" name="album">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-3 input-sm">Tags</label>
 							<div class="col-xs-9">
-								<input type="text" class="form-control input-sm" placeholder="Tags" name="tags" value="{{{  $result["tags"] }}}">
+								<input type="text" class="form-control input-sm" placeholder="Tags" name="tags" value="{{{  $result["_source"]["tags"] }}}">
 							</div>
 						</div>
 					</div>
@@ -95,9 +99,9 @@
 							<label class="control-label col-xs-3 input-sm">Acceptor</label>
 							<div class="col-xs-9">
 								<p class="form-control-static input-sm">
-									{{{ $result["accepter"] ?: "unknown" }}}
+									{{{ $result["_source"]["acceptor"] ?: "unknown" }}}
 									<span class="text-danger">
-										{{{ $result["lasteditor"] ? "(" . $result["lasteditor"] . ")" : "" }}}
+										{{{ $result["_source"]["editor"] ? "(" . $result["_source"]["editor"] . ")" : "" }}}
 									</span>
 								</p>
 							</div>
@@ -106,7 +110,7 @@
 							<label class="control-label col-xs-3 input-sm">ID</label>
 							<div class="col-xs-9">
 								<p class="form-control-static input-sm text-danger">
-									<b>{{{ $result["id"] }}}</b> 
+									<b>{{{ $result["_id"] }}}</b> 
 								</p>
 							</div>
 						</div>
@@ -118,9 +122,9 @@
 							</label>
 							<div class="col-xs-9">
 								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">
-									{{ $result["lastplayed"] != "0000-00-00 00:00:00" ? time_ago($result["lastplayed"]) : "never" }}
+									{{ $result["_source"]["lastplayed"] != "0000-00-00 00:00:00" ? time_ago($result["_source"]["lastplayed"]) : "never" }}
 									/
-									{{ $result["lastrequested"] != "0000-00-00 00:00:00" ? time_ago($result["lastrequested"]) : "never" }}
+									{{ $result["_source"]["lastrequested"] != "0000-00-00 00:00:00" ? time_ago($result["_source"]["lastrequested"]) : "never" }}
 								</p>
 							</div>
 						</div>
@@ -130,7 +134,7 @@
 							</label>
 							<div class="col-xs-6">
 								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">
-									{{{ $result["priority"] }}} <span class="text-success">({{{ $result["requestcount"] }}})</span>
+									<span title="{{{ $result["_score"] }}}">{{{ number_format($result["_score"], 2) }}}</span> <span class="text-success">({{{ $result["_source"]["requests"] }}})</span>
 								</p>
 							</div>
 						</div>
@@ -142,12 +146,12 @@
 									<button type="submit" name="action" value="save" class="btn btn-sm btn-block btn-default">
 										Save
 									</button>
-									<button type="button" class="btn btn-sm btn-block btn-primary play-button" data-url="/admin/song/{{{ $result["id"] }}}">
+									<button type="button" class="btn btn-sm btn-block btn-primary play-button" data-url="/admin/song/{{{ $result["_id"] }}}">
 										Play
 									</button>
 								</div>
 								<div class="col-lg-6">
-									<a class="btn btn-warning btn-sm btn-block" href="/admin/song/{{{ $result["id"] }}}">
+									<a class="btn btn-warning btn-sm btn-block" href="/admin/song/{{{ $result["_id"] }}}">
 										DL
 									</a>
 									@if (Auth::user()->isAdmin())

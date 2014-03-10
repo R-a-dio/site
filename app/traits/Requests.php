@@ -25,10 +25,12 @@ trait Requests {
 					->addHeader("X-Radio-Client", Request::server("REMOTE_ADDR"))
 					->send();
 
-				if (!$response->hasErrors())
+				if (!$response->hasErrors()) {
 					$res = $this->parseResponse($response->body);
-				else
+					$this->index($song);
+				} else {
 					$res = ["error" => trans("search.requests.oops")];
+				}
 			} catch (Exception $e) {
 				$res = ["error" => $e->getMessage()];
 			}

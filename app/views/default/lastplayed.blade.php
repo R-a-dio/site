@@ -6,7 +6,7 @@
 		<ul class="list-group col-md-8 col-md-offset-2">
 			@foreach ($lastplayed as $lp)
 				<li class="list-group-item">
-					<span>{{{ date("H:m:i", $lp["time"]) }}}</span>
+					<span title="{{{ date(DATE_ISO8601, $lp["time"]) }}}">{{{ date("H:i:s", $lp["time"]) }}}</span>
 					<span style="padding-left: 25px">{{{ $lp["meta"] }}}</span>
 				</li>
 			@endforeach

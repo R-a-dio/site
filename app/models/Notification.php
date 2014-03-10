@@ -7,7 +7,7 @@ class Notification extends Eloquent {
 	 *
 	 * @var string
 	 */
-	protected $table = 'radio_notifications';
+	protected $table = 'notifications';
 
 	/**
 	 * Should deleted_at be used

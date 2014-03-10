@@ -181,7 +181,7 @@
 							message = data.message;
 
 						console.log(data);
-						
+
 						if (data.cooldown == false || (now - cooldown > delay)) {
 							$("#cooldown").removeClass("alert-danger").addClass("alert-success");
 							$("#cooldown").html(message);
@@ -199,7 +199,8 @@
 
 
 				} else {
-					$("#errored").text("")
+					console.log(xhr);
+					$("#errored").text("An unknown error occurred");
 				}
 			};
 

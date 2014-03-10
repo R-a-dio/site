@@ -7,7 +7,7 @@
 			<h1 class="text-center text-info"> {{{ trans("search.help.main") }}} </h1>
 			{{ Form::open(['url' => "/search", "class" => "ajax-search"]) }}
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="{{{ trans("search.placeholder") }}}" name="q" id="search" value="{{{ $param }}}">
+					<input type="text" class="form-control" placeholder="{{{ trans("search.placeholder") }}}" name="q" id="search" value="{{{ rawurldecode($param) }}}">
 					<div class="input-group-btn">
 						<button class="btn btn-info" type="submit">
 							{{{ trans("search.button") }}}
@@ -23,63 +23,65 @@
 		</div>
 	</div>
 
-	@if ($search)
-		<!-- Search Results -->
-		<div class="container">
-			<div class="row visible-md visible-lg">
-					<div class="col-sm-4 text-center" style="margin-bottom: 10px">
-						<h4>{{{ trans("search.metadata.artist") }}}</h4>
-					</div>
-					<div class="col-sm-4 text-center" style="margin-bottom: 10px">
-						<h4>{{{ trans("search.metadata.title") }}}</h4>
-					</div>
-					<div class="col-sm-1 text-center" style="margin-bottom: 10px">
-						<h4>{{{ trans("search.fave") }}}</h4>
-					</div>
-					<div class="col-sm-3 text-center" style="margin-bottom: 10px">
-						<h4>{{{ trans("search.requestable") }}}</h4>
-					</div>
-			</div>
-			<hr style="margin-top: 3px; margin-bottom: 8px;">
-
-			@foreach ($search["data"] as $result)
-
-				<div class="row">
-					<div class="col-sm-4 text-center" style="margin-bottom: 10px">
-						<span class="text-danger">{{{ $result["artist"] }}}</span>
-					</div>
-					<div class="col-sm-4 text-center" style="margin-bottom: 10px">
-						<span class="text-info">{{{ $result["track"] }}}</span>
-					</div>
-					<div class="col-sm-1" style="margin-bottom: 10px">
-						<button class="btn btn-block btn-danger fave-button" data-toggle="modal" data-target="#faves">
-							<i class="fa fa-heart"></i>
-						</button>
-					</div>
-					<div class="col-sm-3" style="margin-bottom: 10px">
-						@if ($result["cooldown"])
-							<button class="btn btn-block btn-danger request-button disabled">
-								{{ trans("search.requestable") . " " . time_ago($result["cooldown"]) }}
-							</button>
-						@else
-							{{ Form::open(["url" => "/request/{$result["id"]}"]) }}
-								<button type="submit" name="id" value="{{ $result["id"] }}" class="btn btn-block btn-success request-button">
-									{{{ trans("search.request") }}}
-								</button>
-							{{ Form::close() }}
-						@endif
-					</div>
-				</div>	
-				<hr style="margin-top: 3px; margin-bottom: 8px;">
-			@endforeach
-
-			<div class="text-center">
-				{{ $links }}
-			</div>
-			
-
+	<!-- Search Results -->
+	<div class="container">
+		<div class="row visible-md visible-lg">
+				<div class="col-sm-4 text-center" style="margin-bottom: 10px">
+					<h4>{{{ trans("search.metadata.artist") }}}</h4>
+				</div>
+				<div class="col-sm-4 text-center" style="margin-bottom: 10px">
+					<h4>{{{ trans("search.metadata.title") }}}</h4>
+				</div>
+				<div class="col-sm-1 text-center" style="margin-bottom: 10px">
+					<h4>{{{ trans("search.fave") }}}</h4>
+				</div>
+				<div class="col-sm-3 text-center" style="margin-bottom: 10px">
+					<h4>{{{ trans("search.requestable") }}}</h4>
+				</div>
 		</div>
-	@endif
+		<hr style="margin-top: 3px; margin-bottom: 8px;">
+
+		@foreach ($results as $result)
+
+			<div class="row">
+				<div class="col-sm-4 text-center" style="margin-bottom: 10px">
+					<span class="text-danger">{{{ $result["_source"]["artist"] }}}</span>
+				</div>
+				<div class="col-sm-4 text-center" style="margin-bottom: 10px">
+					<span class="text-info">{{{ $result["_source"]["title"] }}}</span>
+				</div>
+				<div class="col-sm-1" style="margin-bottom: 10px">
+					<button class="btn btn-block btn-danger fave-button" data-toggle="modal" data-target="#faves">
+						<i class="fa fa-heart"></i>
+					</button>
+				</div>
+				<div class="col-sm-3" style="margin-bottom: 10px">
+					@if ($result["_source"]["cooldown"])
+						<button class="btn btn-block btn-danger request-button disabled">
+							{{ trans("search.requestable") . " " . time_ago($result["_source"]["cooldown"]) }}
+						</button>
+					@else
+						{{ Form::open(["url" => "/request/{$result["_id"]}"]) }}
+							<button type="submit" name="id" value="{{ $result["_id"] }}" class="btn btn-block btn-success request-button">
+								{{{ trans("search.request") }}}
+							</button>
+						{{ Form::close() }}
+					@endif
+				</div>
+			</div>	
+			<hr style="margin-top: 3px; margin-bottom: 8px;">
+		@endforeach
+		<div class="text-center text-success">
+			@if (isset($time) and $time)
+				<small>Query took {{{ $time }}}ms</small>
+			@endif
+		</div>
+		<div class="text-center">
+			{{ $results->links() }}
+		</div>
+		
+
+	</div>
 
 
 <div class="modal fade" id="requests">

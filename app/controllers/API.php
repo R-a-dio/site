@@ -3,6 +3,7 @@
 class API extends Controller {
 
 	use Player;
+	use Analysis;
 
 	protected $limit;
 	protected $offset = 0;
@@ -87,5 +88,23 @@ class API extends Controller {
 	 	$current = Cache::get($this->id(), null) ?: $this->currentModelOutput();
 	  
 		return $this->response($current);
+	}
+
+	public function getUserCooldown() {
+		$uploadTime = $this->checkUploadTime();
+
+		$response = [
+			"cooldown" => $uploadTime,
+			"now" => time(),
+			"delay" => $this->delay,
+		];
+
+		if (time() - $uploadTime < $this->delay) {
+			$response["message"] = trans("api.upload.cooldown", ["time" => time_ago($uploadTime)]);
+		} else {
+			$response["message"] = trans("api.upload.no-cooldown");
+		}
+
+		return Response::json($response);
 	}
 }

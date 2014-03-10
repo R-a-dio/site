@@ -114,8 +114,13 @@ trait Analysis {
 			return ["error" => $status["error"]];
 		}
 
-		if (!$this->checkUploadTime()) {
-			return ["error" => "You have to wait longer until you can upload another song!"];
+		$uploadTime = $this->checkUploadTime();
+
+		if (time() - $uploadTime < $this->delay) {
+			return [
+				"error" =>
+					"You have to wait " . date("H") . "hour(s), " . date("i") . "min(s) longer until you can upload another song!"
+			];
 		}
 
 		$new = $status["success"];
@@ -131,6 +136,10 @@ trait Analysis {
 			$submitter = Auth::user()->user;
 		} else {
 			$submitter = Request::server("REMOTE_ADDR");
+			DB::insert(
+				"insert into `uploadtime` (`ip`, `time`) values (?, NOW()) on duplicate key update `ip` = ?, `time` = now()",
+				[$submitter, $submitter]
+			);
 		}
 
 		DB::table("pending")
@@ -150,6 +159,8 @@ trait Analysis {
 				"mode" => $new["mode"],
 			]);
 
+
+
 		// todo: translation strings
 		return ["success" => "File uploaded successfully"];
 
@@ -160,11 +171,11 @@ trait Analysis {
 		// logged in users have unlimited uploads.
 		if (Auth::check())
 			if (Auth::user()->canDoPending())
-				return true;
+				return false;
 
 		// people can be given a "daypass" to upload unlimited songs.
 		if (Input::get("daypass") === $this->daypass())
-			return true;
+			return false;
 
 		// cloudflare + nginx will work this out and pass it in
 		$ip = Request::server("REMOTE_ADDR");
@@ -174,12 +185,10 @@ trait Analysis {
 			->where("ip", "=", $ip)
 			->first();
 
-		if ($result and strtotime($result["time"]) - time() > $this->delay)
-			return false;
+		if ($result)
+			return strtotime($result["time"]);
 
-		//DB::insert("insert into `uploadtime` (`ip`, `time`) values (?, NOW()) on duplicate key update", [$ip]);
-
-		return true;
+		return false;
 
 	}
 

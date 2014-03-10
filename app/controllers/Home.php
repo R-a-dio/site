@@ -88,8 +88,7 @@ class Home extends BaseController {
 		$results = $this->getSearchResults($search);
 
 		$this->layout->content = View::make($this->theme("search"))
-			->with("search", $results["search"])
-			->with("links", $results["links"])
+			->with("results", $results)
 			->with("param", $search);
 	}
 

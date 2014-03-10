@@ -14,9 +14,9 @@
 		<!-- Bootstrap core JavaScript
 			================================================== -->
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-		<script src="/js/jquery.timeago.js"></script>
+		<script src="/js/jquery-timeago/jquery.timeago.js"></script>
 		<!-- History.js -->
-		<script src="/js/jquery.history.js"></script>
+		<script src="/js/history.js/scripts/bundled/html5/jquery.history.js"></script>
 		<script src="/js/jquery.jplayer.min.js"></script>
 		<script src="/js/konami.js"></script>
 		<script src="/js/aurora.js"></script>

@@ -3,71 +3,82 @@
 	<div class="container main">
 		<div class="container">
 			<h1>{{{ trans("submit.title") }}}</h1>
-			<div class="col-md-6">
-				<p>
-					<strong>{{{ trans("submit.guidelines.upload.title") }}}</strong>
-					<ul>
-						<li>{{{ trans("submit.guidelines.upload.search") }}}</li>
-						<li>{{{ trans("submit.guidelines.upload.quality") }}}</li>
-						<li>{{{ trans("submit.guidelines.upload.source") }}}</li>
-					</ul>
-				</p>
-				<p>
-					<strong>{{{ trans("submit.guidelines.tagging.title") }}}</strong>
-					<ul>
-						<li>{{{ trans("submit.guidelines.tagging.required") }}}</li>
-						<li>{{{ trans("submit.guidelines.tagging.runes") }}}</li>
-						<li>{{{ trans("submit.guidelines.tagging.cv") }}}</li>
-					</ul>
-				</p>
-			</div>
-			<div class="col-md-6">
-				{{ Form::open(["files" => true, "class" => "form-horizontal", "id" => "submit"]) }}
-
-					<div class="form-group" id="file-input">
-						<input type="file" name="song" id="song">
-						<span class="form-control-feedback">
-							<i class="fa fa-check" id="feedback-success" style="display: none"></i>
-							<i class="fa fa-times" id="feedback-error" style="display: none"></i>
-						</span>
-						
-						<p class="help-block">
-							{{{ trans("submit.upload.desc") }}}
-						</p>
+			<div class="row">
+				<div class="col-xs-12">
+					@if ($cooldown)
+						<div class="alert alert-danger text-center" id="cooldown">
+					@else
+						<div class="alert alert-success text-center" id="cooldown">
+					@endif
+						{{ $message }}
 					</div>
+				</div>
+				<div class="col-md-6">
+					<p>
+						<strong>{{{ trans("submit.guidelines.upload.title") }}}</strong>
+						<ul>
+							<li>{{{ trans("submit.guidelines.upload.search") }}}</li>
+							<li>{{{ trans("submit.guidelines.upload.quality") }}}</li>
+							<li>{{{ trans("submit.guidelines.upload.source") }}}</li>
+						</ul>
+					</p>
+					<p>
+						<strong>{{{ trans("submit.guidelines.tagging.title") }}}</strong>
+						<ul>
+							<li>{{{ trans("submit.guidelines.tagging.required") }}}</li>
+							<li>{{{ trans("submit.guidelines.tagging.runes") }}}</li>
+							<li>{{{ trans("submit.guidelines.tagging.cv") }}}</li>
+						</ul>
+					</p>
+				</div>
+				<div class="col-md-6">
+					{{ Form::open(["files" => true, "class" => "form-horizontal", "id" => "submit"]) }}
 
-					<div class="form-group" id="upload-progress" style="display: none">
-						<div class="progress progress-striped active">
-							<div id="file-progress-bar" class="progress-bar progress-bar-success"  role="progressbar" style="width: 0%"></div>
+						<div class="form-group" id="file-input">
+							<input type="file" name="song" id="song">
+							<span class="form-control-feedback">
+								<i class="fa fa-check" id="feedback-success" style="display: none"></i>
+								<i class="fa fa-times" id="feedback-error" style="display: none"></i>
+							</span>
+							
+							<p class="help-block">
+								{{{ trans("submit.upload.desc") }}}
+							</p>
 						</div>
-						<p class="help-block" id="uploading">Uploading <span id="filename">file</span>... <span id="file-progress">0</span>%</p>
-						<p class="help-block" id="uploaded" style="display: none">
-							Uploaded <span id="filename">file</span>!
-						</p>
-						<p class="help-block" id="errored" style="display: none">Your Browser does not support HTML5 file uploading.</p>
-					</div>
 
-					<div class="form-group">
-						<input type="text" class="form-control" name="comment" id="comment" placeholder="{{{ trans("submit.comment.label") }}}">
-						<p class="help-block">
-							{{{ trans("submit.comment.desc") }}}
-						</p>
-					</div>
+						<div class="form-group" id="upload-progress" style="display: none">
+							<div class="progress progress-striped active">
+								<div id="file-progress-bar" class="progress-bar progress-bar-success"  role="progressbar" style="width: 0%"></div>
+							</div>
+							<p class="help-block" id="uploading">Uploading <span id="filename">file</span>... <span id="file-progress">0</span>%</p>
+							<p class="help-block" id="uploaded" style="display: none">
+								Uploaded <span id="filename">file</span>!
+							</p>
+							<p class="help-block" id="errored" style="display: none">Your Browser does not support HTML5 file uploading.</p>
+						</div>
 
-					<div class="form-group" style="display: none" id="daypass">
-						<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
-						<p class="help-block">
-							{{{ trans("submit.daypass.desc") }}}
-						</p>
-					</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="comment" id="comment" placeholder="{{{ trans("submit.comment.label") }}}">
+							<p class="help-block">
+								{{{ trans("submit.comment.desc") }}}
+							</p>
+						</div>
 
-					
+						<div class="form-group" style="display: none" id="daypass">
+							<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
+							<p class="help-block">
+								{{{ trans("submit.daypass.desc") }}}
+							</p>
+						</div>
 
-					<button type="submit" id="submit-button" class="btn btn-default ajax-upload">
-						{{{ trans("submit.upload.label") }}}
-					</button>
+						
 
-				{{ Form::close() }}
+						<button type="submit" id="submit-button" class="btn btn-default ajax-upload">
+							{{{ trans("submit.upload.label") }}}
+						</button>
+
+					{{ Form::close() }}
+				</div>
 			</div>
 			<hr>
 		</div>
@@ -152,6 +163,49 @@
 			$("#file-input").addClass("has-error").addClass("has-feedback").removeClass("has-success");
 			$("#file-progress-bar").removeClass("progress-bar-success").addClass("progress-bar-danger");
 		}
+
+		function checkCooldown() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "/api/user-cooldown", true);
+			xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+
+			xhr.onload = function (e) {
+				if (xhr.status >= 200 && xhr.status < 400) {
+					var data = JSON.parse(xhr.responseText);
+
+					if (data.message) {
+
+						var delay = data.delay,
+							now = data.now,
+							cooldown = data.cooldown,
+							message = data.message;
+
+						console.log(data);
+						
+						if (data.cooldown == false || (now - cooldown > delay)) {
+							$("#cooldown").removeClass("alert-danger").addClass("alert-success");
+							$("#cooldown").html(message);
+						} else {
+							$("#cooldown").removeClass("alert-success").addClass("alert-danger");
+							$("#cooldown").html(message);
+						}
+
+					} else {
+						console.log(data);
+						$("#cooldown").removeClass("alert-success").addClass("alert-danger");
+						$("#cooldown").text("An error occurred fetching your cooldown status.");
+					}
+					
+
+
+				} else {
+					$("#errored").text("")
+				}
+			};
+
+			xhr.send();
+		}
+
 		// delegate event to the click button
 		$("#submit").submit(function (e) {
 			e.preventDefault();
@@ -231,6 +285,8 @@
 						} else if (data.value.success) {
 							$("#uploaded").text(data.value.success).show();
 							showUploaded();
+
+							checkCooldown();
 						} else {
 							$("#errored").text("An unknown error occurred.");
 							console.log(data);

@@ -5,6 +5,9 @@ class Admin extends BaseController {
 	use AdminUser;
 	use AdminNews;
 	use AdminSongs;
+	use AdminSearch;
+	use Player;
+	use Search;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -29,8 +32,7 @@ class Admin extends BaseController {
 		// Auth, naturally.
 		$this->beforeFilter('auth');
 
-		// ALL POST/PUT/DELETE REQUIRE CSRF TOKENS.
-		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
+		parent::__construct();
 
 	}
 

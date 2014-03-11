@@ -127,7 +127,7 @@
 						<div class="form-group">
 							<label class="control-label col-xs-4 input-sm">Comment</label>
 							<div class="col-xs-8">
-								<p class="form-control-static input-sm">{{{ $p["comment"] }}}</p>
+								<p class="form-control-static input-sm"><small>{{{ $p["comment"] }}}</small></p>
 							</div>
 						</div>
 					</div>

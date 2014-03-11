@@ -9,10 +9,10 @@ trait Analysis {
 	protected $bitrate = 128.0; // kbps
 
 	// max upload size
-	protected $maxSize = 20000000; // 18MiB
+	protected $maxSize = 20971520; // 20MB
 
 	// flac max upload size
-	protected $maxFlacSize = 90000000; // 90 MiB
+	protected $maxFlacSize = 94371840; // 90 MB
 
 	// max song length, in seconds
 	protected $length = 480.0; // 8 minutes

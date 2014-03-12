@@ -10,7 +10,7 @@
 				@else
 					<li class="list-group-item">
 				@endif
-					<span>{{{ date("H:m:i", $q["time"]) }}}</span>
+					<time datetime="{{{ date(DATE_ISO8601, $q["time"]) }}}">{{{ date("H:i:s", $q["time"]) }}}</time>
 					<span style="padding-left: 25px">{{{ $q["meta"] }}}</span>
 				</li>
 			@endforeach

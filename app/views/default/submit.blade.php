@@ -1,90 +1,87 @@
 @section("content")
 
 	<div class="container main">
-		<div class="container">
-			<h1>{{{ trans("submit.title") }}}</h1>
-			<div class="row">
-				<div class="col-xs-12">
-					@if ($cooldown)
-						<div class="alert alert-danger text-center" id="cooldown">
-					@else
-						<div class="alert alert-success text-center" id="cooldown">
-					@endif
-						{{ $message }}
-					</div>
+		<h1>{{{ trans("submit.title") }}}</h1>
+		<div class="row">
+			<div class="col-xs-12">
+				@if ($cooldown)
+					<div class="alert alert-danger text-center" id="cooldown">
+				@else
+					<div class="alert alert-success text-center" id="cooldown">
+				@endif
+					{{ $message }}
 				</div>
-				<div class="col-md-6">
-					<p>
-						<strong>{{{ trans("submit.guidelines.upload.title") }}}</strong>
-						<ul>
-							<li>{{{ trans("submit.guidelines.upload.search") }}}</li>
-							<li>{{{ trans("submit.guidelines.upload.quality") }}}</li>
-							<li>{{{ trans("submit.guidelines.upload.source") }}}</li>
-						</ul>
-					</p>
-					<p>
-						<strong>{{{ trans("submit.guidelines.tagging.title") }}}</strong>
-						<ul>
-							<li>{{{ trans("submit.guidelines.tagging.required") }}}</li>
-							<li>{{{ trans("submit.guidelines.tagging.runes") }}}</li>
-							<li>{{{ trans("submit.guidelines.tagging.cv") }}}</li>
-						</ul>
-					</p>
-				</div>
-				<div class="col-md-6">
-					{{ Form::open(["files" => true, "class" => "form-horizontal", "id" => "submit"]) }}
+			</div>
+			<div class="col-md-6">
+				<p>
+					<strong>{{{ trans("submit.guidelines.upload.title") }}}</strong>
+					<ul>
+						<li>{{{ trans("submit.guidelines.upload.search") }}}</li>
+						<li>{{{ trans("submit.guidelines.upload.quality") }}}</li>
+						<li>{{{ trans("submit.guidelines.upload.source") }}}</li>
+					</ul>
+				</p>
+				<p>
+					<strong>{{{ trans("submit.guidelines.tagging.title") }}}</strong>
+					<ul>
+						<li>{{{ trans("submit.guidelines.tagging.required") }}}</li>
+						<li>{{{ trans("submit.guidelines.tagging.runes") }}}</li>
+						<li>{{{ trans("submit.guidelines.tagging.cv") }}}</li>
+					</ul>
+				</p>
+			</div>
+			<div class="col-md-6">
+				{{ Form::open(["files" => true, "id" => "submit"]) }}
 
-						<div class="form-group" id="file-input">
-							<input type="file" name="song" id="song">
-							<span class="form-control-feedback">
-								<i class="fa fa-check" id="feedback-success" style="display: none"></i>
-								<i class="fa fa-times" id="feedback-error" style="display: none"></i>
-							</span>
-							
-							<p class="help-block">
-								{{{ trans("submit.upload.desc") }}}
-							</p>
-						</div>
-
-						<div class="form-group" id="upload-progress" style="display: none">
-							<div class="progress progress-striped active">
-								<div id="file-progress-bar" class="progress-bar progress-bar-success"  role="progressbar" style="width: 0%"></div>
-							</div>
-							<p class="help-block" id="uploading">Uploading <span id="filename">file</span>... <span id="file-progress">0</span>%</p>
-							<p class="help-block" id="uploaded" style="display: none">
-								Uploaded <span id="filename">file</span>!
-							</p>
-							<p class="help-block" id="errored" style="display: none">Your Browser does not support HTML5 file uploading.</p>
-						</div>
-
-						<div class="form-group">
-							<input type="text" class="form-control" name="comment" id="comment" placeholder="{{{ trans("submit.comment.label") }}}">
-							<p class="help-block">
-								{{{ trans("submit.comment.desc") }}}
-							</p>
-						</div>
-
-						<div class="form-group" style="display: none" id="daypass">
-							<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
-							<p class="help-block">
-								{{{ trans("submit.daypass.desc") }}}
-							</p>
-						</div>
-
+					<div class="form-group" id="file-input">
+						<input type="file" name="song" id="song">
+						<span class="form-control-feedback">
+							<i class="fa fa-check" id="feedback-success" style="display: none"></i>
+							<i class="fa fa-times" id="feedback-error" style="display: none"></i>
+						</span>
 						
+						<p class="help-block">
+							{{{ trans("submit.upload.desc") }}}
+						</p>
+					</div>
 
+					<div class="form-group" id="upload-progress" style="display: none">
+						<div class="progress progress-striped active">
+							<div id="file-progress-bar" class="progress-bar progress-bar-success"  role="progressbar" style="width: 0%"></div>
+						</div>
+						<p class="help-block" id="uploading">Uploading <span id="filename">file</span>... <span id="file-progress">0</span>%</p>
+						<p class="help-block" id="uploaded" style="display: none">
+							Uploaded <span id="filename">file</span>!
+						</p>
+						<p class="help-block" id="errored" style="display: none">Your Browser does not support HTML5 file uploading.</p>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" name="comment" id="comment" placeholder="{{{ trans("submit.comment.label") }}}">
+						<p class="help-block">
+							{{{ trans("submit.comment.desc") }}}
+						</p>
+					</div>
+
+					<div class="form-group" style="display: none" id="daypass">
+						<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
+						<p class="help-block">
+							{{{ trans("submit.daypass.desc") }}}
+						</p>
+					</div>
+
+					<div class="form-group">
 						<button type="submit" id="submit-button" class="btn btn-default ajax-upload">
 							{{{ trans("submit.upload.label") }}}
 						</button>
+					</div>
 
-					{{ Form::close() }}
-				</div>
+				{{ Form::close() }}
 			</div>
-			<hr>
 		</div>
 
-		<hr>
-		<div class="container">
+		<div class="row">
+			<hr>
 			<div class="col-md-6">
 				<h2 class="text-success text-center">{{{ trans("submit.accepts") }}}</h2>
 				<br>

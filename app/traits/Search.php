@@ -21,7 +21,7 @@ trait Search {
 
 	}
 
-	protected function search($terms, $type, $index) {
+	public function search($terms, $type, $index) {
 
 		$params = [
 			"type" => $type,
@@ -45,7 +45,7 @@ trait Search {
 
 	}
 
-	protected function index($track) {
+	public function index($track) {
 		$tmp = [];
 
 		$tmp["type"] = "track";

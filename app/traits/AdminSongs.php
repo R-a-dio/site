@@ -64,6 +64,13 @@ trait AdminSongs {
 							]);
 						$delete = true;
 
+						// fetch it again
+						$new = DB::table("tracks")
+							->where("id", "=", $replace)
+							->first();
+
+						// index for search
+						$this->index($new);
 						try {
 							rename(Config::get("radio.paths.pending") . "/" . $pending["path"], Config::get("radio.paths.music") . $check["path"]);
 						} catch (Exception $e) {
@@ -86,7 +93,7 @@ trait AdminSongs {
 						$delete = true;
 
 						try {
-							$track = DB::table("tracks")
+							$id = DB::table("tracks")
 								->insertGetId([
 									"track" => $title,
 									"artist" => $artist,
@@ -98,6 +105,7 @@ trait AdminSongs {
 									"lasteditor" => $editor,
 									"hash" => $hash,
 								]);
+
 							} catch (Exception $e) {
 								$delete = false;
 								break;
@@ -111,8 +119,15 @@ trait AdminSongs {
 								"meta" => "$artist - $title",
 								"good_upload" => $good ? 1 : 0,
 							]);
+
+						$track = DB::table("tracks")
+							->where("id", "=", $id)
+							->first();
+
+						$this->index($track);
+
 						rename(Config::get("radio.paths.pending") . "/" . $pending["path"], Config::get("radio.paths.music") . "/" . $pending["path"]);
-						Notification::pending("accepted $artist - $title ($track)", Auth::user());
+						Notification::pending("accepted $artist - $title ($id)", Auth::user());
 					}
 					
 					break;
@@ -141,27 +156,15 @@ trait AdminSongs {
 		if ($pending) {
 			try {
 				
-				$path = Config::get("radio.paths.pending") . "/" . $pending["path"];
-				$file = file_get_contents($path);
-				$size = filesize($path);
-				$response = Response::make($file, 200);
-				
-				if ($pending["format"] == "flac") {
-					$type = "audio/x-flac";
-				} else {
-					$type = "audio/mpeg";
-				}
+				$this->sendFile($pending);
 
-				$response->header("Cache-Control", "no-cache");
-				$response->header("Content-Description", "File Transfer");
-				$response->header("Content-Type", $type);
-				$response->header("Content-Transfer-Encoding", "binary");
-				$response->header("Content-Length", $size);
-				$response->header("Content-Disposition", "attachment; filename=" . $pending["path"]);
-
-				return $response;
 			} catch (Exception $e) {
-				return Response::json(["error" => $e->getMessage()]);
+				return Response::json([
+					"error" => $e->getMessage(),
+					"trace" => $e->getTraceAsString(),
+					"line"  => $e->getLine(),
+					"file"  => $e->getFile(),
+				]);
 			}
 			
 		}
@@ -172,30 +175,51 @@ trait AdminSongs {
 
 		if ($track) {
 			try {
-				$path = Config::get("radio.paths.music") . "/" . $track["path"];
-				$file = file_get_contents($path);
-				$size = filesize($path);
-				$response = Response::make($file, 200);
-				
-				if (strpos($track["path"], ".flac") !== 0) {
-					$type = "audio/x-flac";
-				} else {
-					$type = "audio/mpeg";
-				}
 
-				$response->header("Cache-Control", "no-cache");
-				$response->header("Content-Description", "File Transfer");
-				$response->header("Content-Type", $type);
-				$response->header("Content-Transfer-Encoding", "binary");
-				$response->header("Content-Length", $size);
-				$response->header("Content-Disposition", "attachment; filename=" . $track["path"]);
+				$this->sendFile($track, false);
 
-				return $response;
 			} catch (Exception $e) {
 				return Response::json(["error" => $e->getMessage()]);
 			}
 			
 		}
+	}
+
+	protected function sendFile(array $song, $pending = true) {
+		$loc = "radio.paths." . ($pending ? "pending" : "music");
+		$path = Config::get($loc) . "/" . $song["path"];
+		$size = filesize($path);
+
+		if (stripos($song["path"], ".flac")) {
+			$type = "audio/x-flac";
+		} else {
+			$type = "audio/mpeg";
+		}
+
+		$headers = [
+			"Cache-Control" => "no-cache",
+			"Content-Description" => "File Transfer",
+			"Content-Type" => $type,
+			"Content-Transfer-Encoding" => "binary",
+			"Content-Length" => $size,
+			"Content-Disposition" => "attachment; filename=" . $song["path"],
+		];
+
+		$response = Response::make('', 200, $headers);
+
+		Session::save();
+
+		// send the file
+		$fp = fopen($path, 'rb');
+
+		if ($fp) {
+			// fire headers and clean the output buffer
+			ob_end_clean();
+			$response->sendHeaders();
+			fpassthru($fp);
+		}
+
+		exit;
 	}
 
 	public function getSongs($search = null) {

@@ -22,7 +22,11 @@ trait AdminSearch {
 
 		$load = DB::table("tracks")->get();
 
+
 		try {
+
+			$this->deleteSearch();
+
 			foreach ($load as $track) {
 				$this->index($track);
 			}

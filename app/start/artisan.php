@@ -11,3 +11,6 @@
 |
 */
 
+// song indexing
+Artisan::add(new ReindexCommand);
+Artisan::add(new IndexCommand);

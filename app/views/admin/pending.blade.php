@@ -10,44 +10,51 @@
 			</div>
 		</div>
 		<div class="col-lg-8">
-
-			<div class="row">
-				<div id="player-test">
-					<div>
-						<div class="col-xs-1" style="padding-right: 0" id="play-pause">
-							<i class="fa fa-play audio-icon" id="audio-play"></i>
-							<i class="fa fa-pause audio-icon" id="audio-pause" style="display: none"></i>
-						</div>
-						<div class="col-xs-5" id="audio-slider">
-							<input id="audio-progress" type="range" class="track-slider" min="0" max="1000" step="1" value="0">
-							<div class="buffer" style="margin-right: 30px">
-								<div id="audio-buffer" class="buffer-bar" style="width: 0%"></div>
-							</div>
-						</div>
-						<div class="col-xs-1" id="audio-time">
-							0:00
-						</div>
-						<div class="col-xs-1" style="padding-right: 0">
-							<i class="fa fa-volume-up audio-icon" id="volume-high"></i>
-							<i class="fa fa-volume-down audio-icon" id="volume-low" style="display: none"></i>
-							<i class="fa fa-volume-off audio-icon" id="volume-muted" style="color: rgb(153, 153, 153); display: none"></i>
-						</div>
-						<div class="col-xs-2" style="padding-right: 0">
-							<input type="range" class="track-slider" min="0" max="100" step="1" value="80" id="volume">
-							<div class="buffer" style="margin-right: 15px">
-								<div id="audio-bar" class="buffer-bar" style="width: 80%"></div>
-							</div>
-							
-						</div>
-						<div class="col-xs-2">
-							<button class="btn btn-xs btn-default" style="margin-top: 2px;" id="audio-reset">reset state</button>
-						</div>
-					</div>
-				</div>
-				<p id="np" class="text-center"></p>
+			<div class="well text-center text-primary">
+				Announcements will go here
 			</div>
 		</div>
-	</div>	
+	</div>
+
+	<div style="position: fixed; bottom: 0; z-index: 9999; background: rgba(0, 0, 0, 0.3); padding: 20px 30px 0 30px; width: 100%">
+
+		<div class="container">
+			<div id="player-test">
+				<div>
+					<div class="col-xs-1" style="padding-right: 0" id="play-pause">
+						<i class="fa fa-play audio-icon" id="audio-play"></i>
+						<i class="fa fa-pause audio-icon" id="audio-pause" style="display: none"></i>
+					</div>
+					<div class="col-xs-5" id="audio-slider">
+						<input id="audio-progress" type="range" class="track-slider" min="0" max="1000" step="1" value="0">
+						<div class="buffer" style="margin-right: 30px">
+							<div id="audio-buffer" class="buffer-bar" style="width: 0%"></div>
+						</div>
+					</div>
+					<div class="col-xs-1" id="audio-time">
+						0:00
+					</div>
+					<div class="col-xs-1" style="padding-right: 0">
+						<i class="fa fa-volume-up audio-icon" id="volume-high"></i>
+						<i class="fa fa-volume-down audio-icon" id="volume-low" style="display: none"></i>
+						<i class="fa fa-volume-off audio-icon" id="volume-muted" style="color: rgb(153, 153, 153); display: none"></i>
+					</div>
+					<div class="col-xs-2" style="padding-right: 0">
+						<input type="range" class="track-slider" min="0" max="100" step="1" value="80" id="volume">
+						<div class="buffer" style="margin-right: 15px">
+							<div id="audio-bar" class="buffer-bar" style="width: 80%"></div>
+						</div>
+						
+					</div>
+					<div class="col-xs-2">
+						<button class="btn btn-xs btn-danger" style="margin-top: 2px;" id="audio-reset">debug</button>
+					</div>
+				</div>
+			</div>
+			<p id="np" class="text-center" style="color: #fff"></p>
+		</div>
+	</div>
+
 	<hr>
 	@foreach ($pending as $p)
 		@if ($p["dupe_flag"])

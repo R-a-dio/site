@@ -192,10 +192,10 @@
 			
 			$active.addClass("active");
 
+			var $main = $("[data-uri='/']");
+			var $irc = $("[data-uri='/irc']");
 
 			if (uri == "/") {
-
-				var $main = $("[data-uri='/']");
 
 				if (!$main.length) {
 					$.ajax({
@@ -207,7 +207,12 @@
 								var $section = $(data);
 								var $current = $("#radio-container > .current");
 
-								$current.remove();
+								if ($current.attr("data-uri") == "/irc") {
+									$current.removeClass("current").hide();
+								} else {
+									$current.remove();
+								}
+
 								$section.appendTo($("#radio-container")).addClass("current").show();
 
 								handlers();
@@ -218,16 +223,55 @@
 				} else {
 					var $current = $("#radio-container > .current");
 
-					if ($current.attr("data-uri") != "/") {
+					 if ($current.attr("data-uri") == "/irc") {
+					 	// hide IRC
+						$current.removeClass("current").hide();
+					} else {
 						// trash it
 						$current.remove();
-						$main.addClass("current").show();
-					} else {
-						$main.show();
 					}
-					
+
+					$main.addClass("current").show();
 
 				}
+			} else if (uri == "/irc") {
+				if (!$irc.length) {
+					$.ajax({
+						url: "/irc",
+						type: "GET",
+						dataType: "html",
+						success: function(data) {
+							if (data) {
+								var $section = $(data);
+								var $current = $("#radio-container > .current");
+
+								if ($current.attr("data-uri") == "/") {
+									$current.removeClass("current").hide();
+								} else {
+									$current.remove();
+								}
+
+								$section.appendTo($("#radio-container")).addClass("current").show();
+
+								handlers();
+
+							}
+						}
+					});
+				} else {
+					var $current = $("#radio-container > .current");
+
+					if ($current.attr("data-uri") == "/") {
+						// hide main
+						$main.removeClass("current").hide();
+					} else {
+						// trash it
+						$current.remove();
+					}
+
+					$irc.addClass("current").show();
+				}
+
 			} else {
 				// we need to fetch it and append it
 
@@ -240,7 +284,7 @@
 							var $section = $(data);
 
 							var $current = $("#radio-container > .current");
-							if ($current.attr("data-uri") == "/") {
+							if ($current.attr("data-uri") == "/" || $current.attr("data-uri") == "/irc") {
 								$current.removeClass("current").hide();
 							} else {
 								$current.remove();

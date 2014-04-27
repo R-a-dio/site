@@ -37,26 +37,44 @@ class IndexCommand extends Command {
 	 */
 	public function fire()
 	{
+		return;
 		$id = $this->argument("id");
+		$json = $this->option("json");
+		$output = [];
 
 		$track = DB::table("tracks")->where("id", "=", $id)->first();
 
 		if (!$track)
 		{
-			$this->error("Track ID not found");
+			if ($json) {
+				$output["success"] = false;
+				$output["error"] = "Track ID not found";
+
+				$this->info(json_encode($output, JSON_PRETTY_PRINT));
+			} else {
+				$this->error("Track ID not found");
+			}
 			return;
 		}
 
-		$this->comment("Artist: " . $track["artist"]);
-		$this->comment("Title: " . $track["track"]);
-		$this->comment("Album: " . $track["album"]);
-
-		$this->info("Reindexing song...");
-
+		if ($json) {
+			$output["track"] = $track;
+		} else {
+			$this->comment("Artist: " . $track["artist"]);
+			$this->comment("Title: " . $track["track"]);
+			$this->comment("Album: " . $track["album"]);
+		}
+		
 		$admin = App::make("Admin");
 		$admin->index($track);
-
-		$this->info("Song indexed.");
+		$output["success"] = true;
+		
+		if ($json) {
+			$this->info(json_encode($output, JSON_PRETTY_PRINT));
+		} else {
+			$this->info("Song indexed.");
+		}
+		
 
 	}
 
@@ -80,7 +98,7 @@ class IndexCommand extends Command {
 	protected function getOptions()
 	{
 		return array(
-			//array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
+			array('json', "j", InputOption::VALUE_NONE, 'Output response as JSON?'),
 		);
 	}
 

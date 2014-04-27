@@ -18,5 +18,5 @@
 }
 
 body {
-	background: #f5f5f5 url(/images/default_bg.jpg) x-repeat y-repeat;
+	background-color: rgba(0, 0, 0, 0.009);
 }

@@ -14,7 +14,7 @@ return [
 	"request" => "Request",
 	"requestable" => "Requestable",
 	"requests" => [
-		"oops" => "Something went wrong on our end, and we've been notified.",
+		"oops" => "Requesting is currently disabled as we can't reach the backend service. We're fixing shit with the database, most likely. Apologies.",
 		"invalid" => "Sorry, you made an invalid request.",
 		"missing" => "That song cannot be found. It may have been deleted.",
 		"no_afk" => "Hanyuu (our AFK Streamer) is not playing right now! Requests are disabled.",

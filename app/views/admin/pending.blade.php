@@ -96,7 +96,7 @@
 						<div class="form-group">
 							<label class="control-label col-xs-4 input-sm">Uploader</label>
 							<div class="col-xs-8">
-								<p class="form-control-static input-sm">{{{ $p["submitter"] }}}</p>
+								<p class="form-control-static input-sm">{{{ strpos($p["submitter"], ".") ? substr(sha1($p["submitter"]), 0, 8) : $p["submitter"] }}}</p>
 							</div>
 						</div>
 						<div class="form-group">

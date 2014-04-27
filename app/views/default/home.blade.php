@@ -139,7 +139,7 @@
 
 	<br>
 
-	<div class="container">
+	<div class="container content">
 		<div class="row">
 			<div class="col-md-6">
 				<h3 class="text-center">{{ trans("stream.lp") }}</h3>

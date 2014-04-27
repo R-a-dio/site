@@ -1,5 +1,5 @@
 @section("content")
-	<div class="container main">
+	<div class="container main content">
 	@foreach($staff as $i => $s)
 
 		<div class="col-md-3">

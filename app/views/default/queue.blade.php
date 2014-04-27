@@ -1,6 +1,6 @@
 @section("content")
 
-	<div class="container main">
+	<div class="container main content">
 		<h1 class="text-center">Queue</h1>
 
 		<ul class="list-group col-md-8 col-md-offset-2">

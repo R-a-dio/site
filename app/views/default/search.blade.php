@@ -1,6 +1,6 @@
 @section('content')
 
-<div class="container main">
+<div class="container main content">
 	<!-- Search Bar -->
 	<div class="container">
 		<div class="col-md-7 centered">

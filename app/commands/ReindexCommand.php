@@ -62,24 +62,6 @@ class ReindexCommand extends Command {
 		$this->info("Reindex Complete");
 	}
 
-	// silencable commands
-	public function info($string)
-	{
-		if (!$this->option("silent"))
-		{
-			parent::info($string);
-		}
-	}
-
-	// silencable commands
-	public function comment($string)
-	{
-		if (!$this->option("silent"))
-		{
-			parent::comment($string);
-		}
-	}
-
 	/**
 	 * Get the console command arguments.
 	 *
@@ -97,9 +79,7 @@ class ReindexCommand extends Command {
 	 */
 	protected function getOptions()
 	{
-		return array(
-			array('silent', null, InputOption::VALUE_NONE, 'Silence output', null),
-		);
+		return array();
 	}
 
 }

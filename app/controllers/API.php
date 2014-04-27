@@ -4,6 +4,7 @@ class API extends Controller {
 
 	use Player;
 	use Analysis;
+	use Hanyuu;
 
 	protected $limit;
 	protected $offset = 0;

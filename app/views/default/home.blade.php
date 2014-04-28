@@ -96,7 +96,7 @@
 						</div>
 
 						<div class="col-xs-12">
-							<div class="progress progress-striped" id="progress">
+							<div class="progress" id="progress">
 								<div class="progress-bar progress-bar-danger" role="progressbar" style="width: 100%"></div>
 							</div>
 						</div>

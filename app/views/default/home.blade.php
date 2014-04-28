@@ -64,8 +64,8 @@
 										<p>A volume slider will appear, and the slider will change the volume. This is remembered between page loads.</p>
 										<p>To play the stream in your browser, you can use any of the following links:</p>
 										<ul>
-											<li><a href="https://r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
-											<li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>
+											<li><a href="https://stream.r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
+											<li><a href="https://stream.r-a-d.io/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
 											<li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>
 										</ul>
 

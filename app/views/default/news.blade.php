@@ -143,7 +143,7 @@
 					<p><strike>~~strikethrough~~</strike></p>
 					<p><h1>#header</h1></p>
 					<p><code>images: ![description](https://i.imgur.com/fuck.jpg)</code></p>
-					<p>HTML is not allowed. Also comments are sanitized.</p>
+					<p>HTML is not allowed. Also, comments are sanitized.</p>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->

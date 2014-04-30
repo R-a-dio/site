@@ -121,7 +121,7 @@ class Home extends BaseController {
 		$this->layout->content = View::make($this->theme("news"))
 			->with("news", $news)
 			->with("id", $id)
-			->with("comments", $comments);
+			->with("comments", $comments ? $comments->reverse() : null);
 	}
 
 	public function postNews($id) {

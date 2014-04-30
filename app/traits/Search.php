@@ -31,6 +31,7 @@ trait Search {
 				404
 			],
 			"body" => [
+				"size" => 10000,
 				"query" => [
 					"query_string" => [
 						"fields" => ["title", "artist", "album", "tags", "_id"],

@@ -19,7 +19,7 @@ trait AdminSearch {
 
 	// rebuild
 	public function putSearch() {
-
+		return;
 		$load = DB::table("tracks")->get();
 
 
@@ -39,7 +39,7 @@ trait AdminSearch {
 
 	// wipe
 	public function deleteSearch() {
-
+		return;
 		$this->client->indices()->delete(["index" => "song-database"]);
 	}
 

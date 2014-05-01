@@ -7,7 +7,7 @@ trait Hanyuu {
 	public function getHanyuu($route, $id = null) {
 		Auth::onceBasic("user");
 
-		if (false) {
+		if (Auth::check()) {
 			$user = Auth::user();
 
 			if (($user->isDev() or $user->id === 18)) {

@@ -37,7 +37,6 @@ class IndexCommand extends Command {
 	 */
 	public function fire()
 	{
-		return;
 		$id = $this->argument("id");
 		$json = $this->option("json");
 		$output = [];

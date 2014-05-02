@@ -105,9 +105,7 @@
 									</div>
 
 									@if (Auth::check())
-										<p class="help-block">Logged in (as {{{ Auth::user()->user }}}), no need for a captcha~</p>
-									@else
-										<p class="help-block">There'll be a captcha here eventually.</p>
+										<p class="help-block">Logged in (as {{{ Auth::user()->user }}})</p>
 									@endif
 									<p class="help-block">
 										Comments use markdown formatting (<a href="#" data-toggle="modal" data-target="#markdown-help">help</a>)

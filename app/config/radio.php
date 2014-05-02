@@ -21,4 +21,9 @@ return [
 		"host" => $_ENV["HANYUU_HOST"],
 		"key" => $_ENV["HANYUU_HMAC_KEY"],
 	],
+	"akismet" => [
+		"key" => $_ENV["AKISMET_KEY"],
+		"url" => "https://%s.rest.akismet.com/1.1/comment-check",
+		"blog" => "https://r-a-d.io/news",
+	],
 ];

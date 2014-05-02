@@ -7,6 +7,7 @@ class Home extends BaseController {
 	use Search;
 	use Analysis;
 	use Requests;
+	use SpamCheck;
 
 	// layout to use. always master unless AJAX.
 	protected $layout = 'master';
@@ -150,6 +151,10 @@ class Home extends BaseController {
 			if (Input::has("comment")) {
 
 				try {
+					if (!Auth::check() and $this->isSpam(Input::get("comment"))) {
+						throw new Exception("Go away brohamid.");
+					}
+
 					$comment = new Comment(["comment" => Input::get("comment"), "ip" => Input::server("REMOTE_ADDR")]);
 
 					if (Auth::check()) {

@@ -77,6 +77,25 @@ function radio_error($exception, $code = 500) {
 	return $view;
 }
 
+function requestable($lastplayed, $requests) {
+	$delay = delay($requests);
+
+	return (time() - $lastplayed) > $delay;
+}
+
+function delay($priority) {
+	// priority is 30 max
+		if ($priority > 30)
+			$priority = 30;
+
+		// between 0 and 7 return magic
+		if ($priority >= 0 and $priority <= 7)
+			return -11057 * $priority * $priority + 172954 * $priority + 81720;
+		// if above that, return magic crazy numbers
+		else
+			return (int) (599955 * exp(0.0372 * $priority) + 0.5);
+}
+
 /*
 |--------------------------------------------------------------------------
 | Primary Error Handlers

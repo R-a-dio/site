@@ -62,18 +62,10 @@ trait Search {
 			"acceptor" => $track["accepter"],
 			"editor" => $track["lasteditor"],
 			"requests" => $track["requestcount"],
-			"lastplayed" => $track["lastplayed"],
-			"lastrequested" => $track["lastrequested"],
+			"lastplayed" => strtotime($track["lastplayed"]),
+			"lastrequested" => strtotime($track["lastrequested"]),
 			"hash" => $track["hash"],
-			"delay" => $this->getSongDelay($track["requestcount"]),
 		];
-
-		$lr = strtotime($track["lastrequested"]);
-
-		if (time() - $lr > $tmp["body"]["delay"])
-			$tmp["body"]["cooldown"] = false;
-		else
-			$tmp["body"]["cooldown"] = $lr + $tmp["body"]["delay"];
 
 		$this->client->index($tmp);
 	}

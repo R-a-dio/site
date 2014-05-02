@@ -1,10 +1,16 @@
 <?php
 
 use Httpful\Request as RestClient;
+use Httpful\Mime;
 
 trait SpamCheck {
 
 	public function isSpam($post) {
+
+		// ha.
+		if (strpos($post, "viagra") !== false)
+			return true;
+
 		$key = Config::get("radio.akismet.key", "test");
 
 		$data = [
@@ -18,6 +24,7 @@ trait SpamCheck {
 
 		$response = RestClient::post(sprintf(Config::get("radio.akismet.url"), $key))
 			->body(http_build_query($data))
+			->sendsType(Mime::FORM)
 			->send();
 
 		if (!$response->hasErrors()) {

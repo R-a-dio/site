@@ -46,14 +46,14 @@ function sentry_log($exception, $code = 500) {
 			$id = $client->getIdent($client->captureMessage($exception));
 		} else {
 			$id = $client->getIdent($client->captureException($exception));
-		}
 
-		return [
-			"error" => $exception->getMessage(),
-			"trace" => $exception->getTraceAsString(),
-			"line" => $exception->getLine(),
-			"file" => $exception->getFile(),
-		];
+			return [
+				"error" => $exception->getMessage(),
+				"trace" => $exception->getTraceAsString(),
+				"line" => $exception->getLine(),
+				"file" => $exception->getFile(),
+			];
+		}
 	}
 
 	return null;

@@ -124,7 +124,7 @@
 				<div class="col-md-3">
 					<div class="col-xs-12">
 						<div class="thumbnail">
-							<img id="dj-image" src="//r-a-d.io/res/img/dj/{{{ $status["dj"]["djimage"] }}}" class="hidden-xs">
+							<!-- <img id="dj-image" src="//r-a-d.io/api/image/<id> }}}" class="hidden-sm"> -->
 							<h4 class="text-center" id="dj-name">{{{ $status["dj"]["djname"] }}}</h4>
 						</div>
 					</div>
@@ -145,11 +145,11 @@
 				<h3 class="text-center">{{ trans("stream.lp") }}</h3>
 				<ul class="list-group" id="lastplayed">
 					@foreach ($lastplayed as $lp)
-						<li class="list-group-item last-played" style="height: 55px">
+						<li class="list-group-item last-played" style="overflow-y: auto">
 							<div class="col-md-4 lp-time">
 								{{ time_ago($lp["time"]) }}
 							</div>
-							<div class="col-md-8 lp-meta text-right" style="line-height: 1">
+							<div class="col-md-8 lp-meta text-center" style="line-height: 1">
 								{{{ $lp["meta"] }}}
 							</div>
 						</li>
@@ -163,9 +163,9 @@
 						@if ($queue["type"] > 0)
 							<li class="list-group-item list-group-item-info queue" style="height: 55px">
 						@else
-							<li class="list-group-item queue" style="height: 55px">
+							<li class="list-group-item queue" style="overflow-y: auto">
 						@endif
-							<div class="col-md-8 q-meta" style="line-height: 1">
+							<div class="col-md-8 text-center q-meta" style="line-height: 1">
 								{{{ $queue["meta"] }}}
 							</div>
 							<div class="col-md-4 text-right q-time">

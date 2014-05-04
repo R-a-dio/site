@@ -102,8 +102,3 @@
 				</div>
 			</div>
 		@endif
-		<div class="container">
-			<div class="alert alert-danger text-center">
-				Our database is broken and is being recovered. Requesting is broken, and so is submission. Expect random outages from the stream and the site.
-			</div>
-		</div>

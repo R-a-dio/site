@@ -56,16 +56,16 @@
 					</button>
 				</div>
 				<div class="col-sm-3" style="margin-bottom: 10px">
-					@if ($result["_source"]["cooldown"])
-						<button class="btn btn-block btn-danger request-button disabled">
-							{{ trans("search.requestable") . " " . time_ago($result["_source"]["cooldown"]) }}
-						</button>
-					@else
+					@if (requestable($result["_source"]["lastrequested"], $result["_source"]["requests"]))
 						{{ Form::open(["url" => "/request/{$result["_id"]}"]) }}
 							<button type="submit" name="id" value="{{ $result["_id"] }}" class="btn btn-block btn-success request-button">
 								{{{ trans("search.request") }}}
 							</button>
 						{{ Form::close() }}
+					@else
+						<button class="btn btn-block btn-danger request-button disabled">
+							{{ trans("search.request") }}
+						</button>
 					@endif
 				</div>
 			</div>	

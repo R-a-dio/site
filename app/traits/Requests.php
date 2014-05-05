@@ -46,7 +46,8 @@ trait Requests {
 	}
 
 	protected function parseResponse($response) {
-		$actual = preg_replace("/.*<h2>([^<]*)<\/h2>.*/", "$1", $response);
+
+		$actual = $response->response;
 
 		switch ($actual) {
 			case "You can't request songs at the moment.":

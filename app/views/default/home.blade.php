@@ -161,7 +161,7 @@
 				<ul class="list-group" id="queue">
 					@foreach ($curqueue as $queue)
 						@if ($queue["type"] > 0)
-							<li class="list-group-item list-group-item-info queue" style="height: 55px">
+							<li class="list-group-item list-group-item-info queue" style="overflow-y: auto">
 						@else
 							<li class="list-group-item queue" style="overflow-y: auto">
 						@endif

@@ -125,7 +125,7 @@
 				});
 			}
 			
-			$("#volume").change(function (event) {
+			$("#volume").on("input", function (event) {
 				if (supports_html5_storage()) {
 					localStorage["volume"] = $(this).val();
 				}

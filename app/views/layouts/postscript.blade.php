@@ -369,6 +369,8 @@
 
 				if (queue.type > 0) {
 					$(this).addClass("list-group-item-info");
+				} else {
+					$(this).removeClass("list-group-item-info");
 				}
 
 				count++;

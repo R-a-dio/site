@@ -238,6 +238,54 @@ trait AdminSongs {
 			$search = Input::get("q");
 			return Redirect::to("/admin/songs/$search");
 		}
+
+		$song = DB::table("tracks")
+			->where("id", "=", $id)
+			->first();
+
+		if (! $song) {
+			return radio_error("404 at POST /admin/songs/$id", 404);
+		}
+
+		if (Input::get("artist")) {
+			$hash = sha1(
+				strtolower(
+					trim(
+						Input::get("artist") . " - " . Input::get("title")
+					)
+				)
+			);
+		} else {
+			$hash = sha1(
+				strtolower(
+					trim(
+						Input::get("title")
+					)
+				)
+			);
+		}
+
+		DB::table("tracks")
+			->where("id", "=", $id)
+			->update([
+				"artist" => Input::get("artist"),
+				"track" => Input::get("title"),
+				"album" => Input::get("album"),
+				"tags" => Input::get("tags"),
+				"hash" => $hash,
+				"lasteditor" => Auth::user()->user,
+			]);
+
+		$song = $song = DB::table("tracks")
+			->where("id", "=", $id)
+			->first();
+
+		$this->index($song);
+
+		return Redirect::back()
+			->with("status", "Song Updated.");
+
+
 	}
 
 }

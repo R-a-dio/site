@@ -43,9 +43,9 @@
 									{{{ trans("stream.options") }}} <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu" style="width: 100%">
-									<li><a href="https://r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
-									<li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>
-									<li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>
+									<li><a href="https://stream.r-a-d.io/main.mp3">{{{ trans("stream.links.direct") }}}</a></li>
+									<li><a href="https://stream.r-a-d.io/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
+									<li><a href="/assets/main.pls">{{{ trans("stream.links.pls") }}}</a></li>
 									<li class="divider"></li>
 									<li><a href="#help" data-toggle="modal" data-target="#help">{{{ trans("stream.links.help") }}}</a></li>
 								</ul>
@@ -66,7 +66,7 @@
 										<ul>
 											<li><a href="https://stream.r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
 											<li><a href="https://stream.r-a-d.io/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
-											<li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>
+											<li><a href="/assets/main.pls">{{{ trans("stream.links.pls") }}}</a></li>
 										</ul>
 
 										<h3>Requesting Songs</h3>

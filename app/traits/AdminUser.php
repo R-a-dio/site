@@ -76,6 +76,8 @@ trait AdminUser {
 				if ($privileges) {
 					$user->privileges = $privileges;
 				}
+				
+				$this->updateProfile($user);
 
 				$status = "User {$user->user} updated.";
 				Notification::admin("updated user {$user->user} ({$user->id})", Auth::user());
@@ -140,7 +142,7 @@ trait AdminUser {
 			if ($email)
 				$user->email = $email;
 			
-			updateProfile($user);
+			$this->updateProfile($user);
 
 			$user->save();
 
@@ -176,7 +178,6 @@ trait AdminUser {
 					"djname" => Input::get("djname")
 				]);
 				$user->djid = $dj->id;
-				$user->save();
 			}
 			else {
 				$dj = Dj::find($user->djid);

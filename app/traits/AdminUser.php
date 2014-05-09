@@ -161,12 +161,12 @@ trait AdminUser {
 	protected function updateProfile($user) {
 		// user in this case is either Auth::user() or User::findOrFail()
 		
-		if(Auth::user()->isAdmin()|| $user->djid) {
+		if(Auth::user()->isAdmin() || $user->dj) {
 			// We can edit if we are an admin or the user already has a profile.
 			
 			$name = Input::get("djname");
 			
-			if(!$user->djid) {
+			if(!$user->dj) {
 				// create a new dj if we don't already have one
 				
 				if(!$name || $name === "") {
@@ -175,12 +175,16 @@ trait AdminUser {
 				}
 				
 				$dj = Dj::create([
-					"djname" => Input::get("djname")
+					"djname" => $name,
+					"djtext" => "x",
+					"djimage" => "x",
 				]);
+				$dj->save();
 				$user->djid = $dj->id;
+				$user->save();
 			}
 			else {
-				$dj = Dj::find($user->djid);
+				$dj = $user->dj;
 			}
 			
 			if($name)
@@ -189,16 +193,16 @@ trait AdminUser {
 			if(Input::hasFile("image")) {
 				$image = Input::file("image");
 				
-				$image->moveUploadedFile(Config::get("radio.paths.dj-images"), $dj->id);
+				$image->move(Config::get("radio.paths.dj-images"), $dj->id);
 				
-				$dj->djimage = $filename;
+				$dj->djimage = "".$dj->id;
 			}
 			
 			if(Auth::user()->isAdmin()) {
 				// if the editing user is admin, it means they can change
 				// visibility and priority as well.
 				$visible = Input::get("visible");
-				$priority = Input::get($priority);
+				$priority = Input::get("priority");
 				if(ctype_digit($priority) && $priority >= 1 && $priority <= 200) {
 					// If you want to redo this to use a Validator, be my guest.
 					$dj->priority = $priority;

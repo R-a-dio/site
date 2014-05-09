@@ -7,6 +7,7 @@ return [
 	"paths" => [
 		"pending" => "/radio/music/pend",
 		"music" => "/radio/music",
+		"dj-images" => "/radio/dj-images",
 	],
 	"captcha" => [
 		"public" => $_ENV["RECAPTCHA_PUBLIC_KEY"],

@@ -30,12 +30,16 @@
 					<input type="password" class="form-control" placeholder="Repeat Password" name="confirm">
 				</div>
 			</div>
-			@if (Auth::user()->isAdmin() || Auth::user->dj)
+			@if (Auth::user()->isAdmin() || Auth::user()->dj)
 				<div class="form-group" id="dj">
 					<label class="col-sm-2 control-label">DJ Name</label>
 					
 					<div class="col-sm-10">
+						@if (Auth::user()->dj)
 						<input type="text" class="form-control" value="{{{ Auth::user()->dj->djname }}}" name="djname">
+						@else
+						<input type="text" class="form-control" value="" name="djname">
+						@endif
 					</div>
 				</div>
 				<div class="form-group">
@@ -50,19 +54,19 @@
 						<label class="col-sm-2 control-label">Visible?</label>
 						
 						<div class="col-sm-10">
-							@if (Auth::user()->dj->visible == 1)
+							@if (Auth::user()->dj && Auth::user()->dj->visible == 1)
 								<label class="btn btn-default active">
-									<input type="radio" name="visible" value="1" checked="">Yes
+									<input type="radio" name="visible" value="1" checked>Yes
 								</label>
 								<label class="btn btn-default">
-									<input type="radio" name="visible" value="0">No
+									<input type="radio" name="visible" value="0" >No
 								</label>
 							@else
 								<label class="btn btn-default">
-									<input type="radio" name="visible" value="1">Yes
+									<input type="radio" name="visible" value="1" >Yes
 								</label>
 								<label class="btn btn-default active">
-									<input type="radio" name="visible" value="0" checked="">No
+									<input type="radio" name="visible" value="0" checked>No
 								</label>
 							@endif
 						</div>
@@ -71,7 +75,11 @@
 						<label class="col-sm-2 control-label">Priority</label>
 
 						<div class="col-sm-10">
-							<input type="number" min="1" max="200" class="form-control" value="{{{ Auth::user()->dj->priority }}}">
+							@if (Auth::user()->dj)
+							<input type="number" name="priority" min="1" max="200" class="form-control" value="{{{ Auth::user()->dj->priority }}}">
+							@else
+							<input type="number" name="priority" min="1" max="200" class="form-control" value="200">
+							@endif
 						</div>
 					</div>
 				@endif

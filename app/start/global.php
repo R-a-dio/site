@@ -56,7 +56,12 @@ function sentry_log($exception, $code = 500) {
 		}
 	}
 
-	return null;
+	return [
+				"error" => $exception->getMessage(),
+				"trace" => $exception->getTraceAsString(),
+				"line" => $exception->getLine(),
+				"file" => $exception->getFile(),
+			];
 }
 
 /*

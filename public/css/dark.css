@@ -1,0 +1,122 @@
+body {
+     background-color: #222222;
+}
+
+code {
+     background-color: #363636;
+}
+
+.well a {
+     color: #49667F;
+}
+
+.navbar a {
+     color: #787878 ! important;
+}
+
+p, li, h1, h2, h3, h4, h5, h6, h7, h8, .dropdown-toggle.btn-block, .row {
+     color: #787878;
+}
+
+hr {
+     border-color: #787878;
+}
+
+.navbar {
+     background-color: #2A2A2A ! important;
+     border: medium none;
+}
+
+.dropdown-menu {
+     background-color: #2A2A2A ! important;
+}
+
+.form-control {
+     background-color: #3D3D3D;
+     border-color: rgba(27, 27, 27, 0.5);
+     margin-right: -0.9em;
+     padding-right: 3em;
+}
+
+.form-control:focus {
+     border-color: rgba(27, 27, 27, 0.5);
+     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(0, 0, 0, 0.6);
+}
+
+.thumbnail, #cooldown {
+     background-color: #1B1B1B;
+     border-color: rgba(27, 27, 27, 0.1);
+}
+
+.progress {
+     background-color: #1B1B1B;
+}
+
+.progress-bar {
+     background-color: #49667F;
+}
+
+#stream-play, .btn.btn-primary {
+     background-color: #49667F;
+     border: medium none;
+     color: #D1D1D1;
+}
+
+#stream-play:hover {
+     background-color: #384F62;
+}
+
+.panel-title {
+     color: #49667F ! important;
+}
+
+.dropdown-toggle.btn-block {
+     background-color: #1B1B1B;
+     border: medium none;
+}
+
+.dropdown-toggle.btn-block:hover {
+     background-color: #191919;
+}
+
+.last-played, .queue, #dj-mode, .list-group-item {
+     background-color: #1B1B1B;
+     border-color: rgba(27, 27, 27, 0.1);
+}
+
+.panel-default {
+     background-color: #1B1B1B ! important;
+     border-color: rgba(27, 27, 27, 0.1) ! important;
+}
+
+.panel-heading {
+     background-color: #2A2A2A ! important;
+     border-color: rgba(27, 27, 27, 0.5) ! important;
+}
+
+.well {
+     background-color: #222222;
+     border-color: rgba(27, 27, 27, 0.5);
+}
+
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+     background-color: #1B1B1B;
+     border-color: rgba(27, 27, 27, 0.1);
+     color: #787878;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+     background-color: #1B1B1B;
+     border-color: rgba(27, 27, 27, 0.1);
+     color: #787878;
+}
+
+.pagination > li > a, .pagination > li > span {
+     background-color: #1B1B1B;
+     border-color: rgba(27, 27, 27, 0.1);
+     color: #49667F;
+}
+
+.footer {
+     border-top: medium none;
+}

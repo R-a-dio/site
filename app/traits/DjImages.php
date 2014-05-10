@@ -9,6 +9,12 @@ trait DjImages {
 				
 				$path = Config::get("radio.paths.dj-images") . "/" . $dj->djimage;
 				
+				if(!File::exists($path)) {
+					//TODO: have this return the blank dj image?
+					App::abort(404);
+					return;
+				}
+				
                 $resp = Response::make(
 					File::get($path),
 					200

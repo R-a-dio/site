@@ -6,7 +6,5 @@ branches:
   - develop
 
 before_script:
- - cp app/config/app.php.sample app/config/app.php
- - cp app/config/database.php.sample app/config/database.php
  - composer install
 script: phpunit --configuration phpunit.xml

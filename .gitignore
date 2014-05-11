@@ -2,8 +2,6 @@
 /vendor
 composer.phar
 .DS_Store
-/app/config/database.php
-/app/config/app.php
 .vagrant
 *.sublime-workspace
 *.sublime-project

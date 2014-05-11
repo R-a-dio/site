@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'sentry' => false,
+	'sentry' => @$_ENV["SENTRY_ENV"],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -67,6 +67,8 @@ return array(
 
 	'locale' => 'en',
 
+	'fallback_locale' => 'en',
+
 	/*
 	|--------------------------------------------------------------------------
 	| Encryption Key
@@ -78,7 +80,7 @@ return array(
 	|
 	*/
 
-	'key' => 'UKzpeyTiacBrojnzxu0Rwf3xuTBhPy3A',
+	'key' => @$_ENV["APP_KEY"] ?: "abcdefghijklmnopqrstuvwxyz12345678",
 
 	/*
 	|--------------------------------------------------------------------------
@@ -118,6 +120,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		"hiro\Markdown\MarkdownServiceProvider",
 	),
 
 	/*
@@ -183,6 +186,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+		'Markdown'        => 'hiro\Facades\Markdown',
 
 	),
 

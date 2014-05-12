@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'key' => @$_ENV["APP_KEY"] ?: "abcdefghijklmnopqrstuvwxyz12345678",
+	'key' => @$_ENV["APP_KEY"] ?: "JxMDC4fGVS6URuUL7jmO358SZx4wW1iQ",
 
 	/*
 	|--------------------------------------------------------------------------

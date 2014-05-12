@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateCommentsTable extends Migration {
@@ -11,26 +12,25 @@ class CreateCommentsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create("comments", function($table) {
+		Schema::create('radio_comments', function (Blueprint $table)
+		{
 			$table->engine = "InnoDB";
 
-			// IDs
-			$table->increments("id");
-			$table->integer("news_id")->unsigned();
-			$table->integer("user_id")->unsigned()->nullable();
+			$table->increments('id');
 
-			$table->string("name")->default("Anonymous");
-			$table->string("email")->nullable();
-			$table->text("comment");
+			$table->integer("user_id")
+				->unsigned()
+				->nullable();
 
-			// tracking
+			$table->integer("news_id")
+				->unsigned();
+
+			$table->string("comment", 500);
+			$table->string("ip", 50)->nullable();
+
 			$table->timestamps();
 			$table->softDeletes();
-			$table->string("ip");
-			$table->boolean("login")->default(false);
-			
 
-			// foreign keys
 			$table->foreign("user_id")
 				->references("id")
 				->on("users")
@@ -38,9 +38,8 @@ class CreateCommentsTable extends Migration {
 
 			$table->foreign("news_id")
 				->references("id")
-				->on("news")
+				->on("radio_news")
 				->onDelete("cascade");
-
 		});
 	}
 
@@ -51,7 +50,7 @@ class CreateCommentsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists("comments");
+		Schema::drop('radio_comments');
 	}
 
 }

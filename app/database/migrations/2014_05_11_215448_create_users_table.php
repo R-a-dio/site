@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends Migration {
@@ -11,24 +12,27 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create("users", function ($table) {
+		Schema::create("users", function (Blueprint $table) {
 			$table->engine = "InnoDB";
 
 			$table->increments("id");
-			$table->string("user")->unique();
-			$table->string("pass");
-			$table->string("email")->nullable();
-			$table->integer("djid")->unsigned()->nullable();
+			$table->string("user", 50);
+			$table->integer("privileges");
 
-			$table->mediumInteger("privileges")->default(0);
+			$table->string("pass")->nullable();
+			$table->string("email")->nullable();
+
 			$table->timestamps();
 			$table->softDeletes();
 
-			// vin, wessie: you're retarded for doing it this way around
+			$table->integer("djid")
+				->unsigned()
+				->nullable();
+
 			$table->foreign("djid")
 				->references("id")
 				->on("djs")
-				->onDelete("no action");
+				->onDelete("set null");
 		});
 	}
 
@@ -39,7 +43,7 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists("users");
+		Schema::drop("users");
 	}
 
 }

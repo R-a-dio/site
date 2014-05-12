@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateNewsTable extends Migration {
@@ -11,15 +12,19 @@ class CreateNewsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create("news", function($table) {
+		Schema::create('radio_news', function (Blueprint $table) {
 			$table->engine = "InnoDB";
 
-			$table->increments("id");
-			$table->string("title");
-			$table->timestamp("date");
-			$table->text("text");
-			$table->boolean("comments");
+			$table->increments('id');
+			$table->boolean("private")->default(false);
 			$table->integer("user_id")->unsigned();
+
+			$table->string("title", 200);
+			$table->text("header")->default("");
+			$table->text("text")->default("");
+
+			$table->timestamps();
+			$table->softDeletes();
 
 			$table->foreign("user_id")
 				->references("id")
@@ -35,7 +40,7 @@ class CreateNewsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists("news");
+		Schema::drop('radio_news');
 	}
 
 }

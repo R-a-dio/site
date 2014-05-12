@@ -16,7 +16,7 @@
 							<div class="panel-heading">
 								<h4 class="panel-title">
 									<a class="ajax-navigation" href="/news/{{{ $article->id }}}">
-										{{{ $article->title }}} <span class="text-muted pull-right">{{{ $article->author->user }}}</span>
+										{{{ $article->title }}} <span class="text-muted pull-right">~{{{ $article->author->user }}}</span>
 									</a>
 								</h4>
 							</div>
@@ -38,7 +38,7 @@
 							<a class="ajax-navigation" href="/news">
 								{{{ $news->title }}}
 							</a>
-							<span class="text-muted pull-right">{{ $news->author->user }}</span>
+							<span class="text-muted pull-right">~{{ $news->author->user }}</span>
 						</h4>
 					</div>
 					<div class="panel-body">

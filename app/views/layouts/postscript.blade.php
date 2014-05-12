@@ -189,6 +189,8 @@
 			} else {
 				$active = $active.closest("li");
 			}
+
+			$(".dropdown.open .dropdown-toggle").dropdown("toggle");
 			
 			$active.addClass("active");
 

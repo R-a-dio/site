@@ -18,8 +18,20 @@ code {
      color: #5D7B5D;
 }
 
+.btn-success {
+     background-color: #5D7B5D;
+     border-color: #5D7B5D;
+     color: rgba(255, 255, 255, 0.75);
+}
+
 .text-danger {
      color: #A15755;
+}
+
+.btn-danger, .btn.btn-block.btn-danger.request-button.disabled {
+     background-color: #A15755;
+     border-color: #A15755;
+     color: #EB9D9B;
 }
 
 .well a {
@@ -55,9 +67,14 @@ hr {
      color: #A0A0A0 ! important;
 }
 
+.dropdown-menu a:hover {
+     background-color: #4D4D4D ! important;
+}
+
 .form-control {
      background-color: #3D3D3D;
      border-color: rgba(27, 27, 27, 0.5);
+     color: rgba(255, 255, 255, 0.4);
      margin-right: -0.9em;
      padding-right: 3em;
 }

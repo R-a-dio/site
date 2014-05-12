@@ -40,7 +40,7 @@ class BaseController extends Controller {
 	 */
 	protected function getTheme() {
 		// TODO: check database access, DJ column will have theme
-		return "default";
+		return "dark";
 	}
 
 	/**

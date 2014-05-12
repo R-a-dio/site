@@ -89,6 +89,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
+	
+	public function getDjAttribute()
+	{
+		$dj = Dj::find($this->djid);
+		return $dj;
+	}
 
 	public function groups() {
 		return $this->belongsToMany("Group", "user_privileges", "user_id", "privilege_id")->withTimestamps();

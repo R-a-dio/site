@@ -11,7 +11,7 @@
 
 			<h1>{{{ $users->user }}} <small><a href="/admin/users" class="pull-right">Back</a></small></h1>
 
-			{{ Form::open(["method" => "PUT"]) }}
+			{{ Form::open(["files" => true, "method" => "PUT"]) }}
 
 				<div class="form-group">
 					<label>Username</label>
@@ -76,6 +76,57 @@
 							</option>
 						</select>
 					@endif
+				</div>
+				
+				<div class="form-group" id="dj">
+					<label>DJ Name</label>
+					
+					<div>
+						@if ($users->dj)
+						<input type="text" class="form-control" value="{{{ $users->dj->djname }}}" name="djname">
+						@else
+						<input type="text" class="form-control" value="" name="djname">
+						@endif
+					</div>
+				</div>
+				<div class="form-group">
+					<label >DJ Image</label>
+					
+					<div >
+						<input type="file" name="image" id="image">
+					</div>
+				</div>
+				<div class="form-group">
+					<label >Visible?</label>
+					
+					<div >
+						@if ($users->dj && $users->dj->visible == 1)
+							<label class="btn btn-default">
+								<input type="radio" name="visible" value="1" checked="">Yes
+							</label>
+							<label class="btn btn-default">
+								<input type="radio" name="visible" value="0">No
+							</label>
+						@else
+							<label class="btn btn-default">
+								<input type="radio" name="visible" value="1">Yes
+							</label>
+							<label class="btn btn-default">
+								<input type="radio" name="visible" value="0" checked="">No
+							</label>
+						@endif
+					</div>
+				</div>
+				<div class="form-group">
+					<label >Priority</label>
+
+					<div >
+						@if ($users->dj)
+						<input type="number" name="priority" min="1" max="200" class="form-control" value="{{{ $users->dj->priority }}}">
+						@else
+						<input type="number" name="priority" min="1" max="200" class="form-control" value="200">
+						@endif
+					</div>
 				</div>
 
 				<button type="submit" class="btn btn-info">Edit User</button>

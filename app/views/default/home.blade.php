@@ -43,9 +43,9 @@
 									{{{ trans("stream.options") }}} <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu" style="width: 100%">
-									<li><a href="https://r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
-									<li><a href="#">{{{ trans("stream.links.m3u") }}}</a></li>
-									<li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>
+									<li><a href="https://stream.r-a-d.io/main.mp3">{{{ trans("stream.links.direct") }}}</a></li>
+									<li><a href="/assets/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
+									<li><a href="/assets/main.pls">{{{ trans("stream.links.pls") }}}</a></li>
 									<li class="divider"></li>
 									<li><a href="#help" data-toggle="modal" data-target="#help">{{{ trans("stream.links.help") }}}</a></li>
 								</ul>
@@ -65,8 +65,8 @@
 										<p>To play the stream in your browser, you can use any of the following links:</p>
 										<ul>
 											<li><a href="https://stream.r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
-											<li><a href="https://stream.r-a-d.io/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
-											<li><a href="#">{{{ trans("stream.links.pls") }}}</a></li>
+											<li><a href="/assets/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
+											<li><a href="/assets/main.pls">{{{ trans("stream.links.pls") }}}</a></li>
 										</ul>
 
 										<h3>Requesting Songs</h3>
@@ -124,7 +124,7 @@
 				<div class="col-md-3">
 					<div class="col-xs-12">
 						<div class="thumbnail">
-							<!-- <img id="dj-image" src="//r-a-d.io/api/image/<id> }}}" class="hidden-sm"> -->
+							<img id="dj-image" src="/api/dj-image/{{{ $status["dj"]["djimage"] }}}" class="hidden-sm">
 							<h4 class="text-center" id="dj-name">{{{ $status["dj"]["djname"] }}}</h4>
 						</div>
 					</div>

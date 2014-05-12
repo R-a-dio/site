@@ -5,6 +5,7 @@ class API extends Controller {
 	use Player;
 	use Analysis;
 	use Hanyuu;
+	use DjImages;
 
 	protected $limit;
 	protected $offset = 0;

@@ -332,7 +332,7 @@
 		};
 
 		function setDjImage(image) {
-			$("#dj-image").attr("src", "//backup.r-a-d.io/res/img/dj/" + image);
+			$("#dj-image").attr("src", "/api/dj-image/" + image);
 		}
 
 		function setDJ(dj) {

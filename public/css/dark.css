@@ -6,12 +6,32 @@ code {
      background-color: #363636;
 }
 
+#dj-image {
+     padding-top: 1em;
+}
+
+.text-info {
+     color: #527A8E;
+}
+
+.text-success, .alert-success {
+     color: #5D7B5D;
+}
+
+.text-danger {
+     color: #A15755;
+}
+
 .well a {
      color: #49667F;
 }
 
 .navbar a {
      color: #787878 ! important;
+}
+
+.list-group-item.queue.list-group-item-info {
+     color: #49667F;
 }
 
 p, li, h1, h2, h3, h4, h5, h6, h7, h8, .dropdown-toggle.btn-block, .row {
@@ -29,6 +49,10 @@ hr {
 
 .dropdown-menu {
      background-color: #2A2A2A ! important;
+}
+
+.dropdown-menu a {
+     color: #A0A0A0 ! important;
 }
 
 .form-control {
@@ -75,8 +99,9 @@ hr {
      border: medium none;
 }
 
-.dropdown-toggle.btn-block:hover {
+.dropdown-toggle.btn-block:hover, .dropdown-toggle.btn-block:focus {
      background-color: #191919;
+     color: #D1D1D1;
 }
 
 .last-played, .queue, #dj-mode, .list-group-item {
@@ -87,6 +112,16 @@ hr {
 .panel-default {
      background-color: #1B1B1B ! important;
      border-color: rgba(27, 27, 27, 0.1) ! important;
+}
+
+#submit-button {
+     background-color: #1B1B1B ! important;
+     border-color: rgba(27, 27, 27, 0.1) ! important;
+     color: #788878;
+}
+
+#submit-button:hover {
+     border-color: rgba(255, 255, 255, 0.1) ! important;
 }
 
 .panel-heading {

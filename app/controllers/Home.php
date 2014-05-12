@@ -46,7 +46,7 @@ class Home extends BaseController {
 	*/
 	public function getQueue() {
 		$this->layout->content = View::make($this->theme("queue"))
-			->with("queue", $this->getQueuePagination());
+			->with("queue", $this->getQueuePagination()->get());
 	}
 
 	public function getLastPlayed() {

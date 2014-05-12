@@ -3,7 +3,7 @@
 class Dj extends Eloquent {
 	
 	protected $table = "djs";
-	protected $timestamps = false;
+	public $timestamps = false;
 
 	
 }

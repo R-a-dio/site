@@ -5,7 +5,7 @@
 		<div class="col-md-3">
 
 			<div class="thumbnail" style="height: 221px">
-				<img src="https://r-a-d.io/res/img/dj/{{ $s["djimage"] }}" alt="{{{ $s["djname"] }}}" height="150" width="150" style="max-height: 150px">
+				<img src="//api/dj-image/{{ $s["djimage"] }}" alt="{{{ $s["djname"] }}}" height="150" width="150" style="max-height: 150px">
 				<div class="text-center">
 					{{{ $s["djname"] }}}
 				</div>

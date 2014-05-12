@@ -6,7 +6,7 @@
 		<ul class="list-group col-md-8 col-md-offset-2">
 			@foreach ($queue as $q)
 				@if ($q["type"] > 0)
-					<li class="list-group-item list-group-item-success">
+					<li class="list-group-item list-group-item-info">
 				@else
 					<li class="list-group-item">
 				@endif
@@ -15,11 +15,6 @@
 				</li>
 			@endforeach
 		</ul>
-		
-
-		<div class="text-center">
-			{{ $queue->links() }}
-		</div>
 	</div>
 
 @stop

@@ -124,7 +124,7 @@
 				<div class="col-md-3">
 					<div class="col-xs-12">
 						<div class="thumbnail">
-							<img id="dj-image" src="/api/dj-image/{{{ $status["dj"]["djimage"] }}}" class="hidden-sm">
+							<img id="dj-image" src="/api/dj-image/{{{ $status["dj"]["id"] }}}" class="hidden-sm img-rounded">
 							<h4 class="text-center" id="dj-name">{{{ $status["dj"]["djname"] }}}</h4>
 						</div>
 					</div>

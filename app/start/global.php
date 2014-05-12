@@ -188,6 +188,18 @@ function time_ago($date) {
 	return "<time class=\"timeago\" datetime=\"$timeago\">$time</time>";
 }
 
+function can_request($ip) {
+	$user = DB::table("requesttime")
+		->where("ip", "=", $ip)
+		->first();
+
+	if (!$user)
+		return true;
+
+	$time = time() - strtotime($user["time"]);
+
+	return $time > (3600 * 2);
+}
 
 
 /*

@@ -9,7 +9,7 @@ class API extends Controller {
 
 	protected $limit;
 	protected $offset = 0;
-	protected $routes = ["tracks", "djs", "faves"];
+	protected $routes = ["tracks", "djs", "faves", "can-request", "request", "metadata", "dj-image"];
 
 	public function __construct() {
 		$this->limit = Config::get("radio.api.limit", 25);
@@ -84,6 +84,15 @@ class API extends Controller {
 		}
 
 		return Response::json(["status" => trans($status), "metadata" => $meta]);
+	}
+
+	public function getCanRequest() {
+		$current = Cache::get($this->id(), null) ?: $this->currentModelOutput();
+		if ($current["isafkstream"]) {
+			return $this->response(["requests" => can_request(Input::server("REMOTE_ADDR"))]);
+		}
+
+		return $this->response(["requests" => false]);
 	}
 
 	public function getIndex() {

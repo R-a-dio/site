@@ -27,4 +27,7 @@ return [
 		"url" => "https://%s.rest.akismet.com/1.1/comment-check",
 		"blog" => "https://r-a-d.io/news",
 	],
+	"stream" => [
+		"url" => "https://stream.r-a-d.io/main.mp3",
+	],
 ];

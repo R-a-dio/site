@@ -21,9 +21,7 @@ class BaseController extends Controller {
 
 	protected function getStatus() {
 		$status = DB::table('streamstatus')->first();
-		$status["dj"] = DB::table("djs")
-			->where("id", "=", $status["djid"])
-			->first();
+		$status["dj"] = Dj::find($status['djid']);
 		unset($status["djid"]);
 
 		return $status;
@@ -39,8 +37,24 @@ class BaseController extends Controller {
 	 * @return string
 	 */
 	protected function getTheme() {
-		// TODO: check database access, DJ column will have theme
-		return "dark";
+		
+		// get theme from user cookie
+		$name = Cookie::get('theme');
+		
+		if(!$name) {
+			// no set theme, fall back to DJ theme
+			$theme = Theme::find($this->getStatus()['dj']->theme);
+			
+			if($theme) {
+				$name = $theme->name;
+			}
+			else {
+				// no dj theme? fall back to default theme
+				$name = "default";
+			}
+		}
+
+		return $name;
 	}
 
 	/**

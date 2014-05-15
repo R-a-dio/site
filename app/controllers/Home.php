@@ -8,6 +8,7 @@ class Home extends BaseController {
 	use Analysis;
 	use Requests;
 	use SpamCheck;
+	use Themes;
 
 	// layout to use. always master unless AJAX.
 	protected $layout = 'master';
@@ -31,11 +32,15 @@ class Home extends BaseController {
 			->orderBy("id", "desc")
 			->take(3)
 			->get();
+		
+		$cur_theme = Cookie::get('theme');
 
 		$this->layout->content = View::make($this->theme("home"))
 			->with("curqueue", $this->getQueueArray())
 			->with("lastplayed", $this->getLastPlayedArray())
-			->with("news", $news);
+			->with("news", $news)
+			->with("themes", $this->getThemesArray())
+			->with("cur_theme", $cur_theme);
 
 	}
 

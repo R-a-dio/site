@@ -174,7 +174,7 @@ trait Analysis {
 				return false;
 
 		// people can be given a "daypass" to upload unlimited songs.
-		if (Input::get("daypass") === $this->daypass())
+		if (Input::get("daypass") === daypass())
 			return false;
 
 		// cloudflare + nginx will work this out and pass it in
@@ -190,16 +190,6 @@ trait Analysis {
 
 		return false;
 
-	}
-
-	// daypass~
-	protected function daypass() {
-		// default daypass is "testingYYYY-MM-DD" sha256'd and truncated.
-		$raw = Config::get("radio.daypass", "testing") . date("Y-m-d");
-
-		$hash = base64_encode(hash("sha256", $raw));
-
-		return substr($hash, 0, 16);
 	}
 
 	protected function duplicate($artist, $title) {

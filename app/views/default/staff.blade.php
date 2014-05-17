@@ -5,7 +5,7 @@
 		<div class="col-md-3">
 
 			<div class="thumbnail" style="height: 221px">
-				<img src="//api/dj-image/{{ $s["djimage"] }}" alt="{{{ $s["djname"] }}}" height="150" width="150" style="max-height: 150px">
+				<img src="/api/dj-image/{{ $s["id"] }}" alt="{{{ $s["djname"] }}}" height="150" width="150" style="max-height: 150px">
 				<div class="text-center">
 					{{{ $s["djname"] }}}
 				</div>
@@ -15,8 +15,8 @@
 						Developer
 					</p>
 				@elseif ($s["role"] == "dj")
-					<p class="text-center text-success">
-						<a class="btn btn-info btn-xs">DJ - Follow</a>
+					<p class="text-center text-danger">
+						DJ
 					</p>
 				@else
 					<p class="text-center text-success">

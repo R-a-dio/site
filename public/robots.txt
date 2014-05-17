@@ -12,6 +12,8 @@ Disallow: /stream
 Disallow: /main
 Disallow: /admin/
 Disallow: /song/
+Disallow: /request/
+Disallow: /ed/
 Allow: /
 
 # Bad Yahoo.

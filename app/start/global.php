@@ -43,7 +43,7 @@ function sentry_log($exception, $code = 500) {
 		]);
 
 		if ($code < 500 and $code >= 400) {
-			$id = $client->getIdent($client->captureMessage($exception));
+			// $id = $client->getIdent($client->captureMessage($exception));
 		} else {
 			$id = $client->getIdent($client->captureException($exception));
 

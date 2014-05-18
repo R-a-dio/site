@@ -9,6 +9,7 @@
 
 <script>
 	$(function() {
+		$.timeago.settings.autoDisposal = true;
 		$.timeago.settings.allowFuture = true;
 		$.timeago.settings.strings.minutes = "%d mins";
 		$.timeago.settings.strings.minute = "less than a min";

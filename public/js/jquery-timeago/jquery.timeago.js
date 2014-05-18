@@ -43,6 +43,7 @@
       allowFuture: false,
       localeTitle: false,
       cutoff: 0,
+      autoDisposal: false,
       strings: {
         prefixAgo: null,
         prefixFromNow: null,
@@ -137,10 +138,11 @@
   // functions are called with context of a single element
   var functions = {
     init: function(){
-      var refresh_el = $.proxy(refresh, this);
-      refresh_el();
       var $s = $t.settings;
+      refresh.call(this);
+      functions.dispose.call(this)
       if ($s.refreshMillis > 0) {
+        var refresh_el = $.proxy(($s.autoDisposal ? refreshWithAutoDisposal : refresh), this)
         this._timeagoInterval = setInterval(refresh_el, $s.refreshMillis);
       }
     },
@@ -173,6 +175,15 @@
     });
     return this;
   };
+
+  function refreshWithAutoDisposal() {
+    if ($(this).closest('html').length == 0) {
+      functions.dispose.call(this);
+    } else {
+      refresh.call(this);
+    }
+    return this;
+  }
 
   function refresh() {
     var data = prepareData(this);

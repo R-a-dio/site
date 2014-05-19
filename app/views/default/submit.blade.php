@@ -243,8 +243,18 @@
 
 			var $form = $("#submit"),
 				xhr = new XMLHttpRequest();
-
+			
+			if ($form.find("input[name=comment]")[0].value.trim() === "") {
+				$("#errored").text("You must enter a comment! Please give source!");
+				$("#upload-progress").show();
+				showErrored();
+				e.preventDefault();
+				return;
+			}
+			
 			if (!$form.find("input[name=song]")[0].files[0]) {
+				$("#errored").text("No file was selected.");
+				$("#upload-progress").show();
 				showErrored();
 				e.preventDefault();
 				return;

@@ -201,6 +201,42 @@ function can_request($ip) {
 	return $time > (3600 * 2);
 }
 
+function base64url_encode($data) {
+  return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+}
+
+function base64url_decode($data) {
+  return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
+} 
+
+// daypass~
+function daypass() {
+	// default daypass is "testingYYYY-MM-DD" sha256'd and truncated.
+	$raw = Config::get("radio.daypass", "testing") . date("Y-m-d");
+
+	$hash = base64_encode(hash("sha256", $raw));
+
+	return substr($hash, 0, 16);
+}
+
+function simpleDaypassEncrypt($data) {
+	$seed = hexdec(substr(base64_decode(daypass()), 0, 8));
+	mt_srand($seed);
+	for($i=0;$i<strlen($data);$i++) {
+		$data[$i] = chr(ord($data[$i]) ^ (mt_rand() & 127));
+	}
+	return $data;
+}
+
+function simpleDaypassDecrypt($encr) {
+	$seed = hexdec(substr(base64_decode(daypass()), 0, 8));
+	mt_srand($seed);
+	for($i=0;$i<strlen($encr);$i++) {
+		$encr[$i] = chr(ord($encr[$i]) ^ (mt_rand() & 127));
+	}
+	return $encr;
+}
+
 
 /*
 |--------------------------------------------------------------------------

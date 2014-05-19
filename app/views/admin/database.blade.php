@@ -151,7 +151,7 @@
 									</button>
 								</div>
 								<div class="col-lg-6">
-									<a class="btn btn-warning btn-sm btn-block" href="/admin/song/{{{ $result["_id"] }}}">
+									<a class="btn btn-warning btn-sm btn-block" href="/api/song/{{{ simpleDaypassEncrypt(hex2bin($result["_source"]["hash"])) }}}">
 										DL
 									</a>
 									@if (Auth::user()->isAdmin())

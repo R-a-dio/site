@@ -6,10 +6,11 @@ class API extends Controller {
 	use Analysis;
 	use Hanyuu;
 	use DjImages;
+	use Songs;
 
 	protected $limit;
 	protected $offset = 0;
-	protected $routes = ["tracks", "djs", "faves", "can-request", "request", "metadata", "dj-image"];
+	protected $routes = ["tracks", "djs", "faves", "can-request", "request", "metadata", "dj-image", "song"];
 
 	public function __construct() {
 		$this->limit = Config::get("radio.api.limit", 25);

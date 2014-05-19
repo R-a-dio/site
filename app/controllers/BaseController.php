@@ -43,7 +43,7 @@ class BaseController extends Controller {
 		
 		if(!$name) {
 			// no set theme, fall back to DJ theme
-			$theme = Theme::find($this->getStatus()['dj']->theme);
+			$theme = Theme::find($this->getStatus()['dj']->theme_id);
 			
 			if($theme) {
 				$name = $theme->name;

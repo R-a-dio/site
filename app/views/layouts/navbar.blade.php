@@ -55,6 +55,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="/last-played" class="ajax-navigation drop">Last Played</a></li>
 								<li><a href="/queue" class="ajax-navigation drop">Queue</a></li>
+								<li><a href="/faves" class="ajax-navigation drop">{{{ trans("faves.title") }}} </a></li>
 							</ul>
 						</li>
 

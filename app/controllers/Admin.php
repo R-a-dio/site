@@ -50,6 +50,14 @@ class Admin extends BaseController {
 			->with("notifications", $notifications);
 	}
 
+	public function getDev() {
+		if (! Auth::user()->isDev())
+			return Redirect::to("/admin");
+		
+		$this->layout->content = View::make("admin.dev")
+			->with("failed_logins", DB::table("failed_logins")->get());
+	}
+
 	public function missingMethod($parameters = []) {
 		App::abort(404);
 	}

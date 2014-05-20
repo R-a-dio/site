@@ -18,16 +18,11 @@
 				======== -->
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li
-							@if (!Request::segment(2))
-								class="active"
-							@endif
-						><a href="/admin">Home</a></li>
-						<li
-							@if (Request::segment(2) == "news")
-								class="active"
-							@endif
-						>
+						<li @if (!Request::segment(2)) class="active" @endif>
+							<a href="/admin">Home</a>
+						</li>
+						
+						<li @if (Request::segment(2) == "news") class="active" @endif>
 							<a href="/admin/news">News</a>
 						</li>
 
@@ -46,17 +41,20 @@
 						</li>
 						
 						@if (Auth::user()->isAdmin())
-							<li
-								@if (Request::segment(2) == "users")
-									class="active"
-								@endif
-							><a href="/admin/users">Users</a></li>
+							<li @if (Request::segment(2) == "users") class="active" @endif>
+								<a href="/admin/users">Users</a>
+							</li>
 						@endif
-						<li
-							@if (Request::segment(2) == "djs")
-								class="active"
-							@endif
-						><a href="/admin/djs">DJs</a><li>
+
+						<li @if (Request::segment(2) == "djs") class="active" @endif>
+							<a href="/admin/djs">DJs</a>
+						<li>
+						
+						@if (Auth::user()->isDev())
+							<li @if (Request::segment(2) == "dev") class="active" @endif>
+									<a href="/admin/dev">Dev Shit</a>
+							</li>
+						@endif
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">

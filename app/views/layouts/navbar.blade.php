@@ -46,7 +46,7 @@
 							<a href="/search" class="ajax-navigation">{{{ trans("search.title") }}}</a>
 						</li>
 
-						@if (Request::segment(1) == "queue" or Request::segment(1) == "last-played")
+						@if (Request::segment(1) == "queue" or Request::segment(1) == "last-played" or Request::segment(1) == "faves")
 							<li class="dropdown active">
 						@else
 							<li class="dropdown">

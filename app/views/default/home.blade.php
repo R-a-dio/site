@@ -12,9 +12,9 @@
 
 				<!-- Logo 1 (Icon)
 					============== -->
-				<div class="col-md-3 visible-lg visible-md">
+				<div class="col-md-3 hidden-xs hidden-sm">
 					<div class="col-xs-12">
-						<img src="/assets/logo_image_small.png" class="hidden-sm" alt="R/a/dio">
+						<img src="/assets/logo_image_small.png" alt="R/a/dio">
 					</div>
 				</div>
 

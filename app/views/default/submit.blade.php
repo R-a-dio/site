@@ -33,7 +33,7 @@
 			<div class="col-md-6">
 				{{ Form::open(["files" => true, "id" => "submit"]) }}
 
-					<div class="form-group" id="file-input">
+					<div class="form-group upload-form" id="file-input">
 						<input type="file" name="song" id="song">
 						<span class="form-control-feedback">
 							<i class="fa fa-check" id="feedback-success" style="display: none"></i>
@@ -56,21 +56,21 @@
 						<p class="help-block" id="errored" style="display: none">Your Browser does not support HTML5 file uploading.</p>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group upload-form">
 						<input type="text" class="form-control" name="comment" id="comment" placeholder="{{{ trans("submit.comment.label") }}}">
 						<p class="help-block">
 							{{{ trans("submit.comment.desc") }}}
 						</p>
 					</div>
 
-					<div class="form-group" style="display: none" id="daypass">
+					<div class="form-group upload-form" style="display: none" id="daypass">
 						<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
 						<p class="help-block">
 							{{{ trans("submit.daypass.desc") }}}
 						</p>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group upload-form">
 						<button type="submit" id="submit-button" class="btn btn-default ajax-upload">
 							{{{ trans("submit.upload.label") }}}
 						</button>
@@ -150,6 +150,8 @@
 			$("#feedback-error").hide();
 			$("#file-input").addClass("has-success").addClass("has-feedback").removeClass("has-error");
 			$("#file-progress-bar").addClass("progress-bar-success").removeClass("progress-bar-danger");
+			$(".upload-form").show();
+			$("#daypass").hide();
 		}
 		function showErrored() {
 			$("#uploading").hide();
@@ -159,6 +161,8 @@
 			$("#feedback-error").show();
 			$("#file-input").addClass("has-error").addClass("has-feedback").removeClass("has-success");
 			$("#file-progress-bar").removeClass("progress-bar-success").addClass("progress-bar-danger");
+			$(".upload-form").show();
+			$("#daypass").hide();
 		}
 
 		function checkCooldown() {
@@ -243,15 +247,27 @@
 
 			var $form = $("#submit"),
 				xhr = new XMLHttpRequest();
-
+			
+			if ($form.find("input[name=comment]")[0].value.trim() === "") {
+				$("#errored").text("You must enter a comment! Please give source!");
+				$("#upload-progress").show();
+				showErrored();
+				e.preventDefault();
+				return;
+			}
+			
 			if (!$form.find("input[name=song]")[0].files[0]) {
+				$("#errored").text("No file was selected.");
+				$("#upload-progress").show();
 				showErrored();
 				e.preventDefault();
 				return;
 			} else {
 				showUploading();
 			}
-
+			
+			$(".upload-form").hide();
+			
 			if (typeof FormData !== "undefined" && xhr.upload) {
 				var $data = new FormData();
 				// form data

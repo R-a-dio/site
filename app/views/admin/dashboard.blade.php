@@ -20,6 +20,11 @@
 					<p>These are mostly for admins, but occasionally there's a global announce.</p>
 					<p class="text-center"><a href="/admin/notifications" class="btn btn-success">View Events</a></p>
 				</div>
+				<div class="well">
+					<h3>Daypass</h3>
+					<p>Today's daypass is: <span class="label label-primary">{{{ daypass() }}}</span></p>
+					<p>Hand it out with discretion!</p>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-8">

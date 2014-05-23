@@ -1,8 +1,8 @@
 @section('content')
 
-<div class="container main content">
+<div class="container main content disable">
 	<!-- Search Bar -->
-	<div class="container">
+	<div class="container search">
 		<div class="col-md-7 centered">
 			<h1 class="text-center text-info"> {{{ trans("search.help.main") }}} </h1>
 			{{ Form::open(['url' => "/search", "class" => "ajax-search"]) }}
@@ -24,7 +24,7 @@
 	</div>
 
 	<!-- Search Results -->
-	<div class="container">
+	<div class="container search">
 		<div class="row visible-md visible-lg">
 				<div class="col-sm-4 text-center" style="margin-bottom: 10px">
 					<h4>{{{ trans("search.metadata.artist") }}}</h4>

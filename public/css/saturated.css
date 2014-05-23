@@ -14,6 +14,10 @@ a, a:hover {
      color: #8B928B;
 }
 
+.list-group-item-info time, .list-group-item-info span, .list-group-item-info .q-meta {
+     color: #49667F ! important;
+}
+
 .dropdown-menu {
      background-color: #20202E;
      border: 5px solid #956671;

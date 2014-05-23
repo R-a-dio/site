@@ -335,7 +335,8 @@
 		};
 
 		function setDjImage(image) {
-			$("#dj-image").attr("src", "/api/dj-image/" + image);
+			if(image != "/api/dj-image/" + image)
+				$("#dj-image").attr("src", "/api/dj-image/" + image);
 		}
 
 		function setDJ(dj) {

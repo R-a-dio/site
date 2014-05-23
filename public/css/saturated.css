@@ -1,0 +1,195 @@
+body {
+     background-color: #2A3843;
+}
+
+.footer {
+     border: medium none;
+}
+
+a, a:hover {
+     color: #8B928B;
+}
+
+* {
+     color: #8B928B;
+}
+
+.dropdown-menu {
+     background-color: #20202E;
+     border: 5px solid #956671;
+     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-menu * {
+     color: #FFFFFF ! important;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+     background-color: #41415D;
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+     background-color: #41415D;
+}
+
+.thumbnail, .thumbnail:hover {
+     background-color: transparent;
+     border: medium none;
+     box-shadow: none ! important;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+     background-color: #41415D;
+    border-color: #ADADAD;
+    color: #FFF;
+}
+
+.btn {
+     background-color: transparent;
+     border: medium none;
+     color: #8B928B;
+}
+
+.btn:hover {
+     background-color: transparent;
+     border: medium none;
+     color: #BAC2BA;
+}
+
+.progress {
+     background: none repeat scroll 0% 0% #262637;
+}
+
+.progress-bar {
+     background: none repeat scroll 0% 0% #956671;
+}
+
+.list-group-item {
+     background-color: transparent;
+     border-style: dashed;
+     border-width: 0px;
+}
+
+.bordered {
+     border-radius: 7px;
+     box-shadow: 0px 0px 4px 4px #888888;
+}
+
+.thumbnail:hover, .thumbnail:focus {
+     border-color: #66AFE9;
+     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+}
+
+.main, .container ~ .content {
+     background-color: #20202E;
+     border: 5px solid #956671;
+     box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5);
+}
+
+.main {
+     padding-top: 20px;
+}
+
+.panel {
+     background-color: transparent;
+     border: 0px solid transparent;
+}
+
+#exci-middlerow {
+     text-align: right;
+}
+
+.panel-default > .panel-heading {
+     background-color: transparent;
+     border-bottom: 3px solid #8B928B;
+}
+
+#dj-mode {
+     background-color: transparent;
+     border: medium none;
+}
+
+.panel-heading a, .panel-title {
+     color: #8B928B;
+}
+
+.well:not(#volume-control) {
+     -moz-border-bottom-colors: none;
+     -moz-border-left-colors: none;
+     -moz-border-right-colors: none;
+     -moz-border-top-colors: none;
+     background: none repeat scroll 0% 0% transparent;
+     border-color: -moz-use-text-color;
+     border-image: none;
+     border-radius: 0px;
+     border-style: none none dashed;
+     border-width: medium medium 2px;
+}
+
+#volume-control {
+     background: none repeat scroll 0% 0% transparent;
+     border: medium none;
+}
+
+.text-info {
+     color: #527A8E;
+}
+
+.text-success, .alert-success {
+     color: #5D7B5D;
+}
+
+.text-danger {
+     color: #A15755;
+}
+
+hr {
+     border-color: #333349;
+     border-width: 2px;
+}
+
+.alert {
+     background: none repeat scroll 0% 0% transparent;
+     border: medium none;
+}
+
+.form-control:not(.comment-input) {
+     background-color: #3D3D3D;
+     border-color: rgba(27, 27, 27, 0.5);
+     color: rgba(255, 255, 255, 0.4);
+     margin-right: -0.9em;
+     padding-right: 3em;
+}
+
+.form-control:focus {
+     border-color: rgba(27, 27, 27, 0.5);
+     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(0, 0, 0, 0.6);
+}
+
+.comment-input {
+     background-color: #323247;
+     border: medium none;
+}
+
+.form-control:active, .form-control:focus {
+     border: medium none ! important;
+     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+}
+
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+     background-color: transparent;
+     border-color: rgba(27, 27, 27, 0.1);
+     color: #787878;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+     background-color: transparent;
+     border-color: rgba(27, 27, 27, 0.1);
+     color: #787878;
+}
+
+.pagination > li > a, .pagination > li > span {
+     background-color: transparent;
+     border-color: rgba(27, 27, 27, 0.1);
+     color: #49667F;
+}

@@ -2,9 +2,9 @@
 
 trait Search {
 
-	protected function getSearchResults($request, $amount = 20) {
+	protected function getSearchResults($request, $amount = 20, $usable_only = true) {
 		
-			$results = $this->search($request ?: "", "track", "song-database");
+			$results = $this->search($request ?: "", "track", "song-database", $usable_only);
 			//dd($results);
 
 			$start = (Paginator::getCurrentPage() - 1) * $amount;
@@ -21,7 +21,7 @@ trait Search {
 
 	}
 
-	public function search($terms, $type, $index) {
+	public function search($terms, $type, $index, $usable_only = true) {
 
 		$params = [
 			"type" => $type,
@@ -41,6 +41,10 @@ trait Search {
 				],
 			],
 		];
+
+		if ($usable_only) {
+			$params["body"]["filter"] = ["bool" => ["must" => ["term" => ["usable" => 1] ] ] ];
+		}
 
 		return $this->client->search($params);
 
@@ -65,6 +69,7 @@ trait Search {
 			"lastplayed" => strtotime($track["lastplayed"]),
 			"lastrequested" => strtotime($track["lastrequested"]),
 			"hash" => $track["hash"],
+			"usable" => $track["usable"],
 		];
 
 		$this->client->index($tmp);

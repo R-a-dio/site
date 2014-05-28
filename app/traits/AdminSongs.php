@@ -225,7 +225,7 @@ trait AdminSongs {
 	public function getSongs($search = null) {
 		$search = $search ?: Input::get("q", null);
 
-		$results = $this->getSearchResults($search);
+		$results = $this->getSearchResults($search, 20, false);
 		
 
 		$this->layout->content = View::make("admin.database")

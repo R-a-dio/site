@@ -63,7 +63,11 @@
 	</div>
 
 	@foreach ($results as $result)
-		<div class="well" style="padding-bottom: 0; padding-top: 8px">
+                @if ($result["_source"]["usable"] == 1)
+                <div class="well" style="padding-bottom: 0; padding-top: 8px">
+                @else
+                <div class="well" style="background-color: rgba(217, 83, 79, 0.5); padding-bottom: 0; padding-top: 8px">
+                @endif
 			{{ Form::open(["url" => "/admin/songs/" . $result["_id"], "class" => "form-horizontal"]) }}
 				<div class="container" style="width: 100%; padding: 0">
 					<div class="col-lg-3">
@@ -151,7 +155,7 @@
 									</button>
 								</div>
 								<div class="col-lg-6">
-									<a class="btn btn-warning btn-sm btn-block" href="/api/song/{{{ simpleDaypassEncrypt(hex2bin($result["_source"]["hash"])) }}}">
+									<a class="btn btn-warning btn-sm btn-block" href="/api/song/{{{ base64url_encode(simpleDaypassEncrypt(hex2bin($result["_source"]["hash"]))) }}}">
 										DL
 									</a>
 									@if (Auth::user()->isAdmin())

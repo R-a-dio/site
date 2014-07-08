@@ -6,7 +6,7 @@
 
 			<div class="thumbnail" style="height: 221px">
 				<img src="/api/dj-image/{{ $s["id"] }}" alt="{{{ $s["djname"] }}}" height="150" width="150" style="max-height: 150px">
-				<div class="text-center">
+				<div class="text-center staff-name">
 					{{{ $s["djname"] }}}
 				</div>
 

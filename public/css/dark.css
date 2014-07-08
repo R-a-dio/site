@@ -24,6 +24,11 @@ code {
      color: rgba(255, 255, 255, 0.75);
 }
 
+.staff-name {
+     color: #686868;
+}
+
+
 .text-danger {
      color: #A15755;
 }

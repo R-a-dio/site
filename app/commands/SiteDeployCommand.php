@@ -32,7 +32,12 @@ class SiteDeployCommand extends Command {
 	 */
 	public function fire()
 	{
-		
+		SSH::run([
+			"php artisan down",
+			"git pull origin develop",
+			"composer update",
+			"php artisan up",
+		]);
 	}
 
 	/**

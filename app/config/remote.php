@@ -29,12 +29,12 @@ return array(
         'connections' => array(
 
                 'production' => array(
-                        'host'      => '',
-                        'username'  => '',
-                        'password'  => '',
-                        'key'       => '',
-                        'keyphrase' => '',
-                        'root'      => '/var/www',
+                        'host'      => @$_ENV["SSH_HOST"],
+                        'username'  => @$_ENV["SSH_USER"],
+                        'password'  => '', // passwords are for scrubs.
+                        'key'       => @$_ENV["SSH_KEY"],
+                        'keyphrase' => @$_ENV["SSH_KEYPHRASE"],
+                        'root'      => @$_ENV["SSH_ROOT"],
                 ),
 
         ),

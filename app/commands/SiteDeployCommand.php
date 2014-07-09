@@ -35,6 +35,7 @@ class SiteDeployCommand extends Command {
 	public function fire()
 	{
 		SSH::run([
+			"cd " . @$_ENV["SSH_ROOT"],
 			"php artisan down",
 			"git pull origin develop",
 			"composer update",

@@ -10,7 +10,7 @@ trait Hanyuu {
 		if (Auth::check()) {
 			$user = Auth::user();
 
-			if (($user->isDev() or $user->id === 18)) {
+			if (($user->isDev() or $user->user === "AFK")) {
 				$output = new BufferedOutput();
 				switch ($route) {
 					case "index":

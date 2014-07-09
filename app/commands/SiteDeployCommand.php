@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Console\Command;
+
 class SiteDeployCommand extends Command {
 	/**
 	 * The console command name.

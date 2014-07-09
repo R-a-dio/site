@@ -1,11 +1,13 @@
 <?php
 
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
 class Post extends Eloquent {
 
+	use SoftDeletingTrait;
 
 	protected $table = "radio_news";
-	protected $softDelete = true;
-
+	
 	protected $fillable = ["user_id", "title", "header", "text", "private"];
 
 	public function author() {

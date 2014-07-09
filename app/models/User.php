@@ -2,8 +2,16 @@
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
+
+	/**
+	 * Should deleted_at be used
+	 *
+	 * @var bool
+	 */
+	use SoftDeletingTrait;
 
 	/**
 	 * The database table used by the model.
@@ -11,13 +19,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var string
 	 */
 	protected $table = 'users';
-
-	/**
-	 * Should deleted_at be used
-	 *
-	 * @var bool
-	 */
-	protected $softDelete = true;
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -98,6 +99,21 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function groups() {
 		return $this->belongsToMany("Group", "user_privileges", "user_id", "privilege_id")->withTimestamps();
+	}
+
+	public function getRememberToken()
+	{
+		return $this->remember_token;
+	}
+
+	public function setRememberToken($value)
+	{
+		$this->remember_token = $value;
+	}
+
+	public function getRememberTokenName()
+	{
+		return 'remember_token';
 	}
 
 }

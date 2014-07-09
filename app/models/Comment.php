@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
 class Comment extends Eloquent {
 
+	use SoftDeletingTrait;
+
 	protected $table = "radio_comments";
-	protected $softDelete = true;
 	protected $fillable = ["user_id", "comment", "ip"];
 
 	public function user() {

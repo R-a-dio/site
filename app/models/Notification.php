@@ -1,6 +1,15 @@
 <?php
 
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
+
 class Notification extends Eloquent {
+
+	/**
+	 * Should deleted_at be used
+	 *
+	 * @var bool
+	 */
+	use SoftDeletingTrait;
 
 	/**
 	 * The database table used by the model.
@@ -8,13 +17,6 @@ class Notification extends Eloquent {
 	 * @var string
 	 */
 	protected $table = 'notifications';
-
-	/**
-	 * Should deleted_at be used
-	 *
-	 * @var bool
-	 */
-	protected $softDelete = true;
 
 	// allow mass-assignment
 	protected $fillable = ["notification", "privileges"];

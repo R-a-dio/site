@@ -7,7 +7,7 @@ trait DjImages {
 		$path = Config::get("radio.paths.dj-images") . "/" . $dj->djimage;
 		
 		if (! File::exists($path)) {
-			$resp = Response::make(File::get(public_path() . "/assets/dj-image.png"), 200);
+			$resp = Response::make(File::get(public_path() . "/assets/dj_image.png"), 200);
 		} else {
 			$resp = Response::make(File::get($path), 200);
 		}

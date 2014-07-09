@@ -41,7 +41,9 @@ trait DjImages {
 
 		if (($dj->user->id === $user->id) or ($user->isDev())) {
 			$image = Input::file("image");
+			$dj->djimage = $dj->id;
 			$image->moveUploadedFile(Config::get("radio.paths.dj-images"), $dj->id);
+			$dj->save();
 		}
 	}
 
@@ -55,7 +57,7 @@ trait DjImages {
 
 		if (($dj->user->id === $user->id) or ($user->isDev())) {
 			unlink(Config::get("radio.paths.dj-images", "") . "/" . $dj->djimage);
-			$dj->image = null;
+			$dj->djimage = null;
 			$dj->save();
 		}
 	}

@@ -22,7 +22,7 @@
 		}
 	],
 	"require": {
-		"laravel/framework": "4.1.23",
+		"laravel/framework": "4.2.*",
 		"raven/raven": "0.7.1",
 		"hiro/laravel-hashing": "dev-radio",
 		"hiro/laravel-markdown": "dev-master",

@@ -40,6 +40,7 @@ class SiteDeployCommand extends Command {
 			"git pull origin develop",
 			"composer update",
 			"php artisan up",
+			"aglio -i API.md -o public/docs/index.html",
 		]);
 	}
 

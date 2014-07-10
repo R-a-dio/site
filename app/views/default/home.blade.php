@@ -6,9 +6,9 @@
 
 		<!-- Content (Dynamic)
 		=================== -->
-		<div class="container content">
+		<div class="container content top-content">
 
-			<div class="row">
+			<div class="row dynamic-row">
 
 				<!-- Logo 1 (Icon)
 					============== -->
@@ -21,7 +21,7 @@
 
 				<div class="col-md-6">
 
-					<div class="row" id="stream-info">
+					<div class="row info-row" id="stream-info">
 
 						<!-- Logo 2 (Branded)
 							================= -->
@@ -98,7 +98,7 @@
 
 					<!-- Progress Bar
 						================= -->
-					<div class="row">
+					<div class="row progress-row">
 
 						<div class="col-xs-12">
 							<h2 class="text-center" id="current-song">
@@ -152,8 +152,8 @@
 
 	<br>
 
-	<div class="container content">
-		<div class="row">
+	<div class="container content middle-content">
+		<div class="row lists-row">
 			<div class="col-md-6">
 				<h3 class="text-center">{{ trans("stream.lp") }}</h3>
 				<ul class="list-group" id="lastplayed">
@@ -193,7 +193,7 @@
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row news-row">
 			
 			@foreach ($news as $article)
 				<div class="col-md-4">

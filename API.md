@@ -17,7 +17,7 @@ The main object returns an absolute monster of a response. This is cached every 
 In general you should only really need this API response if you want to make a status display for R/a/dio.
 Any keys not mentioned below is either obsolete or subject to change.
 
-## Fetch Info [GET]
+## Fetch Data [GET]
 + Response 200 (application/json)
 
         {
@@ -59,6 +59,7 @@ Any keys not mentioned below is either obsolete or subject to change.
             ]
         }
 
+
 # DJ Image [/dj-image/{id}]
 The PUT, POST and DELETE methods are authenticated; you can only change an image if it belongs to the user making the call or if the user is a Developer.
 
@@ -69,20 +70,26 @@ This will return the image associated with a dj (or a default image). A 404 is r
 + Response 200 (image/png)
 + Response 404 (text/html)
 
-## Delete Image [DELETE]
-This will delete the image associated with a DJ and they will revert back to the default DJ image.
-
-+ Response 200
-
-## Update Image [PUT]
-Upload a file (key:`image`) while logged in and this method will update the current user's DJ image.
-
-+ Response 200
-
 ## Upload Image [POST]
 Upload a file to this URL with the key `image`, and the current user's image will be added
 (replaces the current entry in the database with the user's ID instead of just overwriting the file)
 
 + Response 200
 
+
+# Last Played [/last-played]
+Return as set as big as you like using the `limit` and `offset` GET parameters.
+Keep in mind that data is constantly changing and if you fetch data in chunks it could result in either a missing or a duplicated entry.
+
+## Fetch Data [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "meta":      string,   // metadata for the song played
+                "timestamp": long      // unix timestamp of when the song was played (64bit int)
+            },
+            ... // n = ?limit
+        ]
 

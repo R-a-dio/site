@@ -1,0 +1,165 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>R/a/dio API Documentation</title><link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200"><style>/* Highlight.js Theme Tomorrow */
+.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}</style><style>body,
+h4,
+h5 {
+  font-family: 'Roboto' sans-serif !important;
+}
+h1,
+h2,
+h3,
+.aglio {
+  font-family: 'Raleway' sans-serif !important;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a {
+  display: none;
+}
+h1:hover a,
+h2:hover a,
+h3:hover a,
+h4:hover a,
+h5:hover a {
+  display: inline;
+}
+code {
+  color: #444;
+  background-color: #ddd;
+  font-family: 'Inconsolata' monospace !important;
+}
+a[data-target] {
+  cursor: pointer;
+}
+h4 {
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.back-to-top {
+  position: fixed;
+  z-index: 1;
+  bottom: 0px;
+  right: 24px;
+  padding: 4px 8px;
+  background-color: #eee;
+  text-decoration: none !important;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.panel {
+  overflow: hidden;
+}
+.panel-heading code {
+  color: #c7254e;
+  background-color: transparent;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.panel-heading h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+a.list-group-item {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+a.list-group-item.heading {
+  background-color: #f5f5f5;
+}
+.list-group-item.collapse {
+  display: none;
+}
+.list-group-item.collapse.in {
+  display: block;
+}
+#nav {
+  margin-top: 38px;
+  min-width: 255px;
+  top: 0;
+  bottom: 0;
+  padding-right: 12px;
+  padding-bottom: 12px;
+  overflow-y: auto;
+}
+@media (max-width: 1199px) {
+  #nav {
+    min-width: 212px;
+  }
+}
+</style></head><body><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><div class="col-md-3"><nav id="nav" class="hidden-sm hidden-xs affix nav"><div class="list-group"><a href="#" class="list-group-item heading">Resource Group</a><a href="#-current-info" class="list-group-item"><i class="fa fa-arrow-circle-down"></i>&nbsp;Current Info</a><a href="#-dj-image" class="list-group-item"><i class="fa fa-bars"></i>&nbsp;DJ Image</a><a href="#-dj-image-get" style="padding-left: 32px" class="list-group-item"><i class="fa fa-arrow-circle-down"></i>&nbsp;Fetch Image</a><a href="#-dj-image-delete" style="padding-left: 32px" class="list-group-item"><i class="fa fa-warning"></i>&nbsp;Delete Image</a><a href="#-dj-image-put" style="padding-left: 32px" class="list-group-item"><i class="fa fa-pencil"></i>&nbsp;Update Image</a><a href="#-dj-image-post" style="padding-left: 32px" class="list-group-item"><i class="fa fa-plus-square"></i>&nbsp;Upload Image</a></div></nav></div><div class="col-md-9"><div><header><div class="page-header"><h1 id="top">R/a/dio API Documentation</h1></div></header><div class="description"><p>R/a/dio doesn’t version its API, but could in future. The current base URL is <strong><code>https://r-a-d.io/api</code></strong>.
+Prepend this to every method here.</p>
+<h1 id="response-types">Response types</h1>
+<p>Every object returned by the API (with the exception of errors, see below) returns two objects: <code>main</code> and <code>meta</code>.
+Meta is a short object returning information about the current request, and available routes (as well as our stream URL).
+Responses will only detail the <em>main</em> object.</p>
+<h1 id="put-delete-usage">PUT + DELETE Usage</h1>
+<p>PUT and DELETE are not available in most browsers, so Symfony2 will obey the <code>_method</code> POST parameter, set to either <code>PUT</code> or <code>DELETE</code> for this.</p>
+</div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="">Resource Group&nbsp;<a href="#"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><h4 id="-current-info">Current Info&nbsp;<a href="#-current-info"><i class="fa fa-link"></i></a></h4><p>The main object returns an absolute monster of a response. This is cached every 1 second as it is time-sensitive.
+In general you should only really need this API response if you want to make a status display for R/a/dio.
+Any keys not mentioned below is either obsolete or subject to change.</p>
+<section id="-current-info-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Fetch Info</span></div><div style="float:left"><a href="#-current-info-get" class="btn btn-xs btn-primary">GET</a></div><div style="overflow:hidden"><code>/</code></div></div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#55f1188e475c024cca51053f261d64fd" class="pull-right">Toggle</a></li><li id="55f1188e475c024cca51053f261d64fd" class="list-group-item panel-collapse collapse"><div class="description"></div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+    <span class="hljs-string">"np"</span>:           <span class="hljs-keyword">string</span>,         <span class="hljs-comment"> // currently playing song</span>
+    <span class="hljs-string">"listeners"</span>:    <span class="hljs-keyword">integer</span>,        <span class="hljs-comment"> // current listeners</span>
+    <span class="hljs-string">"isafkstream"</span>:  <span class="hljs-number">0</span> <span class="hljs-operator">or</span> <span class="hljs-number">1</span>,         <span class="hljs-comment"> // boolean, is Hanyuu (the afk streamer) playing?</span>
+    <span class="hljs-string">"start_time"</span>:   <span class="hljs-keyword">long</span> <span class="hljs-operator">or</span> <span class="hljs-constant">null</span>,   <span class="hljs-comment"> // timestamp for the start of the song. can be null. (64bit int)</span>
+    <span class="hljs-string">"end_time"</span>:     <span class="hljs-keyword">long</span> <span class="hljs-operator">or</span> <span class="hljs-constant">null</span>,   <span class="hljs-comment"> // timestamp for the end of the song. (64bit int)</span>
+                                    <span class="hljs-comment"> // can be null if not known. Can also be inaccurate.</span>
+    <span class="hljs-string">"trackid"</span>:      <span class="hljs-keyword">integer</span> <span class="hljs-operator">or</span> <span class="hljs-constant">null</span>,<span class="hljs-comment"> // if not null, the ID of the current track in the database</span>
+    <span class="hljs-string">"thread"</span>:       <span class="hljs-keyword">string</span> <span class="hljs-operator">or</span> <span class="hljs-constant">null</span>, <span class="hljs-comment"> // current 4chan thread, if any (url)</span>
+    <span class="hljs-string">"requesting"</span>:   <span class="hljs-number">0</span> <span class="hljs-operator">or</span> <span class="hljs-number">1</span>,         <span class="hljs-comment"> // boolean, is requesting allowed right now?</span>
+    <span class="hljs-string">"djname"</span>:       <span class="hljs-keyword">string</span>,         <span class="hljs-comment"> // textual representation of a DJ's name exactly as written in IRC</span>
+    <span class="hljs-string">"current"</span>:      <span class="hljs-keyword">long</span>,           <span class="hljs-comment"> // current server time (64bit int)</span>
+
+    <span class="hljs-string">"dj"</span>: {                         <span class="hljs-comment"> // current DJß</span>
+        <span class="hljs-string">"id"</span>:       <span class="hljs-keyword">integer</span>,        <span class="hljs-comment"> // DJ's internal ID</span>
+        <span class="hljs-string">"djname"</span>:   <span class="hljs-keyword">string</span>,         <span class="hljs-comment"> // DJ's name (use this instead of djname outside of the object)</span>
+        <span class="hljs-string">"visible"</span>:  <span class="hljs-number">0</span> <span class="hljs-operator">or</span> <span class="hljs-number">1</span>,         <span class="hljs-comment"> // is the DJ supposed to be visible on the staff page?</span>
+        <span class="hljs-string">"role"</span>:     <span class="hljs-keyword">string</span>,         <span class="hljs-comment"> // string representation of a user's role in r/a/dio</span>
+        <span class="hljs-string">"theme_id"</span>: <span class="hljs-number">2</span>               <span class="hljs-comment"> // ID of the theme used by this DJ</span>
+    },
+    <span class="hljs-string">"queue"</span>: [                      <span class="hljs-comment"> // current queue, only available for hanyuu</span>
+        {
+            <span class="hljs-string">"meta"</span>:      <span class="hljs-keyword">string</span>,    <span class="hljs-comment"> // metadata for the given item</span>
+            <span class="hljs-string">"time"</span>:      <span class="hljs-keyword">string</span>,    <span class="hljs-comment"> // html timeago timestamp for use in javascript</span>
+            <span class="hljs-string">"timestamp"</span>: <span class="hljs-keyword">long</span>,      <span class="hljs-comment"> // timestamp representing when the song will play (64bit int)</span>
+            <span class="hljs-string">"type"</span>:      <span class="hljs-keyword">integer</span>    <span class="hljs-comment"> // 0: random song, 1 = request, 2+ = internal state, assume 1</span>
+        },
+        ...<span class="hljs-comment"> // limit subject to change</span>
+    ],
+    <span class="hljs-string">"lp"</span>: [                         <span class="hljs-comment"> // last played songs</span>
+        {
+            <span class="hljs-string">"time"</span>:      <span class="hljs-keyword">string</span>,    <span class="hljs-comment"> // html timeago timestamp for use with javascript</span>
+            <span class="hljs-string">"timestamp"</span>: <span class="hljs-keyword">long</span>,      <span class="hljs-comment"> // timestamp representing when the song played (64bit int)</span>
+            <span class="hljs-string">"meta"</span>:      <span class="hljs-keyword">string</span>     <span class="hljs-comment"> // metadata for the given item</span>
+        },
+        ...<span class="hljs-comment"> // limit subject to change</span>
+    ]
+}
+</code></pre></li></ul></section><h4 id="-dj-image">DJ Image&nbsp;<a href="#-dj-image"><i class="fa fa-link"></i></a></h4><p>The PUT, POST and DELETE methods are authenticated; you can only change an image if it belongs to the user making the call or if the user is a Developer.</p>
+<section id="-dj-image-get" class="panel panel-info"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Fetch Image</span></div><div style="float:left"><a href="#-dj-image-get" class="btn btn-xs btn-primary">GET</a></div><div style="overflow:hidden"><code>/dj-image/{id}</code></div></div><div class="panel-body"><p>This will return the image associated with a dj (or a default image). A 404 is returned if an ID did not match a DJ.</p>
+</div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#991aa5677b1b8c2362e2791116b75267" class="pull-right">Toggle</a></li><li id="991aa5677b1b8c2362e2791116b75267" class="list-group-item panel-collapse collapse"><div class="description"></div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">image/png</span><br></code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>404</code></strong><a data-toggle="collapse" data-target="#c5c0fb434637b938511b829f95f6c927" class="pull-right">Toggle</a></li><li id="c5c0fb434637b938511b829f95f6c927" class="list-group-item panel-collapse collapse"><div class="description"></div><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">text/html</span><br></code></pre></li></ul></section><section id="-dj-image-delete" class="panel panel-danger"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Delete Image</span></div><div style="float:left"><a href="#-dj-image-delete" class="btn btn-xs btn-danger">DELETE</a></div><div style="overflow:hidden"><code>/dj-image/{id}</code></div></div><div class="panel-body"><p>This will delete the image associated with a DJ and they will revert back to the default DJ image.</p>
+</div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong></li></ul></section><section id="-dj-image-put" class="panel panel-warning"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Update Image</span></div><div style="float:left"><a href="#-dj-image-put" class="btn btn-xs btn-warning">PUT</a></div><div style="overflow:hidden"><code>/dj-image/{id}</code></div></div><div class="panel-body"><p>Upload a file (key:<code>image</code>) while logged in and this method will update the current user’s DJ image.</p>
+</div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong></li></ul></section><section id="-dj-image-post" class="panel panel-success"><div class="panel-heading"><div style="float:right"><span style="text-transform: lowercase">Upload Image</span></div><div style="float:left"><a href="#-dj-image-post" class="btn btn-xs btn-success">POST</a></div><div style="overflow:hidden"><code>/dj-image/{id}</code></div></div><div class="panel-body"><p>Upload a file to this URL with the key <code>image</code>, and the current user’s image will be added
+(replaces the current entry in the database with the user’s ID instead of just overwriting the file)</p>
+</div><ul class="list-group"><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong></li></ul></section></div></div></div></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 10 Jul 2014</p><div id="localFile" style="display: none; position: absolute; top: 0; left: 0; width: 100%; color: white; background: red; font-size: 150%; text-align: center; padding: 1em;">This page may not display correctly when opened as a local file. Instead, view it from a web server.
+
+</div></body><script src="//code.jquery.com/jquery-1.11.0.min.js"></script><script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script>(function() {
+  if (location.protocol === 'file:') {
+    document.getElementById('localFile').style.display = 'block';
+  }
+
+}).call(this);
+</script><script>(function() {
+  $('table').addClass('table');
+
+}).call(this);
+</script></html>

@@ -48,12 +48,16 @@ class API extends Controller {
 		$dj = DB::table("djs")->where("id", "=", $current["djid"])->first();
 
 		$lastplayed = $this->getLastPlayedArray();
-		foreach ($lastplayed as &$lp)
+		foreach ($lastplayed as &$lp) {
+			$lp["timestamp"] = $lp["time"];
 			$lp["time"] = time_ago($lp["time"]);
+		}
 
 		$queue = $this->getQueueArray();
-		foreach ($queue as &$q)
+		foreach ($queue as &$q) {
+			$q["timestamp"] = $q["time"];
 			$q["time"] = time_ago($q["time"]);
+		}
 
 		$current["dj"] = $dj;
 		unset($current["djid"]);

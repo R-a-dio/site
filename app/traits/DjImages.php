@@ -1,6 +1,10 @@
 <?php
 
 trait DjImages {
+
+	// 10MB
+	protected $maxImageFileSize = 10485760;
+	
 	public function getDjImage($id) {
 		$dj = Dj::findOrFail($id);
 		
@@ -28,6 +32,10 @@ trait DjImages {
 
 		if (($dj->user->id === $user->id) or ($user->isDev())) {
 			$image = Input::file("image");
+			
+			if ($image->getSize() > $this->maxImageFileSize)
+				return Response::json(["error" => "file too big"]);
+
 			$image->moveUploadedFile(Config::get("radio.paths.dj-images"), $dj->djimage);
 		}
 	}
@@ -41,6 +49,10 @@ trait DjImages {
 
 		if (($dj->user->id === $user->id) or ($user->isDev())) {
 			$image = Input::file("image");
+
+			if ($image->getSize() > $this->maxImageFileSize)
+				return Response::json(["error" => "file too big"]);
+
 			$dj->djimage = $dj->id;
 			$image->moveUploadedFile(Config::get("radio.paths.dj-images"), $dj->id);
 			$dj->save();

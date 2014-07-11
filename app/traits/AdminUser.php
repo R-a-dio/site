@@ -142,13 +142,16 @@ trait AdminUser {
 			if ($email)
 				$user->email = $email;
 			
-			$this->updateProfile($user);
+			$check = $this->updateProfile($user);
 
 			$user->save();
 
-			$status = "Profile Updated";
-			Notification::dev("updated their profile", $user);
-
+			if ($check) {
+				$status = "Profile Updated";
+				Notification::dev("updated their profile", $user);
+			} else {
+				$status = "Image file is too big or the database just went kaput.";
+			}
 		} catch (Exception $e) {
 			$status = $e->getMessage();
 		}
@@ -161,15 +164,15 @@ trait AdminUser {
 	protected function updateProfile($user) {
 		// user in this case is either Auth::user() or User::findOrFail()
 		
-		if(Auth::user()->isAdmin() || $user->dj) {
+		if(Auth::user()->isAdmin() or $user->dj) {
 			// We can edit if we are an admin or the user already has a profile.
 			
 			$name = Input::get("djname");
 			
-			if(!$user->dj) {
+			if (! $user->dj) {
 				// create a new dj if we don't already have one
 				
-				if(!$name || $name === "") {
+				if(! $name or $name === "") {
 					// But, abort if we didn't have a djid and haven't input any information.
 					return;
 				}
@@ -182,39 +185,43 @@ trait AdminUser {
 				$dj->save();
 				$user->djid = $dj->id;
 				$user->save();
-			}
-			else {
+			} else {
 				$dj = $user->dj;
 			}
 			
-			if($name)
+			if ($name)
 				$dj->djname = $name;
 			
-			if(Input::hasFile("image")) {
+			if (Input::hasFile("image")) {
 				$image = Input::file("image");
 				
+				if ($image->getSize() > 10485760)
+					return false;
+
 				$image->move(Config::get("radio.paths.dj-images"), $dj->id);
 				
-				$dj->djimage = "".$dj->id;
+				$dj->djimage = (string) $dj->id;
 			}
 			
-			if(Auth::user()->isAdmin()) {
+			if (Auth::user()->isAdmin()) {
 				// if the editing user is admin, it means they can change
 				// visibility and priority as well.
 				$visible = Input::get("visible");
 				$priority = Input::get("priority");
-				if(ctype_digit($priority) && $priority >= 1 && $priority <= 200) {
+				if (ctype_digit($priority) and $priority >= 1 and $priority <= 200) {
 					// If you want to redo this to use a Validator, be my guest.
 					$dj->priority = $priority;
 				}
-				if($visible === "1" || $visible === "0") {
-					// This too!
+				if ($visible === "1" or $visible === "0") {
+					// This too! NB: You can use (bool) $visible for the same effect.
 					$dj->visible = $visible;
 				}
 			}
 			
-			$dj->save();
+			return $dj->save();
 		}
+
+		return false;
 		
 	}
 

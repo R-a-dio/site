@@ -30,7 +30,7 @@
 					<input type="password" class="form-control" placeholder="Repeat Password" name="confirm">
 				</div>
 			</div>
-			@if (Auth::user()->isAdmin() || Auth::user()->dj)
+			@if (Auth::user()->isAdmin() or Auth::user()->dj)
 				<div class="form-group" id="dj">
 					<label class="col-sm-2 control-label">DJ Name</label>
 					
@@ -54,7 +54,7 @@
 						<label class="col-sm-2 control-label">Visible?</label>
 						
 						<div class="col-sm-10">
-							@if (Auth::user()->dj && Auth::user()->dj->visible == 1)
+							@if (Auth::user()->dj and Auth::user()->dj->visible == 1)
 								<label class="btn btn-default active">
 									<input type="radio" name="visible" value="1" checked>Yes
 								</label>

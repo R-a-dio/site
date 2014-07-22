@@ -17,3 +17,4 @@ Artisan::add(new IndexCommand);
 Artisan::add(new DatabaseRescueCommand);
 Artisan::add(new DatabaseCleanupCommand);
 Artisan::add(new SiteDeployCommand);
+Artisan::add(new SlackCommand);

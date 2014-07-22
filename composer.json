@@ -31,7 +31,8 @@
 		"phansys/getid3": "2.1.*@dev",
 		"recaptcha/php5": "v1.0.0",
 		"nategood/httpful": "*",
-		"elasticsearch/elasticsearch": "~1.0"
+		"elasticsearch/elasticsearch": "~1.0",
+		"connorvg/php-slack": "1.2"
 	},
 	"autoload": {
 		"classmap": [

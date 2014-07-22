@@ -82,6 +82,23 @@ return array(
 
 	'key' => @$_ENV["APP_KEY"] ?: "JxMDC4fGVS6URuUL7jmO358SZx4wW1iQ",
 
+
+	/*
+	|--------------------------------------------------------------------------
+	| Slack Integration
+	|--------------------------------------------------------------------------
+	|
+	| Disabled by default; used by R/a/dio for alerts.
+	|
+	*/
+
+	'slack' => [
+		'apikey' => @$_ENV["SLACK_KEY"],
+		'verified_only' => true,
+    	'dynamic' => true
+	],
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| Autoloaded Service Providers
@@ -121,6 +138,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		"hiro\Markdown\MarkdownServiceProvider",
+		'ConnorVG\Slack\SlackServiceProvider',
 	),
 
 	/*
@@ -187,7 +205,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Markdown'        => 'hiro\Facades\Markdown',
-
+		'Slack'           => 'ConnorVG\Slack\SlackFacade',
 	),
 
 	'cipher' => MCRYPT_RIJNDAEL_256,

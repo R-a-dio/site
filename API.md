@@ -74,14 +74,28 @@ This will return the image associated with a dj (or a default image). A 404 is r
 Upload a file to this URL with the key `image`, and the current user's image will be added
 (replaces the current entry in the database with the user's ID instead of just overwriting the file)
 
-+ Response 200
++ Parameters
+
+    + image (required, image) ... The image to upload.
+
++ Response 200 (application/json)
+
+        {
+            "success": true or false,    // if true, error key should be present
+            "error":   string (optional) // see above
+        } 
 
 
-# Last Played [/last-played]
+# Last Played [/last-played{?limit}{?offset}]
 Return as set as big as you like using the `limit` and `offset` GET parameters.
 Keep in mind that data is constantly changing and if you fetch data in chunks it could result in either a missing or a duplicated entry.
 
 ## Fetch Data [GET]
+
++ Parameters
+
+    + limit = `25` (optional, number) ... How many entries to return.
+    + offset = `0` (optional, number) ... The offset from which results should be given, used in combination with *limit* for pagination.
 
 + Response 200 (application/json)
 
@@ -93,3 +107,64 @@ Keep in mind that data is constantly changing and if you fetch data in chunks it
             ... // n = ?limit
         ]
 
+# Queue [/queue]
+Queue data is always returned as a variable-length array in its entirety, and isn't paginated.
+
+## Fetch Data [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "meta":      string,   // song metadata
+                "timestamp": long,     // unix timestamp of when the song was played (64bit int)
+                "type":      0 or 1,   // boolean flag for if the song is a request or not.
+            },
+            ... // n = ?limit
+        ]
+
+# All News [/news{?limit}{?offset}]
+
+## View All News Posts [GET]
+
++ Parameters
+
+    + limit = `20` (optional, number) ... How many news posts to return in the response.
+    + offset = `0` (optional, number) ... The offset from which results should be given, used in combination with *limit* for pagination.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": integer, // ID for seach news post. Used to fetch further info.
+            }
+        ]
+
+# News Posts [/news/{id}{?comments}]
+
+View an individual news post. Note that this response can be extremely large if you allow comments.
+
+## View Post [GET]
+
++ Parameters
+    
+    + comments = `0` (optional, boolean) ... Boolean switch for enabling comments
+
++ Response 200 (application/json)
+
+        {
+            "id": integer,
+            "created_at": date,
+            "updated_at": date,
+            "header": string,
+            "title": string,
+            "body": {
+                "markdown": string,         // post body (markdown)
+                "html": string              // post body (html)
+            }
+            "author": {
+                "name": string              // author's name
+            },
+            "comments": integer or array    // number of comments unless ?comments=1 (else array of comments)
+                                            // see GET /comments/{id} for the objects in this array
+        }

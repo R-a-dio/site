@@ -38,9 +38,9 @@ class SiteDeployCommand extends Command {
 			"cd " . @$_ENV["SSH_ROOT"],
 			"php artisan down",
 			"git pull origin develop",
-			"composer update",
+			"composer update --no-scripts",
+			"php artisan optimize",
 			"php artisan up",
-			"aglio -i API.md -o public/docs/index.html",
 		]);
 	}
 

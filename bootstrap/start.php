@@ -26,7 +26,8 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('your-machine-name'),
+	'local' => ['testing', 'radio'],
+	'production' => ['dev.hiroto.eu'],
 
 ));
 

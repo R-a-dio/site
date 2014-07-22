@@ -92,7 +92,6 @@ trait AdminSongs {
 					$tags = Input::get("tags", "");
 					$hash = sha1(strtolower(trim($artist != "" ? "$artist - $title" : $title)));
 					$good = Input::get("good");
-					$user = Auth::user();
 
 					// title is required.
 					if ($title) {
@@ -133,7 +132,7 @@ trait AdminSongs {
 						$this->index($track);
 
 						rename(Config::get("radio.paths.pending") . "/" . $pending["path"], Config::get("radio.paths.music") . "/" . $pending["path"]);
-						Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> accepted <https://r-a-d.io/admin/song/|{$artist} - {$title} [{$album}]> ({$tags})", "channel" => "#pending", "username" => "pending"]);
+						Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> accepted <https://r-a-d.io/admin/song/{$id}|{$artist} - {$title} [{$album}]> ({$tags})", "channel" => "#pending", "username" => "pending"]);
 						Notification::pending("accepted $artist - $title ($id)", Auth::user());
 					}
 					

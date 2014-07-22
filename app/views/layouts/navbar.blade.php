@@ -1,7 +1,7 @@
 		<!-- Navbar
 		======== -->
 		<div class="navbar navbar-inverse" style="border-radius: 0px">
-			<div class="container">
+			<div class="container navbar-container">
 
 				<!-- Collapse Icon
 					======== -->
@@ -90,7 +90,7 @@
 			</div>
 		</noscript>
 		@if (Session::has("status"))
-			<div class="container">
+			<div class="container if-container">
 				<div class="alert alert-dismissable alert-info">
 					<button class="close" data-dismiss="alert">&times;</button>
 					@if (is_array(Session::get("status")))

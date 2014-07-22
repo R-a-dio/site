@@ -39,14 +39,15 @@ trait AdminNews {
 		$title = Input::get("title");
 		$text = Input::get("text");
 		$header = Input::get("header");
+		$user = Auth::user();
 		$private = Input::get("private");
 
-		if (!Auth::user()->canPostNews()) {
+		if (!$user->canPostNews()) {
 			Session::flash("status", "I can't let you do that.");
 		} else {
 			try {
 				$post = Post::create([
-					"user_id" => Auth::user()->id,
+					"user_id" => $user->id,
 					"title" => $title,
 					"text" => $text,
 					"header" => $header,
@@ -55,7 +56,8 @@ trait AdminNews {
 				
 
 				$status = "News post added.";
-				Notification::news("added news post \"$title\" ({$post->id})", Auth::user()); 
+				Notification::news("added news post \"$title\" ({$post->id})", $user);
+				Queue::push("SendMessage", ["text" => "@channel <https://r-a-d.io/admin/users/{$user->id}|{$user->user}> posted a news article: <https://r-a-d.io/news/{$post->id}|{$title}>", "channel" => "#aaaaaaahn", "username" => "news"]);
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -72,6 +74,7 @@ trait AdminNews {
 		$text = Input::get("text");
 		$header = Input::get("header");
 		$private = Input::get("private");
+		$user = Auth::user();
 
 		if (!Auth::user()->canPostNews()) {
 			Session::flash("status", "I can't let you do that.");
@@ -87,7 +90,8 @@ trait AdminNews {
 				$post->save();
 
 				$status = "News post $id updated.";
-				Notification::news("updated news post \"{$post->title}\" $id", Auth::user()); 
+				Notification::news("updated news post \"{$post->title}\" $id", $user);
+				Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> updated a news article: <https://r-a-d.io/news/{$post->id}|{$title}>", "channel" => "#logs", "username" => "news"]);
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -100,7 +104,8 @@ trait AdminNews {
 	}
 
 	public function deleteNews($id) {
-		if (Auth::user()->isAdmin()) {
+		$user = Auth::user();
+		if ($user->isAdmin()) {
 			try {
 				$post = Post::findOrFail($id);
 				$title = $post->title;
@@ -108,6 +113,7 @@ trait AdminNews {
 
 				$status = "Post Deleted.";
 				Notification::news("soft-deleted news post \"$title\" ($id)", Auth::user());
+				Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> deleted a news article: <https://r-a-d.io/admin/news/{$id}|{$title}>", "channel" => "#logs", "username" => "news"]);
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}

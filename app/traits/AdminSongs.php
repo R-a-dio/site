@@ -24,6 +24,8 @@ trait AdminSongs {
 			->where("id", "=", $id)
 			->first();
 
+		$user = Auth::user();
+
 		$delete = false;
 
 		$action = Input::get("choice");
@@ -48,7 +50,8 @@ trait AdminSongs {
 					}
 					
 					$delete = true;
-					Notification::pending("declined $meta ($reason)", Auth::user());
+					Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> declined <https://r-a-d.io/admin/declined-song/0|{$meta}> with the reason \"{$reason}\"", "channel" => "#pending", "username" => "pending"]);
+					Notification::pending("declined $meta ($reason)", $user);
 					break;
 				case "replace":
 					$replace = Input::get("replace");
@@ -60,7 +63,7 @@ trait AdminSongs {
 							->where("id", "=", $check["id"])
 							->update([
 								"usable" => 0,
-								"lasteditor" => Auth::user()->user,
+								"lasteditor" => $user->user,
 							]);
 						$delete = true;
 
@@ -77,6 +80,8 @@ trait AdminSongs {
 							return Response::json(["error" => $e->getMessage()]);
 						}
 					}
+
+					Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> replaced <https://r-a-d.io/admin/song/{$check["id"]}|{$check["artist"]} - {$check["track"]}>", "channel" => "#pending", "username" => "pending"]);
 					Notification::pending("replaced song {$check["id"]}", Auth::user());
 					break;
 				case "accept":
@@ -87,6 +92,7 @@ trait AdminSongs {
 					$tags = Input::get("tags", "");
 					$hash = sha1(strtolower(trim($artist != "" ? "$artist - $title" : $title)));
 					$good = Input::get("good");
+					$user = Auth::user();
 
 					// title is required.
 					if ($title) {
@@ -127,6 +133,7 @@ trait AdminSongs {
 						$this->index($track);
 
 						rename(Config::get("radio.paths.pending") . "/" . $pending["path"], Config::get("radio.paths.music") . "/" . $pending["path"]);
+						Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> accepted <https://r-a-d.io/admin/song/|{$artist} - {$title} [{$album}]> ({$tags})", "channel" => "#pending", "username" => "pending"]);
 						Notification::pending("accepted $artist - $title ($id)", Auth::user());
 					}
 					

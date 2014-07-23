@@ -5,7 +5,7 @@
 	"license": "MIT",
 	"authors": [
 		{
-			"name": "David Collinson",
+			"name": "Amelia Ikeda",
 			"email": "hiroto@hiroto.eu",
 			"role": "Developer",
 			"homepage": "https://r-a-d.io"
@@ -32,7 +32,8 @@
 		"recaptcha/php5": "v1.0.0",
 		"nategood/httpful": "*",
 		"elasticsearch/elasticsearch": "~1.0",
-		"connorvg/php-slack": "1.2"
+		"connorvg/php-slack": "1.2",
+		"pda/pheanstalk": "~2.0"
 	},
 	"autoload": {
 		"classmap": [

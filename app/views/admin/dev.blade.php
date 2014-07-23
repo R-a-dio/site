@@ -1,6 +1,9 @@
 @section("content")
 
 	<div class="container main">
+		<h1>Environment</h1>
+		<p>{{{ $environment }}}</p>
+		<hr>
 		<h1>Failed Logins</h1>
 		<hr>
 		<table class="table">

@@ -55,7 +55,8 @@ class Admin extends BaseController {
 			return Redirect::to("/admin");
 		
 		$this->layout->content = View::make("admin.dev")
-			->with("failed_logins", DB::table("failed_logins")->get());
+			->with("failed_logins", DB::table("failed_logins")->get())
+			->with("environment", App::environment());
 	}
 
 	public function missingMethod($parameters = []) {

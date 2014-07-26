@@ -30,6 +30,8 @@ class SlackCommand extends Command {
 		$message->set("parse", "none");
 
 		$response = $message->send();
+
+		$this->comment("Sending: " . $text);
 	}
 
 	public function getOptions() {

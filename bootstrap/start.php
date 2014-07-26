@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => ['testing', 'radio', 'debian-7'],
+	'local' => ['radio'],
 	'production' => ['dev.hiroto.eu'],
 
 ));

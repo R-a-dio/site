@@ -32,9 +32,6 @@ Route::get("/R-a-dio", function() {
 	return Redirect::to("//stream.r-a-d.io/main");
 });
 
-# github hook
-Route::post("/git/pull", "GitController@pull");
-
 # API controller
 Route::controller("/api", "API");
 

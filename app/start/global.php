@@ -237,6 +237,10 @@ function simpleDaypassDecrypt($encr) {
 	return $encr;
 }
 
+// Encode a string for raw slack formatting
+function slack_encode($text) {
+	return str_replace(["<", ">", "&"], ["&lt;", "&gt;", "&amp;"], $text);
+}
 
 /*
 |--------------------------------------------------------------------------

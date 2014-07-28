@@ -12,7 +12,7 @@ return [
 
 	"news" => [
 		"add" => "@channel {$radio_slack} just posted a news article: <https://r-a-d.io/news/:id|:title>",
-		"edit" => "{$radio_slack} edited a news article: <https://r-a-d.io/news/:id|:title",
+		"edit" => "{$radio_slack} edited a news article: <https://r-a-d.io/news/:id|:title>",
 		"delete" => "{$radio_slack} deleted a news article: <https://r-a-d.io/admin/news/:id|:title>",
 	],
 	"user" => [

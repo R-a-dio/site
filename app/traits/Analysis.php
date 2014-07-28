@@ -168,6 +168,8 @@ trait Analysis {
 				"format" => slack_encode("{$new["mode"]} {$new["format"]}"),
 				"comment" => slack_encode(Input::get("comment")),
 			]),
+			"channel" => "#pending",
+			"username" => "pending",
 		]);
 
 		// todo: translation strings

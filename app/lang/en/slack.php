@@ -25,7 +25,7 @@ return [
 		"accepted" => "{$radio_slack} just accepted <https://r-a-d.io/admin/song/:id|:meta [:album]> (:tags)",
 		"declined" => "{$radio_slack} just declined <https://r-a-d.io/admin/deleted-songs/:id|:meta> with the reason \":reason\"",
 		"replaced" => "{$radio_slack} just replaced <https://r-a-d.io/admin/song/:id|:meta>",
-		"uploaded" => ":ip just uploaded <https://r-a-d.io/admin/pending#:id|:meta>, :sizeMB :format, :length (:comment)",
+		"uploaded" => ":ip just uploaded <https://r-a-d.io/admin/pending#:id|:meta>, :format, :length (:comment)",
 	],
 
 

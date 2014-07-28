@@ -167,6 +167,7 @@ trait Analysis {
 				"meta" => slack_encode("{$new["artist"]} - {$new["title"]} [{$new["album"]}] / " . $file->getClientOriginalName()),
 				"format" => slack_encode("{$new["mode"]} {$new["format"]}"),
 				"comment" => slack_encode(Input::get("comment")),
+				"length" => slack_encode(date("i\ms\s", floor($new["length"]) ?: 0)),
 			]),
 			"channel" => "#pending",
 			"username" => "pending",

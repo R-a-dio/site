@@ -142,8 +142,8 @@ trait Analysis {
 			);
 		}
 
-		DB::table("pending")
-			->insert([
+		$id = DB::table("pending")
+			->insertGetId([
 				"artist" => $new["artist"],
 				"track" => $new["title"],
 				"album" => $new["album"],
@@ -160,6 +160,15 @@ trait Analysis {
 			]);
 
 
+		Queue::push("SendMessage", [
+			"text" => trans("slack.pending.uploaded", [
+				"ip" => slack_encode($submitter),
+				"id" => slack_encode($id),
+				"meta" => slack_encode("{$new["artist"]} - {$new["title"]} [{$new["album"]}] / " . $file->getClientOriginalName()),
+				"format" => slack_encode("{$new["mode"]} {$new["format"]}"),
+				"comment" => slack_encode(Input::get("comment")),
+			]),
+		]);
 
 		// todo: translation strings
 		return ["success" => "File uploaded successfully"];

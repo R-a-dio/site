@@ -57,7 +57,16 @@ trait AdminNews {
 
 				$status = "News post added.";
 				Notification::news("added news post \"$title\" ({$post->id})", $user);
-				Queue::push("SendMessage", ["text" => "@channel <https://r-a-d.io/admin/users/{$user->id}|{$user->user}> posted a news article: <https://r-a-d.io/news/{$post->id}|{$title}>", "channel" => "#aaaaaaahn", "username" => "news"]);
+				Queue::push("SendMessage", [
+					"text" => trans("slack.news.add", [
+						"user" => slack_encode(Auth::user()->id),
+						"name" => slack_encode(Auth::user()->user),
+						"id" => $post->id,
+						"title" => slack_encode($post->title),
+					]),
+					"channel" => "#general",
+					"username" => "news"
+				]);
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -90,8 +99,17 @@ trait AdminNews {
 				$post->save();
 
 				$status = "News post $id updated.";
-				Notification::news("updated news post \"{$post->title}\" $id", $user);
-				Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> updated a news article: <https://r-a-d.io/news/{$post->id}|{$title}>", "channel" => "#logs", "username" => "news"]);
+				
+				Queue::push("SendMessage", [
+					"text" => trans("slack.news.edit", [
+						"user" => slack_encode(Auth::user()->id),
+						"name" => slack_encode(Auth::user()->user),
+						"id" => $post->id,
+						"title" => slack_encode($post->title),
+					]),
+					"channel" => "#logs",
+					"username" => "news"
+				]);
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -111,9 +129,19 @@ trait AdminNews {
 				$title = $post->title;
 				$post->delete();
 
+				Queue::push("SendMessage", [
+					"text" => trans("slack.news.delete", [
+						"user" => slack_encode(Auth::user()->id),
+						"name" => slack_encode(Auth::user()->user),
+						"id" => $id,
+						"title" => slack_encode($title),
+					]),
+					"channel" => "#logs",
+					"username" => "news"
+				]);
 				$status = "Post Deleted.";
 				Notification::news("soft-deleted news post \"$title\" ($id)", Auth::user());
-				Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> deleted a news article: <https://r-a-d.io/admin/news/{$id}|{$title}>", "channel" => "#logs", "username" => "news"]);
+				
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}

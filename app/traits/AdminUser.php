@@ -25,6 +25,7 @@ trait AdminUser {
 		$password = Input::get("password");
 		$privileges = Input::get("privileges");
 		$email = Input::get("email");
+		$auth = Auth::user();
 
 		if (!Auth::user()->isAdmin() or ($privileges >= 5)) {
 			Session::flash("status", "I can't let you do that.");
@@ -43,6 +44,16 @@ trait AdminUser {
 				}
 
 				$status = "User {$user->user} created.";
+				Queue::push("SendMessage", [
+					"text" => trans("slack.user.add", [
+						"user" => slack_encode(Auth::user()->id),
+						"name" => slack_encode(Auth::user()->user),
+						"id" => $user->id,
+						"target" => slack_encode($user->user),
+					]),
+					"channel" => "#logs",
+					"username" => "users"
+				]);
 				Notification::admin("created user {$user->user} ({$user->id})", Auth::user());
 				
 			} else {
@@ -63,6 +74,18 @@ trait AdminUser {
 
 		if (!Auth::user()->isAdmin() or ($privileges >= 5)) {
 			Session::flash("status", "I can't let you do that.");
+			Queue::push("SendMessage", [
+				"text" => trans("slack.user.denied", [
+					"user" => slack_encode(Auth::user()->id),
+					"name" => slack_encode(Auth::user()->user),
+					"id" => $user->id,
+					"target" => slack_encode($username),
+					"privileges" => slack_encode($privileges),
+					"email" => slack_encode($email),
+				]),
+				"channel" => "#logs",
+				"username" => "users"
+			]);
 			Notification::dev("just tried to update privileges " .
 				"(privileges: $privileges, username: $username, email: $email, on: $id)", Auth::user());
 		} else {
@@ -80,6 +103,16 @@ trait AdminUser {
 				$this->updateProfile($user);
 
 				$status = "User {$user->user} updated.";
+				Queue::push("SendMessage", [
+					"text" => trans("slack.user.edit", [
+						"user" => slack_encode(Auth::user()->id),
+						"name" => slack_encode(Auth::user()->user),
+						"id" => $user->id,
+						"target" => slack_encode($username),
+					]),
+					"channel" => "#logs",
+					"username" => "users"
+				]);
 				Notification::admin("updated user {$user->user} ({$user->id})", Auth::user());
 
 				$user->save();
@@ -101,6 +134,16 @@ trait AdminUser {
 				$username = $user->id;
 				$user->delete();
 				$status = "User Deleted.";
+				Queue::push("SendMessage", [
+					"text" => trans("slack.user.delete", [
+						"user" => slack_encode(Auth::user()->id),
+						"name" => slack_encode(Auth::user()->name),
+						"id" => $id,
+						"target" => slack_encode($username),
+					]),
+					"channel" => "#logs",
+					"username" => "users"
+				]);
 				Notification::admin("soft-deleted $username ($id)", Auth::user());
 			} catch (Exception $e) {
 				$status = $e->getMessage();

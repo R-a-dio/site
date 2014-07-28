@@ -50,7 +50,17 @@ trait AdminSongs {
 					}
 					
 					$delete = true;
-					Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> declined <https://r-a-d.io/admin/declined-song/0|{$meta}> with the reason \"{$reason}\"", "channel" => "#pending", "username" => "pending"]);
+					Queue::push("SendMessage", [
+						"text" => trans("slack.pending.declined", [
+							"user" => slack_encode(Auth::user()->id),
+							"name" => slack_encode(Auth::user()->user),
+							"id" => "9000",
+							"meta" => slack_encode($meta),
+							"reason" => slack_encode($reason),
+						]),
+						"channel" => "#pending",
+						"username" => "pending"
+					]);
 					Notification::pending("declined $meta ($reason)", $user);
 					break;
 				case "replace":
@@ -79,10 +89,20 @@ trait AdminSongs {
 						} catch (Exception $e) {
 							return Response::json(["error" => $e->getMessage()]);
 						}
+
+						Queue::push("SendMessage", [
+							"text" => trans("slack.pending.replaced", [
+								"user" => slack_encode(Auth::user()->id),
+								"name" => slack_encode(Auth::user()->user),
+								"id" => $id,
+								"meta" => slack_encode("{$check["artist"]} - {$check["title"]}"),
+							]),
+							"channel" => "#pending",
+							"username" => "pending"
+						]);
 					}
 
-					Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> replaced <https://r-a-d.io/admin/song/{$check["id"]}|{$check["artist"]} - {$check["track"]}>", "channel" => "#pending", "username" => "pending"]);
-					Notification::pending("replaced song {$check["id"]}", Auth::user());
+					
 					break;
 				case "accept":
 					$editor = Auth::user()->user;
@@ -132,7 +152,18 @@ trait AdminSongs {
 						$this->index($track);
 
 						rename(Config::get("radio.paths.pending") . "/" . $pending["path"], Config::get("radio.paths.music") . "/" . $pending["path"]);
-						Queue::push("SendMessage", ["text" => "<https://r-a-d.io/admin/users/{$user->id}|{$user->user}> accepted <https://r-a-d.io/admin/song/{$id}|{$artist} - {$title} [{$album}]> ({$tags})", "channel" => "#pending", "username" => "pending"]);
+						Queue::push("SendMessage", [
+							"text" => trans("slack.pending.accepted", [
+								"user" => slack_encode(Auth::user()->id),
+								"name" => slack_encode(Auth::user()->user),
+								"id" => $id,
+								"meta" => slack_encode("$artist - $title"),
+								"album" => slack_encode($album),
+								"tags" => slack_encode($tags),
+							]),
+							"channel" => "#pending",
+							"username" => "pending"
+						]);
 						Notification::pending("accepted $artist - $title ($id)", Auth::user());
 					}
 					

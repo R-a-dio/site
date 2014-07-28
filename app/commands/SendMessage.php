@@ -5,7 +5,7 @@ class SendMessage {
 		try {
 			Artisan::call("slack:send", $data);
 		} catch (Exception $e) {
-			echo "[" . $job->getJobId() . "]" . " Failed to send slack message: " . $data["text"];
+			echo "[" . $job->getJobId() . "]" . " Failed to send slack message: " . $data["text"] . PHP_EOL;
 		}
 
 		$job->delete();

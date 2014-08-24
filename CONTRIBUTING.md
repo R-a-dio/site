@@ -26,4 +26,13 @@ To see where all of the translations are physically on a page, set `"locale" => 
 
 # Themes
 
-Themes should replace as LITTLE AS POSSIBLE IN `home.blade.php`. Use partials as much as possible.
+- Themes SHOULD replace as LITTLE AS POSSIBLE IN `home.blade.php`. Use partials as much as possible.
+- All CSS MUST use [Less](http://lesscss.org), using the compiler at `public/themes/theme.less`.
+ - Do not replace "default.bootstrap.less" with your less configuration file for bootstrap's options.
+ - Uncomment the "<theme>.bootstrap.less" line and fill in your theme name.
+ - Less has the rule "last defined wins".
+ - You can change as little as you like in this file
+- Themes' Less files SHOULD be named `<theme_name>.bootstrap.less` and `<theme_name>.less`
+- Themes MUST compile their finished CSS to `public/css/<theme_name>.less`
+- Themes MUST have their compiled CSS minified
+- Do not commit your changes to the compiler file. Only commit your .less files.

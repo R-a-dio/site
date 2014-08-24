@@ -42,6 +42,7 @@
 						</h4>
 					</div>
 					<div class="panel-body">
+						<small class="text-muted">{{{ $news->created_at->format("D, d M y H:i:s T") }}}</small>
 						{{ Markdown::render($news->text) }}
 					</div>
 				</div>

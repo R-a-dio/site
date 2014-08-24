@@ -23,3 +23,7 @@ Rules for translations:
 5. There must be no executable code in the language files
 
 To see where all of the translations are physically on a page, set `"locale" => "<YOUR_LOCALE_CODE_HERE>"` in `app/config/app.php` before you do any work. This will result in a bunch of strings (e.g. "search.placeholder", "search.button") appearing everywhere. These are the locale placeholders, which you then replace in the relevant files (i.e. `search.placeholder` would be `"placeholder" => "Search"` in `app/lang/en/search.php`).
+
+# Themes
+
+Themes should replace as LITTLE AS POSSIBLE IN `home.blade.php`. Use partials as much as possible.

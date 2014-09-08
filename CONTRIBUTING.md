@@ -23,3 +23,20 @@ Rules for translations:
 5. There must be no executable code in the language files
 
 To see where all of the translations are physically on a page, set `"locale" => "<YOUR_LOCALE_CODE_HERE>"` in `app/config/app.php` before you do any work. This will result in a bunch of strings (e.g. "search.placeholder", "search.button") appearing everywhere. These are the locale placeholders, which you then replace in the relevant files (i.e. `search.placeholder` would be `"placeholder" => "Search"` in `app/lang/en/search.php`).
+
+# Themes
+
+Themes SHOULD replace as LITTLE AS POSSIBLE IN `home.blade.php`. Use partials as much as possible.  
+All CSS MUST use [Less](http://lesscss.org), using the compiler at `public/themes/theme.less`.  
+
+ - Do not replace `default.bootstrap.less` with your less configuration file for bootstrap's options.
+ - Uncomment the `<theme>.bootstrap.less` line and fill in your theme name.
+ - Less has the rule "last defined wins".
+ - You can change as little as you like in this file.
+
+Themes' Less SHOULD be compiled using `recess`, twitter's less compiler. Vagrant should have it.  
+Themes' Less files SHOULD be named `<theme_name>.bootstrap.less` and `<theme_name>.less`  
+Themes MUST compile their finished CSS to `public/css/<theme_name>.css`  
+Themes MUST have their compiled CSS minified (`lessc)  
+
+Do not commit your changes to the compiler file. Only commit your `.less` files to the `themes` folder!

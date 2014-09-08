@@ -1,0 +1,184 @@
+/* base CSS. This should be overridden, never removed */
+
+#player-test {
+    margin-top: 3px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: -4;
+}
+.audio-icon {
+    font-size: 22px;
+    color: #fff;
+    padding-top: 5px;
+}
+.buffer {
+    margin-top: -7px;
+    position: relative;
+    width: 100%;
+    padding: 0;
+    pointer-events: none;
+}
+
+.buffer-bar {
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 7px;
+    border-radius: 4px;
+    pointer-events: none;
+    padding: 0;
+}
+
+.track-slider {
+    margin-top: 12px;
+    -webkit-appearance: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 7px;
+    border-radius: 4px;
+    outline: none;
+    z-index: 9999;
+}
+.track-slider:focus {
+    outline: none; 
+}
+.track-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px; 
+}
+.track-slider::-webkit-slider-track {
+    height: 5px;
+}
+
+#audio-time {
+    color: #fff;
+    padding-top: 5px;
+    padding-left: 0;
+    padding-right: 0;
+}
+#np {
+    padding-top: 20px;
+}
+#audio-play, #audio-pause {
+    cursor: pointer;
+}
+#stream-progress-bar {
+    margin-top: 20px;
+}
+
+#stream-volume {
+    padding: 0 30px 0 30px;
+}
+
+.footer {
+    border-top: 1px solid #eee;
+    margin-top: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.errors {
+	background: #AD0000;
+	color: #fff;
+}
+
+.pending {
+	background: #463265;
+	color: #fff;
+}
+
+.centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.search-result:hover,
+.search-result:focus {
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    cursor: pointer;
+}
+
+
+.search-result h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.search-result p {
+    margin: 0;
+}
+
+.cooldown {
+    opacity: 0.7;
+}
+
+
+.btn-google {
+    background: url('../assets/google_base.png');
+    width: 160px;
+    height: 54px;
+}
+.btn-google:hover,
+.btn-google:focus {
+    background: url('../assets/google_hover.png');
+}
+.btn-google:active {
+    background: url('../assets/google_press.png');
+}
+
+li#nav-control > div > div.popover-content {
+    padding: 0 !important;
+}
+
+#canvas > canvas {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#canvas {
+    position: fixed;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    z-index: -9999;
+    height: 100%;
+    width: 100%;
+}
+
+#fft {
+    height: 150px;
+    position: relative;
+    margin-top: -110px;
+    width: 60px;
+}
+
+#visualisation > div {
+    width: 2.5%;
+    background-color: rgb(195, 63, 40);
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+}
+
+#visualisation {
+    height: 245px;
+    position: relative;
+    margin: 10px;
+    margin-bottom: -245px;
+    -webkit-box-reflect: below 3px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255,255,255,0.2)));
+}
+
+.well img {
+    max-width: 100%;
+    max-height: 300px;
+}

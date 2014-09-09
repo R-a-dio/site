@@ -4,7 +4,7 @@ trait SlackTrait {
 	public $diffs = true;
 
 	protected $hide = [
-		"password",
+		"pass",
 	];
 
 	public function getDiffs() {
@@ -14,8 +14,10 @@ trait SlackTrait {
 
 		foreach ($after as $name => $change) {
 
-			if (in_array($name, $this->hide))
+			if (in_array($name, $this->hide)){
+				$text .= "$name changed.\n";
 				continue;
+			}
 
 			if (! isset($before[$name])) {
 				$previous = "?";

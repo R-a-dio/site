@@ -58,7 +58,7 @@ class Pending extends Eloquent implements SongInterface {
 				"meta" => $this->meta,
 			]);
 
-		$this->slack("pending.declined", ["reason" => $reason]);
+		$this->slack("pending.declined", ["reason" => $reason, "meta" => $this->meta]);
 		$this->deleteFile();
 		$this->delete();
 	}

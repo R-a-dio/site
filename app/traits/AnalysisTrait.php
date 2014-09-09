@@ -142,35 +142,20 @@ trait AnalysisTrait {
 			);
 		}
 
-		$id = DB::table("pending")
-			->insertGetId([
-				"artist" => $new["artist"],
-				"track" => $new["title"],
-				"album" => $new["album"],
-				"path" => $path,
-				"origname" => $file->getClientOriginalName(),
-				"comment" => Input::get("comment"),
-				"submitter" => $submitter,
-				"dupe_flag" => $duplicate,
-				"replacement" => null,
-				"bitrate" => $new["bitrate"],
-				"length" => $new["length"],
-				"format" => $new["format"],
-				"mode" => $new["mode"],
-			]);
-
-
-		Queue::push("SendMessage", [
-			"text" => trans("slack.pending.uploaded", [
-				"ip" => slack_encode($submitter),
-				"id" => slack_encode($id),
-				"meta" => slack_encode("{$new["artist"]} - {$new["title"]} [{$new["album"]}] / " . $file->getClientOriginalName()),
-				"format" => slack_encode("{$new["mode"]} {$new["format"]}"),
-				"comment" => slack_encode(Input::get("comment")),
-				"length" => slack_encode(date("i\ms\s", floor($new["length"]) ?: 0)),
-			]),
-			"channel" => "#pending",
-			"username" => "pending",
+		Pending::create([
+			"artist" => $new["artist"],
+			"track" => $new["title"],
+			"album" => $new["album"],
+			"path" => $path,
+			"origname" => $file->getClientOriginalName(),
+			"comment" => Input::get("comment"),
+			"submitter" => $submitter,
+			"dupe_flag" => $duplicate,
+			"replacement" => null,
+			"bitrate" => $new["bitrate"],
+			"length" => $new["length"],
+			"format" => $new["format"],
+			"mode" => $new["mode"],
 		]);
 
 		// todo: translation strings

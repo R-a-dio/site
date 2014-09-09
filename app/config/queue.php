@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default' => 'sync',
+	'default' => 'redis',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -53,6 +53,10 @@ return array(
 			'project' => 'your-project-id',
 			'token'   => 'your-token',
 			'queue'   => 'your-queue-name',
+		),
+		'redis' => array(
+			'driver' => 'redis',
+			'queue'  => 'default',
 		),
 
 	),

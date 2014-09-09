@@ -76,6 +76,15 @@ function sentry_log($exception, $code = 500) {
 |
 */
 function radio_error($exception, $code = 500) {
+	if (App::runningInConsole()) {
+		return [
+			"error" => $exception->getMessage(),
+			"trace" => $exception->getTraceAsString(),
+			"line" => $exception->getLine(),
+			"file" => $exception->getFile(),
+		];
+	}
+
 	View::share("theme", "default");
 	View::share("error", $code);
 	View::share("reference", sentry_log($exception, $code));
@@ -146,6 +155,12 @@ App::error(function(ModelNotFoundException $exception, $code)
 */
 App::missing(function($exception)
 {
+	if (App::runningInConsole() or Request::ajax()) {
+		return [
+			"error" => 404
+		];
+	}
+
 	return radio_error("404 at /" . Request::path(), 404);
 });
 
@@ -219,22 +234,15 @@ function daypass() {
 	return substr($hash, 0, 16);
 }
 
-function simpleDaypassEncrypt($data) {
+function daypass_crypt($data) {
 	$seed = hexdec(substr(base64_decode(daypass()), 0, 8));
 	mt_srand($seed);
-	for($i=0;$i<strlen($data);$i++) {
+
+	for ($i = 0; $i < strlen($data); $i++) {
 		$data[$i] = chr(ord($data[$i]) ^ (mt_rand() & 127));
 	}
-	return $data;
-}
 
-function simpleDaypassDecrypt($encr) {
-	$seed = hexdec(substr(base64_decode(daypass()), 0, 8));
-	mt_srand($seed);
-	for($i=0;$i<strlen($encr);$i++) {
-		$encr[$i] = chr(ord($encr[$i]) ^ (mt_rand() & 127));
-	}
-	return $encr;
+	return $data;
 }
 
 // Encode a string for raw slack formatting

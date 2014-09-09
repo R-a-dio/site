@@ -3,15 +3,18 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Elasticsearch\Client;
 
 class IndexCommand extends Command {
 
+	use SearchTrait;
+	
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-	protected $name = 'index:add';
+	protected $name = 'index';
 
 	/**
 	 * The console command description.
@@ -39,9 +42,10 @@ class IndexCommand extends Command {
 	{
 		$id = $this->argument("id");
 		$json = $this->option("json");
+		$delete = $this->option("delete");
 		$output = [];
 
-		$track = DB::table("tracks")->where("id", "=", $id)->first();
+		$track = Track::find($id);
 
 		if (!$track)
 		{
@@ -59,19 +63,20 @@ class IndexCommand extends Command {
 		if ($json) {
 			$output["track"] = $track;
 		} else {
-			$this->comment("Artist: " . $track["artist"]);
-			$this->comment("Title: " . $track["track"]);
-			$this->comment("Album: " . $track["album"]);
+			$this->comment("Artist: " . $track->artist);
+			$this->comment("Title: " . $track->title);
+			$this->comment("Album: " . $track->album);
 		}
 		
-		$admin = App::make("Admin");
-		$admin->index($track);
+		if ($delete) {
+			$this->remove($track);
+		} else {
+			$this->index($track);
+		}
 		$output["success"] = true;
 		
 		if ($json) {
 			$this->info(json_encode($output, JSON_PRETTY_PRINT));
-		} else {
-			$this->info("Song indexed.");
 		}
 		
 
@@ -84,9 +89,9 @@ class IndexCommand extends Command {
 	 */
 	protected function getArguments()
 	{
-		return array(
-			array('id', InputArgument::REQUIRED, 'Song ID in the database'),
-		);
+		return [
+			["id", InputArgument::REQUIRED, "Song ID in the database"],
+		];
 	}
 
 	/**
@@ -96,9 +101,10 @@ class IndexCommand extends Command {
 	 */
 	protected function getOptions()
 	{
-		return array(
-			array('json', "j", InputOption::VALUE_NONE, 'Output response as JSON?'),
-		);
+		return [
+			["json", "j", InputOption::VALUE_NONE, 'Output response as JSON?'],
+			["delete", "d", InputOptions::VALUE_NONE, "Delete the document?"],
+		];
 	}
 
 }

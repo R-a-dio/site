@@ -10,7 +10,7 @@ class Track extends Eloquent {
 	public $timestamps = false;
 
 
-	protected $guarded = ["hash"];
+	protected $guarded = ["id", "hash"];
 
 	public function hash() {
 		return sha1(strtolower(trim($this->artist != "" ? "{$this->artist} - {$this->title}" : $this->title)));

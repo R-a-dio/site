@@ -5,6 +5,7 @@ class Pending extends Eloquent {
 	use SlackTrait;
 
 	protected $table = "pending";
+	protected $guarded = ["id"];
 	public $timestamps = false;
 
 	public function deleteFile() {

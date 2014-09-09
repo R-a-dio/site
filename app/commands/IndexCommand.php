@@ -8,7 +8,7 @@ use Elasticsearch\Client;
 class IndexCommand extends Command {
 
 	use SearchTrait;
-	
+
 	/**
 	 * The console command name.
 	 *
@@ -103,7 +103,7 @@ class IndexCommand extends Command {
 	{
 		return [
 			["json", "j", InputOption::VALUE_NONE, 'Output response as JSON?'],
-			["delete", "d", InputOptions::VALUE_NONE, "Delete the document?"],
+			["delete", "d", InputOption::VALUE_NONE, "Delete the document?"],
 		];
 	}
 

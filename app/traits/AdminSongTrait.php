@@ -3,7 +3,7 @@
 trait AdminSongTrait {
 
 	public function getPending() {
-		$pending = Pending::all()->sortBy("id", "desc");
+		$pending = Pending::all();
 
 		$this->layout->content = View::make("admin.pending")
 			->with("pending", $pending);
@@ -79,24 +79,15 @@ trait AdminSongTrait {
 		}
 	}
 
-	protected function sendFile(SongInterface $song, $pending = true) {
-		$loc = "radio.paths." . ($pending ? "pending" : "music");
-		$path = Config::get($loc) . "/" . $song["path"];
-		$size = filesize($path);
-
-		if (stripos($song["path"], ".flac")) {
-			$type = "audio/x-flac";
-		} else {
-			$type = "audio/mpeg";
-		}
+	protected function sendFile(SongInterface $song) {
 
 		$headers = [
 			"Cache-Control" => "no-cache",
 			"Content-Description" => "File Transfer",
-			"Content-Type" => $type,
+			"Content-Type" => $song->file_type,
 			"Content-Transfer-Encoding" => "binary",
-			"Content-Length" => $size,
-			"Content-Disposition" => "attachment; filename=" . $song["path"],
+			"Content-Length" => $song->file_size,
+			"Content-Disposition" => "attachment; filename=" . rawurlencode($song->file_name),
 		];
 
 		$response = Response::make('', 200, $headers);
@@ -104,7 +95,7 @@ trait AdminSongTrait {
 		Session::save();
 
 		// send the file
-		$fp = fopen($path, 'rb');
+		$fp = fopen($song->file_path, 'rb');
 
 		if ($fp) {
 			// fire headers and clean the output buffer

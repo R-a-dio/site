@@ -68,13 +68,13 @@
 						<div class="form-group">
 							<label class="control-label col-xs-2 input-sm">Artist</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control input-sm" value="{{{ $p["artist"] }}}" placeholder="Artist" name="artist">
+								<input type="text" class="form-control input-sm" value="{{{ $p->artist }}}" placeholder="Artist" name="artist">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-2 input-sm">Title</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control input-sm" value="{{{ $p["track"] }}}" placeholder="Title" name="title">
+								<input type="text" class="form-control input-sm" value="{{{ $p->track }}}" placeholder="Title" name="title">
 							</div>
 						</div>
 					</div>
@@ -82,7 +82,7 @@
 						<div class="form-group">
 							<label class="control-label col-xs-2 input-sm">Album</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control input-sm" value="{{{ $p["album"] }}}" placeholder="Album" name="album">
+								<input type="text" class="form-control input-sm" value="{{{ $p->album }}}" placeholder="Album" name="album">
 							</div>
 						</div>
 						<div class="form-group">
@@ -96,7 +96,7 @@
 						<div class="form-group">
 							<label class="control-label col-xs-4 input-sm">Uploader</label>
 							<div class="col-xs-8">
-								<p class="form-control-static input-sm">{{{ strpos($p["submitter"], ".") ? substr(sha1($p["submitter"]), 0, 8) : $p["submitter"] }}}</p>
+								<p class="form-control-static input-sm">{{{ $p->submitter }}}</p>
 							</div>
 						</div>
 						<div class="form-group">
@@ -104,7 +104,9 @@
 								Bitrate
 							</label>
 							<div class="col-xs-8">
-								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">{{{ ceil($p["bitrate"] / 1000) }}}kbps {{{ $p["mode"] ?: "" }}}</p>
+								<p
+									class="form-control-static input-sm"
+									style="overflow: hidden; white-space: nowrap">{{{ ceil($p->bitrate / 1000) }}}kbps {{{ $p->mode ?: "" }}}</p>
 							</div>
 						</div>
 					</div>
@@ -113,8 +115,12 @@
 							<label class="control-label col-xs-4 input-sm">Size</label>
 							<div class="col-xs-8">
 								<p class="form-control-static input-sm">
-									<button type="button" class="btn btn-xs btn-primary play-button" data-url="/admin/pending-song/{{{ $p["id"] }}}" data-format="{{ $p["format"] ?: "mp3" }}">
-										{{{ date("i\ms\s", floor($p["length"]) ?: 0) }}}, {{{ number_format($p["filesize"] / 1048576, 2) }}}MB
+									<button
+										type="button"
+										class="btn btn-xs btn-primary play-button"
+										data-url="/admin/pending-song/{{{ $p->id }}}"
+										data-format="{{ $p->format ?: 'mp3' }}">
+										{{{ date("i\ms\s", floor($p->length) ?: 0) }}}, {{{ number_format($p->file_size / 1048576, 2) }}}MB
 									</button>
 								</p>
 							</div>
@@ -123,8 +129,8 @@
 							<label class="control-label col-xs-4 input-sm">Name</label>
 							<div class="col-xs-8">
 								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">
-									<a href="/admin/pending-song/{{{ $p["id"] }}}" title="{{{ $p["origname"] }}}" target="_blank" class="btn btn-warning btn-xs">
-										{{{ strlen($p["origname"]) > 17 ? preg_replace("/(.{1,10})(.*)(\.(mp3|flac))/u", "$1..$3", $p["origname"]) : $p["origname"] }}}
+									<a href="/admin/pending-song/{{{ $p["id"] }}}" title="{{{ $p->file_name }}}" target="_blank" class="btn btn-warning btn-xs">
+										{{{ strlen($p->file_name) > 17 ? preg_replace("/(.{1,10})(.*)(\.(mp3|flac))/u", "$1..$3", $p->file_name) : $p->file_name }}}
 									</a>
 								</p>
 							</div>
@@ -134,7 +140,7 @@
 						<div class="form-group">
 							<label class="control-label col-xs-4 input-sm">Comment</label>
 							<div class="col-xs-8">
-								<p class="form-control-static input-sm"><small>{{{ $p["comment"] }}}</small></p>
+								<p class="form-control-static input-sm"><small>{{{ $p->comment }}}</small></p>
 							</div>
 						</div>
 					</div>

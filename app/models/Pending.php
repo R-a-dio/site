@@ -16,29 +16,37 @@ class Pending extends Eloquent implements SongInterface {
 		rename(Config::get("radio.paths.pending") . "/" . $this->path, Config::get("radio.paths.music") . "/" . $this->path);
 	}
 
-	public function getFilesizeAttribute() {
+	public function getFileSizeAttribute() {
 		try {
-			$filesize = filesize(Config::get("radio.paths.pending") . "/" . $this->path);
+			$filesize = filesize($this->file_path);
 		} catch (Exception $e) {
 			$filesize = 0;
 		}
 
 		return $filesize;
 	}
+
 	public function getFilePathAttribute() {
-		return Config::get("radio.paths.music") . "/" . $this->path;
+		return Config::get("radio.paths.pending") . "/" . $this->path;
 	}
 
 	public function getTitleAttribute() {
 		return $this->track;
 	}
 
-	public function getFilenameAttribute() {
+	public function getFileNameAttribute() {
 		return $this->origname;
 	}
 
+	public function getFileTypeAttribute() {
+		if ($this->format == "flac")
+			return "audio/x-flac";
+
+		return "audio/mpeg";
+	}
+
 	public function getMetaAttribute() {
-		return $this->title ? $this->artist . " - " . $this->title : $this->original;
+		return $this->title ? $this->artist . " - " . $this->title : $this->file_name;
 	}
 
 	public function decline($reason) {

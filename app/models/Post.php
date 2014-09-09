@@ -26,4 +26,20 @@ class Post extends Eloquent {
 
 		return $array;
 	}
+
+
+	public function save(array $options = array()) {
+		if ($this->id) {
+			$this->slack("news.edit");
+		} else {
+			$this->slack("news.add");
+		}
+		parent::save($options);
+		$this->index();
+	}
+
+	public function delete() {
+		$this->slack("track.delete");
+		parent::delete();
+	}
 }

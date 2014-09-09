@@ -5,6 +5,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
 use ConnorVG\Slack\Slack;
+use ConnorVG\Slack\SlackPayload;
 
 class SlackCommand extends Command {
 	protected $name = "slack:send";
@@ -12,26 +13,32 @@ class SlackCommand extends Command {
 
 	public function fire() {
 		$key = Config::get("app.slack.apikey", null);
-		$text = $this->argument("text");
-		$channel = $this->argument("channel");
-		$username = $this->argument("username");
+
+		$body = $this->argument("body");
+		$title = $this->argument("title");
+		$color = $this->argument("color");
 
 		if (!$key)
 			$this->error("API Key is not set. Aborting.");
 
-		$slack = new Slack($key);
-
-		$message = $slack->message($text, $channel);
-
-		$message->username($username);
-		$message->icon("https://r-a-d.io/assets/logo_image_small.png");
-
-		$message->set("link_names", "1");
-		$message->set("parse", "none");
+		$message = new SlackPayload(new Slack($key), [
+			"command" => "chat.postMessage",
+			"username" => "R/a/dio",
+			"link_names" => "1",
+			"parse" => "none",
+			"channel" => "#logs",
+			"icon_url" => "https://r-a-d.io/assets/logo_image_small.png",
+			"text" => $title,
+			"attachments" => [
+				[
+					"fallback" => "$title: $body",
+					"text" => $body,
+					"color" => $color,
+				]
+			],
+		]);
 
 		$response = $message->send();
-
-		$this->comment("Sending: " . $text);
 	}
 
 	public function getOptions() {
@@ -40,9 +47,9 @@ class SlackCommand extends Command {
 
 	public function getArguments() {
 		return [
-			["channel", InputArgument::REQUIRED, "Channel to send to", null],
-			["username", InputArgument::REQUIRED, "Username to give the message", null],
-			["text", InputArgument::REQUIRED, "Text to send to a given channel", null],
+			["title", InputArgument::REQUIRED, "Title for the changelog", null],
+			["body", InputArgument::REQUIRED, "Text to send", null],
+			["color", InputArgument::OPTIONAL, "Color to mark the message", "B19CD9"],
 		];
 	}
 }

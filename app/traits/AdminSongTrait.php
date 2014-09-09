@@ -26,7 +26,7 @@ trait AdminSongTrait {
 		switch ($action) {
 			case "decline":
 				$reason = Input::get("reason", "");
-				$pending->decline();
+				$pending->decline($reason);
 				break;
 			case "replace":
 				$replace = Input::get("replace");

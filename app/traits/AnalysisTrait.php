@@ -142,21 +142,26 @@ trait AnalysisTrait {
 			);
 		}
 
-		Pending::create([
-			"artist" => $new["artist"],
-			"track" => $new["title"],
-			"album" => $new["album"],
-			"path" => $path,
-			"origname" => $file->getClientOriginalName(),
-			"comment" => Input::get("comment"),
-			"submitter" => $submitter,
-			"dupe_flag" => $duplicate,
-			"replacement" => null,
-			"bitrate" => $new["bitrate"],
-			"length" => $new["length"],
-			"format" => $new["format"],
-			"mode" => $new["mode"],
-		]);
+
+		try {
+			Pending::create([
+				"artist" => $new["artist"],
+				"track" => $new["title"],
+				"album" => $new["album"],
+				"path" => $path,
+				"origname" => $file->getClientOriginalName(),
+				"comment" => Input::get("comment"),
+				"submitter" => $submitter,
+				"dupe_flag" => $duplicate,
+				"replacement" => null,
+				"bitrate" => $new["bitrate"],
+				"length" => $new["length"],
+				"format" => $new["format"],
+				"mode" => $new["mode"],
+			]);
+		} catch (Exception $e) {
+			return ["exception" => get_class($e), "message" => $e->getMessage()];
+		}
 
 		// todo: translation strings
 		return ["success" => "File uploaded successfully"];

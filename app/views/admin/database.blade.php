@@ -150,7 +150,7 @@
 									</button>
 								</div>
 								<div class="col-lg-6">
-									<a class="btn btn-warning btn-sm btn-block" href="/api/song/{{{ base64url_encode(simpleDaypassEncrypt(hex2bin($result["_source"]["hash"]))) }}}">
+									<a class="btn btn-warning btn-sm btn-block" href="/api/song/{{{ base64url_encode(daypass_crypt(hex2bin($result["_source"]["hash"]))) }}}">
 										DL
 									</a>
 									@if (Auth::user()->isAdmin())

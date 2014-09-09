@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="R/a/dio Maintenance Page">
+		<meta name="author" content="Amelia Ikeda">
+		<link rel="icon" href="favicon.ico">
+
+		<title>Maintenance</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+		<style>
+			body {
+				background-image: url("background.jpg");
+				font-weight: bold;
+			}
+
+			.jumbotron {
+				background-color: rgba(0, 255, 255, 0.2);
+				color: #fff;
+				border-radius: 28px !important;
+			}
+
+			.jumbotron p {
+				font-weight: bold;
+			}
+
+			a {
+				color: #d9534f;
+				font-weight: bold;
+			}
+			a:hover {
+				color: #c9302c;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="container" style="margin-top: 20px">
+			<!-- Main jumbotron for a primary marketing message or call to action -->
+			<div class="jumbotron">
+				<div class="row">
+					<div class="col-md-6">
+						<img id="volume-image" src="/assets/logotitle_2.png" alt="R/a/dio" class="img-responsive">
+					</div>
+					<div class="col-md-6">
+						<h3 class="text-muted text-center" style="padding-top: 20px">"We Need Better Devs" Edition&trade;</h3>
+					</div>
+				</div>
+
+				<hr>
+				
+				<div class="row">
+					<div class="col-xs-12">
+						<p>We're currently down for maintenance. Usually we try to do this at a reasonable time when there's few people active.</p>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12 hidden-xs hidden-sm">
+						<p>Click below to play the stream, assuming it's still online. This page will keep checking the main site until it becomes available again, but you can force-check using the retry button.</p>
+						<p>
+							List of streams:
+							<ul>
+								<li><a href="https://stream.r-a-d.io/main">https://stream.r-a-d.io/main</a> - primary server</li>
+								<li><a href="http://not.ocv.me:8000/a.mp3">http://not.ocv.me:8000/a.mp3</a> - kilim's backup</li>
+								<li><a href="https://stream.amelia.pw/main">https://stream.amelia.pw/main</a> - amelia's backup</li>
+								<li><a href="https://backup.r-a-d.io/main">https://backup.r-a-d.io/main</a> - emergency backup</li>
+							</ul>
+						</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<div class="col-md-6">
+							<button class="btn btn-primary btn-lg btn-block" role="button" id="stream" style="margin-bottom: 5px">Play Stream</button>
+						</div>          
+						<div class="col-md-6">
+							<button class="btn btn-danger btn-lg btn-block" role="button" id="retry"><span id="status"></span>Retry R/a/dio</button>
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	</body>
+</html>

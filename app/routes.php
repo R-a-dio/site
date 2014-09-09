@@ -38,8 +38,5 @@ Route::controller("/api", "API");
 # Admin controller; adds extra auth + security
 Route::controller('/admin', 'Admin');
 
-# Artisan password reminder controller
-Route::controller('password', 'RemindersController');
-
 # Index.
 Route::controller('/', 'Home');

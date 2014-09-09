@@ -2,12 +2,9 @@
 
 class Admin extends BaseController {
 
-	use AdminUser;
-	use AdminNews;
-	use AdminSongs;
-	use AdminSearch;
-	use Player;
-	use Search;
+	use AdminUserTrait;
+	use AdminNewsTrait;
+	use AdminSongTrait;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -42,14 +39,6 @@ class Admin extends BaseController {
 		$this->layout->content = View::make("admin.dashboard");
 	}
 
-	public function getNotifications() {
-		$notifications = Notification::grab(Auth::user())
-			->paginate(20);
-
-		$this->layout->content = View::make("admin.notifications")
-			->with("notifications", $notifications);
-	}
-
 	public function getDev() {
 		if (! Auth::user()->isDev())
 			return Redirect::to("/admin");
@@ -57,6 +46,16 @@ class Admin extends BaseController {
 		$this->layout->content = View::make("admin.dev")
 			->with("failed_logins", DB::table("failed_logins")->get())
 			->with("environment", App::environment());
+	}
+
+	public function getRestore($type, $id) {
+		if (! Auth::user()->isDev())
+			return Redirect::to("/admin");
+
+		if ($type == "news") {
+			$news = News::withTrashed()->find($id);
+			$news->restore();
+		}
 	}
 
 	public function missingMethod($parameters = []) {
@@ -71,15 +70,6 @@ class Admin extends BaseController {
 	 */
 	protected function setupLayout() {
 		if ( ! is_null($this->layout)) {
-			$pending = DB::table("pending")
-				->select(DB::raw("count(*) as count"))
-				->first()["count"];
-			$events = Notification::count(Auth::user());
-			View::share("notifications", [
-				"errors" => "",
-				"pending" => $pending,
-				"events" => $events,
-			]);
 			$this->layout = View::make($this->layout);
 		}
 	}

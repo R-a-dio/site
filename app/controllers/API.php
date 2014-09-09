@@ -2,11 +2,11 @@
 
 class API extends Controller {
 
-	use Player;
-	use Analysis;
-	use Hanyuu;
-	use DjImages;
-	use Songs;
+	use PlayerTrait;
+	use AnalysisTrait;
+	use HanyuuTrait;
+	use DjImageTrait;
+	use SongTrait;
 
 	protected $limit;
 	protected $offset = 0;
@@ -45,7 +45,7 @@ class API extends Controller {
 	// normally this is in a model, using Status::current()
 	protected function currentModelOutput() {
 		$current = DB::table("streamstatus")->first();
-		$dj = DB::table("djs")->where("id", "=", $current["djid"])->first();
+		$dj = Dj::find($current["djid"]);
 
 		$lastplayed = $this->getLastPlayedArray();
 		foreach ($lastplayed as &$lp) {
@@ -74,7 +74,7 @@ class API extends Controller {
 
 	protected function id() {
 		// manual key because otherwise the redis instance is untouchable
-		return "api:" . Request::url() . ":offset:" . Input::get("offset", 0) . ":limit:" . Input::get("limit", Config::get("radio.api.limit"));
+		return "api:" . Request::url();
 	}
 
 	public function getMetadata($meta) {

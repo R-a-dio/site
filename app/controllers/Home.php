@@ -3,12 +3,11 @@
 class Home extends BaseController {
 
 	// traits (protected functions)
-	use Player;
-	use Search;
-	use Analysis;
-	use Requests;
-	use SpamCheck;
-	use Themes;
+	use PlayerTrait;
+	use AnalysisTrait;
+	use RequestTrait;
+	use SpamCheckTrait;
+	use ThemeTrait;
 
 	// layout to use. always master unless AJAX.
 	protected $layout = 'master';

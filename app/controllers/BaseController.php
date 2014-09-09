@@ -1,22 +1,15 @@
 <?php
 
-use Elasticsearch\Client;
 
 class BaseController extends Controller {
-	
-	protected $params = [
-		"hosts" => [
-			"127.0.0.1:9200",
-		],
-	];
 
-	public $client;
+	use SearchTrait;
 
 	public function __construct() {
 
 		// ALL POST/PUT/DELETE REQUIRE CSRF TOKENS.
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
-		$this->client = new Client($this->params);
+		$this->setupClient();
 	}
 
 	protected function getStatus() {

@@ -3,18 +3,8 @@
 trait AdminSongTrait {
 
 	public function getPending() {
-		$pending = DB::table("pending")
-			->orderBy("id", "asc")
-			->get();
+		$pending = Pending::all()->sortBy("id", "desc");
 
-		foreach($pending as &$p) {
-			try {
-				$filesize = filesize(Config::get("radio.paths.pending") . "/" . $p["path"]);
-			} catch (Exception $e) {
-				$filesize = "N/A";
-			}
-			$p["filesize"] = $filesize;
-		}
 		$this->layout->content = View::make("admin.pending")
 			->with("pending", $pending);
 	}
@@ -89,7 +79,7 @@ trait AdminSongTrait {
 		}
 	}
 
-	protected function sendFile(array $song, $pending = true) {
+	protected function sendFile(SongInterface $song, $pending = true) {
 		$loc = "radio.paths." . ($pending ? "pending" : "music");
 		$path = Config::get($loc) . "/" . $song["path"];
 		$size = filesize($path);

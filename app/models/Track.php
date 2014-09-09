@@ -1,6 +1,6 @@
 <?php
 
-class Track extends Eloquent {
+class Track extends Eloquent implements SongInterface {
 	
 	use SlackTrait;
 	use IndexTrait;
@@ -42,6 +42,20 @@ class Track extends Eloquent {
 
 	public function getLastRequestedAttribute() {
 		return $this->lastrequested;
+	}
+
+	public function getFilesizeAttribute() {
+		try {
+			$filesize = filesize(Config::get("radio.paths.music") . "/" . $this->path);
+		} catch (Exception $e) {
+			$filesize = 0;
+		}
+
+		return $filesize;
+	}
+
+	public function getFilePathAttribute() {
+		return Config::get("radio.paths.music") . "/" . $this->path;
 	}
 
 

@@ -1,6 +1,6 @@
 <?php
 
-class Pending extends Eloquent {
+class Pending extends Eloquent implements SongInterface {
 	
 	use SlackTrait;
 
@@ -18,12 +18,15 @@ class Pending extends Eloquent {
 
 	public function getFilesizeAttribute() {
 		try {
-			$filesize = filesize(Config::get("radio.paths.pending") . "/" . $p["path"]);
+			$filesize = filesize(Config::get("radio.paths.pending") . "/" . $this->path);
 		} catch (Exception $e) {
-			$filesize = "N/A";
+			$filesize = 0;
 		}
 
 		return $filesize;
+	}
+	public function getFilePathAttribute() {
+		return Config::get("radio.paths.music") . "/" . $this->path;
 	}
 
 	public function getTitleAttribute() {

@@ -5,7 +5,7 @@ class Pending extends Eloquent {
 	use SlackTrait;
 
 	protected $table = "pending";
-	protected $timestamps = false;
+	public $timestamps = false;
 
 	public function deleteFile() {
 		unlink(Config::get("radio.paths.pending") . "/" . $this->path);
@@ -77,8 +77,16 @@ class Pending extends Eloquent {
 		}
 	}
 
+	public function replace(Track $track) {
+		if (is_null($track)) return;
+
+
+
+
+	}
+
 	public function save(array $options = array()) {
-		if ($this->id) {
+		if ($this->exists) {
 			//$this->slack("track.update");
 		} else {
 			$this->slack("pending.uploaded");

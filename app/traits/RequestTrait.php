@@ -5,7 +5,7 @@ use Httpful\Request as RestClient;
 trait RequestTrait {
 
 	// normally in REST this would be a GET. Instead, it's a POST so we can use CSRF tokens.
-	public function anyRequest($id) {
+	public function postRequest($id) {
 		$song = Track::find($id);
 
 		if ($song) {

@@ -48,7 +48,7 @@ function sentry_log($exception, $code = 500) {
 			$id = $client->getIdent($client->captureException($exception));
 
 			return [
-				"error" => $exception->getMessage(),
+				"error" => get_class($exception) . ": " . $exception->getMessage(),
 				"trace" => $exception->getTraceAsString(),
 				"line" => $exception->getLine(),
 				"file" => $exception->getFile(),
@@ -60,7 +60,7 @@ function sentry_log($exception, $code = 500) {
 		return null;
 	
 	return [
-		"error" => $exception->getMessage(),
+		"error" => get_class($exception) . ": " . $exception->getMessage(),
 		"trace" => $exception->getTraceAsString(),
 		"line" => $exception->getLine(),
 		"file" => $exception->getFile(),
@@ -78,7 +78,7 @@ function sentry_log($exception, $code = 500) {
 function radio_error($exception, $code = 500) {
 	if (App::runningInConsole()) {
 		return [
-			"error" => $exception->getMessage(),
+			"error" => get_class($exception) . ": " . $exception->getMessage(),
 			"trace" => $exception->getTraceAsString(),
 			"line" => $exception->getLine(),
 			"file" => $exception->getFile(),

@@ -80,8 +80,7 @@ class Track extends Eloquent implements SongInterface {
 	public function save(array $options = array()) {
 
 		if (Auth::user()) {
-			if (! $this->isDirty("lastrequested"))
-				$this->last_editor = Auth::user()->username;
+			$this->last_editor = Auth::user()->username;
 
 			if ($this->exists) {
 				$this->slack("track.update");

@@ -31,6 +31,7 @@ trait RequestTrait {
 				}
 			} catch (Exception $e) {
 				$res = ["error" => get_class($e) . ": " . $e->getMessage()];
+				sentry_log($e);
 			}
 		} else {
 			$res = ["error" => trans("search.requests.missing")];

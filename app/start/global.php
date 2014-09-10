@@ -177,6 +177,7 @@ App::missing(function($exception)
 
 App::down(function()
 {
+	// we need a way to check if the site is pingable from the maintenance site
 	if (Request::is("api/ping"))
 		return Response::json(["ping" => false]);
 
@@ -211,6 +212,7 @@ function can_request($ip) {
 
 	$time = time() - strtotime($user["time"]);
 
+	// you can request every 2 hours.
 	return $time > (3600 * 2);
 }
 
@@ -220,7 +222,7 @@ function base64url_encode($data) {
 
 function base64url_decode($data) {
   return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
-} 
+}
 
 // daypass~
 function daypass() {
@@ -233,10 +235,17 @@ function daypass() {
 }
 
 function daypass_crypt($data) {
+	// get the raw sha256 hexadecimal and convert it to base 10
 	$seed = hexdec(substr(base64_decode(daypass()), 0, 8));
-	mt_srand($seed); // seed mt random with daypass
 
+	// seed mt random with this int
+	mt_srand($seed);
+
+	// loop through each digit of the string to be encrypted
 	for ($i = 0; $i < strlen($data); $i++) {
+		// XOR each digit using a random int, then convert to ascii.
+		// as the rng is seeded, doing this a second time will flip the digits back.
+		// also means the links change daily, which is handy.
 		$data[$i] = chr(ord($data[$i]) ^ (mt_rand() & 127));
 	}
 
@@ -245,6 +254,7 @@ function daypass_crypt($data) {
 
 // Encode a string for raw slack formatting
 function slack_encode($text) {
+	// these are the only characters that are not permitted in slack.
 	return str_replace(["&", "<", ">"], ["&amp;", "&lt;", "&gt;"], $text);
 }
 

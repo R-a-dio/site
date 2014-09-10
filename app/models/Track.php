@@ -6,7 +6,7 @@ class Track extends Eloquent implements SongInterface {
 	use IndexTrait;
 
 	protected $table = "tracks";
-	protected $dates = ["lastplayed", "lastrequested"];
+	protected $dates = ["last_played", "last_requested"];
 
 	public $timestamps = false;
 

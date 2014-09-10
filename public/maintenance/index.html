@@ -13,6 +13,7 @@
 
 		<!-- Bootstrap core CSS -->
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+		<link href="octicons.css" rel="stylesheet">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -43,6 +44,15 @@
 			a:hover {
 				color: #c9302c;
 			}
+
+			img.media-object {
+				width: 40px;
+				height: 40px;
+			}
+
+			.github-clone {
+				display: none;
+			}
 		</style>
 	</head>
 
@@ -64,7 +74,10 @@
 				
 				<div class="row">
 					<div class="col-xs-12">
-						<p>We're currently down for maintenance. Usually we try to do this at a reasonable time when there's few people active.</p>
+						<p>
+							We're currently down for (probably) maintenance. Usually we try to do this at a reasonable time when there's few people active. Join us on IRC: 
+							<a href="https://kiwiirc.com/client/irc.rizon.net/#r/a/dio">&lt;#r/a/dio @ irc.rizon.net&gt;</a>
+						</p>
 					</div>
 				</div>
 				
@@ -92,7 +105,26 @@
 						</div> 
 					</div>
 				</div>
+
+				<hr>
+
+				<h4><a href="https://github.com/R-a-dio/site"><span class="octicon octicon-repo"></span> R-a-dio/site</a> GitHub Commits</h4>
+
+				<div class="github-clone media">
+					<a class="pull-left author-link" href="">
+						<img class="media-object author-image" src="https://avatars.githubusercontent.com/u/1074190?v=2" alt="Amelia Ikeda">
+					</a>
+					<div class="media-body">
+						<h4 class="media-heading"><a class="commit-author" href="">ameliaikeda</a> <span class="commit-time">authored an hour ago</span></h4>
+						<span class="octicon octicon-git-branch"></span> <span class="commit-branch">develop</span>: <a href="#" class="commit-message">Add a bunch of shit to the maintenance page</a>
+					</div>
+				</div>
+
+				<div class="commits">
+					
+				</div>
 			</div>
+
 		</div>
 
 
@@ -101,5 +133,67 @@
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+
+		<script>
+			var time = new Date().toISOString();
+
+
+			function commit(c) {
+				var $github = $(".github-clone").clone();
+
+				$(".commit-author", $github).text(c.author.login).attr("href", c.author.html_url);
+				$(".commit-message", $github).text(c.commit.message).attr("href", c.html_url);
+				$(".commit-time", $github).text(c.commit.author.date);
+				$(".author-image", $github).attr("src", c.author.avatar_url).attr("alt", c.commit.author.name);
+				$(".author-link", $github).attr("href", c.author.html_url);
+				$github.removeClass("github-clone").addClass("github");
+
+				return $github;
+			}
+
+			function setup() {
+				$.ajax({
+					url: "https://api.github.com/repos/R-a-dio/site/commits",
+					data: {
+						sha: "develop" // branch really
+					},
+					success: fetch,
+					error: console.log
+				});
+			}
+
+			function fetch(data) {
+				for (var i = 0; i < data.length; i++) {
+					var c = commit(data[i]);
+					c.appendTo($("div.commits"));
+				}
+			}
+
+			function prepend(data) {
+				for (var i = 0; i < data.length; i++) {
+					var c = commit(data[i]);
+					c.prependTo($("div.commits"));
+				}
+			}
+
+			function timer() {
+				$.ajax({
+					url: "https://api.github.com/repos/R-a-dio/site/commits",
+					data: {
+						sha: "develop", // branch really
+						since: time
+					},
+					success: prepend,
+					error: console.log
+				});
+
+				time = new Date().toISOString();
+			}
+
+
+			setup();
+			setInterval(timer, 300000);
+		</script>
 	</body>
 </html>

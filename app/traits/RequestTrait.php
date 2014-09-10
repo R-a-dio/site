@@ -30,7 +30,7 @@ trait RequestTrait {
 					$res = ["error" => trans("search.requests.oops")];
 				}
 			} catch (Exception $e) {
-				$res = ["error" => $e->getMessage()];
+				$res = ["error" => get_class($e) . ": " . $e->getMessage()];
 			}
 		} else {
 			$res = ["error" => trans("search.requests.missing")];

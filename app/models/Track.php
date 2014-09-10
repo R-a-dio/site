@@ -32,24 +32,24 @@ class Track extends Eloquent implements SongInterface {
 	}
 
 	public function getTitleAttribute() {
-		return $this->track;
+		return $this->attributes["track"];
 	}
 
 
 	public function getLastPlayedAttribute() {
-		return $this->lastplayed;
+		return $this->attributes["lastplayed"];
 	}
 
 	public function getLastRequestedAttribute() {
-		return $this->lastrequested;
+		return $this->attributes["lastrequested"];
 	}
 
 	public function setLastEditorAttribute($value) {
-		$this->lasteditor = $value;
+		$this->attributes["lasteditor"] = $value;
 	}
 
 	public function getLastEditorAttribute() {
-		return $this->lasteditor;
+		return $this->attributes["lasteditor"];
 	}
 
 	public function getFileSizeAttribute() {
@@ -63,15 +63,15 @@ class Track extends Eloquent implements SongInterface {
 	}
 
 	public function getFilePathAttribute() {
-		return Config::get("radio.paths.music") . "/" . $this->path;
+		return Config::get("radio.paths.music") . "/" . $this->attributes["path"];
 	}
 
 	public function getFileNameAttribute() {
-		return $this->artist . " - " . $this->title;
+		return $this->attributes["artist"] . " - " . $this->attributes["track"];
 	}
 
 	public function getFileTypeAttribute() {
-		if (stripos($this->path, ".flac"))
+		if (stripos($this->attributes["path"], ".flac"))
 			return "audio/x-flac";
 
 		return "audio/mpeg";

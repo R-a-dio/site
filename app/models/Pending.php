@@ -35,7 +35,7 @@ class Pending extends Eloquent implements SongInterface {
 	}
 
 	public function getFileNameAttribute() {
-		return $this->origname;
+		return $this->attributes["origname"];
 	}
 
 	public function getFileTypeAttribute() {

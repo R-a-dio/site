@@ -44,9 +44,9 @@ class ReindexCommand extends Command {
 
 		$this->info("Fetching all tracks from the database...");
 
-		$tracks = DB::table("tracks")->get();
+		$tracks = Track::all();
 
-		$this->comment("Found " . count($tracks) . " tracks");
+		$this->comment("Found " . $tracks->count() . " tracks");
 
 		$this->info("Clearing the existing index");
 

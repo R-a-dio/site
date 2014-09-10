@@ -42,6 +42,10 @@ class API extends Controller {
 		return $this->error(404);
 	}
 
+	public function getPing() {
+		return Response::json(["ping" => true]);
+	}
+
 	// normally this is in a model, using Status::current()
 	protected function currentModelOutput() {
 		$current = DB::table("streamstatus")->first();

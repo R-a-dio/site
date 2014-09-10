@@ -177,16 +177,14 @@ App::missing(function($exception)
 
 App::down(function()
 {
+	if (Request::is("api/ping"))
+		return Response::json(["ping" => false]);
+
 	// bypass maintenance mode for devs who logged in earlier
 	if (Auth::check() and Auth::user()->isDev())
 		return null;
 
-	View::share("theme", "default");
-	View::share("error", 503);
-	$view = Request::ajax() ? View::make("ajax") : View::make("master");
-	$view->content = View::make("layouts.error");
-
-	return $view;
+	return Redirect::to("https://static.r-a-d.io/maintenance/");
 });
 
 // timeago function for all dates
@@ -236,7 +234,7 @@ function daypass() {
 
 function daypass_crypt($data) {
 	$seed = hexdec(substr(base64_decode(daypass()), 0, 8));
-	mt_srand($seed);
+	mt_srand($seed); // seed mt random with daypass
 
 	for ($i = 0; $i < strlen($data); $i++) {
 		$data[$i] = chr(ord($data[$i]) ^ (mt_rand() & 127));

@@ -6,9 +6,7 @@ trait RequestTrait {
 
 	// normally in REST this would be a GET. Instead, it's a POST so we can use CSRF tokens.
 	public function anyRequest($id) {
-		$song = DB::table("tracks")
-			->where("id", "=", $id)
-			->first();
+		$song = Track::find($id);
 
 		if ($song) {
 
@@ -20,7 +18,7 @@ trait RequestTrait {
 				);
 				// todo: move to TLS since hanyuu will be on another server
 				$response = RestClient::post(Config::get("radio.hanyuu.host", "https://backup.r-a-d.io/request"))
-					->body("songid=$id")
+					->body("songid={$song->id}")
 					->addHeader("X-Radio-Auth", $hmac)
 					->addHeader("X-Radio-Client", Request::server("REMOTE_ADDR"))
 					->send();

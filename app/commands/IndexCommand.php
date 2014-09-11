@@ -30,6 +30,7 @@ class IndexCommand extends Command {
 	 */
 	public function __construct()
 	{
+		$this->setupClient();
 		parent::__construct();
 	}
 

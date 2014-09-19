@@ -2,41 +2,15 @@
 
 trait SongTrait {
 	
-	public function getSong($b64) {
-		// this will probably throw an exception on anything strange
-		$decoded = base64url_decode($b64);
-		$hash = bin2hex(daypass_crypt($decoded));
-		
-		$track = Track::find(["hash" => $hash]);
-		
-		if ($track) {
-			try {
-				$this->sendFile($track, false);
-			} catch (Exception $e) {
-				return Response::json(["error" => $e->getMessage()]);
-			}
-		}
-	}
-	
-	// Copied this here from AdminSongs; is there a better way?
-	protected function sendFile(array $song, $pending = true) {
-		$loc = "radio.paths." . ($pending ? "pending" : "music");
-		$path = Config::get($loc) . "/" . $song["path"];
-		$size = filesize($path);
-
-		if (stripos($song["path"], ".flac")) {
-			$type = "audio/x-flac";
-		} else {
-			$type = "audio/mpeg";
-		}
+	protected function sendFile(SongInterface $song) {
 
 		$headers = [
 			"Cache-Control" => "no-cache",
 			"Content-Description" => "File Transfer",
-			"Content-Type" => $type,
+			"Content-Type" => $song->file_type,
 			"Content-Transfer-Encoding" => "binary",
-			"Content-Length" => $size,
-			"Content-Disposition" => "attachment; filename=" . $song["path"],
+			"Content-Length" => $song->file_size,
+			"Content-Disposition" => "attachment; filename=" . rawurlencode($song->file_name),
 		];
 
 		$response = Response::make('', 200, $headers);
@@ -44,7 +18,7 @@ trait SongTrait {
 		Session::save();
 
 		// send the file
-		$fp = fopen($path, 'rb');
+		$fp = fopen($song->file_path, 'rb');
 
 		if ($fp) {
 			// fire headers and clean the output buffer

@@ -160,6 +160,7 @@ trait AnalysisTrait {
 				"mode" => $new["mode"],
 			]);
 		} catch (Exception $e) {
+			sentry_log($e);
 			return ["exception" => get_class($e), "message" => $e->getMessage()];
 		}
 

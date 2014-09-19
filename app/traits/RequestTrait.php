@@ -4,8 +4,7 @@ use Httpful\Request as RestClient;
 
 trait RequestTrait {
 
-	// normally in REST this would be a GET. Instead, it's a POST so we can use CSRF tokens.
-	public function postRequest($id) {
+	protected function requestSong($id) {
 		$song = Track::find($id);
 
 		if ($song) {
@@ -37,11 +36,7 @@ trait RequestTrait {
 			$res = ["error" => trans("search.requests.missing")];
 		}
 
-		if (Request::ajax() or !Request::server("REFERER"))
-			return Response::json($res);
-		else
-			return Redirect::back()
-				->with("status", $res);
+		return $res;
 	}
 
 	protected function parseResponse($response) {

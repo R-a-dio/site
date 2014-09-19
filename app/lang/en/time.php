@@ -7,4 +7,4 @@ return [
 	"week" => ":t week|:t weeks",
 	"timeago" => ":time ago",
 	"timeuntil" => "in :time"
-]
+];

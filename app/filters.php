@@ -36,7 +36,10 @@ App::after(function($request, $response)
 
 Route::filter('auth', function()
 {
-	if (Auth::guest()) return Redirect::guest('login');
+	if (Auth::check() and (Auth::user()->privileges > 0))
+		return true;
+
+	return false;
 });
 
 

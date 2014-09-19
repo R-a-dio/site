@@ -3,13 +3,11 @@
 
 class BaseController extends Controller {
 
-	use SearchTrait;
 
 	public function __construct() {
 
 		// ALL POST/PUT/DELETE REQUIRE CSRF TOKENS.
 		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
-		$this->setupClient();
 	}
 
 	protected function getStatus() {

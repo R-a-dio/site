@@ -5,7 +5,6 @@ class API extends Controller {
 	use PlayerTrait;
 	use AnalysisTrait;
 	use HanyuuTrait;
-	use DjImageTrait;
 	use SongTrait;
 
 	protected $limit;
@@ -47,7 +46,7 @@ class API extends Controller {
 	}
 
 	// normally this is in a model, using Status::current()
-	protected function currentModelOutput() {
+	protected function current() {
 		$current = DB::table("streamstatus")->first();
 		$dj = Dj::find($current["djid"]);
 
@@ -104,8 +103,42 @@ class API extends Controller {
 		return $this->response(["requests" => false]);
 	}
 
+	public function getSong($b64) {
+		// this will probably throw an exception on anything strange
+		$decoded = base64url_decode($b64);
+		$hash = bin2hex(daypass_crypt($decoded));
+		
+		$track = Track::find(["hash" => $hash]);
+		
+		if ($track) {
+			try {
+				$this->sendFile($track, false);
+			} catch (Exception $e) {
+				return Response::json(["error" => $e->getMessage()]);
+			}
+		}
+	}
+
+	public function getDjImage($id) {
+		$dj = Dj::findOrFail($id);
+		
+		$path = Config::get("radio.paths.dj-images") . "/" . $dj->djimage;
+		
+		if (! File::exists($path)) {
+			$resp = Response::make(File::get(public_path() . "/assets/dj_image.png"), 200);
+		} else {
+			$resp = Response::make(File::get($path), 200);
+		}
+		
+		// Yes, I know it might be something else, but we don't know and honestly,
+		// browsers don't care either.
+		$resp->header('Content-type', 'image/png');
+		
+		return $resp;
+	}
+
 	public function getIndex() {
-	 	$current = Cache::get($this->id(), null) ?: $this->currentModelOutput();
+	 	$current = Cache::get($this->id(), null) ?: $this->current();
 	  
 		return $this->response($current);
 	}

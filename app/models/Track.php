@@ -68,7 +68,7 @@ class Track extends Eloquent implements SongInterface {
 	}
 
 	public function getFileNameAttribute() {
-		return $this->attributes["artist"] . " - " . $this->attributes["track"];
+		return "{$this->meta}.{$this->file_extension}";
 	}
 
 	public function getFileTypeAttribute() {
@@ -76,6 +76,14 @@ class Track extends Eloquent implements SongInterface {
 			return "audio/x-flac";
 
 		return "audio/mpeg";
+	}
+
+	public function getFileExtensionAttribute() {
+		return explode(".", $this->attributes["path"])[1];
+	}
+
+	public function getMetaAttribute() {
+		return "{$this->attributes["artist"]} - {$this->attributes["track"]}";
 	}
 
 	public function save(array $options = array()) {

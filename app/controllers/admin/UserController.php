@@ -2,10 +2,13 @@
 
 class UserController extends BaseController {
 	
+	protected $layout = "admin";
+	
 	use ProfileTrait;
 
 	public function __construct() {
 		$this->beforeFilter("auth.admin");
+		parent::__construct();
 	}
 
 	public function getIndex($id = null) {

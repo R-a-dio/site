@@ -1,13 +1,9 @@
 <?php
 
-class Home extends BaseController {
+class HomeController extends BaseController {
 
 	// traits (protected functions)
 	use PlayerTrait;
-	use AnalysisTrait;
-	use RequestTrait;
-	use SpamCheckTrait;
-	use ThemeTrait;
 
 	// layout to use. always master unless AJAX.
 	protected $layout = 'master';
@@ -42,68 +38,6 @@ class Home extends BaseController {
 			->with("cur_theme", $cur_theme);
 
 	}
-
-	/*
-	|--------------------------------------------------------------------------
-	| Stats (Queue, LP, etc.) - GET
-	|--------------------------------------------------------------------------
-	*/
-	public function getQueue() {
-		$this->layout->content = View::make($this->theme("queue"))
-			->with("queue", $this->getQueuePagination()->get());
-	}
-
-	public function getLastPlayed() {
-		$this->layout->content = View::make($this->theme("lastplayed"))
-			->with("lastplayed", $this->getLastPlayedPagination()->paginate(20));
-	}
-
-	public function getStaff() {
-		$staff = Dj::where("visible", "=", 1)
-			->orderBy("role", "asc")
-			->orderBy("priority", "asc")
-			->get();
-
-		$this->layout->content = View::make($this->theme("staff"))
-			->with("staff", $staff);
-	}
-
-
-	/*
-	|--------------------------------------------------------------------------
-	| IRC - GET
-	|--------------------------------------------------------------------------
-	*/
-	public function getIrc() {
-		$this->layout->content = View::make($this->theme("irc"));
-	}
-
-
-	/*
-	|--------------------------------------------------------------------------
-	| Search Page - GET, POST
-	|--------------------------------------------------------------------------
-	*/
-	public function anySearch($search = false) {
-
-		if (Input::has('q'))
-			$search = Input::get("q", false);
-
-		$results = $this->getSearchResults($search);
-
-		$this->layout->content = View::make($this->theme("search"))
-			->with("results", $results)
-			->with("param", $search);
-	}
-
-
-	/*
-	|--------------------------------------------------------------------------
-	| News Page - GET, POST|PUT|DELETE (comments)
-	|--------------------------------------------------------------------------
-	*/
-	
-
 
 
 	/*

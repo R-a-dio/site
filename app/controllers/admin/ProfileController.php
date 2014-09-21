@@ -1,12 +1,14 @@
 <?php
 
 class ProfileController extends BaseController {
-	public function getProfile() {
+
+	protected $layout = "admin";
+
+	public function getIndex() {
 		$this->layout->content = View::make("admin.profile");
 	}
 
-
-	public function putProfile() {
+	public function putIndex() {
 		$user = Auth::user();
 		$email = Input::get("email");
 		$password = Input::get("password");

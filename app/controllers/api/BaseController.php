@@ -3,11 +3,12 @@
 
 class BaseController extends Controller {
 
+	use ThemeTrait;
+
+	protected $layout = "master";
 
 	public function __construct() {
-
-		// ALL POST/PUT/DELETE REQUIRE CSRF TOKENS.
-		$this->beforeFilter('csrf', ['on' => ['post', 'put', 'delete']]);
+		$this->beforeFilter("csrf", ["on" => ["put", "post", "delete"]]);
 	}
 
 	protected function getStatus() {

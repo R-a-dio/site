@@ -90,8 +90,8 @@ hr {
 }
 
 .thumbnail, #cooldown {
-     background-color: #1B1B1B;
-     border-color: rgba(27, 27, 27, 0.1);
+     background-color: unset;
+     border-color: rgba(27, 27, 27, 0);
 }
 
 .progress {

@@ -48,6 +48,22 @@ Route::filter('auth.basic', function()
 	return Auth::basic();
 });
 
+Route::filter('auth.dev', function () {
+	return Auth::check() and Auth::user()->isDev();
+});
+Route::filter('auth.admin', function () {
+	return Auth::check() and Auth::user()->isAdmin();
+});
+Route::filter('auth.pending', function () {
+	return Auth::check() and Auth::user()->canDoPending();
+});
+Route::filter('auth.dj', function () {
+	return Auth::check() and Auth::user()->isDJ();
+});
+Route::filter('auth.news', function () {
+	return Auth::check() and Auth::user()->canPostNews();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guest Filter

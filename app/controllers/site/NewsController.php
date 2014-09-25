@@ -2,34 +2,35 @@
 
 class NewsController extends BaseController {
 
-	public function getIndex($id = false) {
-		
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		$news = Post::with("author");
 
-		if ($id) {
-			$news = Post::with("author")->findOrFail($id);
-			if ($news["private"] and !Auth::check())
-				App::abort(404);
+		if (!Auth::check() or !Auth::user()->canDoPending())
+			$news = $news->where("private", "=", 0);
 
-			$comments = $news->comments->load("user");
-		} else {
-			$news = Post::with("author");
-
-			if (!Auth::check() or !Auth::user()->canDoPending())
-				$news = $news->where("private", "=", 0);
-
-			$news = $news->orderBy("id", "desc")
-				->paginate(15);
-			$comments = null;
-		}
+		$news = $news->orderBy("id", "desc")
+			->paginate(15);
+		$comments = null;
 
 		$this->layout->content = View::make($this->theme("news"))
 			->with("news", $news)
-			->with("id", $id)
+			->with("id", null)
 			->with("comments", $comments ? $comments->reverse() : null);
 	}
 
-	public function postIndex($id) {
-
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
 		$post = Post::findOrFail($id);
 
 		$check = Comment::withTrashed()
@@ -82,17 +83,38 @@ class NewsController extends BaseController {
 			return Redirect::to("/news/$id")
 				->with("status", $status);
 		}
-
-		
 	}
 
-	/**
-	 * Deletes comments.
-	 *
-	 * @return void
-	 */
-	public function deleteIndex($id) {
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$news = Post::with("author")->findOrFail($id);
+		if ($news["private"] and !Auth::check())
+			App::abort(404);
+
+		$comments = $news->comments->load("user");
+
+		$this->layout->content = View::make($this->theme("news"))
+			->with("news", $news)
+			->with("id", $id)
+			->with("comments", $comments ? $comments->reverse() : null);
+	}
+
+
+	/**
+	 * Remove the specified comment if user is an admin.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
 		if (!Auth::check() and !Auth::user()->isAdmin())
 			return Redirect::to("/news/$id");
 
@@ -121,7 +143,5 @@ class NewsController extends BaseController {
 			return Redirect::to("/news/$id")
 				->with("status", $status);
 		}
-
-		
-	}	
+	}
 }

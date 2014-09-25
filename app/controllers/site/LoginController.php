@@ -2,14 +2,26 @@
 
 class LoginController extends BaseController {
 
-	public function getIndex() {
+	use LoginTrait;
+	
+	/**
+	 * Display the login form
+	 *
+	 * @return Response
+	 */
+	public function index() {
 		if (Auth::check())
 			return Redirect::to("/admin");
 
 		$this->layout->content = View::make($this->theme("login"));
 	}
 
-	public function postIndex() {
+	/**
+	 * POST the login form
+	 *
+	 * @return Response
+	 */
+	public function store() {
 		if (Auth::check())
 			return Redirect::to("/admin");
 
@@ -27,29 +39,4 @@ class LoginController extends BaseController {
 
 		return Redirect::to("/admin");
 	}
-
-	protected function bruteforce() {
-		$ip = Input::server("REMOTE_ADDR");
-
-		$fails = DB::table("failed_logins")
-			->where("ip", "=", $ip)
-			->get();
-
-		return count($fails) > 15;
-	}
-
-	protected function failedLogin() {
-		DB::table("failed_logins")
-			->insert([
-				"ip" => Input::server("REMOTE_ADDR"),
-				"user" => Input::get("username", ""),
-				"password" => hash("sha256", Input::get("password")),
-			]);
-	}
-
-	protected function clearFailedLogins($ip = null) {
-		DB::table("failed_logins")
-			->where("ip", "=", $ip ?: Input::server("REMOTE_ADDR"))
-			->delete();
-	}	
 }

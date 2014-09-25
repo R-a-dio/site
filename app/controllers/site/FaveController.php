@@ -1,32 +1,57 @@
 <?php
 
 class FaveController extends BaseController {
-	public function getFaves($nick = false) {
-		if($nick) {
-			// select nick, artist, track from enick join efave on inick=enick.id join esong on isong=esong.id left join tracks on esong.hash=tracks.hash where nick= 'Vin';
-			$faves = $this->getFavesArray($nick);
-			if(Input::has("dl")) {
-				$resp = Response::make($faves->get(), 200);
-				$resp->header("Content-disposition", "attachment; filename={$nick}_faves.json");
-				return $resp;
-			}
-		}
-		else {
-			$faves = null;
-		}
 
-		if($faves)
-			$faves = $faves->paginate(100);
+	use FaveTrait;
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
 		$this->layout->content = View::make($this->theme("faves"))
-			->with("nick", $nick)
-			->with("faves", $faves);
+			->with("nick", null)
+			->with("faves", null);
 	}
-	
-	public function postFaves($nick = false) {
+
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
 		if(Input::has('nick')) {
 			$nick = Input::get('nick', false);
 		}
 		
 		return Redirect::to("/faves/$nick");
+	}
+
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($nick)
+	{
+		$faves = $this->getFavesArray($nick);
+		if (Input::has("dl")) {
+			$resp = Response::make($faves->get(), 200);
+			$resp->header("Content-disposition", "attachment; filename={$nick}_faves.json");
+			return $resp;
+		}
+
+		if ($faves)
+			$faves = $faves->paginate(100);
+
+		$this->layout->content = View::make($this->theme("faves"))
+			->with("nick", $nick)
+			->with("faves", $faves);
 	}
 }

@@ -4,7 +4,7 @@ class SubmitController extends BaseController {
 
 	use AnalysisTrait;
 
-	public function getIndex() {
+	public function index() {
 		$accepts = DB::table("postpending")
 			->where("accepted", ">=", 1)
 			->take(20)
@@ -34,7 +34,7 @@ class SubmitController extends BaseController {
 			->with("cooldown", $cooldown);
 	}
 
-	public function postIndex() {
+	public function store() {
 		try {
 			$file = Input::file("song");
 

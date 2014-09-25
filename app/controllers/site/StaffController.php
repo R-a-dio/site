@@ -2,7 +2,7 @@
 
 class StaffController extends BaseController {
 
-	public function getIndex() {
+	public function index() {
 		$staff = Dj::where("visible", "=", 1)
 			->orderBy("role", "asc")
 			->orderBy("priority", "asc")

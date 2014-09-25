@@ -1,6 +1,6 @@
 <?php
 
-class API extends Controller {
+class APIController extends Controller {
 
 	use PlayerTrait;
 	use AnalysisTrait;

@@ -33,11 +33,11 @@ class BaseController extends Controller {
 		// get theme from user cookie
 		$name = Cookie::get('theme');
 		
-		if(!$name) {
+		if (!$name) {
 			// no set theme, fall back to DJ theme
 			$theme = Theme::find($this->getStatus()['dj']->theme_id);
 			
-			if($theme) {
+			if ($theme) {
 				$name = $theme->name;
 			}
 			else {

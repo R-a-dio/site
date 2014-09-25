@@ -8,11 +8,29 @@ class SearchController extends BaseController {
 		parent::__construct();
 	}
 
-	public function anyIndex($search = false) {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
 
 		if (Input::has('q'))
-			$search = Input::get("q", false);
+			Redirect::to("/search/" . Input::get("q"));
 
+		$this->layout->content = View::make($this->theme("search"))
+			->with("results", null)
+			->with("param", false);
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($search)
+	{
 		$results = $this->getSearchResults($search);
 
 		$this->layout->content = View::make($this->theme("search"))

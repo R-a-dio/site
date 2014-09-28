@@ -1,0 +1,339 @@
+@color0: #2A3843;
+@color1: #8B928B;
+@color2: #49667F;
+@color3: #20202E;
+@color4: #956671;
+@color5: #FFFFFF;
+@color6: #41415D;
+@color7: #ADADAD;
+@color8: #FFF;
+@color9: #BAC2BA;
+@color10: #5D7B5D;
+@color11: #262637;
+@color12: #888888;
+@color13: #66AFE9;
+@color14: #527A8E;
+@color15: #A15755;
+@color16: #333349;
+@color17: #3D3D3D;
+@color18: #323247;
+@color19: #787878;
+
+.vp-border-bottom-colors(@p0)
+{
+  -moz-border-bottom-colors: @p0;
+  -o-border-bottom-colors: @p0;
+  -ms-border-bottom-colors: @p0;
+  -webkit-border-bottom-colors: @p0;
+  border-bottom-colors: @p0;
+}
+.vp-border-left-colors(@p0)
+{
+  -moz-border-left-colors: @p0;
+  -o-border-left-colors: @p0;
+  -ms-border-left-colors: @p0;
+  -webkit-border-left-colors: @p0;
+  border-left-colors: @p0;
+}
+.vp-border-right-colors(@p0)
+{
+  -moz-border-right-colors: @p0;
+  -o-border-right-colors: @p0;
+  -ms-border-right-colors: @p0;
+  -webkit-border-right-colors: @p0;
+  border-right-colors: @p0;
+}
+.vp-border-top-colors(@p0)
+{
+  -moz-border-top-colors: @p0;
+  -o-border-top-colors: @p0;
+  -ms-border-top-colors: @p0;
+  -webkit-border-top-colors: @p0;
+  border-top-colors: @p0;
+}
+
+body
+{
+  background-color: @color0;
+}
+
+.footer
+{
+  border: medium none;
+}
+
+a,
+a:hover
+{
+  color: @color1;
+}
+
+*
+{
+  color: @color1;
+}
+
+.list-group-item-info time,
+.list-group-item-info span,
+.list-group-item-info .q-meta
+{
+  color: @color2 ! important;
+}
+
+.dropdown-menu
+{
+  background-color: @color3;
+  border: 5px solid @color4;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5);
+
+  *
+  {
+    color: @color5 ! important;
+  }
+}
+
+.dropdown-menu &>li &>a:hover,
+.dropdown-menu &>li &>a:focus
+{
+  background-color: @color6;
+}
+
+.dropdown-menu &>.active &>a,
+.dropdown-menu &>.active &>a:hover,
+.dropdown-menu &>.active &>a:focus
+{
+  background-color: @color6;
+}
+
+.thumbnail,
+.thumbnail:hover
+{
+  background-color: transparent;
+  border: medium none;
+  box-shadow: none ! important;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default
+{
+  background-color: @color6;
+  border-color: @color7;
+  color: @color8;
+}
+
+.btn
+{
+  background-color: transparent;
+  border: medium none;
+  color: @color1;
+
+  &:hover
+  {
+    background-color: transparent;
+    border: medium none;
+    color: @color9;
+  }
+}
+
+.btn-success
+{
+  background-color: @color10;
+  color: @color5;
+}
+
+.progress
+{
+  background: none repeat scroll 0% 0% @color11;
+}
+
+.progress-bar
+{
+  background: none repeat scroll 0% 0% @color4;
+}
+
+.list-group-item
+{
+  background-color: transparent;
+  border-style: dashed;
+  border-width: 0px;
+}
+
+.bordered
+{
+  border-radius: 7px;
+  box-shadow: 0px 0px 4px 4px @color12;
+}
+
+.thumbnail:hover,
+.thumbnail:focus
+{
+  border-color: @color13;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+}
+
+.main:not(.disable),
+.container ~ .content,
+.search
+{
+  background-color: @color3;
+  border: 5px solid @color4;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.5);
+}
+
+.search
+{
+  &:nth-child(2)
+  {
+    margin-top: 20px;
+  }
+}
+
+.main
+{
+  padding-top: 20px;
+}
+
+.panel
+{
+  background-color: transparent;
+  border: 0px solid transparent;
+}
+
+#exci-middlerow
+{
+  text-align: right;
+}
+
+.panel-default
+{
+  & > .panel-heading
+  {
+    background-color: transparent;
+    border-bottom: 3px solid @color1;
+  }
+}
+
+#dj-mode
+{
+  background-color: transparent;
+  border: medium none;
+}
+
+.panel-heading a,
+.panel-title
+{
+  color: @color1;
+}
+
+.well
+{
+  &:not(#volume-control)
+  {
+    background: none repeat scroll 0% 0% transparent;
+    border-color: -moz-use-text-color;
+    border-image: none;
+    border-radius: 0px;
+    border-style: none none dashed;
+    border-width: medium medium 2px;
+  }
+}
+
+#volume-control
+{
+  background: none repeat scroll 0% 0% transparent;
+  border: medium none;
+}
+
+.text-info
+{
+  color: @color14;
+}
+
+.text-success,
+.alert-success
+{
+  color: @color10;
+}
+
+.text-danger
+{
+  color: @color15;
+}
+
+hr
+{
+  border-color: @color16;
+  border-width: 2px;
+}
+
+.alert
+{
+  background: none repeat scroll 0% 0% transparent;
+  border: medium none;
+}
+
+.form-control
+{
+  &:not(.comment-input)
+  {
+    background-color: @color17;
+    border-color: rgba(27, 27, 27, 0.5);
+    color: rgba(255, 255, 255, 0.4);
+    margin-right: -0.9em;
+    padding-right: 3em;
+  }
+
+  &:focus
+  {
+    border-color: rgba(27, 27, 27, 0.5);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.comment-input
+{
+  background-color: @color18;
+  border: medium none;
+}
+
+.form-control:active,
+.form-control:focus
+{
+  border: medium none ! important;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+}
+
+.pagination &>.disabled &>span,
+.pagination &>.disabled &>span:hover,
+.pagination &>.disabled &>span:focus,
+.pagination &>.disabled &>a,
+.pagination &>.disabled &>a:hover,
+.pagination &>.disabled &>a:focus
+{
+  background-color: transparent;
+  border-color: rgba(27, 27, 27, 0.1);
+  color: @color19;
+}
+
+.pagination &>.active &>a,
+.pagination &>.active &>span,
+.pagination &>.active &>a:hover,
+.pagination &>.active &>span:hover,
+.pagination &>.active &>a:focus,
+.pagination &>.active &>span:focus
+{
+  background-color: transparent;
+  border-color: rgba(27, 27, 27, 0.1);
+  color: @color19;
+}
+
+.pagination &>li &>a,
+.pagination &>li &>span
+{
+  background-color: transparent;
+  border-color: rgba(27, 27, 27, 0.1);
+  color: @color2;
+}

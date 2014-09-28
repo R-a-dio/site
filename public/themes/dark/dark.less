@@ -1,0 +1,268 @@
+@color0: #222222;
+@color1: #363636;
+@color2: #527A8E;
+@color3: #5D7B5D;
+@color4: #686868;
+@color5: #A15755;
+@color6: #EB9D9B;
+@color7: #49667F;
+@color8: #787878;
+@color9: #2A2A2A;
+@color10: #A0A0A0;
+@color11: #4D4D4D;
+@color12: #3D3D3D;
+@color13: #1B1B1B;
+@color14: #D1D1D1;
+@color15: #384F62;
+@color16: #191919;
+@color17: #788878;
+
+body
+{
+  background-color: @color0;
+}
+
+code
+{
+  background-color: @color1;
+}
+
+#dj-image
+{
+  margin-top: 1em;
+}
+
+.text-info
+{
+  color: @color2;
+}
+
+.text-success,
+.alert-success
+{
+  color: @color3;
+}
+
+.btn-success
+{
+  background-color: @color3;
+  border-color: @color3;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.staff-name
+{
+  color: @color4;
+}
+
+.text-danger
+{
+  color: @color5;
+}
+
+.btn-danger,
+.btn.btn-block.btn-danger.request-button.disabled
+{
+  background-color: @color5;
+  border-color: @color5;
+  color: @color6;
+}
+
+.well
+{
+  background-color: @color0;
+  border-color: rgba(27, 27, 27, 0.5);
+
+  a
+  {
+    color: @color7;
+  }
+}
+
+.navbar
+{
+  background-color: @color9 ! important;
+  border: medium none;
+
+  a
+  {
+    color: @color8 ! important;
+  }
+}
+
+.list-group-item.queue.list-group-item-info
+{
+  color: @color7;
+}
+
+p,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h7,
+h8,
+.dropdown-toggle.btn-block,
+.row
+{
+  color: @color8;
+}
+
+hr
+{
+  border-color: @color8;
+}
+
+.dropdown-menu
+{
+  background-color: @color9 ! important;
+
+  a
+  {
+    color: @color10 ! important;
+
+    &:hover
+    {
+      background-color: @color11 ! important;
+    }
+  }
+}
+
+.form-control
+{
+  background-color: @color12;
+  border-color: rgba(27, 27, 27, 0.5);
+  color: rgba(255, 255, 255, 0.4);
+  margin-right: -0.9em;
+  padding-right: 3em;
+
+  &:focus
+  {
+    border-color: rgba(27, 27, 27, 0.5);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.thumbnail,
+#cooldown
+{
+  background-color: unset;
+  border-color: rgba(27, 27, 27, 0);
+}
+
+.progress
+{
+  background-color: @color13;
+}
+
+.progress-bar
+{
+  background-color: @color7;
+}
+
+#stream-play,
+.btn.btn-primary
+{
+  background-color: @color7;
+  border: medium none;
+  color: @color14;
+}
+
+#stream-play
+{
+  &:hover
+  {
+    background-color: @color15;
+  }
+}
+
+.panel-title
+{
+  color: @color7 ! important;
+}
+
+.dropdown-toggle.btn-block
+{
+  background-color: @color13;
+  border: medium none;
+}
+
+.dropdown-toggle.btn-block:hover,
+.dropdown-toggle.btn-block:focus
+{
+  background-color: @color16;
+  color: @color14;
+}
+
+.last-played,
+.queue,
+#dj-mode,
+.list-group-item
+{
+  background-color: @color13;
+  border-color: rgba(27, 27, 27, 0.1);
+}
+
+.panel-default
+{
+  background-color: @color13 ! important;
+  border-color: rgba(27, 27, 27, 0.1) ! important;
+}
+
+#submit-button
+{
+  background-color: @color13 ! important;
+  border-color: rgba(27, 27, 27, 0.1) ! important;
+  color: @color17;
+
+  &:hover
+  {
+    border-color: rgba(255, 255, 255, 0.1) ! important;
+  }
+}
+
+.panel-heading
+{
+  background-color: @color9 ! important;
+  border-color: rgba(27, 27, 27, 0.5) ! important;
+}
+
+.pagination &>.disabled &>span,
+.pagination &>.disabled &>span:hover,
+.pagination &>.disabled &>span:focus,
+.pagination &>.disabled &>a,
+.pagination &>.disabled &>a:hover,
+.pagination &>.disabled &>a:focus
+{
+  background-color: @color13;
+  border-color: rgba(27, 27, 27, 0.1);
+  color: @color8;
+}
+
+.pagination &>.active &>a,
+.pagination &>.active &>span,
+.pagination &>.active &>a:hover,
+.pagination &>.active &>span:hover,
+.pagination &>.active &>a:focus,
+.pagination &>.active &>span:focus
+{
+  background-color: @color13;
+  border-color: rgba(27, 27, 27, 0.1);
+  color: @color8;
+}
+
+.pagination &>li &>a,
+.pagination &>li &>span
+{
+  background-color: @color13;
+  border-color: rgba(27, 27, 27, 0.1);
+  color: @color7;
+}
+
+.footer
+{
+  border-top: medium none;
+}

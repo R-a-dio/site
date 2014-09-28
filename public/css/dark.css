@@ -90,7 +90,7 @@ hr {
 }
 
 .thumbnail, #cooldown {
-     background-color: unset;
+     background-color: transparent;
      border-color: rgba(27, 27, 27, 0);
 }
 

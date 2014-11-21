@@ -1,0 +1,24 @@
+{
+    "name": "amelia/radio",
+    "description": "",
+    "authors": [
+        {
+            "name": "Amelia Ikeda",
+            "email": "amelia@amelia.moe"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "laravel/framework": "5.0.*",
+        "connorvg/slack"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-4": {
+            "Amelia\\Radio\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

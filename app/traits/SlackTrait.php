@@ -32,7 +32,13 @@ trait SlackTrait {
 
 	public function slack($code, array $extra = []) {
 		$user = Auth::user();
-		$title = trans("slack.$code.title", ["user" => slack_encode($user->user), "userid" => $user->id]);
+
+		if ($user) {
+			$title = trans("slack.$code.title", ["user" => slack_encode($user->user), "userid" => $user->id]);
+		} else {
+			$title = trans("slack.$code.title");
+		}
+
 		$body = trans("slack.$code.body", array_merge($this->toSlackArray(), $extra)) . "\n" . $this->getDiffs();
 
 		Queue::push("SendMessage", [

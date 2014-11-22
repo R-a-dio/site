@@ -56,17 +56,6 @@ trait AdminNewsTrait {
 				
 
 				$status = "News post added.";
-				Notification::news("added news post \"$title\" ({$post->id})", $user);
-				Queue::push("SendMessage", [
-					"text" => trans("slack.news.add", [
-						"user" => slack_encode(Auth::user()->id),
-						"name" => slack_encode(Auth::user()->user),
-						"id" => $post->id,
-						"title" => slack_encode($post->title),
-					]),
-					"channel" => "#general",
-					"username" => "news"
-				]);
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -100,16 +89,6 @@ trait AdminNewsTrait {
 
 				$status = "News post $id updated.";
 				
-				Queue::push("SendMessage", [
-					"text" => trans("slack.news.edit", [
-						"user" => slack_encode(Auth::user()->id),
-						"name" => slack_encode(Auth::user()->user),
-						"id" => $post->id,
-						"title" => slack_encode($post->title),
-					]),
-					"channel" => "#logs",
-					"username" => "news"
-				]);
 			} catch (Exception $e) {
 				$status = $e->getMessage();
 			}
@@ -129,18 +108,7 @@ trait AdminNewsTrait {
 				$title = $post->title;
 				$post->delete();
 
-				Queue::push("SendMessage", [
-					"text" => trans("slack.news.delete", [
-						"user" => slack_encode(Auth::user()->id),
-						"name" => slack_encode(Auth::user()->user),
-						"id" => $id,
-						"title" => slack_encode($title),
-					]),
-					"channel" => "#logs",
-					"username" => "news"
-				]);
 				$status = "Post Deleted.";
-				Notification::news("soft-deleted news post \"$title\" ($id)", Auth::user());
 				
 			} catch (Exception $e) {
 				$status = $e->getMessage();

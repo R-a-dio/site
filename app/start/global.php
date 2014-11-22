@@ -146,6 +146,11 @@ App::error(function(ModelNotFoundException $exception, $code)
 	return radio_error("Model not found at /" . Request::path(), 404);
 });
 
+App::error(function(Illuminate\Session\TokenMismatchException $e, $code)
+{
+	return "I'm a teapot";
+});
+
 /*
 |--------------------------------------------------------------------------
 | 404 Logger

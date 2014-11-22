@@ -196,15 +196,12 @@ class Home extends BaseController {
 
 					$post->comments()->save($comment);
 
-					Notification::dev(Input::server("REMOTE_ADDR") . " posted a comment on news post $id");
 					$status = "Comment posted!";
 					$response = ["comment" => $comment->toArray(), "status" => $status];
 				} catch (Exception $e) {
 					$response = ["error" => $e->getMessage()];
 					$status = $e->getMessage();
 				}
-				
-
 			}
 		}
 		if (Request::ajax()) {
@@ -236,7 +233,6 @@ class Home extends BaseController {
 				$comment = Comment::find($comment);
 
 				$comment->delete();
-				Notification::dev("deleted a comment on news post $id", Auth::user());
 				$status = "Comment Deleted!";
 				$response = ["status" => $status];
 			} catch (Exception $e) {

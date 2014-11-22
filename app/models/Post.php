@@ -5,9 +5,10 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 class Post extends Eloquent {
 
 	use SoftDeletingTrait;
+	use SlackTrait;
 
 	protected $table = "radio_news";
-	
+
 	protected $fillable = ["user_id", "title", "header", "text", "private"];
 
 	public function author() {
@@ -35,7 +36,6 @@ class Post extends Eloquent {
 			$this->slack("news.add");
 		}
 		parent::save($options);
-		$this->index();
 	}
 
 	public function delete() {

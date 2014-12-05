@@ -1,5 +1,11 @@
 <?php namespace Amelia\Radio\Services\Status;
 
+/**
+ * @property string|null $playing
+ * @property bool        $online
+ * @property bool        $requests
+ * @property bool        $afk
+ */
 interface StatusService {
 
     /**

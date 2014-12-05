@@ -4,6 +4,12 @@ use Amelia\Radio\Models\Status;
 use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Support\Collection;
 
+/**
+ * @property string|null $playing
+ * @property bool        $online
+ * @property bool        $requests
+ * @property bool        $afk
+ */
 class RadioStatusService implements StatusService {
 
     /**

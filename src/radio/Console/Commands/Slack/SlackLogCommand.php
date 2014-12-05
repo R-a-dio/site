@@ -1,5 +1,6 @@
 <?php namespace Amelia\Radio\Console\Commands\Slack;
 
+use Amelia\Radio\Services\Slack\SlackService;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -20,9 +21,19 @@ class SlackLogCommand extends Command {
     protected $description = "Send a log to slack";
 
     /**
-     * @var
+     * @var \Amelia\Radio\Services\Slack\SlackService
      */
     protected $slack;
+
+    /**
+     * Create a new slack command with a slack service.
+     *
+     * @param \Amelia\Radio\Services\Slack\SlackService $slack
+     */
+    public function __construct(SlackService $slack) {
+        $this->slack = $slack;
+        parent::__construct();
+    }
 
     /**
      * Execute the command.

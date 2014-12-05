@@ -13,7 +13,14 @@ interface ThemeService {
      * Return a view name scoped to a theme
      *
      * @param string $name
-     * @return mixed
+     * @return string
      */
     public function view($name);
+
+    /**
+     * Get the extra data needed for themed views
+     *
+     * @return array
+     */
+    public function extra();
 }

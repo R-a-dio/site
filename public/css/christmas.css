@@ -1,5 +1,22 @@
 html, body {
-     background: url("/images/valentines/background.jpg") no-repeat fixed left center / cover  #FFFFFF;
+     background: url("/images/christmas/winter-wp.jpg") no-repeat fixed left center / cover  #FFFFFF;
+}
+
+html {
+	 height: 100%;
+}
+
+body {
+	 height: 100%;
+	 overflow: hidden;
+}
+
+.radio-content-panel {
+	 height: 100%;
+}
+
+.main {
+	 height: 100%;
 }
 
 #happy {
@@ -7,6 +24,56 @@ html, body {
      bottom: 0px;
      position: fixed;
      right: 0px;
+}
+
+#radio-container {
+	 height: 100%;
+}
+
+.thumbnail {
+	 margin-bottom: 0px;
+}
+
+.listeners-num, .timer-num {
+	 color: #FFF;
+	 font-size: 18px;
+}
+
+.list-group-item {
+	 background: transparent;
+	 border: none;
+}
+
+.lp-meta {
+	 color: #FFF;
+	 font-size: 18px;
+}
+
+.top-pusher {
+	 height: 50%;
+}
+
+.upper-content {
+	 transform: translateY(-50%);
+background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 72%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.75)), color-stop(72%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 72%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 72%,rgba(0,0,0,0) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 72%,rgba(0,0,0,0) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 72%,rgba(0,0,0,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+}
+
+.lower-content {
+	 background-color: none;
+	 border: 0px #FFF solid;
+	 position: fixed;
+	 bottom: 0px;
+}
+
+.container {
+	 width: 100%;
 }
 
 .navbar {
@@ -49,7 +116,7 @@ html, body {
 }
 
 .thumbnail {
-     background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%) repeat scroll 0px 0px transparent;
+     background: transparent;
      border-radius: 0px 20px 0px 0px;
      border: 0px solid #DDDDDD;
      color: #FFFFFF;
@@ -121,15 +188,6 @@ html, body {
 
 h2, h3 {
      color: #FFFFFF;
-}
-
-.container {
-     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 25%, rgba(0, 0, 0, 0.4) 75%, rgba(0, 0, 0, 0) 100%) repeat scroll 0px 0px transparent;
-     padding-top: 1em;
-}
-
-.content {
-     background: none repeat scroll 0% 0% rgba(0, 0, 0, 0) ! important;
 }
 
 .modal-content {

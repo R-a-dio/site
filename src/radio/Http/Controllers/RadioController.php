@@ -1,8 +1,8 @@
 <?php namespace Amelia\Radio\Http\Controllers;
 
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Illuminate\Http\Request,
+    Illuminate\Routing\Controller;
 use function Amelia\Radio\theme;
 
 class RadioController extends Controller {

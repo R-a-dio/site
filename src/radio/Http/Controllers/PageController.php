@@ -1,9 +1,11 @@
 <?php namespace Amelia\Radio\Http\Controllers;
 
-use Amelia\Radio\Repositories\News\PostRepository;
-use Amelia\Radio\Repositories\Users\UserRepository;
-use function Amelia\Radio\theme;
+use Amelia\Radio\Repositories\LastPlayed\LastPlayedRepository,
+    Amelia\Radio\Repositories\News\PostRepository,
+    Amelia\Radio\Repositories\Queue\QueueRepository,
+    Amelia\Radio\Repositories\Users\UserRepository;
 use Illuminate\Http\Request;
+use function Amelia\Radio\theme;
 
 class PageController extends RadioController {
 
@@ -37,9 +39,26 @@ class PageController extends RadioController {
         $this->layout->content = theme("radio::irc");
     }
 
-
+    /**
+     * Show the last played songs
+     *
+     * @param \Amelia\Radio\Repositories\LastPlayed\LastPlayedRepository $lastPlayed
+     * @param \Illuminate\Http\Request                                   $input
+     * @get("last-played")
+     */
     public function lastPlayed(LastPlayedRepository $lastPlayed, Request $input) {
-        $lp = $lastPlayed->paginate($input->get("page"));
+        $lp = $lastPlayed->paginate($input->get("page", 0));
         $this->layout->content = theme("radio::last-played")->with(compact("lp"));
+    }
+
+    /**
+     * Show the queue page
+     *
+     * @param \Amelia\Radio\Repositories\Queue\QueueRepository $queue
+     * @get("queue")
+     */
+    public function queue(QueueRepository $queue) {
+        $queue = $queue->get();
+        $this->layout->content = theme("radio::last-played")->with(compact("queue"));
     }
 }

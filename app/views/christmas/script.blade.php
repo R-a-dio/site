@@ -270,7 +270,7 @@ var particles = [];
 var particleImage = new Image(); 
 particleImage.src = '/images/valentines/ParticleSmoke.png';
 
-init();
+//init();
 
 
 function init(id) {

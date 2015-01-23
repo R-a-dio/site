@@ -15,8 +15,10 @@
 			<div class="col-md-12">
 				@include("partials.dj-image")
 			</div>
-			<div class="col-md-4"></div>
 			<div class="col-md-4">
+			</div>
+			<div class="col-md-4">
+				@include("partials.volume-logo")
 				<button class="btn btn-primary btn-block disabled" id="stream-play" data-loading-text="{{{ trans("stream.loading") }}}"><i class="fa fa-spinner fa-spin"></i></button>
 				<button class="btn btn-primary btn-block" id="stream-stop" data-loading-text="{{{ trans("stream.loading") }}}" style="display: none; margin-top: 0;">{{{ trans("stream.stop") }}}</button>
 				<div class="btn-group btn-block" style="width:100%">

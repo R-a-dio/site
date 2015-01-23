@@ -84,7 +84,7 @@ trait SearchTrait {
 			"id" => $track->id,
 			"acceptor" => $track->acceptor,
 			"editor" => $track->last_editor,
-			"requests" => $track->request_count,
+			"requests" => $track->requestcount,
 			"lastplayed" => strtotime($track->last_played),
 			"lastrequested" => strtotime($track->last_requested),
 			"hash" => $track->hash,

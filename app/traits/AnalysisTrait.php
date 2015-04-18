@@ -2,6 +2,7 @@
 
 use GetId3\GetId3Core as ID3;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 
 trait AnalysisTrait {
 	
@@ -24,7 +25,7 @@ trait AnalysisTrait {
 	protected $delay = 7200; // 2 hours
 
 
-	protected function analyze(UploadedFile $file) {
+	protected function analyze(File $file) {
 		$size = $file->getSize();
 
 		$status = ["error" => [], "success" => []];
@@ -108,6 +109,21 @@ trait AnalysisTrait {
 	}
 
 	protected function addPending(UploadedFile $file) {
+
+		// hack start
+
+                $filePath = $file->getRealPath();
+                $newFile = $filePath . "." . $file->getClientOriginalExtension();
+                $name = $file->getClientOriginalName();
+                $size = $file->getClientSize();
+
+                rename($filePath, $newFile);
+
+                $file = new File($newFile);
+
+                // hack end
+
+
 		$status = $this->analyze($file);
 
 		if (count($status["error"])) {
@@ -149,7 +165,7 @@ trait AnalysisTrait {
 				"track" => $new["title"],
 				"album" => $new["album"],
 				"path" => $path,
-				"origname" => $file->getClientOriginalName(),
+				"origname" => $name,
 				"comment" => Input::get("comment"),
 				"submitter" => $submitter,
 				"dupe_flag" => $duplicate,

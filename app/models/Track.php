@@ -68,7 +68,7 @@ class Track extends Eloquent implements SongInterface {
 	}
 
 	public function getFileNameAttribute() {
-		return $this->attributes["artist"] . " - " . $this->attributes["track"];
+		return $this->attributes["artist"] . " - " . $this->attributes["track"] . "." . pathinfo($this->attributes["path"], PATHINFO_EXTENSION);
 	}
 
 	public function getFileTypeAttribute() {

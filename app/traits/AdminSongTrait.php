@@ -87,7 +87,7 @@ trait AdminSongTrait {
 			"Content-Type" => $song->file_type,
 			"Content-Transfer-Encoding" => "binary",
 			"Content-Length" => $song->file_size,
-			"Content-Disposition" => "attachment; filename=" . rawurlencode($song->file_name),
+			"Content-Disposition" => "attachment; filename=\"" . $song->file_name . "\"",
 		];
 
 		$response = Response::make('', 200, $headers);
@@ -125,6 +125,17 @@ trait AdminSongTrait {
 		}
 
 		$song = Track::findOrFail($id);
+
+		if(Input::get("action", "") === "delete") {
+			// remove search index first
+			$this->remove($song);
+			// remove file
+			File::delete($song->getFilePathAttribute());
+			// remove entry
+			$song->delete();
+			return Redirect::back()
+				->with("status", "Song Deleted.");
+		}
 
 		$song->title = Input::get("title", "");
 		$song->artist = Input::get("artist", "");

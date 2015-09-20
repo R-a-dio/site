@@ -92,28 +92,36 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-1">
 						<div class="form-group">
-							<label class="control-label col-xs-4 input-sm">Uploader</label>
-							<div class="col-xs-8">
-								<p class="form-control-static input-sm">{{{ $p->submitter }}}</p>
+							<!-- <label class="control-label col-xs-4 input-sm">Uploader</label> -->
+							<div class="col-xs-16">
+								<p style="overflow:hidden" class="form-control-static input-sm">{{{ $p->submitter }}}</p>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-4 input-sm">
+							<!-- <label class="control-label col-xs-4 input-sm">
 								Bitrate
-							</label>
-							<div class="col-xs-8">
+							</label> -->
+							<div class="col-xs-16">
 								<p
 									class="form-control-static input-sm"
-									style="overflow: hidden; white-space: nowrap">{{{ ceil($p->bitrate / 1000) }}}kbps {{{ $p->mode ?: "" }}}</p>
+									style="white-space: nowrap">{{{ ceil($p->bitrate / 1000) }}}kbps {{{ $p->mode ?: "" }}}</p>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-2">
 						<div class="form-group">
-							<label class="control-label col-xs-4 input-sm">Size</label>
-							<div class="col-xs-8">
+							<!-- <label class="control-label col-xs-4 input-sm">Comment</label> -->
+							<div class="col-xs-16">
+								<p class="form-control-static input-sm"><small>{{{ $p->comment }}}</small></p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-1">
+						<div class="form-group">
+							<!-- <label class="control-label col-xs-4 input-sm">Size</label> -->
+							<div class="col-xs-16">
 								<p class="form-control-static input-sm">
 									<button
 										type="button"
@@ -122,13 +130,14 @@
 										data-format="{{ $p->format ?: 'mp3' }}">
 										{{{ date("i\ms\s", floor($p->length) ?: 0) }}}, {{{ number_format($p->file_size / 1048576, 2) }}}MB
 									</button>
+								
 								</p>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-4 input-sm">Name</label>
-							<div class="col-xs-8">
-								<p class="form-control-static input-sm" style="overflow: hidden; white-space: nowrap">
+							<!-- <label class="control-label col-xs-4 input-sm">Name</label> -->
+							<div class="col-xs-16">
+								<p class="form-control-static input-sm" style="white-space: nowrap">
 									<a href="/admin/pending-song/{{{ $p["id"] }}}" title="{{{ $p->file_name }}}" target="_blank" class="btn btn-warning btn-xs">
 										{{{ strlen($p->file_name) > 17 ? preg_replace("/(.{1,10})(.*)(\.(mp3|flac))/u", "$1..$3", $p->file_name) : $p->file_name }}}
 									</a>
@@ -136,31 +145,31 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-3">
 						<div class="form-group">
-							<label class="control-label col-xs-4 input-sm">Comment</label>
-							<div class="col-xs-8">
-								<p class="form-control-static input-sm"><small>{{{ $p->comment }}}</small></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-2">
-						<div class="form-group">
-							<label class="control-label col-xs-4 input-sm" style="padding-top: 0">
+							<div class="col-xs-1"></div>
+							<label class="control-label col-xs-3 input-sm" style="padding-top: 0">
+								<button type="submit" name="choice" value="replace" class="btn btn-sm btn-warning accept-song">Replace</button>
+							</label>
+							<label class="control-label col-xs-3 input-sm" style="padding-top: 0">
 								<button type="submit" name="choice" value="accept" class="btn btn-sm btn-success accept-song">Accept</button>
 							</label>
-							<div class="col-xs-8">
+							<div class="col-xs-3">
 								<div class="checkbox">
 									<input type="checkbox" name="good" value="1"> Good?
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-4 input-sm" style="padding-top: 0">
+							<div class="col-xs-1"></div>
+							<div class="col-xs-3" >
+								<input type="text" name="replace" value="" class="form-control input-sm" placeholder="Rep. ID">
+							</div>
+							<label class="control-label col-xs-3 input-sm" style="padding-top: 0">
 								<button type="submit" name="choice" value="decline" class="btn btn-sm btn-danger decline-song">Decline</button>
 							</label>
-							<div class="col-xs-8">
-								<input type="text" name="reason" class="form-control input-sm" placeholder="Reason for declining">
+							<div class="col-xs-3">
+								<input type="text" name="reason" class="form-control input-sm" placeholder="Reason">
 							</div>
 						</div>
 					</div>

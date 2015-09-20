@@ -20,9 +20,10 @@ trait AdminSongTrait {
 				break;
 			case "replace":
 				$replace = Input::get("replace");
+				$good = Input::get("good");
 				$track = Track::find($replace);
 				if ($track)
-					$pending->replace($track);
+					$pending->replace($track, $good);
 				break;
 			case "accept":
 				$artist = Input::get("artist", "");

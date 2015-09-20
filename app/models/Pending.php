@@ -89,12 +89,24 @@ class Pending extends Eloquent implements SongInterface {
 		}
 	}
 
-	public function replace(Track $track) {
+	public function replace(Track $track, $good) {
 		if (is_null($track)) return;
-
-
-
-
+		// add postpending result
+		DB::table("postpending")
+			->insert([
+				"ip" => $this->submitter,
+				"accepted" => 2,
+				"meta" => $track->artist != "" ? "{$track->artist} - {$track->title}" : $track->title,
+				"good_upload" => $good ? 1 : 0,
+			]);
+		// move the file to the music dir
+		$this->moveFile();
+		// update the path value
+		$track->path = $this->path;
+		$track->usable = 0;
+		$track->save();
+		// delete the pending entry
+		$this->delete();
 	}
 
 	public function save(array $options = array()) {

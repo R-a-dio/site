@@ -331,7 +331,8 @@
 			update_old_progress: 0.0,
 			current_pos: 0,
 			current_len: 0,
-			afk: "init"
+			afk: "init",
+			djimg: 0
 		};
 
 		String.prototype.format = function() {
@@ -345,8 +346,10 @@
 		};
 
 		function setDjImage(image) {
-			if(image != "/api/dj-image/" + image)
+			if(radio.djimg != image) {
 				$("#dj-image").attr("src", "/api/dj-image/" + image);
+				radio.djimg = image;
+			}
 		}
 
 		function setDJ(dj) {

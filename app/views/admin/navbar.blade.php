@@ -46,9 +46,9 @@
 							</li>
 						@endif
 
-						<li @if (Request::segment(2) == "djs") class="active" @endif>
+						<!-- <li @if (Request::segment(2) == "djs") class="active" @endif>
 							<a href="/admin/djs">DJs</a>
-						<li>
+						<li> -->
 						
 						@if (Auth::user()->isDev())
 							<li @if (Request::segment(2) == "dev") class="active" @endif>
@@ -68,9 +68,9 @@
 						<a href="/admin/profile" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/admin/profile">Edit Profile</a></li>
-							@if (Auth::user()->isDJ())
+							<!-- @if (Auth::user()->isDJ())
 								<li><a href="/admin/profile#dj">DJ Profile</a></li>
-							@endif
+							@endif -->
 							<li><a href="/admin/profile#password">Change Password</a></li>
 							<li><a href="/logout">Log Out</a></li>
 						</ul>

@@ -1,0 +1,295 @@
+html, body {
+     background: url("/images/naruto-nye.jpg") repeat #FFFFFF;
+}
+
+html {
+	 height: 100%;
+}
+
+body {
+	 height: 100%;
+}
+
+.top-content {
+     padding-top: 15px;
+     padding-bottom: 15px;
+     position: relative;
+     top: 50%;
+     transform: translateY(-50%);
+     width: 75% !important;
+	background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0) 100%);
+	background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 50%,rgba(0,0,0,0) 100%);
+	background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.8) 50%,rgba(0,0,0,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 );
+}
+
+.dropdown-menu .divider {
+    display: none;
+}
+
+.radio-content-panel {
+	 height: 100%;
+}
+
+.main {
+	 height: 100%;
+}
+
+#radio-container {
+	 height: 100%;
+}
+
+.thumbnail {
+	 margin-bottom: 0px;
+}
+
+.listeners-num, .timer-num {
+	 color: #FFF;
+	 font-size: 18px;
+}
+
+.list-group-item {
+	 background: transparent;
+	 border: none;
+}
+
+.lp-meta {
+	 color: #FFF;
+	 font-size: 18px;
+}
+
+.top-pusher {
+	 height: 50%;
+}
+
+.upper-content {
+	 transform: translateY(-50%);
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 72%, rgba(0,0,0,0) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.75)), color-stop(72%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0)));
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 72%,rgba(0,0,0,0) 100%);
+	background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 72%,rgba(0,0,0,0) 100%);
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 72%,rgba(0,0,0,0) 100%);
+	background: radial-gradient(ellipse at center,  rgba(0,0,0,0.75) 0%,rgba(0,0,0,0) 72%,rgba(0,0,0,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf000000', endColorstr='#00000000',GradientType=1 );
+
+}
+
+.lower-content {
+	 background-color: none;
+	 border: 0px #FFF solid;
+	 position: fixed;
+	 bottom: 0px;
+}
+
+.container {
+	 width: 100%;
+}
+
+.footer {
+     display: none;
+}
+
+.container.hidden-xs.hidden-sm {
+     background: none repeat scroll 0% 0% transparent;
+}
+
+#Div1 {
+     height: 100%;
+     left: 0px;
+     overflow: hidden;
+     position: fixed;
+     top: 0px;
+     width: 100%;
+     z-index: 0;
+}
+
+#volume-control {
+     background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%) repeat scroll 0% 0% transparent;
+     border-radius: 0px;
+     border: medium none;
+     color: #FFFFFF;
+     margin-left: -1.5em;
+     transition: all 0.2s ease-in-out 0s;
+}
+
+#logo {
+     background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.25) 100%) repeat scroll 0% 0% transparent;
+     border-radius: 20px 0px 0px;
+     margin-left: -1.5em;
+     padding: 4px;
+     transition: all 0.2s ease-in-out 0s;
+}
+
+.thumbnail {
+     background: transparent;
+     border-radius: 0px 20px 0px 0px;
+     border: 0px solid #DDDDDD;
+     color: #FFFFFF;
+}
+
+#volume-image {
+     background: rgba(0, 0, 0, 0);
+     border-radius: 0px;
+     padding: 4px;
+     transition: all 0.2s ease-in-out 0s;
+}
+
+#dj-image {
+     border-radius: 200px;
+     margin-top: 0.5em;
+     width: 10em;
+}
+
+.progress-bar {
+     background-color: rgba(255, 255, 255, 0.25);
+}
+
+.progress {
+     background-color: rgba(0, 0, 0, 0.5);
+     border-radius: 3px;
+}
+
+.btn-primary {
+     background-color: rgba(0, 0, 0, 0);
+     border-radius: 0px;
+     border: medium none;
+}
+
+.btn-primary:hover {
+     background-color: rgba(0, 0, 0, 0);
+}
+
+.btn-default {
+     background-color: rgba(0, 0, 0, 0);
+     border-radius: 0px;
+     border: medium none;
+     color: #FFFFFF;
+}
+
+.btn-default:hover {
+     background-color: rgba(0, 0, 0, .25);
+     color: #FFFFFF;
+}
+
+.btn-group .dropdown-toggle:active, .btn-group.open .dropdown-toggle {
+     background-color: rgba(0, 0, 0, .25);
+     color: #FFFFFF;
+}
+
+.dropdown-menu, .dropdown-menu li a {
+     background-color: rgba(0, 0, 0, .5);
+     color: #FFFFFF;
+}
+
+.dropdown-menu li a:hover {
+     background-color: rgba(255, 255, 255, 0.1);
+     color: #FFFFFF;
+     transition: all 0.2s ease-in-out 0s;
+}
+
+.dropdown-menu .divider {
+     background-color: rgba(100, 100, 100, 0);
+     height: 0;
+}
+
+h2, h3 {
+     color: #FFFFFF;
+}
+
+.modal-content {
+     background-color: #000000;
+     border-radius: 20px;
+     border: 0px solid rgba(0, 0, 0, 0.2);
+     color: #FFFFFF;
+     position: relative;
+}
+
+.modal-footer {
+     border: medium none;
+}
+
+.modal-header {
+     border: medium none;
+}
+
+.close {
+     color: #FFFFFF;
+}
+
+.text-muted {
+     color: #FFF;
+}
+
+#stream-play:hover {
+     background-color: rgba(0, 0, 0, .25) !important;
+}
+
+#stream-play {
+     margin-top: 20px;
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+     background: rgba(255, 255, 255, .25);
+}
+
+.col-md-3 > .col-xs-12 > img, .thumbnail {
+	margin-top: 20px;
+}
+
+.panel-default {
+	border: none;
+}
+
+.panel-default > .panel-heading {
+     background-color: rgba(0, 0, 0, .8);
+	 color: #FFF;
+}
+
+.panel-group .panel {
+    padding-right: 15px;
+    background: rgba(0, 0, 0, .25);
+}
+
+.panel-title > a, .text-center {
+	color: #FFF;
+}
+
+.search, .panel-body, .panel-heading, #well {
+     background-color: rgba(0, 0, 0, .8);
+}
+
+hr {
+	border-color: #000;
+}
+
+.list-group {
+     background-color: rgba(0, 0, 0, .8);
+     color: #FFF;
+}
+
+.pagination {
+	display: none;
+}
+
+.panel {
+	background-color: transparent !important;
+     color: #FFF;
+}
+
+.well {
+    background: rgba(0, 0, 0, .35);
+     border: none;
+}
+
+.panel-heading {
+	border: 0px solid #000;
+	padding: 20px;
+}
+
+.panel-title {
+	color: #FFF;
+}
+
+.navbar li:nth-child(5) {
+	display: none;
+}

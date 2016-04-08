@@ -15,10 +15,12 @@
 			<li><a href="/set-theme/-1">Use DJ Theme</a></li>
 		@endif
 		@foreach ($themes as $t)
-			@if ($t->name === $cur_theme)
-				<li class="active"><a href="/set-theme/{{ $t->id }}">{{{ $t->display_name }}}</a></li>
-			@else
-				<li><a href="/set-theme/{{ $t->id }}">{{{ $t->display_name }}}</a></li>
+			@if ($t->display_name != "")
+				@if ($t->name === $cur_theme)
+					<li class="active"><a href="/set-theme/{{ $t->id }}">{{{ $t->display_name }}}</a></li>
+				@else
+					<li><a href="/set-theme/{{ $t->id }}">{{{ $t->display_name }}}</a></li>
+				@endif
 			@endif
 		@endforeach
 		<li class="divider"></li>

@@ -79,3 +79,15 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+Route::filter('req_api_csrf', function()
+{
+throw new Exception;
+        $s = Track::find(Route::input('id'));
+        if($s) {
+                if(substr($s->hash, 0, 20) != base64url_decode(daypass_crypt(bin2hex(Input::get('_token'))))) {
+                        throw new Illuminate\Session\TokenMismatchException;
+                }
+        }
+});
+

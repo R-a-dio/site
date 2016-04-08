@@ -1,0 +1,190 @@
+body {
+     background: url("/images/halloween/halloween.png") center no-repeat;
+     background-origin: padding-box;
+     background-position: center top;
+     background-repeat: no-repeat;
+     background-size: cover;
+     min-height: 100%;
+     background-attachment: fixed;
+     background-clip: border-box;
+     background-color: #440088;
+}
+
+.divider {
+     border: 1px solid #000;
+}
+
+.row {
+     margin: 0px;
+}
+
+.footer {
+     display: none;
+}
+
+.container {
+     margin-left: 0px;
+     padding: 0px;
+}
+
+.top-content {
+     margin-left: 15px;
+}
+
+.middle-content {
+     margin-left: 15px;
+}
+
+.btn-default {
+     background-color: rgba(0, 0, 0, 0);
+     color: rgba(255, 255, 255, 0.43);
+     border: none;
+}
+
+.btn-default:hover {
+     background-color: rgba(255, 255, 255, 0.1);
+     color: rgba(255, 255, 255, 0.43);
+     border: none;
+}
+
+.well, .form-control {
+     background-color: transparent;
+     border: none;
+}
+
+.panel, .list-group-item, #dj-mode, #dj-mode a {
+     background-color: rgba(0, 0, 0, 0.75);
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+}
+
+.navbar {
+     background-color: rgba(0, 0, 0, 0.75);
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+     padding-left: 25px;
+}
+
+.navbar-right {
+     float: none !important;;
+}
+
+.panel-default > .panel-heading, .panel-default > .panel-heading a {
+     background-color: rgba(0, 0, 0, 0.25);
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+}
+
+h1, h2, h3 {
+     color: rgba(255, 255, 255, 0.50);
+}
+
+.thumbnail {
+     background: none;
+     border: none;
+     color: rgba(255, 255, 255, 0.6)
+}
+
+.top-content {
+     background-color: rgba(0, 0, 0, 0.75);
+     border-radius: 6px;
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+     padding-top: 25px;
+}
+
+.progress {
+     background-color: rgba(255, 255, 255, 0.25);
+}
+
+.progress-bar {
+     background-color: rgba(253, 83, 69, 0.5);
+}
+
+.btn-primary, .btn-info {
+     background-color: rgba(253, 83, 69, 0.75);
+     border: none;
+}
+
+.btn-primary:hover {
+     background-color: rgba(253, 83, 69, 0.45);
+     border: none;
+}
+
+.dropdown-menu {
+     background-color: rgba(0, 0, 0, 0.9);
+     border: none;
+}
+
+.dropdown-menu li a {
+     color: #FFF;
+}
+
+.dropdown-menu li a:hover {
+     background-color: rgba(255, 255, 255, 0.15);
+     color: #FFF;
+
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+     background-color: rgba(253, 83, 69, 0.45) !important;
+}
+
+.modal-content {
+     background-color: rgba(0, 0, 0, 0.95);
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+}
+
+.disable {
+     background-color: rgba(0, 0, 0, 0.75);
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+     border-radius: 5px;
+}
+
+.disable {
+     margin-left: 15px;
+     margin-bottom: 15px;
+}
+
+hr {
+     border: none;
+}
+
+.pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
+     background-color: rgba(0, 0, 0, 0.25);
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+     background-color: rgba(0, 0, 0, 0.25);
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+}
+
+.pagination > li > a, .pagination > li > span {
+     background-color: rgba(0, 0, 0, 0.25);
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+}
+
+.container.main.content {
+     background-color: rgba(0, 0, 0, 0.75);
+     border: none;
+     color: rgba(255, 255, 255, 0.43);
+     border-radius: 6px;
+     margin-left: 15px;
+     margin-bottom: 15px;
+     padding: 15px;
+}
+
+.alert-success {
+     background-color: rgba(0, 0, 0, 0);
+     border: none;
+}
+
+.request-button {
+     width: 90%;
+}

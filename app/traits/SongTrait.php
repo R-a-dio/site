@@ -2,8 +2,10 @@
 
 trait SongTrait {
 	
-	public function getSong($b64) {
+	public function getSong($b64="") {
 		// this will probably throw an exception on anything strange
+		if($b64 === "")
+			App::abort(404);
 		$decoded = base64url_decode($b64);
 		$hash = bin2hex(daypass_crypt($decoded));
 //		return $hash;

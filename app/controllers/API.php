@@ -7,6 +7,8 @@ class API extends Controller {
 	use HanyuuTrait;
 	use DjImageTrait;
 	use SongTrait;
+	use SearchTrait;
+	use RequestTrait;
 
 	protected $limit;
 	protected $offset = 0;
@@ -14,6 +16,8 @@ class API extends Controller {
 
 	public function __construct() {
 		$this->limit = Config::get("radio.api.limit", 25);
+//		$this->beforeFilter('csrf', ["on" => "postRequest"]);
+		$this->setupClient();
 	}
 
 	/**
@@ -126,5 +130,28 @@ class API extends Controller {
 		}
 
 		return Response::json($response);
+	}
+	
+	public function getSearch($query) {
+		$limit = Input::get('limit', 20);
+		$raw = $this->search($query ?: "", "track", "song-database", true);
+		$total = $raw["hits"]["total"];
+		$res = [];
+		$start = (Paginator::getCurrentPage() - 1) * $limit;
+		$raw = array_slice($raw["hits"]["hits"], $start, $limit);
+		for ($i = 0; $i < count($raw); $i++) {
+			$x = $raw[$i]["_source"];
+			$res[] = [
+				"artist" => $x["artist"],
+				"title" => $x["title"],
+				"id" => $x["id"],
+				"lastplayed" => $x["lastplayed"],
+				"lastrequested" => $x["lastrequested"],
+				"requestable" => requestable($x["lastrequested"], $x["requests"]),
+//				"token" => base64url_encode(daypass_crypt(hex2bin(substr($x["hash"], 0, 20))))
+			];
+		}
+		$pag = Paginator::make($res, $total, $limit);
+		return Response::json($pag);
 	}
 }

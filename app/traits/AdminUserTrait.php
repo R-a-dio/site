@@ -79,7 +79,7 @@ trait AdminUserTrait {
 				$status = "User {$user->user} updated.";
 				$user->save();
 			} catch (Exception $e) {
-				$status = $e->getMessage();
+				$status = $e->__toString();
 			}
 			
 		}
@@ -169,11 +169,10 @@ trait AdminUserTrait {
 					return;
 				}
 				
-				$dj = Dj::create([
-					"djname" => $name,
-					"djtext" => "x",
-					"djimage" => "x",
-				]);
+				$dj = new Dj;
+				$dj->djname = $name;
+				$dj->djtext = "x";
+				$dj->djimage = "x";
 				$dj->save();
 				$user->djid = $dj->id;
 				$user->save();

@@ -48,6 +48,10 @@ trait SearchTrait {
 						"query" => $terms,
 					]
 				],
+				"sort" => [
+					["requests" => ["order" => "desc", "ignore_unmapped" => true]],
+					["_score"   => ["order" => "desc"]]
+				],
 			],
 		];
 

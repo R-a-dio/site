@@ -376,4 +376,4 @@ function loop() {
 }
 </script>
 
-<script>init('Div1');</script>
+<!-- <script>init('Div1');</script> -->

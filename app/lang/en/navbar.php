@@ -9,7 +9,7 @@ return [
 	"faves" => "Favourites",
 	"stats" => "Stats",
 	"submit" => "Submit",
-	"irc" => "IRC",
+	"irc" => "Chat",
 	"search" => "Search",
 	"request" => "Request",
 	"graphs" => "Graphs & Metrics",

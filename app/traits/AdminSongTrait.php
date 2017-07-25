@@ -16,14 +16,26 @@ trait AdminSongTrait {
 		switch ($action) {
 			case "decline":
 				$reason = Input::get("reason", "");
+				if ($pending->replacement) {
+					$track = Track::find($pending->replacement);
+					if ($track) {
+						$track->need_reupload = 1;
+						$track->save();
+					}
+				}
 				$pending->decline($reason);
 				break;
 			case "replace":
 				$replace = Input::get("replace");
 				$good = Input::get("good");
 				$track = Track::find($replace);
-				if ($track)
+				if ($track) {
+					if ($pending->replacement) {
+						$track->need_reupload = 0;
+						$track->save();
+					}
 					$pending->replace($track, $good);
+				}
 				break;
 			case "accept":
 				$artist = Input::get("artist", "");
@@ -142,6 +154,7 @@ trait AdminSongTrait {
 		$song->artist = Input::get("artist", "");
 		$song->album = Input::get("album", "");
 		$song->tags = Input::get("tags", "");
+		$song->need_reupload = Input::get("need_reupload") === "1" ? 1 : 0;
 
 		$song->save();
 

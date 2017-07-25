@@ -59,6 +59,8 @@
 	@foreach ($pending as $p)
 		@if ($p["dupe_flag"])
 			<div class="well" style="background-color: rgba(217, 83, 79, 0.5); padding-bottom: 0">
+		@elseif ($p["replacement"])
+			<div class="well" style="background-color: rgba(137, 232, 148, 0.5); padding-bottom: 0">
 		@else
 			<div class="well" style="padding-bottom: 0">
 		@endif
@@ -68,13 +70,13 @@
 						<div class="form-group">
 							<label class="control-label col-xs-2 input-sm">Artist</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control input-sm" value="{{{ $p->artist }}}" placeholder="Artist" name="artist">
+								<input type="text" class="form-control input-sm" value="{{{ $p->artist }}}" placeholder="Artist" name="artist" {{ $p["replacement"] ? "disabled" : "" }}>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-2 input-sm">Title</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control input-sm" value="{{{ $p->track }}}" placeholder="Title" name="title">
+								<input type="text" class="form-control input-sm" value="{{{ $p->track }}}" placeholder="Title" name="title" {{ $p["replacement"] ? "disabled" : "" }}>
 							</div>
 						</div>
 					</div>
@@ -82,13 +84,13 @@
 						<div class="form-group">
 							<label class="control-label col-xs-2 input-sm">Album</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control input-sm" value="{{{ $p->album }}}" placeholder="Album" name="album">
+								<input type="text" class="form-control input-sm" value="{{{ $p->album }}}" placeholder="Album" name="album" {{ $p["replacement"] ? "disabled" : "" }}>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-xs-2 input-sm">Tags</label>
 							<div class="col-xs-10">
-								<input type="text" class="form-control input-sm" placeholder="Tags" name="tags">
+								<input type="text" class="form-control input-sm" placeholder="Tags" name="tags" {{ $p["replacement"] ? "disabled" : "" }}>
 							</div>
 						</div>
 					</div>
@@ -152,7 +154,7 @@
 								<button type="submit" name="choice" value="replace" class="btn btn-sm btn-warning accept-song">Replace</button>
 							</label>
 							<label class="control-label col-xs-3 input-sm" style="padding-top: 0">
-								<button type="submit" name="choice" value="accept" class="btn btn-sm btn-success accept-song">Accept</button>
+								<button type="submit" name="choice" value="accept" class="btn btn-sm btn-success accept-song" {{ $p["replacement"] ? "disabled" : "" }}>Accept</button>
 							</label>
 							<div class="col-xs-3">
 								<div class="checkbox">
@@ -163,7 +165,10 @@
 						<div class="form-group">
 							<div class="col-xs-1"></div>
 							<div class="col-xs-3" >
-								<input type="text" name="replace" value="" class="form-control input-sm" placeholder="Rep. ID">
+								<input type="text" name="replace" value="{{ $p["replacement"] ?: "" }}" class="form-control input-sm" placeholder="Rep. ID" {{ $p["replacement"] ? "disabled" : "" }}>
+								@if ($p["replacement"])
+								<input type="hidden" name="replace" value="{{ $p["replacement"] }}">
+								@endif
 							</div>
 							<label class="control-label col-xs-3 input-sm" style="padding-top: 0">
 								<button type="submit" name="choice" value="decline" class="btn btn-sm btn-danger decline-song">Decline</button>

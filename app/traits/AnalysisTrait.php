@@ -108,7 +108,7 @@ trait AnalysisTrait {
 
 	}
 
-	protected function addPending(UploadedFile $file) {
+	protected function addPending(UploadedFile $file, Track $repl = null) {
 
 		// hack start
 
@@ -116,7 +116,6 @@ trait AnalysisTrait {
                 $newFile = $filePath . "." . $file->getClientOriginalExtension();
                 $name = $file->getClientOriginalName();
                 $size = $file->getClientSize();
-
                 rename($filePath, $newFile);
 
                 $file = new File($newFile);
@@ -153,28 +152,32 @@ trait AnalysisTrait {
 		} else {
 			$submitter = Request::server("REMOTE_ADDR");
 			DB::insert(
-				"insert into `uploadtime` (`ip`, `time`) values (?, NOW()) on duplicate key update `ip` = ?, `time` = now()",
-				[$submitter, $submitter]
+				"insert into `uploadtime` (`ip`, `time`) values (?, NOW()) on duplicate key update `time` = now()",
+				[$submitter]
 			);
 		}
 
 
 		try {
 			Pending::create([
-				"artist" => $new["artist"],
-				"track" => $new["title"],
-				"album" => $new["album"],
+				"artist" => $repl ? $repl->artist : $new["artist"],
+				"track" => $repl ? $repl->title : $new["title"],
+				"album" => $repl ? $repl->album : $new["album"],
 				"path" => $path,
 				"origname" => $name,
 				"comment" => Input::get("comment"),
 				"submitter" => $submitter,
-				"dupe_flag" => $duplicate,
-				"replacement" => null,
+				"dupe_flag" => $repl ? false : $duplicate,
+				"replacement" => $repl ? $repl->id : null,
 				"bitrate" => $new["bitrate"],
 				"length" => $new["length"],
 				"format" => $new["format"],
 				"mode" => $new["mode"],
 			]);
+			if ($repl) {
+				$repl->need_reupload = 0;
+				$repl->save();
+			}
 		} catch (Exception $e) {
 			sentry_log($e);
 			return ["exception" => get_class($e), "message" => $e->getMessage()];

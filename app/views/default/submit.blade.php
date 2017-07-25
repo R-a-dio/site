@@ -62,6 +62,21 @@
 							{{{ trans("submit.comment.desc") }}}
 						</p>
 					</div>
+					
+					<!--email_off-->
+					<div class="form-group upload-form">
+						<label class="control-label">Replacement</label>
+						<select name="replacement" class="form-control">
+							<option value="0">No replacement</option>
+							@foreach ($replacements as $r)
+							<option value="{{ $r->id }}">{{{ $r->artist === "" ? $r->title : $r->artist . " - " . $r->title }}}</option>
+							@endforeach
+						</select>
+						<p class="help-block">
+							Sometimes, songs in the database aren't up to snuff. If you have a good copy of a track listed here, select the track in the list and upload it!
+						</p>
+					</div>
+					<!--/email_off-->
 
 					<div class="form-group upload-form" style="display: none" id="daypass">
 						<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
@@ -289,6 +304,7 @@
 				$data.append("_token", $form.find("input[name=_token]").val());
 				$data.append("daypass", $form.find("input[name=daypass]").val());
 				$data.append("comment", $form.find("input[name=comment]").val());
+				$data.append("replacement", $form.find("select[name=replacement]").val());
 
 				xhr.open("POST", "/submit", true);
 				xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");

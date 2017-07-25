@@ -373,11 +373,22 @@ class Home extends BaseController {
 	public function postSubmit() {
 		try {
 			$file = Input::file("song");
+			$repl = Input::get("replacement", 0);
 
-			if ($file)
-				$result = $this->addPending($file);
+			if ($file && $file->isValid()) {
+				if ((is_int($repl) || ctype_digit($repl)) && (int)$repl > 0) {
+					// We want a replacement. Verify it.
+					$repl = Track::find($repl);
+					if (!($repl && $repl->need_reupload))
+						$result = "Invalid replacement ID.";
+					else
+						$result = $this->addPending($file, $repl);
+				}
+				else
+					$result = $this->addPending($file, NULL);
+			}
 			else
-				$result = "You need to add a file.";
+				$result = "You need to add a valid file.";
 
 			if (Request::ajax())
 				return Response::json(["value" => $result]);

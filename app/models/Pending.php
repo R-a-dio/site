@@ -65,7 +65,7 @@ class Pending extends Eloquent implements SongInterface {
 
 	public function accept($artist, $title, $album, $tags, $good) {
 		try {
-			Track::create([
+			$new_track = Track::create([
 				"track" => $title,
 				"artist" => $artist,
 				"album" => $album,
@@ -76,9 +76,12 @@ class Pending extends Eloquent implements SongInterface {
 
 			DB::table("postpending")
 				->insert([
+					"trackid" => $new_track->id,
 					"ip" => $this->submitter,
 					"accepted" => 1,
-					"meta" => "$artist - $title",
+					"meta" => $artist != ""
+					          ? "$artist - $title"
+					          : "$title",
 					"good_upload" => $good ? 1 : 0,
 				]);
 
@@ -94,6 +97,7 @@ class Pending extends Eloquent implements SongInterface {
 		// add postpending result
 		DB::table("postpending")
 			->insert([
+				"trackid" => $track->id,
 				"ip" => $this->submitter,
 				"accepted" => 2,
 				"meta" => $track->artist != "" ? "{$track->artist} - {$track->title}" : $track->title,

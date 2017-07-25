@@ -168,10 +168,12 @@
 					</div>
 					<div class="col-lg-1">
 						<div class="form-group">
-							<button type="submit" name="action" value="replace" class="btn btn-info btn-block btn-sm btn-default">
+							<!--<button disabled type="submit" name="action" value="replace" class="btn btn-info btn-block btn-sm btn-default">
 								Replace
-							</button>
-							<input style="margin-top: 5px" type="file" class="form-control input-sm" name="replace-id" placeholder="Replace ID" disabled>
+							</button>-->
+							
+							<label> <input style="margin-top:5px" type="checkbox" name="need_reupload" value="1" {{ $result['_source']['need_reupload'] === 1 ? "checked" : "" }} > Needs repl. </label>
+							<!--<input style="margin-top: 5px" type="file" class="form-control input-sm" name="replace-id" placeholder="Replace ID" disabled>-->
 							</div>
 						</div>
 					</div>

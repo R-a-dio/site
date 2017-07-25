@@ -94,6 +94,34 @@ function radio_error($exception, $code = 500) {
 	return $view;
 }
 
+function intdiv_1($a, $b){
+	return ($a - $a % $b) / $b;
+}
+
+function pretty_cooldown($lp, $lr, $rc) {
+	$delay = delay($rc);
+	$now = time();
+	$cd = intval(max($lp + $delay - $now, $lr + $delay - $now));
+
+	if ($cd <= 0)
+		return "Request";
+
+	$days = intdiv_1($cd, 86400);
+	$cd = $cd % 86400;
+	$hours = intdiv_1($cd, 3600);
+	$cd = $cd % 3600;
+	$minutes = intdiv_1($cd, 60);
+	$seconds = $cd % 60;
+
+	if ($days > 0)
+		return "Requestable in ".$days."d".$hours."h";
+	else if ($hours > 0)
+		return "Requestable in ".$hours."h".$minutes."m";
+	else if ($minutes > 0)
+		return "Requestable in ".$minutes."m".$seconds."s";
+	return "Request";
+}
+
 function requestable($lastplayed, $requests) {
 	$delay = delay($requests);
 
@@ -107,10 +135,11 @@ function delay($priority) {
 
 		// between 0 and 7 return magic
 		if ($priority >= 0 and $priority <= 7)
-			return -11057 * $priority * $priority + 172954 * $priority + 81720;
+			$cd = -11057 * $priority * $priority + 172954 * $priority + 81720;
 		// if above that, return magic crazy numbers
 		else
-			return (int) (599955 * exp(0.0372 * $priority) + 0.5);
+			$cd = (int) (599955 * exp(0.0372 * $priority) + 0.5);
+		return $cd / 2;
 }
 
 /*

@@ -32,10 +32,12 @@
 				<div class="col-sm-4 text-center" style="margin-bottom: 10px">
 					<h4>{{{ trans("search.metadata.title") }}}</h4>
 				</div>
+				<!--
 				<div class="col-sm-1 text-center" style="margin-bottom: 10px">
 					<h4>{{{ trans("search.fave") }}}</h4>
 				</div>
-				<div class="col-sm-3 text-center" style="margin-bottom: 10px">
+				-->
+				<div class="col-sm-4 text-center" style="margin-bottom: 10px">
 					<h4>{{{ trans("search.requestable") }}}</h4>
 				</div>
 		</div>
@@ -50,13 +52,15 @@
 				<div class="col-sm-4 text-center" style="margin-bottom: 10px">
 					<span class="text-info">{{{ $result["_source"]["title"] }}}</span>
 				</div>
+				<!--
 				<div class="col-sm-1" style="margin-bottom: 10px">
 					<button class="btn btn-block btn-danger fave-button" data-toggle="modal" data-target="#faves">
 						<i class="fa fa-heart"></i>
 					</button>
 				</div>
-				<div class="col-sm-3" style="margin-bottom: 10px">
-					@if (requestable($result["_source"]["lastrequested"], $result["_source"]["requests"]))
+				-->
+				<div class="col-sm-4" style="margin-bottom: 10px">
+					@if (requestable($result["_source"]["lastrequested"], $result["_source"]["requests"]) && requestable($result["_source"]["lastplayed"], $result["_source"]["requests"]))
 						{{ Form::open(["url" => "/request/{$result["_id"]}"]) }}
 							<button type="submit" name="id" value="{{ $result["_id"] }}" class="btn btn-block btn-success request-button">
 								{{{ trans("search.request") }}}
@@ -64,7 +68,7 @@
 						{{ Form::close() }}
 					@else
 						<button class="btn btn-block btn-danger request-button disabled">
-							{{ trans("search.request") }}
+							{{{ pretty_cooldown($result["_source"]["lastrequested"], $result["_source"]["lastplayed"], $result["_source"]["requests"]) }}}
 						</button>
 					@endif
 				</div>

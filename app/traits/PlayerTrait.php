@@ -82,7 +82,7 @@ trait PlayerTrait {
 		return DB::select(
 			"select unix_timestamp(`eplay`.`dt`) as time, `esong`.`meta` " .
 			"from `eplay` use index (PRIMARY) " .
-			"inner join `esong` on `esong`.`id` = `eplay`.`isong` " .
+			"left join `esong` on `esong`.`id` = `eplay`.`isong` " .
 			"order by `eplay`.`id` desc limit ?", [$limit]);
 
 	}
@@ -101,7 +101,7 @@ trait PlayerTrait {
 				"esong.meta",
 				DB::raw("unix_timestamp(`eplay`.`dt`) as time")
 			)
-			->join("esong", "esong.id", "=", "eplay.isong")
+			->leftJoin("esong", "esong.id", "=", "eplay.isong")
 			->orderBy("eplay.id", "desc");
 
 	}

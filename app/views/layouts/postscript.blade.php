@@ -1,6 +1,7 @@
 <!-- Bootstrap core JavaScript
 	================================================== -->
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<!-- script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script -->
+<script src="/js/bootstrap-3.1.0.min.js"></script>
 <script src="/js/jquery.timeago.js"></script>
 <!-- History.js -->
 <script src="/js/jquery.history.js"></script>

@@ -6,7 +6,7 @@ return [
 	"data" => "Play Data",
 	"lp" => "Last Played",
 	"queue" => "Queue",
-	"faves" => "Favourites",
+	"faves" => "Favorites",
 	"stats" => "Stats",
 	"submit" => "Submit",
 	"irc" => "Chat",

@@ -25,7 +25,9 @@
 			<link href="/css/{{ $theme }}.css" rel="stylesheet">
 		@endif
 
-		<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+		<!-- script src="//code.jquery.com/jquery-2.0.3.min.js"></script -->
+		<!-- external refs are dumb. ed -->
+		<script src="/js/jquery-2.0.3.min.js"></script>
 
 		<script>swfpath = "/js/Jplayer.swf";</script>
 

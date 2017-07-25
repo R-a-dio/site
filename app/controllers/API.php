@@ -74,9 +74,8 @@ class API extends Controller {
 		$current["lp"] = $lastplayed;
 
 		// time-sensitive. contains timestamps that are hit hundreds of times per second.
-		Cache::connection()->set(Cache::getPrefix() . $this->id(), serialize($current));
-		Cache::connection()->expire(Cache::getPrefix() . $this->id(), 1);
-
+		Cache::connection()->set('main_api', serialize($current));
+		Cache::connection()->expire('main_api', 1);
 		return $current;
 	}
 
@@ -109,9 +108,14 @@ class API extends Controller {
 	}
 
 	public function getIndex() {
-	 	$current = Cache::get($this->id(), null) ?: $this->currentModelOutput();
-	  
-		return $this->response($current);
+		$current = Cache::get('main_api', null);
+		if ($current) {
+			$c = true;
+		} else {
+			$current = $this->currentModelOutput();
+			$c = false;
+		}
+		return $this->response($current, ["c" => $c]);
 	}
 
 	public function getUserCooldown() {

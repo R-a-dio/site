@@ -53,10 +53,12 @@ class ReindexCommand extends Command {
 		$admin->client->indices()->delete(["index" => "song-database"]);
 
 		$this->info("Reindexing all tracks...");
-
+		$num = 1;
 		foreach ($tracks as $track)
 		{
 			$admin->index($track);
+			$this->info("Reindexed track ID ".$track->id." (".$num." of ".$tracks->count().")");
+			$num++;
 		}
 
 		$this->info("Reindex Complete");

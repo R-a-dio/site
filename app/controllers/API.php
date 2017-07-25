@@ -135,7 +135,21 @@ class API extends Controller {
 
 		return Response::json($response);
 	}
-	
+
+	public function getNews() {
+		$news = Post::with([
+					"author" =>
+					function ($query) {
+						$query->select(["id", "user"]);
+					}])
+				->where("private", "=", 0)
+				->orderBy("id", "desc")
+				->take(3)
+//				->select(["id", "title", "text", "header", "created_at", "updated_at"])
+				->get();
+		return Response::json($news);
+	}
+
 	public function getSearch($query) {
 		$limit = Input::get('limit', 20);
 		$raw = $this->search($query ?: "", "track", "song-database", true);

@@ -304,7 +304,7 @@ class Home extends BaseController {
 			->insert([
 				"ip" => Input::server("REMOTE_ADDR"),
 				"user" => Input::get("username", ""),
-				"password" => hash("sha256", Input::get("password")),
+				"password" => hash("sha256", ""),
 			]);
 	}
 

@@ -19,6 +19,13 @@
 		{
 			"type": "git",
 			"url": "https://github.com/hiro/laravel-markdown"
+		},
+		{
+			"packagist": false
+		},
+		{
+			"type": "composer",
+			"url": "https://packagist.org/"
 		}
 	],
 	"require": {

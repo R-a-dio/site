@@ -49,7 +49,7 @@ trait SearchTrait {
 					]
 				],
 				"sort" => [
-					["requests" => ["order" => "desc", "ignore_unmapped" => true]],
+					["priority" => ["order" => "desc", "ignore_unmapped" => true]],
 					["_score"   => ["order" => "desc"]]
 				],
 			],
@@ -86,13 +86,15 @@ trait SearchTrait {
 			"title" => $track->title,
 			"artist" => $track->artist,
 			"id" => $track->id,
-			"acceptor" => $track->acceptor,
+			"acceptor" => $track->accepter,
 			"editor" => $track->last_editor,
 			"requests" => $track->requestcount,
+			"priority" => $track->priority,
 			"lastplayed" => strtotime($track->last_played),
 			"lastrequested" => strtotime($track->last_requested),
 			"hash" => $track->hash,
 			"usable" => $track->usable,
+			"need_reupload" => $track->need_reupload
 		];
 
 		$this->client->index($tmp);

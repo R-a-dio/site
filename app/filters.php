@@ -37,6 +37,11 @@ App::after(function($request, $response)
 Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::guest('login');
+	// If they don't have sufficient privs, log them out.
+	if (!Auth::user()->canDoPending()) {
+		Auth::logout();
+		return Redirect::to('/');
+	}
 });
 
 

@@ -279,6 +279,10 @@ class Home extends BaseController {
 			Session::put("error", "Invalid Login");
 			return Redirect::to("/login");
 		}
+		if (!Auth::user()->canDoPending()) {
+			Auth::logout();
+			return Redirect::to("/login");
+		}
 
 		//$this->clearFailedLogins();
 

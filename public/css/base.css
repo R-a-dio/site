@@ -183,4 +183,26 @@ li#nav-control > div > div.popover-content {
     max-height: 300px;
 }
 
+.border-between > [class*='col-']:before,
+.border-between > [class*='col-']:after {
+    background: #b2b2b2;
+    bottom: 0;
+    content: " ";
+    position: absolute;
+    width: 1px;
+    top: 0;
+    min-height: 40px;
+}
+.border-between > [class*='col-']:before {
+    left: 0;
+}
+.border-between > [class*='col-']:after {
+    right: -1px;
+}
+.border-between > [class*='col-']:first-child:before,
+.border-between > [class*='col-']:nth-last-child(2):before,
+.border-between > [class*='col-']:nth-last-child(3):after,
+.border-between > [class*='col-']:last-child:after {
+    display: none;
+}
 

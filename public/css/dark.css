@@ -226,3 +226,39 @@ hr {
 .footer {
      border-top: medium none;
 }
+
+.modal-header {
+	border-bottom:1px solid #787878;
+}
+
+.modal-content {
+	background-color:#1b1b1b;
+}
+
+
+.modal-footer {
+	border-top:1px solid #787878;
+}
+
+.alert-warning {
+	background-color:#2B2B2B;
+	border-color:#4B4B4B;
+	color:#8a6d3b
+}
+
+.border-between > [class*='col-']:before,
+.border-between > [class*='col-']:after {
+    background: #787878;
+}
+
+.btn-default {
+	color:#7B7B7B;
+	background-color:#2B2B2B;
+	border-color:transparent;
+}
+
+.btn-default:hover,.btn-default:focus,.btn-default:active,.btn-default.active,.open .dropdown-toggle.btn-default {
+	color:#7B7B7B;
+	background-color:#3B3B3B;
+	border-color:transparent;
+}

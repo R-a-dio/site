@@ -1,5 +1,5 @@
 html, body {
-     background: url("/images/christmas/winter-wp.jpg") no-repeat fixed left center / cover  #FFFFFF;
+     background: url("/images/christmas/winter-wp.jpg") no-repeat fixed left center / cover;
 }
 
 html {
@@ -8,7 +8,7 @@ html {
 
 body {
 	 height: 100%;
-	 overflow: hidden;
+	 /*overflow: hidden;*/
 }
 
 .radio-content-panel {
@@ -73,11 +73,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf000000', e
 }
 
 .container {
-	 width: 100%;
+	 /*width: 100%;*/
 }
 
 .navbar {
-     display: none;
+     /*display: none;*/
 }
 
 .footer {
@@ -89,12 +89,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf000000', e
 }
 
 #Div1 {
-     height: 100%;
+     height: 0;
      left: 0px;
      overflow: hidden;
      position: fixed;
      top: 0px;
-     width: 100%;
+     width: 0;
      z-index: 0;
 }
 

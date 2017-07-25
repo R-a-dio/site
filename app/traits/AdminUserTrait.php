@@ -71,7 +71,7 @@ trait AdminUserTrait {
 					$user->pass = Hash::make($password);
 				}
 
-				if ($privileges) {
+				if (Input::has("privileges")) {
 					$user->privileges = $privileges;
 				}
 				

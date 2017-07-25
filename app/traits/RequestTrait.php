@@ -25,6 +25,8 @@ trait RequestTrait {
 
 				if (!$response->hasErrors()) {
 					$res = $this->parseResponse($response->body);
+					// No 'fresh' method in our version.
+					$song = Track::find($id);
 					$this->index($song);
 				} else {
 					$res = ["error" => trans("search.requests.oops")];

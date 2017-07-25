@@ -5,7 +5,7 @@ return [
 		"limit" => 25,
 	],
 	"paths" => [
-		"pending" => "/radio/music/pend",
+		"pending" => "/radio/music/pending",
 		"music" => "/radio/music",
 		"dj-images" => "/radio/dj-images",
 	],

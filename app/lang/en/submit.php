@@ -5,14 +5,14 @@ return [
 	"guidelines" => [
 		"upload" => [
 			"title" => "Uploading",
-			"search" => "Search first to make sure that the song isn't already in the database.",
-			"quality" => "Anything below 128kbps is auto-rejected. That means no youtube rips.",
-			"source" => "Please include the source (anime, VN, etc.) in the comment field.",
+			"search" => "VERY IMPORTANT: Search first to make sure that the song isn't already in the database!",
+			"quality" => "Anything below 128kbps is auto-rejected. Do not upload YouTube rips.",
+			"source" => "Please include as much information as possible in the comment field, especially source (name of the anime, VN, game). If there is no source work, please mention this.",
 		],
 		"tagging" => [
 			"title" => "Tagging",
-			"required" => "Both artist and title are required.",
-			"runes" => "Avoid Japanese characters unless it's absolutely necessary.",
+			"required" => "Artist and title are required; at least put them in the comment, if not in the artist and title tags.",
+			"runes" => "Avoid Japanese characters unless it's absolutely necessary. Uploads with too much kana/kanji may be declined.",
 			"cv" => "Do not include character names or \"CV\" notation; vocalists only."
 		]
 	],
@@ -27,7 +27,7 @@ return [
 	],
 	"upload" => [
 		"label" => "Upload Song",
-		"desc" => "Upload a song to the R/a/dio database. Try to keep MP3s to around 15MB.",
+		"desc" => "Upload a song to the R/a/dio database. We accept both MP3 (20MB max) and FLAC (90MB max).",
 	],
 	"accepts" => "Accepts",
 	"declines" => "Declines",

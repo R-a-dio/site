@@ -177,7 +177,7 @@ App::error(function(ModelNotFoundException $exception, $code)
 
 App::error(function(Illuminate\Session\TokenMismatchException $e, $code)
 {
-	return "I'm a teapot";
+	return radio_error("Invalid CSRF", 403);
 });
 
 /*

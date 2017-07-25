@@ -1,13 +1,13 @@
 <?php
 
-use GetId3\GetId3Core as ID3;
+//use GetId3\GetId3Core as ID3;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\File;
 
 trait AnalysisTrait {
 	
 	// min
-	protected $bitrate = 128.0; // kbps
+	protected $bitrate = 130.0; // kbps
 
 	// max upload size
 	protected $maxSize = 20971520; // 20MB
@@ -30,8 +30,9 @@ trait AnalysisTrait {
 
 		$status = ["error" => [], "success" => []];
 
-		$analyzer = new ID3();
-		$analyzer->setEncoding("UTF-8");
+		$analyzer = new \getID3();
+		//$analyzer->setEncoding("UTF-8");
+		$analyzer->setOption(["encoding" => "UTF-8"]);
 
 		$result = $analyzer->analyze($file->getRealPath());
 

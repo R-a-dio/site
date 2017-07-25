@@ -105,12 +105,13 @@ trait SearchTrait {
 		// assumes this is a model
 		if (is_null($track))
 			$track = $this;
-
+		try {
 		$this->client->delete([
 			"type" => "track",
 			"index" => "song-database",
 			"id" => $track->id,
 		]);
+		} catch (Exception $e) {} // HACK this seems to work anyway
 	}
 
 

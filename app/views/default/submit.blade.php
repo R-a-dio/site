@@ -84,6 +84,13 @@
 			<hr>
 			<div class="col-md-6">
 				<h2 class="text-success text-center">{{{ trans("submit.accepts") }}}</h2>
+				@if ($ip_accs >= 0)
+				<div class="row">
+					<div class="alert alert-success" style="margin-right:15px">
+						A total of {{{ $ip_accs }}} submissions from your IP have been accepted!
+					</div>
+				</div>
+				@endif
 				<br>
 				@foreach ($accepts as $accept)
 					<div class="row">
@@ -103,6 +110,13 @@
 			</div>
 			<div class="col-md-6">
 				<h2 class="text-danger text-center">{{{ trans("submit.declines") }}}</h2>
+				@if ($ip_decs >= 0)
+				<div class="row">
+					<div class="alert alert-danger" style="margin-right:15px">
+						A total of {{{ $ip_decs }}} submissions from your IP have been declined!
+					</div>
+				</div>
+				@endif
 				<br>
 				@foreach ($declines as $decline)
 					<div class="row">

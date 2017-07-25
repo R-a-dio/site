@@ -338,18 +338,34 @@ class Home extends BaseController {
 			->orderBy("time", "desc")
 			->get();
 
+		$ip_accs = DB::table("postpending")
+			->where("accepted", ">=", 1)
+			->where("ip", "=", Request::server("REMOTE_ADDR"))
+			->count();
+		
+		$ip_decs = DB::table("postpending")
+			->where("accepted", "=", 0)
+			->where("reason", "!=", "")
+			->where("ip", "=", Request::server("REMOTE_ADDR"))
+			->count();
+
+		$replacements = Track::where("need_reupload", 1)->get();
+
 		$uploadTime = $this->checkUploadTime();
 		$cooldown = time() - $uploadTime < $this->delay;
 
 		if ($cooldown) {
-			$message = trans("api.upload.cooldown", ["time" => time_ago($uploadTime)]);
+			$message = trans("api.upload.cooldown", ["time" => time_ago($uploadTime + $this->delay)]);
 		} else {
 			$message = trans("api.upload.no-cooldown");
 		}
 
 		$this->layout->content = View::make($this->theme("submit"))
 			->with("accepts", $accepts)
+			->with("ip_accs", $ip_accs)
 			->with("declines", $declines)
+			->with("ip_decs", $ip_decs)
+			->with("replacements", $replacements)
 			->with("message", $message)
 			->with("cooldown", $cooldown);
 	}

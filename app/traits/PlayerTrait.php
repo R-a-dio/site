@@ -112,7 +112,11 @@ trait PlayerTrait {
 				->join('esong', 'efave.isong', '=', 'esong.id')
 				->leftJoin('tracks', 'esong.hash', '=', 'tracks.hash')
 				->where('nick', $nick)
-				->select('tracks.id as tracks_id', 'meta', 'lastrequested', 'lastplayed', 'requestcount')
+				->select('tracks.id as tracks_id',
+						'meta',
+						DB::raw('unix_timestamp(lastrequested) as lastrequested'),
+						DB::raw('unix_timestamp(lastplayed) as lastplayed'),
+						'requestcount')
 				->orderBy('meta', 'asc');
 	}
 

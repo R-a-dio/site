@@ -43,15 +43,19 @@
 						<span class="text-info">{{{ $f["meta"] }}}</span>
 					</div>
 					<div class="col-sm-4" style="margin-bottom: 10px">
-						@if ($f["tracks_id"] && requestable($f["lastrequested"], $f["requestcount"]))
+						@if ($f["tracks_id"] && requestable($f["lastrequested"], $f["requestcount"]) && requestable($f["lastplayed"], $f["requestcount"]))
 							{{ Form::open(["url" => "/request/{$f["tracks_id"]}"]) }}
 								<button type="submit" name="id" value="{{ $f["tracks_id"] }}" class="btn btn-block btn-success request-button">
 									{{{ trans("faves.request") }}}
 								</button>
 							{{ Form::close() }}
+						@elseif ($f["tracks_id"])
+							<button class="btn btn-block btn-danger request-button disabled">
+								{{{ pretty_cooldown($f["lastrequested"], $f["lastplayed"], $f["requestcount"]) }}}
+							</button>
 						@else
 							<button class="btn btn-block btn-danger request-button disabled">
-								{{ trans("faves.request") }}
+								Not requestable
 							</button>
 						@endif
 					</div>

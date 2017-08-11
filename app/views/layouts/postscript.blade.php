@@ -333,6 +333,7 @@
 			current_pos: 0,
 			current_len: 0,
 			afk: "init",
+			thread: "init",
 			djimg: 0
 		};
 
@@ -395,6 +396,32 @@
 			});
 		}
 
+		function updateThread(isafk, thread) {
+			radio.afk = isafk;
+			// Swap the queue and the thread box if needed.
+			if (radio.afk && $("#dj-mode").is(":visible")) {
+				$("#queue").show();
+				$("#dj-mode").hide();
+			} else if (!(radio.afk || $("#dj-mode").is(":visible"))) {
+				$("#queue").hide();
+				$("#dj-mode").show();
+			}
+			// Set thread if necessary.
+			if (radio.thread !== thread) {
+				if (thread.toLowerCase() === "none") {
+					// no thread
+					$("#dj-mode").children()
+						.replaceWith($('<h2 class="text-center">There is currently no thread up.</h2>'));
+				} else {
+					// thread
+					t = thread.replace("\"", "\\\""); // ugh im so good
+					$("#dj-mode").children()
+						.replaceWith($('<h1 class="text-center thread"><a href="' + t + '">Thread up!</a></h1>'));
+				}
+			}
+			radio.thread = resp.main.thread;
+		}
+
 		function updatePeriodic() {
 			$.ajax({
 				method: 'get',
@@ -403,19 +430,7 @@
 				success: function (resp) {
 					nowPlaying(resp.main.np);
 					setListeners(resp.main.listeners);
-
-					if (radio.afk != resp.main.isafkstream) {
-						radio.afk = resp.main.isafkstream;
-
-						if (radio.afk) {
-							$("#queue").show();
-							$("#dj-mode").hide();
-						} else {
-							$("#queue").hide();
-							$("#dj-mode").show();
-						}
-					}
-					
+					updateThread(resp.main.isafkstream, resp.main.thread);
 					setDJ(resp.main.dj);
 					updateLastPlayed(resp.main.lp);
 					updateQueue(resp.main.queue);

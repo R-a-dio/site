@@ -419,7 +419,7 @@
 						.replaceWith($('<h1 class="text-center thread"><a href="' + t + '">Thread up!</a></h1>'));
 				}
 			}
-			radio.thread = resp.main.thread;
+			radio.thread = thread;
 		}
 
 		function updatePeriodic() {

@@ -246,8 +246,8 @@ function can_request($ip) {
 
 	$time = time() - strtotime($user["time"]);
 
-	// you can request every 2 hours.
-	return $time > (3600 * 2);
+	// you can request every 1 hours.
+	return $time > (3600 * 1);
 }
 
 function base64url_encode($data) {

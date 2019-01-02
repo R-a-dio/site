@@ -128,6 +128,17 @@
 						@endif
 					</div>
 				</div>
+				<div class="form-group">
+					<label >IPv4 Address</label>
+
+					<div >
+						@if ($users->dj)
+						<input type="text" name="ipadr" class="form-control" value="{{{ $users->ip }}}">
+						@else
+						<input type="text" name="ipadr" class="form-control" value="200">
+						@endif
+					</div>
+				</div>
 
 				<button type="submit" class="btn btn-info">Edit User</button>
 			{{ Form::close() }}

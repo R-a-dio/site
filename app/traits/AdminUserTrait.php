@@ -44,7 +44,6 @@ trait AdminUserTrait {
 				}
 
 				$status = "User {$user->username} created.";
-				
 			} else {
 				$status = "Missing username, password or permissions";
 			}
@@ -74,14 +73,17 @@ trait AdminUserTrait {
 				if (Input::has("privileges")) {
 					$user->privileges = $privileges;
 				}
-				
-				$this->updateProfile($user);
-				$status = "User {$user->user} updated.";
-				$user->save();
+
+				$rv = $this->updateProfile($user);
+				if ($rv === true) {
+					$status = "User {$user->user} updated.";
+					$user->save();
+				} else {
+					$status = ($rv === false) ? "Something broke." : $rv;
+				}
 			} catch (Exception $e) {
 				$status = $e->__toString();
 			}
-			
 		}
 
 		return Redirect::to("/admin/users")
@@ -125,7 +127,6 @@ trait AdminUserTrait {
 						return Redirect::to("/admin/profile")
 							->with("status", "Passwords do not match");
 					}
-					
 				} else {
 					return Redirect::to("/admin/profile")
 						->with("status", "Incorrect password");
@@ -134,15 +135,14 @@ trait AdminUserTrait {
 
 			if ($email)
 				$user->email = $email;
-			
+
 			$check = $this->updateProfile($user);
 
-			$user->save();
-
-			if ($check) {
+			if ($check === true) {
 				$status = "Profile Updated";
+				$user->save();
 			} else {
-				$status = "Image file is too big or the database just went kaput.";
+				$status = ($check === false) ? "Something broke." : $check;
 			}
 		} catch (Exception $e) {
 			$status = $e->getMessage();
@@ -152,23 +152,23 @@ trait AdminUserTrait {
 			->with("status", $status);
 
 	}
-	
+
 	protected function updateProfile($user) {
 		// user in this case is either Auth::user() or User::findOrFail()
-		
+
 		if(Auth::user()->isAdmin() or $user->dj) {
 			// We can edit if we are an admin or the user already has a profile.
-			
+
 			$name = Input::get("djname");
-			
+
 			if (! $user->dj) {
 				// create a new dj if we don't already have one
-				
+
 				if(! $name or $name === "") {
 					// But, abort if we didn't have a djid and haven't input any information.
-					return;
+					return false;
 				}
-				
+
 				$dj = new Dj;
 				$dj->djname = $name;
 				$dj->djtext = "x";
@@ -179,21 +179,21 @@ trait AdminUserTrait {
 			} else {
 				$dj = $user->dj;
 			}
-			
+
 			if ($name)
 				$dj->djname = $name;
-			
+
 			if (Input::hasFile("image")) {
 				$image = Input::file("image");
-				
+
 				if ($image->getSize() > 10485760)
-					return false;
+					return "Error: Image file size is too large.";
 
 				$image->move(Config::get("radio.paths.dj-images"), $dj->id);
-				
+
 				$dj->djimage = (string) $dj->id;
 			}
-			
+
 			if (Auth::user()->isAdmin()) {
 				// if the editing user is admin, it means they can change
 				// visibility and priority as well.
@@ -208,12 +208,21 @@ trait AdminUserTrait {
 					$dj->visible = $visible;
 				}
 			}
-			
+
+			$ip = Input::get("ipadr");
+			if (preg_match('/^([0-9]{1,3}\.){3}[0-9]{1,3}$|^$/', $ip))
+			{
+				$user->ip = $ip;
+			}
+			else
+			{
+				return 'Error: Need a valid IPv4 address (or leave the field empty)';
+			}
+
 			return $dj->save();
 		}
 
 		return false;
-		
 	}
 
 }

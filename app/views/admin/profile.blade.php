@@ -85,6 +85,17 @@
 				@endif
 			@endif
 			<div class="form-group">
+				<label class="col-sm-2 control-label">IPv4 Address</label>
+				<div class="col-sm-8">
+					<input type="text" id="ipadr" name="ipadr" class="form-control" value="{{{ Auth::user()->ip }}}">
+				</div>
+				<?php if(strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ':') === false) { ?>
+				<div class="col-sm-2">
+					<button type="button" class="btn btn-primary" onclick="$('#ipadr').val('<?php echo $_SERVER['HTTP_X_FORWARDED_FOR'] ?>')">(You)</button>
+				</div>
+				<?php } ?>
+			</div>
+			<div class="form-group">
 				<div class="col-sm-10 col-sm-offset-2">
 					<button type="submit" class="btn btn-success">Update Profile</button>
 				</div>

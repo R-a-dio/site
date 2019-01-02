@@ -95,7 +95,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title">{{{ trans("search.request") }}}</h4>
 			</div>
-			<div class="modal-body"></div>
+			<p class="modal-body"></p>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
@@ -103,6 +103,7 @@
 	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<!--
 <div class="modal fade" id="faves">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -110,13 +111,14 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title">{{{ trans("search.fave") }}}</h4>
 			</div>
-			<div class="modal-body">Sorry, faves are not implemented yet.</div>
+			<p class="modal-body">Sorry, faves are not implemented yet.</p>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+		</div><!-- /.modal-content - ->
+	</div><!-- /.modal-dialog - ->
+</div><!-- /.modal - ->
+-->
 
 </div>
 

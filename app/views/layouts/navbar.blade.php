@@ -160,37 +160,40 @@
                 	<div class="col-md-1 h4">{{ Carbon\Carbon::now()->startOfWeek()->format("m/d") }}</div>
 			<div class="col-md-2 h4 text-right">Monday</div>
 			<div class="col-md-6">
-				<p></p><p>Monday tunes between 8 and 9 PM. Kethsar will play a 3 - 4 hour block of one genre that might change from week to week.</p>
+				<p></p><p>Monday tunes starting between 8 and 9PM, Kethsar <strike>will</strike> might play some garbage no one wants to listen to.
+				<br />
+						Let's be honest, Keth doesn't actually stream.
+				</p>
 			</div>
                 </div>
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Tuesday</div>
                     <div class="col-md-6">
-                    	<p></p><p>Smooth jazz, acoustic and chill tunes with Eggmun at 4 PM.</p>
+                    	<p></p><p>Anime tunes and possibly requests with Chrono, starting 8:30PM</p>
                     </div>
                 </div>
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Wednesday</div>
                     <div class="col-md-6">
-                    	<p></p><p>No stream.</p>
+                    	<p></p><p><strike>Master Bacon</strike> Autistic weeb plays musical memes. Usually starting around 11PM or midnight.</p>
                     </div>
                 </div>
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Thursday</div>
                     <div class="col-md-6">
-                    	<p></p><p>No stream.</p>
+                    	<p></p><p>Join faggot kipukun for a (probably) relaxing stream, starting at 9PM.</p>
                     </div>
                 </div>
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Friday</div>
                     <div class="col-md-6">
-                    	<p></p><p>Friday Night Faggotry! ed starts off at 2 PM with open requests. Ekureiru takes over at 8 PM and continues into the night.</p>
+                    	<p></p><p>Friday Night Faggotry! ed usually starts off at 2 PM with open requests, if he is around. One of various DJs will take over at 8PM. Occasionally guest DJs will stream instead (apply today!).</p>
                     </div>
                 </div>
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Saturday</div>
                     <div class="col-md-6">
-                    	<p></p><p>Acoustic, classical and chill songs and VGM with Kilim at 4 PM.</p>
+                    	<p></p><p>The not anime-related Saturday stream with that one goose faggot. Starts around 7PM or 8PM</p>
                     </div>
                 </div>
                 <div class="row border-between">

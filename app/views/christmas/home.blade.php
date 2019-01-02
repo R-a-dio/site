@@ -55,6 +55,7 @@
 					</div>
 				</div>
 			</div>
+			@include("partials.thread")
 		</div>
 	</div>
 	<div class="col-md-3"></div>

@@ -127,12 +127,14 @@ trait AnalysisTrait {
 		$status = $this->analyze($file);
 
 		if (count($status["error"])) {
+			rename($newFile, $filePath);
 			return ["error" => $status["error"]];
 		}
 
 		$uploadTime = $this->checkUploadTime();
 
 		if (time() - $uploadTime < $this->delay) {
+			rename($newFile, $filePath);
 			return [
 				"error" =>
 					"You have to wait " . date("H") . "hour(s), " . date("i") . "min(s) longer until you can upload another song!"

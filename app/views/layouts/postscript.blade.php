@@ -133,7 +133,8 @@
 					},
 					volume: Math.pow(($("#volume").val() / 100), 2.0),
 					supplied: "mp3",
-					swfPath: swfpath
+					swfPath: swfpath,
+					preload: "none"
 				});
 			}
 			

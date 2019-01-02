@@ -267,9 +267,11 @@ hr {
      color: #FFF;
 }
 
+/*
 .pagination {
 	display: none;
 }
+*/
 
 .panel {
 	background-color: transparent !important;
@@ -290,6 +292,8 @@ hr {
 	color: #FFF;
 }
 
+/*
 .navbar li:nth-child(5) {
 	display: none;
 }
+*/

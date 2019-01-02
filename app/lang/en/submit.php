@@ -23,7 +23,7 @@ return [
 	],
 	"daypass" => [
 		"label" => "Daypass",
-		"desc" => "Enter the daypass and you can have unlimited uploads until midnight, UTC."
+		"desc" => "Enter the daypass and you can have unlimited uploads until midnight, UTC. Ask staff in IRC for it. USE WITH DISCRETION."
 	],
 	"upload" => [
 		"label" => "Upload Song",

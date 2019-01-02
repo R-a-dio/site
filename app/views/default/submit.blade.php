@@ -78,7 +78,7 @@
 					</div>
 					<!--/email_off-->
 
-					<div class="form-group upload-form" style="display: none" id="daypass">
+					<div class="form-group upload-form" id="daypass">
 						<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
 						<p class="help-block">
 							{{{ trans("submit.daypass.desc") }}}

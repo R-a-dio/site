@@ -74,6 +74,14 @@
 							<a href="/faves" class="ajax-navigation">{{{ trans("navbar.faves") }}}</a>
 						</li>
 
+                                                @if (Request::segment(1) == "staff")
+                                                        <li class="active">
+                                                @else
+                                                        <li>
+                                                @endif
+                                                        <a href="/staff" class="ajax-navigation">{{{ trans("navbar.staff") }}}</a>
+                                                </li>
+
 <!--
 						@if (Request::segment(1) == "queue" or Request::segment(1) == "last-played" or Request::segment(1) == "faves")
 							<li class="dropdown active">

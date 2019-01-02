@@ -140,7 +140,7 @@
 							<!-- <label class="control-label col-xs-4 input-sm">Name</label> -->
 							<div class="col-xs-16">
 								<p class="form-control-static input-sm" style="white-space: nowrap">
-									<a href="/admin/pending-song/{{{ $p["id"] }}}" title="{{{ $p->file_name }}}" target="_blank" class="btn btn-warning btn-xs">
+									<a href="/admin/pending-song/{{{ $p["id"] }}}" title="{{{ $p->file_name }}}" class="btn btn-warning btn-xs">
 										{{{ strlen($p->file_name) > 17 ? preg_replace("/(.{1,10})(.*)(\.(mp3|flac))/u", "$1..$3", $p->file_name) : $p->file_name }}}
 									</a>
 								</p>

@@ -178,7 +178,7 @@
 						<label style="min-width: 20px">{{{ $user->id }}}</label>
 					</div>
 					<div class="form-group">
-						<input name="username" type="text" placeholder="Username" class="form-control" autocomplete="off" value="{{{ $user->user }}}" disabled>
+						<input name="username" type="text" placeholder="Username" class="form-control" autocomplete="off" value="{{{ $user->user }}}" readonly>
 					</div>
 					<div class="form-group">
 						<input name="password" type="password" placeholder="Password" class="form-control" autocomplete="off">

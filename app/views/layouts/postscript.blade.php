@@ -190,9 +190,12 @@
 		 */
 		function replaceTimeZones($section) {
 			if ($section.attr('data-uri') == '/queue' || $section.attr('data-uri') == '/last-played') {
+				var today = new Date();
+				today.setHours(0,0,0,0);
+
 				$section.find('time').each(function(){
 					var d = new Date(this.getAttribute('datetime'));
-					this.firstChild.nodeValue = d.toLocaleTimeString();
+					this.firstChild.nodeValue = d < today ? d.toLocaleString() : d.toLocaleTimeString();
 				});
 			}
 		}

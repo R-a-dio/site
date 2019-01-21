@@ -3,11 +3,11 @@
 	<div class="container main content">
 		<h1 class="text-center">Last Played</h1>
 
-		<ul class="list-group col-md-8 col-md-offset-2">
+		<ul class="time-list list-group col-md-8 col-md-offset-2">
 			@foreach ($lastplayed as $lp)
 				<li class="list-group-item">
 					<time datetime="{{{ date(DATE_ISO8601, $lp["time"]) }}}">{{{ date("H:i:s", $lp["time"]) }}}</time>
-					<span style="padding-left: 25px">{{{ $lp["meta"] }}}</span>
+					<span>{{{ $lp["meta"] }}}</span>
 				</li>
 			@endforeach
 		</ul>

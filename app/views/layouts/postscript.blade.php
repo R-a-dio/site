@@ -183,6 +183,25 @@
 		}
 		handlers();
 
+		
+		/**
+		 * Replaces <time>'s content so it complies with the user's time zone
+		 * in /queue and /last-played
+		 */
+		function replaceTimeZones($section) {
+			if ($section.attr('data-uri') == '/queue' || $section.attr('data-uri') == '/last-played') {
+				var today = new Date();
+				today.setHours(0,0,0,0);
+
+				$section.find('time').each(function(){
+					var d = new Date(this.getAttribute('datetime'));
+					this.firstChild.nodeValue = d < today ? d.toLocaleString() : d.toLocaleTimeString();
+				});
+			}
+		}
+		replaceTimeZones($('.radio-content-panel.current'));
+
+
 		$(window).on("statechange", function(event) {
 			var state = History.getState();
 			var root = History.getRootUrl();
@@ -305,6 +324,8 @@
 								$current.remove();
 							}
 							
+							replaceTimeZones($section);
+
 							$section.appendTo($("#radio-container")).addClass("current").show();
 
 							handlers();

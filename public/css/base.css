@@ -206,3 +206,17 @@ li#nav-control > div > div.popover-content {
     display: none;
 }
 
+.time-list {
+    display: table;
+}
+.time-list .list-group-item {
+    display: table-row;
+}
+.time-list time {
+    display: table-cell;
+    padding: 8px 0px 8px 15px;
+}
+.time-list span {
+    display: table-cell;
+    padding: 8px 15px;
+}

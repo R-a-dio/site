@@ -3,7 +3,7 @@
 	<div class="container main content">
 		<h1 class="text-center">Queue</h1>
 
-		<ul class="time-list list-group col-md-8 col-md-offset-2">
+		<ul class="time-list list-group col-md-8 col-md-offset-2 col-xs-12">
 			@foreach ($queue as $q)
 				@if ($q["type"] > 0)
 					<li class="list-group-item list-group-item-info">

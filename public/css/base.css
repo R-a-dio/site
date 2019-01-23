@@ -212,8 +212,11 @@ li#nav-control > div > div.popover-content {
 .time-list .list-group-item {
     display: table-row;
 }
-.time-list span, .time-list time {
+.time-list time {
     display: table-cell;
     padding: 8px 0px 8px 15px;
 }
-
+.time-list span {
+    display: table-cell;
+    padding: 8px 15px 8px 0px;
+}

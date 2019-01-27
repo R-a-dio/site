@@ -1,4 +1,8 @@
 @section("content")
+
+@if (!Auth::user()->canViewDatabase())
+	<h2>You shouldn't be here.</h2>
+@else
 	<div style="position: fixed; bottom: 0; z-index: 9999; background: rgba(0, 0, 0, 0.3); padding: 20px 30px 0 30px; width: 100%">
 
 		<div class="container">
@@ -142,18 +146,24 @@
 						<div class="form-group">
 							<div class="col-sm-10 col-sm-offset-2">
 								<div class="col-lg-6">
-									<button type="submit" name="action" value="save" class="btn btn-sm btn-block btn-default">
-										Save
-									</button>
+									<a class="btn btn-warning btn-sm btn-block" href="/api/song/{{{ base64url_encode(daypass_crypt(hex2bin($result["_source"]["hash"]))) }}}">
+										DL
+									</a>
 									<button type="button" class="btn btn-sm btn-block btn-primary play-button" data-url="/admin/song/{{{ $result["_id"] }}}">
 										Play
 									</button>
 								</div>
 								<div class="col-lg-6">
-									<a class="btn btn-warning btn-sm btn-block" href="/api/song/{{{ base64url_encode(daypass_crypt(hex2bin($result["_source"]["hash"]))) }}}">
-										DL
-									</a>
-									@if (Auth::user()->isAdmin())
+									@if (Auth::user()->canEditDatabase())
+										<button type="submit" name="action" value="save" class="btn btn-sm btn-block btn-default">
+											Save
+										</button>
+									@else
+										<button class="btn btn-sm btn-block btn-default" disabled>
+											Save
+										</button>
+									@endif
+									@if (Auth::user()->canDeleteDatabase())
 										<button type="submit" name="action" value="delete" class="btn btn-sm btn-block btn-danger">
 											Delete
 										</button>
@@ -168,12 +178,10 @@
 					</div>
 					<div class="col-lg-1">
 						<div class="form-group">
-							<!--<button disabled type="submit" name="action" value="replace" class="btn btn-info btn-block btn-sm btn-default">
-								Replace
-							</button>-->
-							
-							<label> <input style="margin-top:5px" type="checkbox" name="need_reupload" value="1" {{ $result['_source']['need_reupload'] === 1 ? "checked" : "" }} > Needs repl. </label>
-							<!--<input style="margin-top: 5px" type="file" class="form-control input-sm" name="replace-id" placeholder="Replace ID" disabled>-->
+							<label class="btn btn-default btn-sm">
+								<input type="checkbox" name="need_reupload" value="1" {{ Auth::user()->canEditDatabase() ? "" : "disabled" }} {{ $result['_source']['need_reupload'] === 1 ? "checked" : "" }} >
+								Needs repl.
+							</label>
 							</div>
 						</div>
 					</div>
@@ -185,5 +193,7 @@
 	<div class="text-center">
 		{{ $results->links() }}
 	</div>
+
+@endif
 
 @stop

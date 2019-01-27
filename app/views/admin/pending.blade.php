@@ -1,5 +1,8 @@
 @section("content")
 
+@if (!Auth::user()->canViewPending())
+	<h2>You shouldn't be here.</h2>
+@else
 	<div class="container main">
 		<div class="col-lg-4">
 			<div class="row">
@@ -148,6 +151,7 @@
 						</div>
 					</div>
 					<div class="col-lg-3">
+						@if (Auth::user()->canEditPending())
 						<div class="form-group">
 							<div class="col-xs-1"></div>
 							<label class="control-label col-xs-3 input-sm" style="padding-top: 0">
@@ -163,8 +167,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="col-xs-1"></div>
-							<div class="col-xs-3" >
+							<div class="col-xs-3 col-xs-offset-1" >
 								<input type="text" name="replace" value="{{ $p["replacement"] ?: "" }}" class="form-control input-sm" placeholder="Rep. ID" {{ $p["replacement"] ? "disabled" : "" }}>
 								@if ($p["replacement"])
 								<input type="hidden" name="replace" value="{{ $p["replacement"] }}">
@@ -177,6 +180,7 @@
 								<input type="text" name="reason" class="form-control input-sm" placeholder="Reason">
 							</div>
 						</div>
+						@endif
 					</div>
 				</div>
 			{{ Form::close() }}
@@ -279,4 +283,5 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
+@endif
 @stop

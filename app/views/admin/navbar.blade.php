@@ -26,6 +26,7 @@
 							<a href="/admin/news">News</a>
 						</li>
 
+						@if (Auth::user()->canViewPending() || Auth::user()->canViewDatabase())
 						<li
 							@if (Request::segment(2) == "pending" or Request::segment(2) == "songs")
 								class="dropdown active"
@@ -35,10 +36,15 @@
 						>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Songs <b class="caret"></b></a>
 							<ul class="dropdown-menu">
+								@if (Auth::user()->canViewPending())
 								<li><a href="/admin/pending">Pending</a></li>
+								@endif
+								@if (Auth::user()->canViewDatabase())
 								<li><a href="/admin/songs">Current</a></li>
+								@endif
 							</ul>
 						</li>
+						@endif
 						
 						@if (Auth::user()->isAdmin())
 							<li @if (Request::segment(2) == "users") class="active" @endif>
@@ -46,10 +52,6 @@
 							</li>
 						@endif
 
-						<!-- <li @if (Request::segment(2) == "djs") class="active" @endif>
-							<a href="/admin/djs">DJs</a>
-						<li> -->
-						
 						@if (Auth::user()->isDev())
 							<li @if (Request::segment(2) == "dev") class="active" @endif>
 									<a href="/admin/dev">Dev Shit</a>
@@ -68,9 +70,6 @@
 						<a href="/admin/profile" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li><a href="/admin/profile">Edit Profile</a></li>
-							<!-- @if (Auth::user()->isDJ())
-								<li><a href="/admin/profile#dj">DJ Profile</a></li>
-							@endif -->
 							<li><a href="/admin/profile#password">Change Password</a></li>
 							<li><a href="/logout">Log Out</a></li>
 						</ul>

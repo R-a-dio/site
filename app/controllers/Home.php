@@ -144,7 +144,7 @@ class Home extends BaseController {
 		} else {
 			$news = Post::with("author");
 
-			if (!Auth::check() or !Auth::user()->canDoPending())
+			if (!Auth::check() or !Auth::user()->isActive())
 				$news = $news->where("private", "=", 0);
 
 			$news = $news->orderBy("id", "desc")
@@ -279,7 +279,7 @@ class Home extends BaseController {
 			Session::put("error", "Invalid Login");
 			return Redirect::to("/login");
 		}
-		if (!Auth::user()->canDoPending()) {
+		if (!Auth::user()->isActive()) {
 			Auth::logout();
 			return Redirect::to("/login");
 		}

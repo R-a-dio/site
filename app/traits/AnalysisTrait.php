@@ -195,7 +195,7 @@ trait AnalysisTrait {
 
 		// logged in users have unlimited uploads.
 		if (Auth::check())
-			if (Auth::user()->canDoPending())
+			if (Auth::user()->isActive())
 				return false;
 
 		// people can be given a "daypass" to upload unlimited songs.

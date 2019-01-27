@@ -13,6 +13,9 @@ trait AdminSongTrait {
 		$pending = Pending::findOrFail($id);
 		$action = Input::get("choice");
 
+		if (!Auth::user()->canEditPending())
+			return Redirect::to("/admin/pending");
+
 		switch ($action) {
 			case "decline":
 				$reason = Input::get("reason", "");
@@ -62,8 +65,10 @@ trait AdminSongTrait {
 	public function getPendingSong($id) {
 		$pending = Pending::findOrFail($id);
 
+		if (!Auth::user()->canViewPending())
+			return;
+
 		try {
-			
 			$this->sendFile($pending);
 
 		} catch (Exception $e) {
@@ -80,15 +85,16 @@ trait AdminSongTrait {
 	public function getSong($id) {
 		$track = Track::findOrFail($id);
 
+		if (!Auth::user()->canViewDatabase())
+			return;
+
 		if ($track) {
 			try {
-
 				$this->sendFile($track, false);
 
 			} catch (Exception $e) {
 				return Response::json(["error" => $e->getMessage()]);
 			}
-			
 		}
 	}
 
@@ -123,8 +129,10 @@ trait AdminSongTrait {
 	public function getSongs($search = null) {
 		$search = $search ?: Input::get("q", null);
 
+		if (!Auth::user()->canViewDatabase())
+			return Redirect::to("/admin");
+
 		$results = $this->getSearchResults($search, 20, false);
-		
 
 		$this->layout->content = View::make("admin.database")
 			->with("search", $search)
@@ -140,6 +148,9 @@ trait AdminSongTrait {
 		$song = Track::findOrFail($id);
 
 		if(Input::get("action", "") === "delete") {
+			if (!Auth::user()->canDeleteDatabase())
+				return Redirect::back()
+					->with("status", "Missing permissions.");
 			// remove search index first
 			$this->remove($song);
 			// remove file
@@ -149,6 +160,10 @@ trait AdminSongTrait {
 			return Redirect::back()
 				->with("status", "Song Deleted.");
 		}
+
+		if (!Auth::user()->canEditDatabase())
+			return Redirect::back()
+				->with("status", "Missing permissions.");
 
 		$song->title = Input::get("title", "");
 		$song->artist = Input::get("artist", "");

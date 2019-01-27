@@ -104,7 +104,7 @@
 							<a href="/submit" class="ajax-navigation">{{{ trans("navbar.submit") }}}</a>
 						</li>
 
-						@if (Auth::check() and Auth::user()->canDoPending())
+						@if (Auth::check() and Auth::user()->isActive())
 							<li><a href="/admin"><i class="fa fa-star"></i></a></li>
 						@endif
 					</ul>

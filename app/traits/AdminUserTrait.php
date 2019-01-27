@@ -23,21 +23,20 @@ trait AdminUserTrait {
 	public function postUsers($id = null) {
 		$username = Input::get("username");
 		$password = Input::get("password");
-		$privileges = Input::get("privileges");
-		$email = Input::get("email");
+		$email = Input::get("email", "");
 		$auth = Auth::user();
 
-		if (!Auth::user()->isAdmin() or ($privileges >= 5)) {
+		if (!Auth::user()->isAdmin()) {
 			Session::flash("status", "I can't let you do that.");
 		} else {
-			if ($username and $password and $privileges) {
+			if ($username and $password) {
 
 				try {
 					$user = User::create([
 						"user" => $username,
 						"pass" => Hash::make($password),
 						"email" => $email,
-						"privileges" => $privileges,
+						"privileges" => 0,
 					]);
 				} catch (Exception $e) {
 					$status = $e->getMessage();
@@ -57,11 +56,10 @@ trait AdminUserTrait {
 	public function putUsers($id) {
 		$username = Input::get("username");
 		$password = Input::get("password");
-		$privileges = Input::get("privileges");
 		$email = Input::get("email");
 
-		if (!Auth::user()->isAdmin() or ($privileges >= 5)) {
-			Session::flash("status", "I can't let you do that.");
+		if (!Auth::user()->isAdmin()) {
+			$status = "I can't let you do that.";
 		} else {
 			try {
 				$user = User::findOrFail($id);
@@ -70,13 +68,18 @@ trait AdminUserTrait {
 					$user->pass = Hash::make($password);
 				}
 
-				if (Input::has("privileges")) {
-					$user->privileges = $privileges;
+				$newPerm = $user->getPermissions();
+				foreach ($newPerm as $perm => $hasPerm) {
+					$inputPerm = "p_" . $perm;
+					if (Input::has($inputPerm)) {
+						$newPerm[$perm] = (Input::get($inputPerm, "") === "true");
+					}
 				}
 
 				$rv = $this->updateProfile($user);
 				if ($rv === true) {
 					$status = "User {$user->user} updated.";
+					$user->privileges = $user->updatePermissions($newPerm);
 					$user->save();
 				} else {
 					$status = ($rv === false) ? "Something broke." : $rv;
@@ -166,7 +169,7 @@ trait AdminUserTrait {
 
 				if(! $name or $name === "") {
 					// But, abort if we didn't have a djid and haven't input any information.
-					return false;
+					return true;
 				}
 
 				$dj = new Dj;

@@ -199,17 +199,16 @@ trait AdminUserTrait {
 
 			if (Auth::user()->isAdmin()) {
 				// if the editing user is admin, it means they can change
-				// visibility and priority as well.
+				// visibility, priority and regex as well.
 				$visible = Input::get("visible");
 				$priority = Input::get("priority");
+				$regex = Input::get("regex");
 				if (ctype_digit($priority) and $priority >= 1 and $priority <= 200) {
 					// If you want to redo this to use a Validator, be my guest.
 					$dj->priority = $priority;
 				}
-				if ($visible === "1" or $visible === "0") {
-					// This too! NB: You can use (bool) $visible for the same effect.
-					$dj->visible = $visible;
-				}
+				$dj->visible = (bool)$visible;
+				$dj->regex = $regex;
 			}
 
 			$ip = Input::get("ipadr");

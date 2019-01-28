@@ -49,6 +49,17 @@
 						<input type="file" name="image" id="image">
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">IPv4 Address</label>
+					<div class="col-sm-8">
+						<input type="text" id="ipadr" name="ipadr" class="form-control" value="{{{ Auth::user()->ip }}}">
+					</div>
+					@if (strpos(Request::ip(), ':') === false)
+						<div class="col-sm-2">
+							<button type="button" class="btn btn-primary btn-block" onclick="$('#ipadr').val('{{{ Request::ip() }}}')">(You)</button>
+						</div>
+					@endif
+				</div>
 				@if (Auth::user()->isAdmin())
 					<div class="form-group">
 						<label class="col-sm-2 control-label">Visible?</label>
@@ -82,19 +93,19 @@
 							@endif
 						</div>
 					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">IRC Regex</label>
+
+						<div class="col-sm-10">
+							@if (Auth::user()->dj)
+							<input type="text" name="regex" class="form-control" value="{{{ Auth::user()->dj->regex }}}">
+							@else
+							<input type="text" name="regex" class="form-control" value="">
+							@endif
+						</div>
+					</div>
 				@endif
 			@endif
-			<div class="form-group">
-				<label class="col-sm-2 control-label">IPv4 Address</label>
-				<div class="col-sm-8">
-					<input type="text" id="ipadr" name="ipadr" class="form-control" value="{{{ Auth::user()->ip }}}">
-				</div>
-				<?php if(strpos($_SERVER['HTTP_X_FORWARDED_FOR'], ':') === false) { ?>
-				<div class="col-sm-2">
-					<button type="button" class="btn btn-primary" onclick="$('#ipadr').val('<?php echo $_SERVER['HTTP_X_FORWARDED_FOR'] ?>')">(You)</button>
-				</div>
-				<?php } ?>
-			</div>
 			<div class="form-group">
 				<div class="col-sm-10 col-sm-offset-2">
 					<button type="submit" class="btn btn-success">Update Profile</button>

@@ -64,6 +64,17 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-2 control-label">IPv4 Address</label>
+
+					<div class="col-sm-10">
+						@if ($users->dj)
+						<input type="text" name="ipadr" class="form-control" value="{{{ $users->ip }}}">
+						@else
+						<input type="text" name="ipadr" class="form-control" value="">
+						@endif
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="col-sm-2 control-label">Visible?</label>
 					
 					<div class="col-sm-10">
@@ -87,13 +98,13 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">IPv4 Address</label>
+					<label class="col-sm-2 control-label">IRC Regex</label>
 
 					<div class="col-sm-10">
 						@if ($users->dj)
-						<input type="text" name="ipadr" class="form-control" value="{{{ $users->ip }}}">
+						<input type="text" name="regex" class="form-control" value="{{{ $users->dj->regex }}}">
 						@else
-						<input type="text" name="ipadr" class="form-control" value="200">
+						<input type="text" name="regex" class="form-control" value="">
 						@endif
 					</div>
 				</div>

@@ -107,7 +107,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * Get a collection of strings with the user's permissions.
 	 */
 	public function getUserPermissions() {
-//		if ($this->userPermCache) return $this->userPermCache;
+		if ($this->userPermCache) return $this->userPermCache;
 		$this->userPermCache =
 			Permission::where('user_id', '=', $this->id)
 				->get(['permission'])

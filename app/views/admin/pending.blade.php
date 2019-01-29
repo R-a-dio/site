@@ -14,7 +14,7 @@
 		</div>
 		<div class="col-lg-8">
 			<div class="well text-center text-primary">
-				Announcements will go here
+				There are currently {{{ count($pending) }}} pending tracks awaiting approval.
 			</div>
 		</div>
 	</div>

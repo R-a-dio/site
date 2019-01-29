@@ -175,7 +175,7 @@ trait AdminUserTrait {
 				$dj = new Dj;
 				$dj->djname = $name;
 				$dj->djtext = "x";
-				$dj->djimage = "x";
+				$dj->djimage = "";
 				$dj->save();
 				$user->djid = $dj->id;
 				$user->save();
@@ -194,7 +194,7 @@ trait AdminUserTrait {
 
 				$image->move(Config::get("radio.paths.dj-images"), $dj->id);
 
-				$dj->djimage = (string) $dj->id;
+				$dj->djimage = $dj->id . "-" . substr(sha1(rand()), 0, 8) . ".png";
 			}
 
 			if (Auth::user()->isAdmin()) {

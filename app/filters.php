@@ -19,7 +19,8 @@ App::before(function($request)
 
 App::after(function($request, $response)
 {
-	$response->headers->set("Cache-Control", "no-transform");
+	if ($response->headers->get('cache-control') == null)
+		$response->headers->set("Cache-Control", "no-transform");
 	$response->headers->set("Access-Control-Allow-Origin", "*");
 });
 

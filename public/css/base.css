@@ -215,8 +215,12 @@ li#nav-control > div > div.popover-content {
 .time-list time {
     display: table-cell;
     padding: 8px 0px 8px 15px;
+    white-space: nowrap;
+    min-width: 10%;
+    text-align: right;
 }
 .time-list span {
     display: table-cell;
-    padding: 8px 15px;
+    padding: 8px 15px 8px 25px;
+    width: 100%;
 }

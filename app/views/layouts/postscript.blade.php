@@ -195,7 +195,7 @@
 
 				$section.find('time').each(function(){
 					var d = new Date(this.getAttribute('datetime'));
-					this.firstChild.nodeValue = d < today ? d.toLocaleString() : d.toLocaleTimeString();
+					this.firstChild.nodeValue = d < today ? d.toLocaleString('se-SV') : d.toLocaleTimeString('se-SV');
 				});
 			}
 		}

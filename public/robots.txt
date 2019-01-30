@@ -13,6 +13,7 @@ Disallow: /main
 Disallow: /admin/
 Disallow: /song/
 Disallow: /request/
+Disallow: /last-played
 Allow: /
 
 # Bad Yahoo.

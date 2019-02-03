@@ -14,11 +14,19 @@
 	"repositories": [
 		{
 			"type": "git",
-			"url": "https://github.com/hiro/php-markdown"
+			"url": "https://github.com/r-a-dio/laravel-markdown"
 		},
 		{
 			"type": "git",
-			"url": "https://github.com/hiro/laravel-markdown"
+			"url": "https://github.com/r-a-dio/laravel-hashing"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/r-a-dio/php-slack"
+		},
+		{
+			"type": "git",
+			"url": "https://github.com/r-a-dio/php-markdown"
 		},
 		{
 			"packagist": false
@@ -35,11 +43,10 @@
 		"hiro/laravel-markdown": "dev-master",
 		"ezyang/htmlpurifier": "4.6.0",
 		"michelf/php-markdown": "dev-lib",
-		"phansys/getid3": "2.1.*@dev",
 		"recaptcha/php5": "v1.0.0",
 		"nategood/httpful": "*",
 		"elasticsearch/elasticsearch": "~1.0",
-		"connorvg/php-slack": "1.2",
+		"connorvg/php-slack": "dev-master",
 		"pda/pheanstalk": "~2.0",
 		"james-heinrich/getid3": "^1.9"
 	},
@@ -56,9 +63,6 @@
 	"scripts": {
 		"post-install-cmd": [
 			"php artisan optimize"
-		],
-		"pre-update-cmd": [
-			"php artisan clear-compiled"
 		],
 		"post-update-cmd": [
 			"php artisan optimize"

@@ -1,5 +1,7 @@
-/bootstrap/compiled.php
 /vendor
+/node_modules
+.env
+/bootstrap/compiled.php
 composer.phar
 .DS_Store
 .vagrant
@@ -9,7 +11,6 @@ Icon*
 .dropbox
 Thumbs.db
 desktop.ini
-.env.php
 .dropbox.attr
 .bower.json
 composer.lock

@@ -7,7 +7,7 @@
 			<h1 class="text-center text-info"> {{{ trans("search.help.main") }}} </h1>
 			{{ Form::open(['url' => "/search", "class" => "ajax-search"]) }}
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="{{{ trans("search.placeholder") }}}" name="q" id="search" value="{{{ rawurldecode($param) }}}">
+					<input type="text" class="form-control" placeholder="{{{ trans("search.placeholder") }}}" name="q" id="search" value="{{{ $param }}}">
 					<div class="input-group-btn">
 						<button class="btn btn-info" type="submit">
 							{{{ trans("search.button") }}}

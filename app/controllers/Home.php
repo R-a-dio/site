@@ -114,11 +114,15 @@ class Home extends BaseController {
 	| Search Page - GET, POST
 	|--------------------------------------------------------------------------
 	*/
-	public function anySearch($search = false) {
+	public function postSearch($search = false) {
+		$search = $search ?: Input::get("q", false);
 
-		if (Input::has('q'))
-			$search = Input::get("q", false);
+		if (Request::ajax())
+			return getSearch($search);
 
+		return Redirect::to(Request::getPathInfo() . "/" . $search);
+	}
+	public function getSearch($search = false) {
 		$results = $this->getSearchResults($search);
 
 		$this->layout->content = View::make($this->theme("search"))

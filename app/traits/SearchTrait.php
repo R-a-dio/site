@@ -18,6 +18,9 @@ trait SearchTrait {
 		
 			$results = $this->search($request ?: "", "track", "song-database", $usable_only);
 			$start = (Paginator::getCurrentPage() - 1) * $amount;
+			if (($usable_only === false) && is_string($results)) {
+				throw new Exception(print_r(json_decode($results), true));
+			}
 			$count = $results["hits"]["total"];
 			$slice = array_slice($results["hits"]["hits"], $start, $amount);
 			$paginator = Paginator::make($slice, $count, $amount);

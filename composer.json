@@ -34,7 +34,7 @@
 		}
 	],
 	"require": {
-		"laravel/framework": "5.0.*",
+		"laravel/framework": "5.1.*",
 		"raven/raven": "0.7.1",
 		"hiro/laravel-markdown": "dev-master-5",
 		"ezyang/htmlpurifier": "4.6.0",

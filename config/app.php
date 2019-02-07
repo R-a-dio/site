@@ -130,7 +130,6 @@ return [
 		'Illuminate\Encryption\EncryptionServiceProvider',
 		'Illuminate\Filesystem\FilesystemServiceProvider',
 		'Illuminate\Foundation\Providers\FoundationServiceProvider',
-		'hiro\Hashing\HashServiceProvider',
 		'Illuminate\Mail\MailServiceProvider',
 		'Illuminate\Pagination\PaginationServiceProvider',
 		'Illuminate\Pipeline\PipelineServiceProvider',
@@ -142,7 +141,6 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'hiro\Markdown\MarkdownServiceProvider',
-//		'ConnorVG\Slack\SlackServiceProvider',
 		'Collective\Html\HtmlServiceProvider',
 
 		/*
@@ -153,6 +151,7 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
+		'App\Providers\HashServiceProvider',
 
 	],
 

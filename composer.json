@@ -19,10 +19,6 @@
 		},
 		{
 			"type": "git",
-			"url": "https://github.com/r-a-dio/laravel-hashing"
-		},
-		{
-			"type": "git",
 			"url": "https://github.com/r-a-dio/php-slack"
 		},
 		{
@@ -40,7 +36,6 @@
 	"require": {
 		"laravel/framework": "5.0.*",
 		"raven/raven": "0.7.1",
-		"hiro/laravel-hashing": "dev-master-5",
 		"hiro/laravel-markdown": "dev-master-5",
 		"ezyang/htmlpurifier": "4.6.0",
 		"michelf/php-markdown": "dev-lib",

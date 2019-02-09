@@ -22,10 +22,6 @@
 			"url": "https://github.com/r-a-dio/php-slack"
 		},
 		{
-			"type": "git",
-			"url": "https://github.com/r-a-dio/php-markdown"
-		},
-		{
 			"packagist": false
 		},
 		{
@@ -38,7 +34,7 @@
 		"raven/raven": "0.7.1",
 		"hiro/laravel-markdown": "dev-master-5",
 		"ezyang/htmlpurifier": "4.6.0",
-		"michelf/php-markdown": "dev-lib",
+		"michelf/php-markdown": "^1.8",
 		"recaptcha/php5": "v1.0.0",
 		"nategood/httpful": "*",
 		"elasticsearch/elasticsearch": "~1.0",

@@ -3,6 +3,7 @@
 use Exception;
 use Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler {
@@ -42,6 +43,8 @@ class Handler extends ExceptionHandler {
 			return radio_error("Model not found at /". Request::path(), 404);
 		if ($e instanceof Illuminate\Session\TokenMismatchException)
 			return radio_error("Invalid CSRF", 403);
+		if ($e instanceof NotFoundHttpException)
+			return radio_error("Not Found", 404);
 		return radio_error($e, 500);
 	}
 

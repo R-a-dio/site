@@ -14,7 +14,7 @@ class Track extends Eloquent implements SongInterface {
 	protected $guarded = ["id", "hash"];
 
 	public function hash() {
-		return sha1(strtolower(trim($this->artist != "" ? "{$this->artist} - {$this->title}" : $this->title)));
+		return sha1(mb_strtolower(trim($this->artist != "" ? "{$this->artist} - {$this->title}" : $this->title)));
 	}
 
 	public function setTrackAttribute($value) {

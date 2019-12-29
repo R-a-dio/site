@@ -5,6 +5,7 @@
 <div class="container main">
 	<!-- Content (Dynamic)
 		=================== -->
+	@include("partials.help-main")
 	<div class="container top-pusher">
 	</div>
 	<div class="col-md-2"></div>

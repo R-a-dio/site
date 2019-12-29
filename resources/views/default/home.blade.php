@@ -6,6 +6,7 @@
 
 		<!-- Content (Dynamic)
 		=================== -->
+		@include("partials.help-main")
 		<div class="container content top-content">
 
 			<div class="row dynamic-row">
@@ -34,7 +35,6 @@
 						<div class="col-md-6">
 							@include("partials.player-options")
 						</div>
-						@include("partials.help-main")
 
 					</div><!-- /.row#stream-info -->
 

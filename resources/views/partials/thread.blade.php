@@ -1,4 +1,4 @@
-<div class="well well-lg" id="dj-mode" style="display: none">
+<div class="well-lg" id="dj-mode" style="display: none">
 	@if ($status["thread"] === "none" or $status["thread"] === "None")
 		<h2 class="text-center">There is currently no thread up.</h2>
 	@else

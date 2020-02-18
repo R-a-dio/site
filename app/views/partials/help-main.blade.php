@@ -19,7 +19,7 @@
 				<h3>Requesting Songs</h3>
 				<p>Search for a song first, by entering something into the searchbox at the top (or clicking "Search" in the navbar).</p>
 				<p>Then, click on <button class="btn btn-success btn-sm">Request</button></p>
-				<p>You can only request every hour.</p>
+				<p>You can only request every 30 minutes.</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

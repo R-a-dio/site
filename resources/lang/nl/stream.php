@@ -9,7 +9,7 @@ return [
 		"direct" => "Directe streamlink",
 		"m3u" => "Als afspeellijst (.m3u)",
 		"pls" => "Als afspeellijst (.pls)",
-		"help" => "Help"
+		"help" => "?"
 	],
 	"dj" => "DJ",
 	"listeners" => "Luisteraars",

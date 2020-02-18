@@ -9,7 +9,7 @@
 				<h3>Playing the Stream</h3>
 				<p>Simply click the <button class="btn btn-primary btn-sm">Play Stream</button> button in your browser.</p>
 				<p>A volume slider will appear, and the slider will change the volume. This is remembered between page loads.</p>
-				<p>To play the stream in your browser, you can use any of the following links:</p>
+				<p>To play the stream in your media player, you can use any of the following links:</p>
 				<ul>
 					<li><a href="https://stream.r-a-d.io/main">{{{ trans("stream.links.direct") }}}</a></li>
 					<li><a href="/assets/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
@@ -19,7 +19,7 @@
 				<h3>Requesting Songs</h3>
 				<p>Search for a song first, by entering something into the searchbox at the top (or clicking "Search" in the navbar).</p>
 				<p>Then, click on <button class="btn btn-success btn-sm">Request</button></p>
-				<p>You can only request every 2 hours.</p>
+				<p>You can only request every hour.</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

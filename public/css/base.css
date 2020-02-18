@@ -224,3 +224,8 @@ li#nav-control > div > div.popover-content {
     padding: 8px 15px 8px 25px;
     width: 100%;
 }
+
+/* Ensure the Staff page doesn't get screwy from non-rectangular images */
+.thumbnail {
+	min-height: 227px;
+}

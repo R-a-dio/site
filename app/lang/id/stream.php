@@ -9,7 +9,7 @@ return [
         "direct" => "Tautan Stream Langsung",
         "m3u" => "Stream .m3u Playlist",
         "pls" => "Stream .pls Playlist",
-        "help" => "Bantuan"
+        "help" => "?"
     ],
     "dj" => "DJ",
     "listeners" => "Pendengar",

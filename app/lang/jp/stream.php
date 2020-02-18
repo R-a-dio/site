@@ -9,7 +9,7 @@ return [
 		"direct" => "放送リンク",
 		"m3u" => ".m3u ファイル形式",
 		"pls" => ".pls ファイル形式",
-		"help" => "ヘルプ"
+		"help" => "?"
 	],
 	"dj" => "DJ",
 	"listeners" => "受け手数",

@@ -9,7 +9,7 @@ return [
 		"direct" => "Direct Stream Link",
 		"m3u" => "Stream .m3u Playlist",
 		"pls" => "Stream .pls Playlist",
-		"help" => "Help"
+		"help" => "?"
 	],
 	"dj" => "DJ",
 	"listeners" => "Listeners",

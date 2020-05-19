@@ -154,6 +154,7 @@ class API extends Controller {
 
 	public function getSearch($query) {
 		$limit = Input::get('limit', 20);
+		$limit = $limit < 20 ? $limit : 20;
 		$raw = $this->search($query ?: "", "track", "song-database", true);
 		$total = $raw["hits"]["total"];
 		$res = [];

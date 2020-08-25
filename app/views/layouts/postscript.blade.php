@@ -462,7 +462,7 @@
 				radio.duration = end - start;
 				radio.position = radio.cur_time - start;
 				radio.update_progress = 100 / radio.duration * radio.position;
-				radio.update_progress_inc = 100 / radio.duration * 0.5;
+				radio.update_progress_inc = 100 / radio.duration;
 				radio.current_pos = radio.position;
 				radio.current_len = radio.duration;
 			}
@@ -512,17 +512,17 @@
 		}
 
 		function periodic() {
-			radio.counter += 0.5;
-			radio.current_pos += 0.5;
+			radio.counter += 1;
+			radio.current_pos += 1;
 			applyProgress();
-			if (radio.counter >= 10.0) {
+			if (radio.counter >= 10) {
 				updatePeriodic();
 				radio.counter = 0;
 			}
 		}
 
 		updatePeriodic();
-		setInterval(periodic, 500);
+		setInterval(periodic, 1000);
 
 
 

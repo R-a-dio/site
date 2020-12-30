@@ -540,3 +540,9 @@ hr {
         display: block !important;
     }
 }
+
+@media (max-width: 600px) {
+    .djpage-panel>.col-md-3 {
+        width: 100%;
+    }
+}

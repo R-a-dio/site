@@ -1,3 +1,6 @@
+		<?php if (false) { ?>
+		<video src="//stream.r-a-d.io/ed.webm" style="position:fixed;z-index:999;right:0;top:0;width:320px;height:320px" autoplay="autoplay"></video>
+		<?php } ?>
 		<!-- Navbar
 		======== -->
 		<div class="navbar navbar-inverse" style="border-radius: 0px">

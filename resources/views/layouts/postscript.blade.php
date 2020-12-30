@@ -5,18 +5,7 @@
 <script src="/js/jquery.timeago.js"></script>
 <!-- History.js -->
 <script src="/js/jquery.history.js"></script>
-<script src="/js/jquery.jplayer.min.js"></script>
 <script src="/js/konami.js"></script>
-
-<script>
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	ga('create', 'UA-42658381-1', 'auto');
-	ga('send', 'pageview');
-</script>
 
 <script>
 	$(function() {
@@ -37,17 +26,6 @@
 			} catch (e) {
 				return false;
 			}
-		}
-
-		if (supports_html5_storage()) {
-
-			if (!localStorage["volume"]) {
-				localStorage["volume"] = 80;
-			}
-			$("#volume").val(parseInt(localStorage["volume"]));
-
-		} else {
-			$("#volume").val(80);
 		}
 
 		$.fn.serializeObject = function() {
@@ -94,55 +72,6 @@
 				History.pushState(null, $(this).text(), $(this).attr("action") + "/" + arr.q);
 				
 				return false;
-			});
-
-
-			if (History.getState().url.replace(History.getRootUrl(), "/") == "/") {
-				$("#stream").jPlayer({
-					ready: function () {
-						$("#stream-play").text("{{{ trans("stream.play") }}}").removeClass("disabled");
-						$("#stream-play").click(function() {
-							if(window.player_source_set == false) {
-								$("#stream").jPlayer("setMedia", {'mp3': location.protocol + '//stream.r-a-d.io/main.mp3'});
-								window.player_source_set = true;
-								$("#stream").jPlayer("play");
-								$(this).hide();
-								$("#volume-image").hide();
-								$("#stream-stop").show();
-								$("#volume-control").show();
-							}
-						});
-						$("#stream-stop").click(function() {
-							$("#stream").jPlayer("pause");
-							$(this).hide();
-							$("#stream-play").show();
-						});
-					},
-					pause: function() {
-						$("#stream").jPlayer("clearMedia");
-						$("#volume-control").hide();
-						$("#volume-image").show();
-						window.player_source_set = false;
-						$("#stream-play").click(function() {
-							if(window.player_source_set == false) {
-								$("#stream").jPlayer("setMedia", {'mp3': location.protocol + '//stream.r-a-d.io/main.mp3'});
-								window.player_source_set = true;
-								$("#stream").jPlayer("play");
-							}
-						});
-					},
-					volume: Math.pow(($("#volume").val() / 100), 2.0),
-					supplied: "mp3",
-					swfPath: swfpath,
-					preload: "none"
-				});
-			}
-			
-			$("#volume").on("input change", function (event) {
-				if (supports_html5_storage()) {
-					localStorage["volume"] = $(this).val();
-				}
-				$("#stream").jPlayer("volume", Math.pow(($(this).val() / 100), 2.0));
 			});
 
 			$("textarea.comment-input").keyup(function() {
@@ -379,6 +308,16 @@
 		function setDJ(dj) {
 			$("#dj-name").text(dj.djname);
 			setDjImage(dj.djimage);
+
+			var url = '/assets/logo_image_small.png';
+			if (dj.djname.toLowerCase().indexOf('sauce') !== -1)
+				url = '/assets/logo_image_small_sauce.png';
+			else if (new Date().getMonth() == 11)
+				url = '/assets/logo_image_small_christmas.png';
+
+			var img = document.querySelector('img[alt="R/a/dio"]');
+			if (img.getAttribute('src') !== url && img.getAttribute('src').startsWith('/assets/logo_image'))
+				img.setAttribute('src', url);
 		}
 
 		function nowPlaying(np) {
@@ -472,7 +411,7 @@
 				radio.duration = end - start;
 				radio.position = radio.cur_time - start;
 				radio.update_progress = 100 / radio.duration * radio.position;
-				radio.update_progress_inc = 100 / radio.duration * 0.5;
+				radio.update_progress_inc = 100 / radio.duration;
 				radio.current_pos = radio.position;
 				radio.current_len = radio.duration;
 			}
@@ -522,19 +461,184 @@
 		}
 
 		function periodic() {
-			radio.counter += 0.5;
-			radio.current_pos += 0.5;
+			radio.counter += 1;
+			radio.current_pos += 1;
 			applyProgress();
-			if (radio.counter >= 10.0) {
+			if (radio.counter >= 10) {
 				updatePeriodic();
 				radio.counter = 0;
 			}
 		}
 
 		updatePeriodic();
-		setInterval(periodic, 500);
+		setInterval(periodic, 1000);
 
 
 
 	});
+</script>
+
+<script>
+// stripped down version of https://ocv.me/dev/iceplay.html
+(function() {
+	console.log(Date.now(), 'ayy');
+
+	function ebi(id) {
+		return document.getElementById(id);
+	}
+
+	function bust(url) {
+		return url + '?_=' + Date.now();
+	}
+
+	var vol = 0.8,
+		url_stream = '//stream.r-a-d.io/main.mp3',
+		dom_btn = ebi('stream-play'),
+		dom_vol = ebi('volume'),
+		is_playing = false,
+		start_grace = 99,
+		last_pos = -99,
+		audio = null;
+
+	ev_stop();
+	dom_btn.onclick = ev_start;
+	dom_btn.classList.remove('disabled');
+
+	////
+	//// volume contorl
+	////
+
+	$('#volume').on("input change", function(ev) {
+		vol = $(this).val() / 100.0;
+		setvol();
+	});
+
+	// persist and apply volume to player
+	function setvol() {
+		if (audio)
+			audio.volume = Math.pow(vol, 2.0);
+			// not quite exponential but "sounds right"
+
+		try {
+			localStorage.setItem('volume', Math.floor(vol * 100));
+		}
+		catch (ex) {}
+
+		$("#volume").val(vol * 100);
+	}
+
+	// load volume preference
+	try {
+		var v = localStorage.getItem('volume');
+		if (v !== null)
+			vol = parseInt(v) / 100.0;
+
+		setvol();
+	}
+	catch (ex) {}
+
+	////
+	//// media control
+	////
+
+	// fully reinit the player (safe since it's a UI event)
+	function ev_start() {
+		ev_stop();
+		start();
+	}
+
+	// starts playback of `url_stream`
+	function start() {
+		dom_btn.onclick = ev_stop;
+		dom_btn.innerHTML = 'Connecting...';
+
+		$("#volume-image").hide();
+		$("#volume-control").show();
+
+		if (!audio) {
+			audio = new Audio();
+			audio.addEventListener('error', recover, true);
+		}
+		is_playing = true;
+		start_grace = 3;
+		last_pos = -99;
+		setvol();
+
+		var url = bust(url_stream);
+		console.log(Date.now(), url);
+		audio.src = url;
+		var rv = audio.play();
+		if (!rv || !rv.then || !rv.catch) {
+			check_started();
+			return;
+		}
+
+		// newer browsers return a promise; helps to identify issues
+		rv.then(check_started, function(err) {
+			dom_btn.innerHTML = 'oh fucking';
+			console.log(Date.now(), 'reject: ' + err);
+		});
+	}
+
+	// check if start() worked after the promise fires
+	function check_started() {
+		if (audio.paused) {
+			stop();
+			dom_btn.innerHTML = 'uhh try again';
+			return;
+		}
+		dom_btn.innerHTML = 'Stop Stream';
+	}
+
+	// after 1 sec, try to restart the stream without a UI event
+	function recover() {
+		dom_btn.onclick = ev_start;
+		dom_btn.innerHTML = 'Reconnecting...';
+		console.log(Date.now(), 'error ' + audio.error.code);
+		if (audio.error.message)
+			console.log(Date.now(), 'error ' + audio.error.code + ', ' + audio.error.message);
+	}
+
+	// stop playback;
+	// requires a full reinit from a UI event to resume
+	function ev_stop() {
+		stop();
+		audio = null;
+	}
+
+	// stop playback;
+	// usuallyTM allows a non-event start() after
+	function stop() {
+		dom_btn.onclick = ev_start;
+		dom_btn.innerHTML = 'Play Stream';
+
+		is_playing = false;
+
+		if (audio)
+			audio.pause();
+
+		$("#volume-control").hide();
+		$("#volume-image").show();
+	}
+
+	// check if playback has progressed every 3 sec,
+	// try to reconnect if that's not the case
+	function monitor() {
+		if (is_playing) {
+			var pos = audio.currentTime;
+			if (start_grace > 0) {
+				start_grace--;
+				console.log(Date.now(), "monitor grace", start_grace, "@", pos);
+			}
+			else if (pos > 0 && pos <= last_pos) {
+				console.log(Date.now(), "reconnecting", pos);
+				start();
+			}
+			last_pos = pos;
+		}
+		setTimeout(monitor, 3000);
+	}
+	console.log(Date.now(), 'starting monitor')
+	monitor();
+})();
 </script>

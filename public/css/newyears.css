@@ -488,7 +488,8 @@ hr {
     margin-top: 0px;
 }
 
-#logo-image-container {
+#logo-image-container,
+#dj-image-container {
     display: block;
     margin-top: auto;
     margin-bottom: auto;

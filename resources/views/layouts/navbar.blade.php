@@ -160,16 +160,13 @@
                 	<div class="col-md-1 h4">{{ Carbon\Carbon::now()->startOfWeek()->format("m/d") }}</div>
 			<div class="col-md-2 h4 text-right">Monday</div>
 			<div class="col-md-6">
-				<p></p><p>Monday tunes starting between 8 and 9PM, Kethsar <strike>will</strike> might play some garbage no one wants to listen to.
-				<br />
-						Let's be honest, Keth doesn't actually stream.
-				</p>
+				<p></p><p>Monday music with yukii. Starts around 5PM.<br/>What a boring description.</p>
 			</div>
                 </div>
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Tuesday</div>
                     <div class="col-md-6">
-                    	<p></p><p>Anime tunes and possibly requests with Chrono, starting 8:30PM</p>
+                    	<p></p><p>Touhou Tuesday with Kethsar, where the same song is played 10 times in one stream. Starts between 6 and 9PM except when Keth's sleep schedule is fucked, which is 99% of the time.</p>
                     </div>
                 </div>
                 <div class="row border-between">
@@ -181,7 +178,7 @@
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Thursday</div>
                     <div class="col-md-6">
-                    	<p></p><p>Join faggot kipukun for a (probably) relaxing stream, starting at 9PM.</p>
+                    	<p></p><p>The Indie Feature, with apt-get. Discover the bands and artists that have shaped Japan's music then and now, whether booming or underground. Stars around 2PM.</p>
                     </div>
                 </div>
                 <div class="row border-between">
@@ -193,7 +190,7 @@
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Saturday</div>
                     <div class="col-md-6">
-                    	<p></p><p>The not anime-related Saturday stream with that one goose faggot. Starts around 7PM or 8PM</p>
+                    	<p></p><p>Join Yorozuya as he livemixes anison, sometimes anison remixes, every other week to your disdain.<br/>Alternating with him is our bartending goose, Claud.<br/>Frankly, no one is able to remember whose week is whose anymore.</p>
                     </div>
                 </div>
                 <div class="row border-between">

@@ -503,3 +503,34 @@ hr {
     display: flex;
     justify-content: center;
 }
+
+@media screen and (max-width: 992px) {
+    .top-content {
+        display: block;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        position: unset;
+        transform: unset;
+        width: 100% !important;
+        background: rgba(0, 0, 0, 0.8);
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+        border-color: rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(2px);
+        border-radius: 8px;
+    }
+    #radio-container {
+        height: unset;
+    }
+    .top-content>.row {
+        display: block;
+    }
+    #dj-image-container {
+        margin-top: 20px;
+    }
+    #volume-control {
+        background: rgba(0, 0, 0, 0.35);
+        border-radius: 8px;
+        margin-left: 0;
+    }
+}

@@ -1,6 +1,6 @@
 @section("content")
 
-	<div class="container main content submitpage">
+	<div id="submitpage" class="container main content">
 		<h1>{{{ trans("submit.title") }}}</h1>
 		<div class="row">
 			<div class="col-xs-12">

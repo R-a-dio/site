@@ -48,6 +48,13 @@ body {
     margin-bottom: 0px;
 }
 
+.thumbnail>img {
+    min-height: 180px;
+    min-width: 180px;
+    max-height: 180px;
+    max-width: 180px;
+}
+
 .listeners-num,
 .timer-num {
     color: #FFF;
@@ -332,6 +339,7 @@ hr {
 }
 
 #lastplayed,
+#queue,
 #dj-mode,
 #volume-control,
 .time-list {
@@ -440,17 +448,19 @@ hr {
     backdrop-filter: blur(0px);
 }
 
-.staffpage-title>h3 {
+.staffpage-title>h3,
+.col-md-6>h3,
+#dj-name {
     text-align: center;
     text-shadow: 0px 1px 5px black;
 }
 
-.submitpage {
+#submitpage {
     width: 80%;
     color: #FFF;
 }
 
-.submitpage>.row {
+#submitpage>.row {
     color: #FFF;
     background-color: rgba(0, 0, 0, .8);
     border-radius: 8px;
@@ -459,7 +469,7 @@ hr {
     margin-bottom: 30px;
 }
 
-.submitpage>.row>.col-md-6>.row>.col-md-12 {
+#submitpage>.row>.col-md-6>.row>.col-md-12 {
     background-color: rgba(0, 0, 0, 0);
     backdrop-filter: unset;
 }
@@ -467,4 +477,28 @@ hr {
 .djpage-panel {
     margin: 30px;
     width: calc(100% - 60px);
+}
+
+#logo-image-container>.col-xs-12>img {
+    margin-top: 0px;
+}
+
+#dj-image-container>.col-xs-12>.thumbnail,
+#dj-image-container>.col-xs-12>.thumbnail>#dj-image {
+    margin-top: 0px;
+}
+
+#logo-image-container {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.top-content>.row {
+    display: flex;
+}
+
+#logo-image-container>.col-xs-12 {
+    display: flex;
+    justify-content: center;
 }

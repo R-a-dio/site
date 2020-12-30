@@ -13,7 +13,7 @@
 
 				<!-- Logo 1 (Icon)
 					============== -->
-				<div class="col-md-3 hidden-xs hidden-sm">
+				<div id="logo-image-container" class="col-md-3 hidden-xs hidden-sm">
 					<div class="col-xs-12">
 						<img src="/assets/logo_image_small.png" alt="R/a/dio">
 					</div>
@@ -68,7 +68,7 @@
 
 				<!-- DJ Image + Name
 					================= -->
-				<div class="col-md-3">
+				<div id="dj-image-container" class="col-md-3">
 					<div class="col-xs-12">
 						@include("partials.dj-image")
 					</div>

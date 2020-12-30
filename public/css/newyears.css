@@ -539,10 +539,17 @@ hr {
     #dj-image {
         display: block !important;
     }
+    .modal-lg {
+        width: 95%;
+    }
 }
 
 @media (max-width: 600px) {
     .djpage-panel>.col-md-3 {
         width: 100%;
+    }
+    .modal-content {
+        top: unset;
+        transform: unset;
     }
 }

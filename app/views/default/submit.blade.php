@@ -96,6 +96,13 @@
 		</div>
 
 		<div class="row">
+			<br>
+			<div class="alert text-center">
+				There are currently {{{ count($pending) }}} pending tracks awaiting approval.
+			</div>
+		</div>
+
+		<div class="row">
 			<hr>
 			<div class="col-md-6">
 				<h2 class="text-success text-center">{{{ trans("submit.accepts") }}}</h2>

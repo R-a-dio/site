@@ -17,6 +17,7 @@
 					<strong>{{{ trans("submit.guidelines.upload.title") }}}</strong>
 					<ul>
 						<li>{{{ trans("submit.guidelines.upload.search") }}}</li>
+						<li>Low quality uploads are likely to be declined if it's obvious better quality versions are available</li>
 						<li>{{{ trans("submit.guidelines.upload.quality") }}}</li>
 						<li>{{{ trans("submit.guidelines.upload.source") }}}</li>
 					</ul>
@@ -27,6 +28,7 @@
 						<li>{{{ trans("submit.guidelines.tagging.required") }}}</li>
 						<li>{{{ trans("submit.guidelines.tagging.runes") }}}</li>
 						<li>{{{ trans("submit.guidelines.tagging.cv") }}}</li>
+						<li>If you can remember, please include where you downloaded the file from</li>
 					</ul>
 				</p>
 			</div>

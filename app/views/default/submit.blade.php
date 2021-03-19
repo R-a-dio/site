@@ -100,7 +100,7 @@
 		<div class="row">
 			<br>
 			<div class="alert text-center">
-				There are currently {{{ count($pending) }}} pending tracks awaiting approval.
+				There are currently {{{ $pending_amount }}} pending tracks awaiting approval.
 			</div>
 		</div>
 

@@ -353,6 +353,9 @@ class Home extends BaseController {
 			->where("ip", "=", Request::server("REMOTE_ADDR"))
 			->count();
 
+		$pending_amount = DB::table("pending")
+			->count();
+
 		$replacements = Track::where("need_reupload", 1)->get();
 
 		$uploadTime = $this->checkUploadTime();
@@ -371,7 +374,8 @@ class Home extends BaseController {
 			->with("ip_decs", $ip_decs)
 			->with("replacements", $replacements)
 			->with("message", $message)
-			->with("cooldown", $cooldown);
+			->with("cooldown", $cooldown)
+			->with("pending_amount", $pending_amount);
 	}
 
 	public function postSubmit() {

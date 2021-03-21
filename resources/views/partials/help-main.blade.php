@@ -20,6 +20,11 @@
 				<p>Search for a song first, by entering something into the searchbox at the top (or clicking "Search" in the navbar).</p>
 				<p>Then, click on <button class="btn btn-success btn-sm">Request</button></p>
 				<p>You can only request every 30 minutes.</p>
+
+				<h3>Submitting songs</h3>
+				<p>Head over to the <a href="/submit">submit page</a> and read the instructions on the left <b>very carefully</b> before submitting a song.</p>
+				<p>It can take some time for your submission to be reviewed and accepted (or declined).</p>
+				<p>Your submission may be declined for a number of reasons including low quality, missing tags (meaning artist name, song name, source, etc.), but also sometimes because it's simply too niche and the majority of the listeners would likely rather not listen to it.</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

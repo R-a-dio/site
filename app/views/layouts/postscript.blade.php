@@ -646,9 +646,6 @@
 <!-- rave lol -->
 <script>
 	if (localStorage.getItem("isRave") === "true" ) {
-		document.getElementsByTagName("head")[0].insertAdjacentHTML(
-			"beforeend",
-			"<link rel=\"stylesheet\" href=\"/css/rave.css\" />");
 		ravemode();
 	}
 
@@ -669,6 +666,9 @@
 
 	function ravemode() {
 		if (localStorage.getItem("isRave") === "true") {
+			document.getElementsByTagName("head")[0].insertAdjacentHTML(
+			"beforeend",
+			"<link rel=\"stylesheet\" href=\"/css/rave.css\" />");
 			document.getElementById("ravetoggle").getElementsByTagName('a')[0].innerHTML = "Disable rave theme";
 			document.getElementById("dj-image").addEventListener("click", spinfasterfaggot);
 			document.getElementById("dj-image").style.animation = "djRotate 2s linear 0s infinite";

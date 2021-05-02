@@ -645,6 +645,9 @@
 
 <!-- rave lol -->
 <script>
+
+	var ravespeed = 2;
+	var ravemulti = 1;
 	if (localStorage.getItem("isRave") === "true" ) {
 		ravemode();
 	}
@@ -673,28 +676,25 @@
 		document.getElementById("dj-image").style.animation = "djRotate 2s linear 0s infinite";
 		document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].addEventListener("click", shakeintensifies);
 
-		var speed = 2;
-		var multi = 1;
-
 		function spinfasterfaggot() {
-			speed = speed / 1.5;
-			document.getElementById("dj-image").style.animation = "djRotate " + speed + "s linear 0s infinite";
+			ravespeed = ravespeed / 1.5;
+			document.getElementById("dj-image").style.animation = "djRotate " + ravespeed + "s linear 0s infinite";
 		}
 
 		function shakeintensifies() {
-			multi = multi + 1;
+			ravemulti = ravemulti + 1;
 			document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].animate([
-				{ transform: 'translate(' + multi * 2 + 'px, ' + multi * 1 + 'px) rotate(' + multi * 0 + 'deg)' },
-				{ transform: 'translate(' + multi * -1 + 'px, ' + multi * -2 + 'px) rotate(' + multi * -1 + 'deg)' },
-				{ transform: 'translate(' + multi * -3 + 'px, ' + multi * 0 + 'px) rotate(' + multi * 1 + 'deg)' },
-				{ transform: 'translate(' + multi * 0 + 'px, ' + multi * 2 + 'px) rotate(' + multi * 0 + 'deg)' },
-				{ transform: 'translate(' + multi * 1 + 'px, ' + multi * -1 + 'px) rotate(' + multi * 1 + 'deg)' },
-				{ transform: 'translate(' + multi * -1 + 'px, ' + multi * 2 + 'px) rotate(' + multi * -1 + 'deg)' },
-				{ transform: 'translate(' + multi * -3 + 'px, ' + multi * 1 + 'px) rotate(' + multi * 0 + 'deg)' },
-				{ transform: 'translate(' + multi * 2 + 'px, ' + multi * 1 + 'px) rotate(' + multi * -1 + 'deg)' },
-				{ transform: 'translate(' + multi * -1 + 'px, ' + multi * -1 + 'px) rotate(' + multi * 1 + 'deg)' },
-				{ transform: 'translate(' + multi * 2 + 'px, ' + multi * 2 + 'px) rotate(' + multi * 0 + 'deg)' },
-				{ transform: 'translate(' + multi * 1 + 'px, ' + multi * -2 + 'px) rotate(' + multi * -1 + 'deg)' }
+				{ transform: 'translate(' + ravemulti * 2 + 'px, ' + ravemulti * 1 + 'px) rotate(' + ravemulti * 0 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -1 + 'px, ' + ravemulti * -2 + 'px) rotate(' + ravemulti * -1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -3 + 'px, ' + ravemulti * 0 + 'px) rotate(' + ravemulti * 1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 0 + 'px, ' + ravemulti * 2 + 'px) rotate(' + ravemulti * 0 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 1 + 'px, ' + ravemulti * -1 + 'px) rotate(' + ravemulti * 1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -1 + 'px, ' + ravemulti * 2 + 'px) rotate(' + ravemulti * -1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -3 + 'px, ' + ravemulti * 1 + 'px) rotate(' + ravemulti * 0 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 2 + 'px, ' + ravemulti * 1 + 'px) rotate(' + ravemulti * -1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -1 + 'px, ' + ravemulti * -1 + 'px) rotate(' + ravemulti * 1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 2 + 'px, ' + ravemulti * 2 + 'px) rotate(' + ravemulti * 0 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 1 + 'px, ' + ravemulti * -2 + 'px) rotate(' + ravemulti * -1 + 'deg)' }
 			], {
 				duration: 500,
 				iterations: Infinity

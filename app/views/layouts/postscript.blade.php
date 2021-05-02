@@ -644,7 +644,7 @@
 </script>
 
 <!-- rave lol -->
-</script>
+<script>
 	if (localStorage.getItem("isRave") === "true" ) {
 		document.getElementsByTagName("head")[0].insertAdjacentHTML(
 			"beforeend",

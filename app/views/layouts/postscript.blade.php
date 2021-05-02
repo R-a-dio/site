@@ -645,17 +645,25 @@
 
 <!-- rave lol -->
 </script>
+	if (localStorage.getItem("isRave") === "true" ) {
+		document.getElementsByTagName("head")[0].insertAdjacentHTML(
+			"beforeend",
+			"<link rel=\"stylesheet\" href=\"/css/rave.css\" />");
+		ravemode();
+	}
+
 	document.getElementById("ravetoggle").addEventListener("click", enablerave);
 	if (localStorage.getItem("isRave") === null) {
 		localStorage.setItem("isRave", "false");
 	}
-	window.addEventListener('load', ravemode);
 
 	function enablerave() {
 		if (localStorage.getItem("isRave") === "false" ) {
 			localStorage.setItem("isRave", "true");
+			window.location.href = window.location.href;
 		} else {
 			localStorage.setItem("isRave", "false");
+			window.location.href = window.location.href;
 		}
 	}
 
@@ -665,10 +673,6 @@
 			document.getElementById("dj-image").addEventListener("click", spinfasterfaggot);
 			document.getElementById("dj-image").style.animation = "djRotate 2s linear 0s infinite";
 			document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].addEventListener("click", shakeintensifies);
-
-			document.getElementsByTagName("head")[0].insertAdjacentHTML(
-				"beforeend",
-				"<link rel=\"stylesheet\" href=\"/css/rave.css\" />");
 
 			var speed = 2;
 			var multi = 1;
@@ -701,3 +705,4 @@
 		}
 	}
 </script>
+<!-- rave end -->

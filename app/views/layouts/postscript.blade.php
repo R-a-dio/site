@@ -665,43 +665,40 @@
 	}
 
 	function ravemode() {
-		if (localStorage.getItem("isRave") === "true") {
-			document.getElementsByTagName("head")[0].insertAdjacentHTML(
-			"beforeend",
-			"<link rel=\"stylesheet\" href=\"/css/rave.css\" />");
-			document.getElementById("ravetoggle").getElementsByTagName('a')[0].innerHTML = "Disable rave theme";
-			document.getElementById("dj-image").addEventListener("click", spinfasterfaggot);
-			document.getElementById("dj-image").style.animation = "djRotate 2s linear 0s infinite";
-			document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].addEventListener("click", shakeintensifies);
+		document.getElementsByTagName("head")[0].insertAdjacentHTML(
+		"beforeend",
+		"<link rel=\"stylesheet\" href=\"/css/rave.css\" />");
+		document.getElementById("ravetoggle").getElementsByTagName('a')[0].innerHTML = "Disable rave theme";
+		document.getElementById("dj-image").addEventListener("click", spinfasterfaggot);
+		document.getElementById("dj-image").style.animation = "djRotate 2s linear 0s infinite";
+		document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].addEventListener("click", shakeintensifies);
 
-			var speed = 2;
-			var multi = 1;
+		var speed = 2;
+		var multi = 1;
 
-			function spinfasterfaggot() {
-				speed = speed / 1.5;
-				document.getElementById("dj-image").style.animation = "djRotate " + speed + "s linear 0s infinite";
-				console.log("hello");
-			}
+		function spinfasterfaggot() {
+			speed = speed / 1.5;
+			document.getElementById("dj-image").style.animation = "djRotate " + speed + "s linear 0s infinite";
+		}
 
-			function shakeintensifies() {
-				multi = multi + 1;
-				document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].animate([
-					{ transform: 'translate(' + multi * 2 + 'px, ' + multi * 1 + 'px) rotate(' + multi * 0 + 'deg)' },
-					{ transform: 'translate(' + multi * -1 + 'px, ' + multi * -2 + 'px) rotate(' + multi * -1 + 'deg)' },
-					{ transform: 'translate(' + multi * -3 + 'px, ' + multi * 0 + 'px) rotate(' + multi * 1 + 'deg)' },
-					{ transform: 'translate(' + multi * 0 + 'px, ' + multi * 2 + 'px) rotate(' + multi * 0 + 'deg)' },
-					{ transform: 'translate(' + multi * 1 + 'px, ' + multi * -1 + 'px) rotate(' + multi * 1 + 'deg)' },
-					{ transform: 'translate(' + multi * -1 + 'px, ' + multi * 2 + 'px) rotate(' + multi * -1 + 'deg)' },
-					{ transform: 'translate(' + multi * -3 + 'px, ' + multi * 1 + 'px) rotate(' + multi * 0 + 'deg)' },
-					{ transform: 'translate(' + multi * 2 + 'px, ' + multi * 1 + 'px) rotate(' + multi * -1 + 'deg)' },
-					{ transform: 'translate(' + multi * -1 + 'px, ' + multi * -1 + 'px) rotate(' + multi * 1 + 'deg)' },
-					{ transform: 'translate(' + multi * 2 + 'px, ' + multi * 2 + 'px) rotate(' + multi * 0 + 'deg)' },
-					{ transform: 'translate(' + multi * 1 + 'px, ' + multi * -2 + 'px) rotate(' + multi * -1 + 'deg)' }
-				], {
-					duration: 500,
-					iterations: Infinity
-				});
-			}
+		function shakeintensifies() {
+			multi = multi + 1;
+			document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].animate([
+				{ transform: 'translate(' + multi * 2 + 'px, ' + multi * 1 + 'px) rotate(' + multi * 0 + 'deg)' },
+				{ transform: 'translate(' + multi * -1 + 'px, ' + multi * -2 + 'px) rotate(' + multi * -1 + 'deg)' },
+				{ transform: 'translate(' + multi * -3 + 'px, ' + multi * 0 + 'px) rotate(' + multi * 1 + 'deg)' },
+				{ transform: 'translate(' + multi * 0 + 'px, ' + multi * 2 + 'px) rotate(' + multi * 0 + 'deg)' },
+				{ transform: 'translate(' + multi * 1 + 'px, ' + multi * -1 + 'px) rotate(' + multi * 1 + 'deg)' },
+				{ transform: 'translate(' + multi * -1 + 'px, ' + multi * 2 + 'px) rotate(' + multi * -1 + 'deg)' },
+				{ transform: 'translate(' + multi * -3 + 'px, ' + multi * 1 + 'px) rotate(' + multi * 0 + 'deg)' },
+				{ transform: 'translate(' + multi * 2 + 'px, ' + multi * 1 + 'px) rotate(' + multi * -1 + 'deg)' },
+				{ transform: 'translate(' + multi * -1 + 'px, ' + multi * -1 + 'px) rotate(' + multi * 1 + 'deg)' },
+				{ transform: 'translate(' + multi * 2 + 'px, ' + multi * 2 + 'px) rotate(' + multi * 0 + 'deg)' },
+				{ transform: 'translate(' + multi * 1 + 'px, ' + multi * -2 + 'px) rotate(' + multi * -1 + 'deg)' }
+			], {
+				duration: 500,
+				iterations: Infinity
+			});
 		}
 	}
 </script>

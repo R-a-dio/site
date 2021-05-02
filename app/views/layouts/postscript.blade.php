@@ -646,17 +646,21 @@
 <!-- rave lol -->
 </script>
 	document.getElementById("ravetoggle").addEventListener("click", enablerave);
+	if (localStorage.getItem("isRave") === null) {
+		localStorage.setItem("isRave", "false");
+	}
+	window.addEventListener('load', ravemode);
 
 	function enablerave() {
-		if (localStorage.getItem(!isRave)) {
-			localStorage.setItem(isRave, true);
+		if (localStorage.getItem("isRave") === "false" ) {
+			localStorage.setItem("isRave", "true");
 		} else {
-			localStorage.setItem(isRave, false);
+			localStorage.setItem("isRave", "false");
 		}
 	}
 
 	function ravemode() {
-		if (localStorage.getItem(isRave)) {
+		if (localStorage.getItem("isRave") === "true") {
 			document.getElementById("ravetoggle").getElementsByTagName('a')[0].innerHTML = "Disable rave theme";
 			document.getElementById("dj-image").addEventListener("click", spinfasterfaggot);
 			document.getElementById("dj-image").style.animation = "djRotate 2s linear 0s infinite";

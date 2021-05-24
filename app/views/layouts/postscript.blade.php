@@ -383,6 +383,14 @@
 			radio.thread = thread;
 		}
 
+		function updateTags(tags) {
+			if(tags.length === 0) {
+				document.getElementById("tags").innerHTML = "there are no tags for this song!";
+			} else {
+				document.getElementById("tags").innerHTML = "tags: " + tags.join(" ");
+			}
+		}
+
 		function updatePeriodic() {
 			$.ajax({
 				method: 'get',
@@ -395,6 +403,7 @@
 					setDJ(resp.main.dj);
 					updateLastPlayed(resp.main.lp);
 					updateQueue(resp.main.queue);
+					updateTags(resp.tags);
 					parseProgress(resp.main.start_time, resp.main.end_time, resp.main.current);
 					$("time.timeago").timeago();
 				}
@@ -643,7 +652,7 @@
 })();
 </script>
 
-<!-- rave lol -->
+<!-- rave start -->
 <script>
 
 	var ravespeed = 2;
@@ -673,11 +682,11 @@
 		"beforeend",
 		"<link rel=\"stylesheet\" href=\"/css/rave.css\" />");
 		document.getElementById("ravetoggle").getElementsByTagName('a')[0].innerHTML = "Disable rave theme";
-		document.getElementById("dj-image").addEventListener("click", spinfasterfaggot);
+		document.getElementById("dj-image").addEventListener("click", spinfaster);
 		document.getElementById("dj-image").style.animation = "djRotate 2s linear 0s infinite";
 		document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].addEventListener("click", shakeintensifies);
 
-		function spinfasterfaggot() {
+		function spinfaster() {
 			ravespeed = ravespeed / 1.5;
 			document.getElementById("dj-image").style.animation = "djRotate " + ravespeed + "s linear 0s infinite";
 		}
@@ -704,7 +713,7 @@
 	}
 </script>
 <!-- rave end -->
-<!-- tags script start -->
+<!-- tags start -->
 <script>
 if (localStorage.getItem("displayTags") === null) {
     localStorage.setItem("displayTags", "false");
@@ -717,24 +726,7 @@ switch (localStorage.getItem("displayTags")) {
         break;
     case "true":
         document.getElementById("np").insertAdjacentHTML('afterend', '<p id="tags" style="font-size:14px;"></p>');
-        fetchAndDisplayTags();
         break;
-}
-
-// set up and use mutationobserver to observe changes to currently playing song
-const observeTarget = document.querySelector("#np");
-const config = { attributes: true, childList: true, subtree: true };
-const observer = new MutationObserver(fetchAndDisplayTags)
-observer.observe(observeTarget, config);
-
-// fetch new tags and insert them into the dom
-function fetchAndDisplayTags() {
-    fetch('https://r-a-d.io/api')
-        .then(response => response.json())
-        .then(data => data["main"]["tags"])
-        .then(tags => {
-            document.getElementById("tags").innerHTML = "tags: " + tags.join(" ");
-        });
 }
 
 // add eventlistener to toggle display of tags when song title is clicked
@@ -750,5 +742,8 @@ document.getElementById("np").addEventListener("click", function() {
             break;
     }
 });
+
+// also i set this here because changing this in the css file would be :effort:
+document.getElementById("np").style.cursor = "pointer";
 </script>
-<!-- tags script end -->
+<!-- tags end -->

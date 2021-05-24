@@ -383,6 +383,14 @@
 			radio.thread = thread;
 		}
 
+		function updateTags(tags) {
+			if(tags[0] === "") {
+				document.getElementById("tags").innerHTML = "there are no tags for this song!";
+			} else {
+				document.getElementById("tags").innerHTML = "tags: " + tags.join(" ");
+			}
+		}
+
 		function updatePeriodic() {
 			$.ajax({
 				method: 'get',
@@ -395,6 +403,7 @@
 					setDJ(resp.main.dj);
 					updateLastPlayed(resp.main.lp);
 					updateQueue(resp.main.queue);
+					updateTags(resp.tags);
 					parseProgress(resp.main.start_time, resp.main.end_time, resp.main.current);
 					$("time.timeago").timeago();
 				}
@@ -642,3 +651,99 @@
 	monitor();
 })();
 </script>
+
+<!-- rave start -->
+<script>
+
+	var ravespeed = 2;
+	var ravemulti = 1;
+	
+	if (localStorage.getItem("isRave") === "true" ) {
+		ravemode();
+	}
+
+	document.getElementById("ravetoggle").addEventListener("click", enablerave);
+	if (localStorage.getItem("isRave") === null) {
+		localStorage.setItem("isRave", "false");
+	}
+
+	function enablerave() {
+		if (localStorage.getItem("isRave") === "false" ) {
+			localStorage.setItem("isRave", "true");
+			window.location.href = window.location.href;
+		} else {
+			localStorage.setItem("isRave", "false");
+			window.location.href = window.location.href;
+		}
+	}
+
+	function ravemode() {
+		document.getElementsByTagName("head")[0].insertAdjacentHTML(
+		"beforeend",
+		"<link rel=\"stylesheet\" href=\"/css/rave.css\" />");
+		document.getElementById("ravetoggle").getElementsByTagName('a')[0].innerHTML = "Disable rave theme";
+		document.getElementById("dj-image").addEventListener("click", spinfaster);
+		document.getElementById("dj-image").style.animation = "djRotate 2s linear 0s infinite";
+		document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].addEventListener("click", shakeintensifies);
+
+		function spinfaster() {
+			ravespeed = ravespeed / 1.5;
+			document.getElementById("dj-image").style.animation = "djRotate " + ravespeed + "s linear 0s infinite";
+		}
+
+		function shakeintensifies() {
+			ravemulti = ravemulti + 1;
+			document.getElementById("logo-image-container").getElementsByTagName('div')[0].getElementsByTagName('img')[0].animate([
+				{ transform: 'translate(' + ravemulti * 2 + 'px, ' + ravemulti * 1 + 'px) rotate(' + ravemulti * 0 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -1 + 'px, ' + ravemulti * -2 + 'px) rotate(' + ravemulti * -1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -3 + 'px, ' + ravemulti * 0 + 'px) rotate(' + ravemulti * 1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 0 + 'px, ' + ravemulti * 2 + 'px) rotate(' + ravemulti * 0 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 1 + 'px, ' + ravemulti * -1 + 'px) rotate(' + ravemulti * 1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -1 + 'px, ' + ravemulti * 2 + 'px) rotate(' + ravemulti * -1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -3 + 'px, ' + ravemulti * 1 + 'px) rotate(' + ravemulti * 0 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 2 + 'px, ' + ravemulti * 1 + 'px) rotate(' + ravemulti * -1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * -1 + 'px, ' + ravemulti * -1 + 'px) rotate(' + ravemulti * 1 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 2 + 'px, ' + ravemulti * 2 + 'px) rotate(' + ravemulti * 0 + 'deg)' },
+				{ transform: 'translate(' + ravemulti * 1 + 'px, ' + ravemulti * -2 + 'px) rotate(' + ravemulti * -1 + 'deg)' }
+			], {
+				duration: 500,
+				iterations: Infinity
+			});
+		}
+	}
+</script>
+<!-- rave end -->
+<!-- tags start -->
+<script>
+if (localStorage.getItem("displayTags") === null) {
+    localStorage.setItem("displayTags", "false");
+}
+
+// add the tag part under currently playing song after checking it's display status
+switch (localStorage.getItem("displayTags")) {
+    case "false":
+        document.getElementById("np").insertAdjacentHTML('afterend', '<p id="tags" style="font-size:14px;display:none;"></p>');
+        break;
+    case "true":
+        document.getElementById("np").insertAdjacentHTML('afterend', '<p id="tags" style="font-size:14px;"></p>');
+        break;
+}
+
+// add eventlistener to toggle display of tags when song title is clicked
+document.getElementById("np").addEventListener("click", function() {
+    switch (localStorage.getItem("displayTags")) {
+        case "false":
+            localStorage.setItem("displayTags", "true");
+            document.getElementById("tags").style.display = "inherit";
+            break;
+        case "true":
+            localStorage.setItem("displayTags", "false");
+            document.getElementById("tags").style.display = "none";
+            break;
+    }
+});
+
+// also i set this here because changing this in the css file would be :effort:
+document.getElementById("np").style.cursor = "pointer";
+</script>
+<!-- tags end -->

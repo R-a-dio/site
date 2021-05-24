@@ -10,6 +10,7 @@
 		<li><a href="/assets/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
 		<li><a href="/assets/main.pls">{{{ trans("stream.links.pls") }}}</a></li>
 		<li class="divider"></li>
+		<li id="ravetoggle"><a href="/">Enable rave theme</a></li>
 		@if (!$cur_theme)
 			<li class="active"><a href="/set-theme/-1">Use DJ Theme</a></li>
 		@else

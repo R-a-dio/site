@@ -384,7 +384,7 @@
 		}
 
 		function updateTags(tags) {
-			if(tags.length === 0) {
+			if(tags[0] === "") {
 				document.getElementById("tags").innerHTML = "there are no tags for this song!";
 			} else {
 				document.getElementById("tags").innerHTML = "tags: " + tags.join(" ");

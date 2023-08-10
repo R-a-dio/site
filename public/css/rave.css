@@ -1,0 +1,220 @@
+/*body, html {
+    overflow:hidden;
+}*/
+
+#canvas {
+    z-index: -1;
+}
+
+#np,
+#djname,
+.text-center,
+.timeago,
+.staff-name>h4 {
+    animation: colorRotate 2s linear 0s infinite;
+}
+
+#lastplayed>li:nth-child(odd)>.lp-meta {
+    animation: colorRotate2 2s linear 0s infinite;
+}
+
+#lastplayed>li:nth-child(even)>.lp-time>.timeago {
+    animation: colorRotate2 2s linear 0s infinite;
+}
+
+#logo-image-container {
+    animation: rbgLady 1s linear 0s infinite;
+}
+
+.news-row>.col-md-4:nth-child(1)>.panel>.panel-heading>.ajax-navigation>.panel-title {
+    animation: rbgLady 1.5s linear 0s infinite;
+}
+
+.news-row>.col-md-4:nth-child(2)>.panel>.panel-heading>.ajax-navigation>.panel-title {
+    animation: rbg2 1s linear 0s infinite;
+}
+
+.news-row>.col-md-4:nth-child(3)>.panel>.panel-heading>.ajax-navigation>.panel-title {
+    animation: rbg3 1.5s linear 0s infinite;
+}
+
+.news-row>.col-md-4:nth-child(even)>.panel>.panel-body>p {
+    animation: colorRotate3 2s linear 0s infinite;
+}
+
+.news-row>.col-md-4:nth-child(odd)>.panel>.panel-body>p {
+    animation: colorRotate2 2s linear 0s infinite;
+}
+
+.thumbnail>img {
+    animation: djRotate 2s linear 0s infinite;
+    transform: rotate(0deg);
+}
+
+#dj-image,
+.thumbnail>img {
+    border-radius: 90px;
+}
+
+.progress-bar {
+    animation: rbg2 2s linear 0s infinite;
+}
+
+#volume-image,
+#stream-play {
+    animation: rbg2 3s linear 0s infinite;
+}
+
+@keyframes rbgLady {
+    from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes rbg2 {
+    from {
+        filter: hue-rotate(30deg);
+    }
+    to {
+        filter: hue-rotate(330deg);
+    }
+}
+
+@keyframes rbg3 {
+    from {
+        filter: hue-rotate(360deg);
+    }
+    to {
+        filter: hue-rotate(0deg);
+    }
+}
+
+@keyframes djRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes colorRotate {
+    from {
+        color: #6666ff;
+    }
+    10% {
+        color: #0099ff;
+    }
+    50% {
+        color: #00ff00;
+    }
+    75% {
+        color: #ff3399;
+    }
+    100% {
+        color: #6666ff;
+    }
+}
+
+@keyframes colorRotate2 {
+    from {
+        color: #0099ff;
+    }
+    10% {
+        color: #6666ff;
+    }
+    50% {
+        color: #6666ff;
+    }
+    75% {
+        color: #ff3399;
+    }
+    100% {
+        color: #00ff00;
+    }
+}
+
+@keyframes colorRotate3 {
+    from {
+        color: #00ff00;
+    }
+    10% {
+        color: #6666ff;
+    }
+    50% {
+        color: #6666ff;
+    }
+    75% {
+        color: #ff3399;
+    }
+    100% {
+        color: #0099ff;
+    }
+}
+
+#logo-image-container>div>img {
+    animation: screaming 0.5s linear 0s infinite;
+}
+
+@keyframes screaming {
+    0% {
+        -webkit-transform: translate(2px, 1px) rotate(0deg);
+    }
+    10% {
+        -webkit-transform: translate(-1px, -2px) rotate(-1deg);
+    }
+    20% {
+        -webkit-transform: translate(-3px, 0px) rotate(1deg);
+    }
+    30% {
+        -webkit-transform: translate(0px, 2px) rotate(0deg);
+    }
+    40% {
+        -webkit-transform: translate(1px, -1px) rotate(1deg);
+    }
+    50% {
+        -webkit-transform: translate(-1px, 2px) rotate(-1deg);
+    }
+    60% {
+        -webkit-transform: translate(-3px, 1px) rotate(0deg);
+    }
+    70% {
+        -webkit-transform: translate(2px, 1px) rotate(-1deg);
+    }
+    80% {
+        -webkit-transform: translate(-1px, -1px) rotate(1deg);
+    }
+    90% {
+        -webkit-transform: translate(2px, 2px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.thumbnail, .last-played, .btn, .list-group-item {
+    animation: screaming 1.1s linear 0s infinite;
+}
+
+.col-md-4, .col-xs-12 {
+    animation: screaming 0.9s linear 0s infinite;
+}
+
+.col-md-4:nth-child(odd), btn:nth-child(odd), .queue, .list-group-item:nth-child(odd) {
+    animation: screaming 1.05s reverse 0s infinite;
+}
+
+.col-md-6, .col-md-3, .thread {
+    animation: screaming 0.95s reverse 0s infinite;
+}
+
+.col-md-6:nth-child(odd), .col-md-3:nth-child(odd) {
+    animation: screaming 0.85s linear 0s infinite;
+}
+
+.open > .dropdown-menu {
+    display: contents;
+}

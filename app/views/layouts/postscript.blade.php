@@ -383,6 +383,45 @@
 			radio.thread = thread;
 		}
 
+		function updateTags(tags, dj) {
+			if(tags[0] === "") {
+				document.getElementById("tags").innerHTML = "there are no tags for this song!";
+			} else if (dj !== "Hanyuu-sama") {
+				document.getElementById("tags").innerHTML = "tags can't be displayed while a dj is on!";
+			} else {
+				document.getElementById("tags").innerHTML = tags.join(" ");
+			}
+		}
+
+		function setMediaSession(np, dj) {
+			if (!('mediaSession' in navigator && window.MediaMetadata))
+				return;
+
+			var m = {},
+				ofs = np.indexOf(' - ');
+
+			m.title = np;
+			m.artist = dj;
+			m.album = dj + ' on r/a/dio';
+			m.artwork = [{
+				src: $("#dj-image").attr("src"),
+				type: "image/png"
+			}];
+
+			if (ofs + 1) {
+				m.artist = np.slice(0, ofs);
+				m.title = np.slice(ofs + 3);
+			}
+
+			function playpause() {
+				document.getElementById('stream-play').click();
+			}
+
+			navigator.mediaSession.metadata = new MediaMetadata(m);
+			navigator.mediaSession.setActionHandler('play', playpause);
+			navigator.mediaSession.setActionHandler('pause', playpause);
+		}
+
 		function updatePeriodic() {
 			$.ajax({
 				method: 'get',
@@ -395,6 +434,8 @@
 					setDJ(resp.main.dj);
 					updateLastPlayed(resp.main.lp);
 					updateQueue(resp.main.queue);
+					updateTags(resp.main.tags, resp.main.dj.djname);
+					setMediaSession(resp.main.np, resp.main.dj.djname);
 					parseProgress(resp.main.start_time, resp.main.end_time, resp.main.current);
 					$("time.timeago").timeago();
 				}
@@ -480,25 +521,57 @@
 
 <script>
 // stripped down version of https://ocv.me/dev/iceplay.html
-(function() {
+window.iceplay = (function() {
 	console.log(Date.now(), 'ayy');
 
-	function ebi(id) {
-		return document.getElementById(id);
-	}
+	var ebi = document.getElementById.bind(document),
+		events = {},
+		r = {
+			"vol": 0.8,
+			"audio": null,
+			"is_playing": false
+		};
+	
+	r.addEventListener = function(name, handler) {
+		if (events.hasOwnProperty(name))
+			events[name].push(handler);
+		else
+			events[name] = [handler];
+	};
+
+	r.removeEventListener = function(name, handler) {
+		if (!events.hasOwnProperty(name))
+			return;
+
+		var idx = events[name].indexOf(handler);
+		if (idx !== -1)
+			events[name].splice(idx, 1);
+	};
+
+	function emitEvent(name, args) {
+		if (!events.hasOwnProperty(name))
+			return;
+
+		if (!args || !args.length)
+			args = [];
+
+		for (var a=0, aa=events[name].length; a<aa; a++)
+			events[name][a].apply(null, args);
+	};
 
 	function bust(url) {
 		return url + '?_=' + Date.now();
 	}
 
-	var vol = 0.8,
-		url_stream = '//stream.r-a-d.io/main.mp3',
+	// TODO nginx config sets acao for relay0 but not stream.*
+	var url_stream = '//relay0.r-a-d.io/main.mp3',
 		dom_btn = ebi('stream-play'),
 		dom_vol = ebi('volume'),
-		is_playing = false,
 		start_grace = 99,
 		last_pos = -99,
-		audio = null;
+		fader_t = 0,
+		fader_ref = 0,
+		fader_v = 0;
 
 	ev_stop();
 	dom_btn.onclick = ev_start;
@@ -509,29 +582,32 @@
 	////
 
 	$('#volume').on("input change", function(ev) {
-		vol = $(this).val() / 100.0;
+		r.vol = $(this).val() / 100.0;
 		setvol();
 	});
 
 	// persist and apply volume to player
-	function setvol() {
-		if (audio)
-			audio.volume = Math.pow(vol, 2.0);
+	function setvol(tempval) {
+		if (r.audio)
+			r.audio.volume = Math.pow(tempval || r.vol, 2.0);
 			// not quite exponential but "sounds right"
 
+		if (tempval)
+			return;
+
 		try {
-			localStorage.setItem('volume', Math.floor(vol * 100));
+			localStorage.setItem('volume', Math.floor(r.vol * 100));
 		}
 		catch (ex) {}
 
-		$("#volume").val(vol * 100);
+		$("#volume").val(r.vol * 100);
 	}
 
 	// load volume preference
 	try {
 		var v = localStorage.getItem('volume');
 		if (v !== null)
-			vol = parseInt(v) / 100.0;
+			r.vol = parseInt(v) / 100.0;
 
 		setvol();
 	}
@@ -555,19 +631,24 @@
 		$("#volume-image").hide();
 		$("#volume-control").show();
 
-		if (!audio) {
-			audio = new Audio();
-			audio.addEventListener('error', recover, true);
+		if (!r.audio) {
+			r.audio = new Audio();
+			r.audio.crossOrigin = 'anonymous';
+			r.audio.addEventListener('error', recover, true);
 		}
-		is_playing = true;
+		r.is_playing = true;
 		start_grace = 3;
 		last_pos = -99;
 		setvol();
 
+		// let the fader handle it
+		r.audio.volume = 0;
+		fader_v = 0;
+
 		var url = bust(url_stream);
 		console.log(Date.now(), url);
-		audio.src = url;
-		var rv = audio.play();
+		r.audio.src = url;
+		var rv = r.audio.play();
 		if (!rv || !rv.then || !rv.catch) {
 			check_started();
 			return;
@@ -578,32 +659,54 @@
 			dom_btn.innerHTML = 'oh fucking';
 			console.log(Date.now(), 'reject: ' + err);
 		});
+
+		try {
+			navigator.mediaSession.playbackState = "playing";
+		}
+		catch (e) { }
 	}
 
 	// check if start() worked after the promise fires
 	function check_started() {
-		if (audio.paused) {
+		if (r.audio.paused) {
 			stop();
 			dom_btn.innerHTML = 'uhh try again';
 			return;
 		}
 		dom_btn.innerHTML = 'Stop Stream';
+		emitEvent('connected');
+		setTimeout(fade_in, 200);
+	}
+
+	function fade_in() {
+		clearTimeout(fader_t);
+		var apos = r.audio.currentTime;
+		if (apos != fader_ref) {
+			fader_ref = apos;
+			if (r.vol - fader_v < 0.01) {
+				setvol(fader_v);
+				return;
+			}
+			fader_v = Math.min(fader_v + 0.03, r.vol);
+			setvol(fader_v);
+		}
+		fader_t = setTimeout(fade_in, 20);
 	}
 
 	// after 1 sec, try to restart the stream without a UI event
 	function recover() {
 		dom_btn.onclick = ev_start;
 		dom_btn.innerHTML = 'Reconnecting...';
-		console.log(Date.now(), 'error ' + audio.error.code);
-		if (audio.error.message)
-			console.log(Date.now(), 'error ' + audio.error.code + ', ' + audio.error.message);
+		console.log(Date.now(), 'error ' + r.audio.error.code);
+		if (r.audio.error.message)
+			console.log(Date.now(), 'error ' + r.audio.error.code + ', ' + r.audio.error.message);
 	}
 
 	// stop playback;
 	// requires a full reinit from a UI event to resume
 	function ev_stop() {
 		stop();
-		audio = null;
+		r.audio = null;
 	}
 
 	// stop playback;
@@ -612,20 +715,25 @@
 		dom_btn.onclick = ev_start;
 		dom_btn.innerHTML = 'Play Stream';
 
-		is_playing = false;
+		r.is_playing = false;
 
-		if (audio)
-			audio.pause();
+		if (r.audio)
+			r.audio.pause();
 
 		$("#volume-control").hide();
 		$("#volume-image").show();
+
+		try {
+			navigator.mediaSession.playbackState = "paused";
+		}
+		catch (e) { }
 	}
 
 	// check if playback has progressed every 3 sec,
 	// try to reconnect if that's not the case
 	function monitor() {
-		if (is_playing) {
-			var pos = audio.currentTime;
+		if (r.is_playing) {
+			var pos = r.audio.currentTime;
 			if (start_grace > 0) {
 				start_grace--;
 				console.log(Date.now(), "monitor grace", start_grace, "@", pos);
@@ -640,5 +748,105 @@
 	}
 	console.log(Date.now(), 'starting monitor')
 	monitor();
+	return r;
 })();
+</script>
+<script src="/js/rave.js"></script>
+<script src="/js/tags.js"></script>
+<!--<script src="/js/user-preferences.js"></script>-->
+<script>
+document.getElementById("save-preferences").addEventListener("click", saveUserPreferences);
+
+if (localStorage.getItem("mute-tags-internal") === null) { localStorage.setItem("mute-tags-internal", ""); }
+if (localStorage.getItem("mute-tags-title") === null) { localStorage.setItem("mute-tags-title", ""); }
+if (localStorage.getItem("mute-tags-play-instead") === null) { localStorage.setItem("mute-tags-play-instead", ""); }
+if (localStorage.getItem("customSongVolume") === null) { localStorage.setItem("customSongVolume", "10"); }
+if (localStorage.getItem("mute-tags-stop-early") === null) { localStorage.setItem("mute-tags-stop-early", "false"); }
+
+if (localStorage.getItem("mute-tags-internal") != "") { document.getElementById("mute-tags-internal").value = localStorage.getItem("mute-tags-internal"); }
+if (localStorage.getItem("mute-tags-title") != "") { document.getElementById("mute-tags-title").value = localStorage.getItem("mute-tags-title"); }
+if (localStorage.getItem("mute-tags-play-instead") != "") { document.getElementById("mute-tags-play-instead").value = localStorage.getItem("mute-tags-play-instead"); }
+if (localStorage.getItem("mute-tags-stop-early") == "true") { document.getElementById("mute-tags-stop-early").checked = true; }
+
+document.getElementById("custom-song-volume").value = localStorage.getItem("customSongVolume");
+
+let muteTagsInternalArray = localStorage.getItem("mute-tags-internal").split(",");
+let muteTagsTitleArray = localStorage.getItem("mute-tags-title").split(",");
+let muteTagsPlayInsteadArray = localStorage.getItem("mute-tags-play-instead").split(",");
+
+var playInsteadSongPlaying = false;
+
+function saveUserPreferences() {
+    let fooMuteTagsInternal = "";
+    document.getElementById("mute-tags-internal").value.toLowerCase().split(",").forEach(tag => fooMuteTagsInternal += tag.trim() + ",");
+    fooMuteTagsInternal = fooMuteTagsInternal.slice(0, -1);
+    let fooMuteTagsTitle = "";
+    document.getElementById("mute-tags-title").value.toLowerCase().split(",").forEach(tag => fooMuteTagsTitle += tag.trim() + ",");
+    fooMuteTagsTitle = fooMuteTagsTitle.slice(0, -1);
+    let fooMuteTagsPlayInstead = "";
+    document.getElementById("mute-tags-play-instead").value.split(",").forEach(tag => fooMuteTagsPlayInstead += tag.trim() + ",");
+    fooMuteTagsPlayInstead = fooMuteTagsPlayInstead.slice(0, -1);
+
+    localStorage.setItem("mute-tags-internal", fooMuteTagsInternal);
+    localStorage.setItem("mute-tags-title", fooMuteTagsTitle);
+    localStorage.setItem("mute-tags-play-instead", fooMuteTagsPlayInstead);
+    localStorage.setItem("customSongVolume", document.getElementById("custom-song-volume").value);
+	localStorage.setItem("mute-tags-stop-early", document.getElementById("mute-tags-stop-early").checked === true ? "true" : "false");
+}
+
+function muteStream() {
+    if (!window.iceplay.is_playing) {
+        return;
+    }
+
+    if (muteTagsInternalArray.some(tag=> document.getElementById("tags").innerHTML.toLowerCase().includes(tag)) && muteTagsInternalArray[0] != "") {
+        window.iceplay.audio.muted = true;
+        if (muteTagsPlayInsteadArray[0] != "") {
+            muteStreamPlaySomethingInstead();
+            return;
+        }
+    } else if (muteTagsTitleArray.some(tag=> document.getElementById("np").innerHTML.toLowerCase().includes(tag)) && muteTagsTitleArray[0] != "") {
+        window.iceplay.audio.muted = true;
+        if (muteTagsPlayInsteadArray[0] != "") {
+            muteStreamPlaySomethingInstead();
+            return;
+        }
+	} else if (localStorage.getItem("mute-tags-stop-early") == "true" && typeof customSong != 'undefined') {
+		customSong.pause();
+		setSongPlayingFalse();
+		window.iceplay.audio.muted = false;
+		delete customSong;
+    } else if (playInsteadSongPlaying) {
+        window.iceplay.audio.muted = true;
+        return;
+    } else {
+        window.iceplay.audio.muted = false;
+    }
+}
+
+function setSongPlayingFalse() {
+    playInsteadSongPlaying = false;
+}
+
+function muteStreamPlaySomethingInstead() {
+    if (!playInsteadSongPlaying) {
+        playInsteadSongPlaying = true;
+        var randomSongIndex = Math.floor(Math.random()*muteTagsPlayInsteadArray.length);
+        customSong = new Audio(muteTagsPlayInsteadArray[randomSongIndex]);
+        customSong.onloadedmetadata = function () {
+            //clearInterval(muteStreamInterval);
+            //setTimeout(function () {setInterval(muteStream, 5000), customSong.duration * 1000});
+            setTimeout(setSongPlayingFalse, customSong.duration * 1000);
+            customSong.volume = localStorage.getItem("customSongVolume") / 100;
+            customSong.play();
+        }
+    }
+}
+
+if (muteTagsInternalArray[0] != "" || muteTagsTitleArray[0] != "") {
+    var muteStreamInterval = setInterval(muteStream, 5000);
+}
+
+// need to move the above to a separate file
+
 </script>

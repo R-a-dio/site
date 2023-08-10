@@ -6,6 +6,8 @@
                                         <a class="text-muted" href="https://twitter.com/Hanyuu_status" target="_blank">Twitter</a>
                                         |
                                         <a class="text-muted" href="https://github.com/R-a-dio/site" target="_blank">Github</a>
+                                        |
+                                        <a class="text-muted" href="https://need.moe/radio/" target="_blank">Extra</a>
                                 </p>
                         </div>
                 </footer>

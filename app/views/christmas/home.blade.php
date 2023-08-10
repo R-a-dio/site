@@ -1,20 +1,35 @@
 @section('content')
-<div class="snow" id="Div1"></div> <!-- This is for the snow.js -->
 <!-- Main Container
 	================ -->
-<div class="container main">
+<div class="container main" style="z-index:-1;">
+<div id="logo-image-container" style="position:absolute;top:10px;left:calc(100vw - 60px);padding:0px;margin:0px;width:50px;height:50px;z-index:1;">
+	<div>
+		<span style="position: absolute;color: #fff;right: 60px;line-height: 25px;font-size: 25px;width: auto;overflow: hidden;"><a href="https://r-a-d.io/news/71" style="color:#fff;">xmas schedule</a></span>
+		<img src="/assets/logo_image_small_christmas.png" alt="R/a/dio" style="height:50px;z-index:1;">
+	</div>
+</div>
+<div style="position:absolute;top:10px;left:10px;padding:0px;margin:0px;width:50px;height:50px;z-index:1;">
+	@if (Auth::check() and Auth::user()->isActive())
+		<a href="/admin"><i class="fa fa-star" style="font-size:50px;"></i></a>
+	@endif
+</div>
 	<!-- Content (Dynamic)
 		=================== -->
 	@include("partials.help-main")
-	<div class="container top-pusher">
-	</div>
+	@include("partials.preferences")
+
 	<div class="col-md-2"></div>
-	<div class="col-md-8 content upper-content">
+	<div class="col-md-8 content upper-content" style="z-index:1;">
 		<div class="row dynamic-row">
 			<!-- DJ Image + Name
 				================= -->
 			<div class="col-md-12">
-				@include("partials.dj-image")
+				<!-- @include("partials.dj-image") -->
+			<div class="thumbnail">
+			        <img id="dj-image" src="/api/dj-image/{{{ $status["dj"]["djimage"] }}}" class="hidden-sm img-rounded" style="max-height: 180px">
+			        <h4 class="text-center" id="dj-name">{{{ $status["dj"]["djname"] }}}</h4>
+			</div>
+
 			</div>
 			<div class="col-md-4">
 			</div>

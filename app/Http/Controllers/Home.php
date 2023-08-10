@@ -357,6 +357,25 @@ class Home extends BaseController {
 		$pending_amount = DB::table("pending")
 			->count();
 
+		$pending_accepted_total = DB::table("postpending")
+			->where("accepted", ">=", 1)
+			->count();
+
+                $pending_declined_total = DB::table("postpending")
+			->where("accepted", "=", 0)
+			->count();
+		
+		$twoweeksago = date("Y-m-d", strtotime("-14 days"));
+		$pending_accepted_2weeks = DB::table("postpending")
+			->where("accepted", ">=", 1)
+			->where("time", ">=", $twoweeksago)
+			->count();
+
+		$pending_declined_2weeks = DB::table("postpending")
+			->where("accepted", "=", 0)
+			->where("time", ">=", $twoweeksago)
+			->count();
+
 		$replacements = Track::where("need_reupload", 1)->get();
 
 		$uploadTime = $this->checkUploadTime();
@@ -376,7 +395,11 @@ class Home extends BaseController {
 			->with("replacements", $replacements)
 			->with("message", $message)
 			->with("cooldown", $cooldown)
-			->with("pending_amount", $pending_amount);
+			->with("pending_amount", $pending_amount)
+			->with("pending_accepted_total", $pending_accepted_total)
+			->with("pending_declined_total", $pending_declined_total)
+			->with("pending_accepted_2weeks", $pending_accepted_2weeks)
+			->with("pending_declined_2weeks", $pending_declined_2weeks);
 	}
 
 	public function postSubmit() {

@@ -99,7 +99,7 @@
 
 		<div class="row">
 			<br>
-			<div class="alert text-center">
+			<div id="pendingsongsamount" class="alert text-center">
 				There are currently {{{ $pending_amount }}} pending tracks awaiting approval.
 			</div>
 		</div>
@@ -110,8 +110,10 @@
 				<h2 class="text-success text-center">{{{ trans("submit.accepts") }}}</h2>
 				@if ($ip_accs >= 0)
 				<div class="row">
-					<div class="alert alert-success" style="margin-right:15px">
-						A total of {{{ $ip_accs }}} submissions from your IP have been accepted!
+					<div class="alert text-center">
+						{{{ $pending_accepted_total }}} accepted submissions.<br>
+						{{{ $pending_accepted_2weeks }}} accepted in the last 2 weeks.<br>
+						{{{ $ip_accs }}} accepted submissions from (You).
 					</div>
 				</div>
 				@endif
@@ -136,8 +138,10 @@
 				<h2 class="text-danger text-center">{{{ trans("submit.declines") }}}</h2>
 				@if ($ip_decs >= 0)
 				<div class="row">
-					<div class="alert alert-danger" style="margin-right:15px">
-						A total of {{{ $ip_decs }}} submissions from your IP have been declined!
+					<div class="alert text-center">
+						{{{ $pending_declined_total }}} declined submissions.<br>
+						{{{ $pending_declined_2weeks }}} declined in the last 2 weeks.<br>
+						{{{ $ip_decs }}} declined submissions from (You).
 					</div>
 				</div>
 				@endif

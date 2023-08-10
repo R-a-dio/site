@@ -312,7 +312,7 @@
 			var url = '/assets/logo_image_small.png';
 			if (dj.djname.toLowerCase().indexOf('sauce') !== -1)
 				url = '/assets/logo_image_small_sauce.png';
-			else if (new Date().getMonth() == 11)
+			else if (new Date().getMonth() == 11 && new Date().getDate() < 26)
 				url = '/assets/logo_image_small_christmas.png';
 
 			var img = document.querySelector('img[alt="R/a/dio"]');

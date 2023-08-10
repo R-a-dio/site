@@ -7,6 +7,7 @@
 		<!-- Content (Dynamic)
 		=================== -->
 		@include("partials.help-main")
+		@include("partials.preferences") 
 		<div class="container content top-content">
 
 			<div class="row dynamic-row">

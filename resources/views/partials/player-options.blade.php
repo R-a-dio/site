@@ -9,8 +9,9 @@
 	<ul class="dropdown-menu" role="menu" style="width: 100%">
 		<li><a href="/assets/main.mp3.m3u">{{{ trans("stream.links.m3u") }}}</a></li>
 		<li><a href="/assets/main.pls">{{{ trans("stream.links.pls") }}}</a></li>
-		<li class="divider"></li>
-		@if (!$cur_theme)
+		<!--<li class="divider"></li>-->
+		<li id="preferences-button"><a href="#preferences" data-toggle="modal" data-target="#preferences">Preferences</a></li>
+<!--		@if (!$cur_theme)
 			<li class="active"><a href="/set-theme/-1">Use DJ Theme</a></li>
 		@else
 			<li><a href="/set-theme/-1">Use DJ Theme</a></li>
@@ -24,5 +25,6 @@
 				@endif
 			@endif
 		@endforeach
+-->
 	</ul>
 </div>

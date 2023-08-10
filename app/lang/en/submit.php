@@ -27,7 +27,7 @@ return [
 	],
 	"upload" => [
 		"label" => "Upload Song",
-		"desc" => "Upload a song to the R/a/dio database. We accept both MP3 (20MB max) and FLAC (90MB max).",
+		"desc" => "Upload a song to the R/a/dio database. We accept both MP3 (30MB max) and FLAC (90MB max).",
 	],
 	"accepts" => "Accepts",
 	"declines" => "Declines",

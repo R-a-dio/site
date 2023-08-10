@@ -7,16 +7,16 @@ use Symfony\Component\HttpFoundation\File\File;
 trait AnalysisTrait {
 	
 	// min
-	protected $bitrate = 130.0; // kbps
+	protected $bitrate = 192.0; // kbps
 
 	// max upload size
-	protected $maxSize = 20971520; // 20MB
+	protected $maxSize = 31457280; // 30MB
 
 	// flac max upload size
 	protected $maxFlacSize = 94371840; // 90 MB
 
 	// max song length, in seconds
-	protected $length = 480.0; // 8 minutes
+	protected $length = 780.0; // 10 minutes
 
 	// allowed formats
 	protected $formats = ["mp3", "flac"];

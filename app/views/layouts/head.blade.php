@@ -19,9 +19,11 @@
 		<!-- Base CSS -->
 		<link href="/css/base.css" rel="stylesheet">
 
+		<!-- comments are gay -->
+		<link rel="search" type="application/opensearchdescription+xml" title="r/a/dio" href="/opensearch.xml">
 
 		@if (isset($theme))
-			<!-- DJ Theme -->
+			<!-- DJ theme -->
 			<link href="/css/{{ $theme }}.css" rel="stylesheet">
 		@endif
 

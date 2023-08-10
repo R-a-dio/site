@@ -19,7 +19,11 @@
 		</div>
 		<hr>
 		<div class="col-md-7 centered">
-			<h2 class="text-center text-warning"> {{{ trans("search.help.options") }}} </h2>
+			<!--<h2 class="text-center text-warning"> {{{ trans("search.help.options") }}} </h2>-->
+			<h2 class="text-center text-warning"><span style="color:red;">new!!!</span> Click on a song to show tags </h2>
+			<h6 class="text-center text-warning" id="always-show-tags-toggle" > or click this to show all tags 
+</h2>
+
 		</div>
 	</div>
 
@@ -44,8 +48,7 @@
 		<hr style="margin-top: 3px; margin-bottom: 8px;">
 
 		@foreach ($results as $result)
-
-			<div class="row">
+			<div class="row song-search-row">
 				<div class="col-sm-4 text-center" style="margin-bottom: 10px">
 					<span class="text-danger">{{{ $result["_source"]["artist"] }}}</span>
 				</div>
@@ -72,6 +75,7 @@
 						</button>
 					@endif
 				</div>
+				<div class="col-sm-12 text-center" id="search-tagline" style="display:none;margin-bottom:10px;"><b>{{{ $result["_source"]["tags"] }}}</b></div>
 			</div>	
 			<hr style="margin-top: 3px; margin-bottom: 8px;">
 		@endforeach
@@ -119,6 +123,50 @@
 	</div><!-- /.modal-dialog - ->
 </div><!-- /.modal - ->
 -->
+
+<script>
+if (localStorage.getItem("showSearchTags") === null) { localStorage.setItem("showSearchTags", "false"); }
+if (localStorage.getItem("showSearchTags") == "true") { displayTags(); }
+
+function showsearchsongtags() {
+  if (this.querySelector("#search-tagline").style.display=="none") { 
+    this.querySelector("#search-tagline").style.display = "unset";
+  } else {   
+    this.querySelector("#search-tagline").style.display = "none";
+  } 
+}  
+ 
+function displayTags() {
+  if (localStorage.getItem("showSearchTags") == "true") {
+        Array.from(document.getElementsByClassName("song-search-row")).forEach(row => {
+            row.querySelector("#search-tagline").style.display = "unset";
+        }       
+    )}
+}
+ 
+function toggleShowSearchTags() {
+  localStorage.getItem("showSearchTags") == "true" ? localStorage.setItem("showSearchTags", "false") : 
+localStorage.setItem("showSearchTags", "true");
+}
+ 
+Array.from(document.getElementsByClassName("song-search-row")).forEach(row => {
+  row.style.cursor = "pointer";
+  row.addEventListener("click", showsearchsongtags);
+})  
+
+document.getElementById("always-show-tags-toggle").addEventListener("click", function() {
+  Array.from(document.getElementsByClassName("song-search-row")).forEach(row => {
+    if (row.querySelector("#search-tagline").style.display=="none") {    
+            row.querySelector("#search-tagline").style.display = "unset";
+        } else {
+            row.querySelector("#search-tagline").style.display = "none";
+        } 
+    })
+})  
+
+document.getElementById("always-show-tags-toggle").style.cursor = "pointer";
+document.getElementById("always-show-tags-toggle").addEventListener("click", toggleShowSearchTags);
+</script>
 
 </div>
 

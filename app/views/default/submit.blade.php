@@ -2,6 +2,7 @@
 
 	<div id="submitpage" class="container main content">
 		<h1>{{{ trans("submit.title") }}}</h1>
+		@include("partials.submission-guidelines")
 		<div class="row">
 			<div class="col-xs-12">
 				@if ($cooldown)
@@ -18,8 +19,9 @@
 					<ul>
 						<li>{{{ trans("submit.guidelines.upload.search") }}}</li>
 						<li>Low quality uploads are likely to be declined if it's obvious better quality versions are available</li>
-						<li>{{{ trans("submit.guidelines.upload.quality") }}}</li>
+						<li>Anything below 192kbps is rejected. Do not upload YouTube rips.</li>
 						<li>{{{ trans("submit.guidelines.upload.source") }}}</li>
+						<li><a style="cursor: pointer;" data-toggle="modal" data-target="#submission-guidelines">Why did my submission get declined?</a></li>
 					</ul>
 				</p>
 				<p>
@@ -29,6 +31,7 @@
 						<li>{{{ trans("submit.guidelines.tagging.runes") }}}</li>
 						<li>{{{ trans("submit.guidelines.tagging.cv") }}}</li>
 						<li>If you can remember, please include where you downloaded the file from</li>
+						<li><a href="https://static.r-a-d.io/exci/good-comment.png">An example of a good comment</a></li>
 					</ul>
 				</p>
 			</div>
@@ -82,9 +85,16 @@
 
 					<div class="form-group upload-form" id="daypass">
 						<input type="text" class="form-control" name="daypass" placeholder="{{{ trans("submit.daypass.label") }}}">
-						<p class="help-block">
-							{{{ trans("submit.daypass.desc") }}}
-						</p>
+						<ul class="help-block" style="list-style-type:none;margin-left:-40px;">
+								<!--<li>{{{ trans("submit.daypass.desc") }}}</li>-->
+                                                                <li>Enter the daypass and you can have unlimited uploads until midnight, UTC. <a href="https://static.r-a-d.io/exci/daypass-guide.webm">Ask exci in IRC for it</a>. USE WITH DISCRETION.</li>
+                                                                <li>Uploading full soundtracks or albums without asking for a daypass will probably end in everything being declined.</li>
+
+						</ul>
+						<!--<p>
+							Uploading full soundtracks without asking for one will probably end in everything being declined.
+						</p>-->
+
 					</div>
 
 					<div class="form-group upload-form">

@@ -160,13 +160,13 @@
                 	<div class="col-md-1 h4">{{ Carbon\Carbon::now()->startOfWeek()->format("m/d") }}</div>
 			<div class="col-md-2 h4 text-right">Monday</div>
 			<div class="col-md-6">
-				<p></p><p>Monday music with yukii. Starts around 5PM.<br/>What a boring description.</p>
+				<p></p><p>Nothing Scheduled. Who knows what might happen.</p>
 			</div>
                 </div>
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Tuesday</div>
                     <div class="col-md-6">
-                    	<p></p><p>Touhou Tuesday with Kethsar, where the same song is played 10 times in one stream. Starts between 6 and 9PM except when Keth's sleep schedule is fucked, which is 99% of the time.</p>
+                    	<p></p><p>Actual old men in r/a/dio? More likely than you think! Grab yourselves a nice drink and tune in at around 5PM to whatever jii-san will be playing.</p>
                     </div>
                 </div>
                 <div class="row border-between">
@@ -184,13 +184,13 @@
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Friday</div>
                     <div class="col-md-6">
-                    	<p></p><p>Friday Night Faggotry! ed usually starts off at 2 PM with open requests, if he is around. One of various DJs will take over at 8PM. Occasionally guest DJs will stream instead (apply today!).</p>
+                    	<p></p><p>Friday Night Faggotry! Nobody knows who will be streaming, but you can be sure someone will do it (apply today!). Usually starts around 8PM.</p>
                     </div>
                 </div>
                 <div class="row border-between">
                     <div class="col-md-offset-1 col-md-2 h4 text-right">Saturday</div>
                     <div class="col-md-6">
-                    	<p></p><p>Join Yorozuya as he livemixes anison, sometimes anison remixes, every other week to your disdain.<br/>Alternating with him is our bartending goose, Claud.<br/>Frankly, no one is able to remember whose week is whose anymore.</p>
+                    	<p></p><p>Nothing Scheduled.</p>
                     </div>
                 </div>
                 <div class="row border-between">

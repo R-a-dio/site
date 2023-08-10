@@ -1,5 +1,11 @@
 /* base CSS. This should be overridden, never removed */
 
+/* Animations are fucking dumb */
+.progress-bar {
+    transition: none !important;
+	-webkit-transition: none !important;
+}
+
 #player-test {
     margin-top: 3px;
     margin-left: auto;

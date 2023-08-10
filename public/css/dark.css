@@ -262,3 +262,42 @@ hr {
 	background-color:#3B3B3B;
 	border-color:transparent;
 }
+
+.modal-content {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        top: 100vh;
+        transform: translateY(calc(-50vh - 50% - 25px));
+        background-color: #222;
+        border-radius: 20px;
+        border: 0px solid rgba(0, 0, 0, 0.2);
+        color: #FFFFFF;
+        position: relative;
+}
+
+.modal-title {
+        margin-top: 30px;
+        text-align: center;
+}
+
+.modal-footer {
+        border: medium none;
+}
+
+.modal-header {
+        border: medium none;
+        padding-top: 30px;
+        text-align: center;
+}
+
+#help,
+#schedule {
+        backdrop-filter: blur(15px);
+	overflow: hidden;
+}
+
+#theme-selection-body > btn > a {
+     text-decoration: unset;
+     color: #a0a0a0;
+}

@@ -159,6 +159,11 @@ trait AdminUserTrait {
 	protected function updateProfile($user) {
 		// user in this case is either Auth::user() or User::findOrFail()
 
+		// Abort here if we aren't admin and there is no profile, or we
+		// can't change the password.
+		if(!Auth::user()->isAdmin() and !$user->dj)
+			return true;
+
 		if(Auth::user()->isAdmin() or $user->dj) {
 			// We can edit if we are an admin or the user already has a profile.
 

@@ -134,6 +134,7 @@ trait SearchTrait {
 				"?",
 				"\\",
 				"/",
+				"~",
 			],
 			[
 				"",
@@ -149,6 +150,7 @@ trait SearchTrait {
 				"",
 				"",
 				"",
+				" ",
 			],
 			$text
 		);
